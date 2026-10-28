@@ -2,6 +2,7 @@ import "server-only";
 import { createHmac } from "node:crypto";
 import { db } from "@/lib/supabase/server";
 import { setStatus } from "@/lib/artworks";
+import { UUID } from "@/lib/uuid";
 
 // 신고·내림 요청 (설계 "신고 흐름", design 14A).
 //   저장 → (같은 작품에 24시간 안 서로 다른 IP 대역 3곳) 자동 숨김 → 어드민 검수
@@ -46,12 +47,14 @@ export type NewReport = {
   message: string | null;
 };
 
-export function parseReport(body: Record<string, unknown>): NewReport {
+export function parseReport(input: unknown): NewReport {
+  if (!input || typeof input !== "object") throw new ReportError("invalid_reason");
+  const body = input as Record<string, unknown>;
   const text = (v: unknown, max: number) => (typeof v === "string" && v.trim() ? v.trim().slice(0, max) : null);
   const artworkId = text(body.artworkId, 36);
   const sourceUrl = text(body.sourceUrl, 2000);
   if (!REASONS.includes(body.reason as Reason)) throw new ReportError("invalid_reason");
-  if (artworkId && !/^[0-9a-f-]{36}$/i.test(artworkId)) throw new ReportError("not_found");
+  if (artworkId && !UUID.test(artworkId)) throw new ReportError("not_found");
   if (sourceUrl && !/^https?:\/\//i.test(sourceUrl)) throw new ReportError("invalid_source_url");
   if (!artworkId && !sourceUrl) throw new ReportError("target_required");
   return { artworkId, sourceUrl, reason: body.reason as Reason, contact: text(body.contact, 200), message: text(body.message, 2000) };

@@ -50,6 +50,7 @@ export type AdminArtworkAction =
 
 export async function applyAdminAction(id: string, input: AdminArtworkAction, admin: Admin) {
   const actor = admin.email;
+  if (!input || typeof input !== "object") throw new ArtworkError("invalid_action");
   switch (input.action) {
     case "hide":
       return setStatus(id, "hidden", { reason: input.reason, actor });
@@ -59,6 +60,9 @@ export async function applyAdminAction(id: string, input: AdminArtworkAction, ad
       await requireConfirm(id, input.confirm);
       return setStatus(id, "withdrawn", { reason: input.reason, actor });
     case "consent": {
+      // "false" 같은 문자열이 참으로 읽혀 하향 확인을 건너뛰지 않게 정확한 값만 받는다.
+      if (typeof input.thumbnailOk !== "boolean") throw new ArtworkError("invalid_consent");
+      if (input.consentLevel !== "link_only" && input.consentLevel !== "hosted") throw new ArtworkError("invalid_consent");
       const { data, error } = await db()
         .from("artworks")
         .select("consent_level, thumbnail_ok")

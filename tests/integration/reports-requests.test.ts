@@ -57,6 +57,15 @@ describe("reports (설계 신고 흐름)", () => {
     expect(count).toBe(5);
   });
 
+  it("keeps the daily limit under concurrent reports from one range", async () => {
+    const hash = hashRange("198.51.100.1", "t");
+    await Promise.allSettled(
+      Array.from({ length: 10 }, (_, i) => submitReport(report(null, `https://example.com/c${i}`), hash)),
+    );
+    const [{ count }] = await sql<{ count: number }[]>`select count(*)::int from reports`;
+    expect(count).toBe(5);
+  });
+
   it("links a URL-only report to the artwork it names and closes it (eng E7)", async () => {
     const id = await linkOnly("https://cafe.naver.com/pokeca/123");
     const { id: reportId } = await submitReport(report(null, "https://cafe.naver.com/pokeca/123?art=1"), "h");

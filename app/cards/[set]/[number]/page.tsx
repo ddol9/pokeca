@@ -4,7 +4,7 @@ import { AliasNote } from "@/components/AliasNote";
 import { FormatResults } from "@/components/FormatResults";
 import { listPublicArtworks } from "@/lib/artworks";
 import { getCard } from "@/lib/cards";
-import { numberFromPath } from "@/lib/search";
+import { numberFromPath, safeDecode } from "@/lib/search";
 import styles from "./page.module.css";
 
 const LANG_LABEL = { ja: "일본", en: "영문" } as const;
@@ -22,7 +22,10 @@ async function Card({
   searchParams,
 }: Pick<PageProps<"/cards/[set]/[number]">, "params" | "searchParams">) {
   const { set, number } = await params;
-  const card = await getCard(decodeURIComponent(set), numberFromPath(number));
+  const setCode = safeDecode(set);
+  const collectorNumber = numberFromPath(number);
+  if (setCode === null || collectorNumber === null) notFound();
+  const card = await getCard(setCode, collectorNumber);
   if (!card) notFound();
 
   const [artworks, query] = await Promise.all([listPublicArtworks(card.cardId), searchParams]);

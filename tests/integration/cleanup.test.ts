@@ -1,5 +1,5 @@
 import { afterAll, beforeEach, describe, expect, it } from "vitest";
-import { createArtwork, setStatus } from "@/lib/artworks";
+import { attachFile, createArtwork, setConsent, setStatus } from "@/lib/artworks";
 import { cleanup } from "@/lib/cleanup";
 import { db } from "@/lib/supabase/server";
 import { cardId, PDF, PNG, resetArtworks, sql, storedPaths, uploadAsBrowser } from "../helpers/fixtures";
@@ -61,6 +61,33 @@ describe("cleanup", () => {
     await setStatus(id, "hidden", { actor: "test" });
     await cleanup(later());
     expect(await storedPaths()).toHaveLength(2);
+  });
+
+  it("removes untracked files inside a known artwork folder (replaced file whose purge failed)", async () => {
+    const id = await hostedArtwork();
+    const stray = `artworks/${id}/original-stale`;
+    await db().storage.from("artworks").upload(stray, PDF, { contentType: "application/pdf" });
+
+    expect(await cleanup(later())).toMatchObject({ orphaned: 1 });
+    const paths = await storedPaths();
+    expect(paths).toHaveLength(2);
+    expect(paths).not.toContain(stray);
+  });
+
+  it("a consent downgrade stops tracking the file in the same transaction", async () => {
+    const id = await hostedArtwork();
+    await setConsent(id, { consentLevel: "hosted", thumbnailOk: false }, { actor: "test" });
+    const rows = await sql`select kind from artwork_files where artwork_id = ${id}`;
+    expect(rows.map((r) => r.kind)).toEqual(["original"]);
+  });
+
+  it("does not move an upload into a withdrawn artwork, and rejects non-UUID ids", async () => {
+    const id = await hostedArtwork();
+    await setStatus(id, "withdrawn", { actor: "test" });
+    const upload = await uploadAsBrowser("thumbnail", PNG, "image/png");
+    await expect(attachFile(id, "thumbnail", upload)).rejects.toMatchObject({ code: "withdrawn_is_final" });
+    await expect(attachFile("../pending", "thumbnail", upload)).rejects.toMatchObject({ code: "not_found" });
+    expect(await storedPaths()).toEqual([`pending/${upload}`]);
   });
 
   it("drops report abuse counters after 24 hours", async () => {

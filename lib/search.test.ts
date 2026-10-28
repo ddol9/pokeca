@@ -32,4 +32,8 @@ describe("card paths", () => {
     expect(path).toBe("/cards/sv2a/201-165");
     expect(numberFromPath("201-165")).toBe("201/165");
   });
+
+  it("treats a malformed escape as not found instead of throwing", () => {
+    expect(numberFromPath("%E0")).toBeNull();
+  });
 });

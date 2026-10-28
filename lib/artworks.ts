@@ -12,6 +12,7 @@ import {
   type StoredFile,
 } from "@/lib/storage";
 import { FORMATS, type Format } from "@/lib/formats";
+import { UUID } from "@/lib/uuid";
 
 // 작품의 생성·상태·허락 변경은 이 모듈만 한다 (eng D5, D9, D10).
 // 전이 규칙과 consent_events 기록은 DB 함수(artwork_functions.sql)가 한 트랜잭션에서 처리하고,
@@ -76,6 +77,7 @@ export async function createArtwork(
   if (!FORMATS.includes(input.format)) throw new ArtworkError("invalid_format");
   if (input.sourceUrl && !/^https?:\/\//.test(input.sourceUrl)) throw new ArtworkError("invalid_source_url");
   if (!!input.sourceUrl !== !!input.sourceVisibility) throw new ArtworkError("source_visibility_required");
+  if (!UUID.test(input.id)) throw new ArtworkError("invalid_id");
 
   const files: StoredFile[] = [];
   try {
@@ -152,6 +154,13 @@ export async function setConsent(
 }
 
 export async function attachFile(id: string, kind: FileKind, uploadId: string): Promise<void> {
+  if (!UUID.test(id)) throw new ArtworkError("not_found");
+  if (kind !== "original" && kind !== "thumbnail") throw new ArtworkError("invalid_kind");
+  // 파일을 옮기기 전에 확인한다. 철회 작품에 옮긴 파일은 추적되지 않는다(정리 작업이 지우긴 한다).
+  const { data: target, error: targetError } = await db().from("artworks").select("status").eq("id", id).maybeSingle();
+  if (targetError) throw targetError;
+  if (!target) throw new ArtworkError("not_found");
+  if (target.status === "withdrawn") throw new ArtworkError("withdrawn_is_final");
   let file: StoredFile;
   try {
     file = await promoteUpload(uploadId, id, kind);
@@ -270,7 +279,7 @@ type FileLookup = {
 };
 
 async function lookup(id: string): Promise<FileLookup | null> {
-  if (!/^[0-9a-f-]{36}$/i.test(id)) return null;
+  if (!UUID.test(id)) return null;
   const { data, error } = await db()
     .from("artworks")
     .select(

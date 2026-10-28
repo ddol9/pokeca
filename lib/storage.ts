@@ -1,5 +1,6 @@
 import "server-only";
 import { db } from "@/lib/supabase/server";
+import { UUID } from "@/lib/uuid";
 
 // 파일 경로 규칙과 업로드 확정 (eng D3, D4, D9).
 //
@@ -32,7 +33,6 @@ export const EXTENSION: Record<MimeType, string> = {
 
 export class StorageInputError extends Error {}
 
-const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 export function pendingPath(uploadId: string): string {
   if (!UUID.test(uploadId)) throw new StorageInputError("invalid_upload_id");
@@ -40,6 +40,9 @@ export function pendingPath(uploadId: string): string {
 }
 
 export function finalPath(artworkId: string, kind: FileKind, uploadId: string): string {
+  // 작품 ID가 경로에 그대로 들어가므로 UUID만 받는다(../ 경로, 정리 작업의 uuid 캐스트 실패 방지).
+  if (!UUID.test(artworkId)) throw new StorageInputError("invalid_artwork_id");
+  if (!(kind in ALLOWED)) throw new StorageInputError("invalid_kind");
   return `artworks/${artworkId}/${kind}-${uploadId}`;
 }
 
@@ -52,7 +55,7 @@ export function detectMime(head: Uint8Array): MimeType | null {
 }
 
 export async function createUpload(input: { kind: FileKind; mimeType: string; sizeBytes: number }) {
-  if (!ALLOWED[input.kind]?.includes(input.mimeType as MimeType)) {
+  if (!Object.hasOwn(ALLOWED, input.kind) || !ALLOWED[input.kind].includes(input.mimeType as MimeType)) {
     throw new StorageInputError("bad_file_type");
   }
   if (!(input.sizeBytes > 0 && input.sizeBytes <= MAX_BYTES)) {

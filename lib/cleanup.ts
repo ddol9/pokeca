@@ -4,7 +4,8 @@ import { BUCKET, removeFiles } from "@/lib/storage";
 
 // 하루 한 번 도는 정리 작업 (eng D4, D9). Vercel Cron이 /api/cron/cleanup을 부른다.
 //   1. 24시간 지난 pending/ 업로드 (확정 전에 탭을 닫은 경우)
-//   2. 작품 행이 없는 artworks/<id>/ 파일 중 24시간 지난 것 (이동 후 행 생성 실패)
+//   2. artworks/ 아래 24시간 지난 파일 중 artwork_files 행이 없는 것
+//      (이동 후 행 생성 실패, 교체·허락 하향 뒤 삭제 실패, 철회 작품에 옮겨진 파일)
 //   3. 철회됐는데 files_purged = false인 작품의 파일 (커밋 후 삭제 실패)
 //   4. 24시간 지난 신고 남용 방지 카운터(report_throttle)
 // Supabase Storage 파일은 SQL로 지울 수 없어서 pg_cron 대신 앱 경로로 돈다.
@@ -19,6 +20,16 @@ async function listAll(prefix: string): Promise<Listed[]> {
     const { data, error } = await db().storage.from(BUCKET).list(prefix, { limit: PAGE, offset });
     if (error) throw error;
     out.push(...data);
+    if (data.length < PAGE) return out;
+  }
+}
+
+async function trackedPaths(): Promise<Set<string>> {
+  const out = new Set<string>();
+  for (let from = 0; ; from += PAGE) {
+    const { data, error } = await db().from("artwork_files").select("path").order("path").range(from, from + PAGE - 1);
+    if (error) throw error;
+    for (const r of data) out.add(r.path as string);
     if (data.length < PAGE) return out;
   }
 }
@@ -39,17 +50,16 @@ export async function cleanup(now = new Date()): Promise<CleanupReport> {
     if (error) throw error;
   }
 
-  // 폴더 항목은 id가 null이다.
-  const folders = (await listAll("artworks")).filter((f) => !f.id).map((f) => f.name);
-  const { data: rows, error: rowsError } = await db().from("artworks").select("id").in("id", folders.length ? folders : ["00000000-0000-0000-0000-000000000000"]);
-  if (rowsError) throw rowsError;
-  const known = new Set(rows.map((r) => r.id));
-  const orphaned: string[] = [];
-  for (const folder of folders.filter((f) => !known.has(f))) {
-    for (const f of await listAll(`artworks/${folder}`)) {
-      if (f.id && isOlder(f.created_at, cutoff)) orphaned.push(`artworks/${folder}/${f.name}`);
+  // 폴더 항목은 id가 null이다. 행 여부는 경로로만 본다(작품 ID를 쿼리에 넣지 않아 수가 늘어도 URL 길이 문제가 없다).
+  // 목록을 먼저 읽고 행을 나중에 읽는다: 그 사이 확정된 파일은 행 쪽에 잡혀 지워지지 않는다.
+  const candidates: string[] = [];
+  for (const folder of (await listAll("artworks")).filter((f) => !f.id)) {
+    for (const f of await listAll(`artworks/${folder.name}`)) {
+      if (f.id && isOlder(f.created_at, cutoff)) candidates.push(`artworks/${folder.name}/${f.name}`);
     }
   }
+  const tracked = await trackedPaths();
+  const orphaned = candidates.filter((path) => !tracked.has(path));
   if (orphaned.length) {
     const { error } = await bucket.remove(orphaned);
     if (error) throw error;

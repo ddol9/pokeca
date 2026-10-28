@@ -1,6 +1,7 @@
 import "server-only";
 import { db } from "@/lib/supabase/server";
 import { ArtworkError, type ConsentLevel, type Format, type Status } from "@/lib/artworks";
+import { UUID } from "@/lib/uuid";
 
 // 어드민 화면 조회와 간단한 기록 (design 11A, eng E6·E7). 호출자는 currentAdmin()을 먼저 확인한다.
 
@@ -113,7 +114,7 @@ export type AdminArtworkDetail = AdminArtworkRow & {
 };
 
 export async function getAdminArtwork(id: string, now = new Date()): Promise<AdminArtworkDetail | null> {
-  if (!/^[0-9a-f-]{36}$/i.test(id)) return null;
+  if (!UUID.test(id)) return null;
   const { data, error } = await db()
     .from("artworks")
     .select(

@@ -1,6 +1,7 @@
 import "server-only";
 import { db } from "@/lib/supabase/server";
 import type { Format } from "@/lib/formats";
+import { UUID } from "@/lib/uuid";
 
 // 찾기 요청 (design 5A, eng E5). 카드·규격·방문자 단위로 한 번만 센다.
 // 카드 상세 HTML은 방문자와 무관하게 만들고, 요청 상태는 브라우저가 따로 불러온다 (eng R8).
@@ -43,7 +44,7 @@ export async function recordDemandIfEmpty(cardId: string, visitorId: string | nu
 }
 
 export async function cardExists(cardId: string): Promise<boolean> {
-  if (!/^[0-9a-f-]{36}$/i.test(cardId)) return false;
+  if (!UUID.test(cardId)) return false;
   const { data, error } = await db().from("cards").select("id").eq("id", cardId).maybeSingle();
   if (error) throw error;
   return !!data;

@@ -61,6 +61,16 @@ export function cardPath(setCode: string, collectorNumber: string): string {
   return `/cards/${encodeURIComponent(setCode)}/${encodeURIComponent(collectorNumber.replace("/", "-"))}`;
 }
 
-export function numberFromPath(segment: string): string {
-  return decodeURIComponent(segment).replace("-", "/");
+// 잘못된 %이스케이프는 null(→ 404).
+export function numberFromPath(segment: string): string | null {
+  const decoded = safeDecode(segment);
+  return decoded === null ? null : decoded.replace("-", "/");
+}
+
+export function safeDecode(segment: string): string | null {
+  try {
+    return decodeURIComponent(segment);
+  } catch {
+    return null;
+  }
 }
