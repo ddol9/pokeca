@@ -51,6 +51,15 @@ test("download starts and shows print guidance with verified size (eng E8)", asy
   await expect(page.getByText("9포켓 조각 63×88 mm로 확인됐어요")).toBeVisible();
 });
 
+test("a verified PSA file shows the storage case's inner size", async ({ page }) => {
+  await seedArtwork({ artist: "PSA확인", format: "psa", printSizeVerified: true });
+  await page.goto(CARD);
+  const downloading = page.waitForEvent("download");
+  await page.getByRole("button", { name: /다운로드/ }).click();
+  await downloading;
+  await expect(page.getByText("PSA 보관 케이스 안쪽 80×135 mm로 확인됐어요")).toBeVisible();
+});
+
 test("unverified files point to the artist's own print guide", async ({ page }) => {
   await seedArtwork({ artist: "미확인", format: "psa" });
   await page.goto(CARD);
