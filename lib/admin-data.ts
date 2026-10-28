@@ -1,6 +1,7 @@
 import "server-only";
 import { db } from "@/lib/supabase/server";
 import { ArtworkError, type ConsentLevel, type Format, type Status } from "@/lib/artworks";
+import { signedEvidenceUrl } from "@/lib/storage";
 import { UUID } from "@/lib/uuid";
 
 // 어드민 화면 조회와 간단한 기록 (design 11A, eng E6·E7). 호출자는 currentAdmin()을 먼저 확인한다.
@@ -162,6 +163,14 @@ export async function getAdminArtwork(id: string, now = new Date()): Promise<Adm
       .map((r) => ({ id: r.id, reason: r.reason, status: r.status, createdAt: r.created_at }))
       .sort((a, b) => b.createdAt.localeCompare(a.createdAt)),
   };
+}
+
+// 허락 근거 (설계 R3). 이벤트 ID로만 찾는다: 기록된 경로만 서명하고 임의 경로는 받지 않는다.
+export async function evidenceUrl(eventId: string): Promise<string | null> {
+  if (!/^[1-9]\d{0,17}$/.test(eventId)) return null;
+  const { data, error } = await db().from("consent_events").select("evidence_path").eq("id", eventId).maybeSingle();
+  if (error) throw error;
+  return data?.evidence_path ? signedEvidenceUrl(data.evidence_path) : null;
 }
 
 // 신고 (eng E7) ----------------------------------------------------------------

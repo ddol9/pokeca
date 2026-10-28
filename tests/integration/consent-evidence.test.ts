@@ -1,0 +1,207 @@
+import { readdirSync, readFileSync } from "node:fs";
+import path from "node:path";
+import { createClient } from "@supabase/supabase-js";
+import { afterAll, beforeEach, describe, expect, it, vi } from "vitest";
+import { applyAdminAction } from "@/lib/admin";
+import { evidenceUrl } from "@/lib/admin-data";
+import { ArtworkError, attachFile, createArtwork, type NewArtwork } from "@/lib/artworks";
+import { cleanup } from "@/lib/cleanup";
+import { createUpload, StorageInputError } from "@/lib/storage";
+import { GET as viewEvidence } from "@/app/api/admin/evidence/[eventId]/route";
+import {
+  cardId,
+  evidencePaths,
+  FAKE_PNG,
+  PDF,
+  PNG,
+  resetArtworks,
+  sql,
+  storedPaths,
+  uploadAsBrowser,
+} from "../helpers/fixtures";
+
+// 라우트 핸들러를 요청 밖에서 부르므로 쿠키 저장소를 빈 것으로 바꾼다(= 로그인하지 않은 요청).
+vi.mock("next/headers", () => ({ cookies: async () => ({ getAll: () => [], set: () => {} }) }));
+
+afterAll(() => sql.end());
+beforeEach(resetArtworks);
+
+// 허락 근거 업로드 (설계 R3): 별도 비공개 버킷, 어드민 라우트로만 열람.
+
+const admin = { userId: "00000000-0000-0000-0000-000000000001", email: "admin@test" };
+
+async function input(overrides: Partial<NewArtwork> = {}): Promise<NewArtwork> {
+  return {
+    id: crypto.randomUUID(),
+    cardId: await cardId(),
+    artistName: "근거작가",
+    format: "9pocket",
+    sourceUrl: "https://cafe.naver.com/example/7",
+    sourceVisibility: "public",
+    consentLevel: "link_only",
+    thumbnailOk: false,
+    printSizeVerified: false,
+    ...overrides,
+  };
+}
+
+async function events(id: string) {
+  return sql<{ id: string; kind: string; evidence_path: string | null }[]>`
+    select id::text, kind, evidence_path from consent_events where artwork_id = ${id} order by id`;
+}
+
+const later = () => new Date(Date.now() + 24 * 60 * 60 * 1000 + 60_000);
+
+describe("evidence upload validation", () => {
+  it("accepts png, jpeg, pdf up to 20 MB and rejects anything else", async () => {
+    await expect(createUpload({ kind: "evidence", mimeType: "image/gif", sizeBytes: 10 })).rejects.toThrow(
+      "bad_file_type",
+    );
+    await expect(
+      createUpload({ kind: "evidence", mimeType: "image/png", sizeBytes: 20 * 1024 * 1024 + 1 }),
+    ).rejects.toSatisfy((e) => e instanceof StorageInputError && e.message === "file_too_large");
+    expect(await createUpload({ kind: "evidence", mimeType: "application/pdf", sizeBytes: 20 * 1024 * 1024 }))
+      .toMatchObject({ path: expect.stringMatching(/^pending\//) });
+  });
+
+  it("uploads into the private evidence bucket, not the artworks bucket", async () => {
+    await uploadAsBrowser("evidence", PNG, "image/png");
+    expect(await evidencePaths()).toHaveLength(1);
+    expect(await storedPaths()).toEqual([]);
+  });
+
+  it("deletes an evidence file whose bytes are not an allowed type and creates nothing", async () => {
+    const evidence = await uploadAsBrowser("evidence", FAKE_PNG, "image/png");
+    await expect(createArtwork(await input(), { evidence }, "test")).rejects.toSatisfy(
+      (e) => e instanceof ArtworkError && e.code === "bad_file_type",
+    );
+    expect(await evidencePaths()).toEqual([]);
+    const [{ count }] = await sql<{ count: number }[]>`select count(*)::int from artworks`;
+    expect(count).toBe(0);
+  });
+});
+
+describe("evidence_path is recorded", () => {
+  it("on create, under the artwork in the evidence bucket", async () => {
+    const a = await input();
+    const evidence = await uploadAsBrowser("evidence", PDF, "application/pdf");
+    await createArtwork(a, { evidence }, "test");
+    // 재시도해도 같은 경로(멱등).
+    await createArtwork(a, { evidence }, "test");
+
+    const [created] = await events(a.id);
+    expect(created).toMatchObject({ kind: "created", evidence_path: `artworks/${a.id}/${evidence}` });
+    expect(await evidencePaths()).toEqual([created.evidence_path]);
+  });
+
+  it("on consent change, and on an evidence-only save that keeps the consent", async () => {
+    const a = await input();
+    await createArtwork(a, {}, "test");
+
+    const first = await uploadAsBrowser("evidence", PNG, "image/png");
+    await applyAdminAction(
+      a.id,
+      { action: "consent", consentLevel: "link_only", thumbnailOk: false, evidenceUploadId: first, reason: "DM" },
+      admin,
+    );
+    // 허락은 그대로(link_only, 썸네일 없음) → 근거만 기록, changed=false
+    const [created, evidenceOnly] = await events(a.id);
+    expect(created.evidence_path).toBeNull();
+    expect(evidenceOnly).toMatchObject({ kind: "consent", evidence_path: `artworks/${a.id}/${first}` });
+
+    const id = a.id;
+    const thumb = await uploadAsBrowser("thumbnail", PNG, "image/png");
+    await attachFile(id, "thumbnail", thumb);
+    const second = await uploadAsBrowser("evidence", PDF, "application/pdf");
+    await applyAdminAction(
+      id,
+      { action: "consent", consentLevel: "link_only", thumbnailOk: true, evidenceUploadId: second },
+      admin,
+    );
+    const [, , upgraded] = await events(id);
+    expect(upgraded).toMatchObject({ kind: "consent", evidence_path: `artworks/${id}/${second}` });
+
+    // 기록된 근거는 정리 작업이 지우지 않는다.
+    expect(await cleanup(later())).toMatchObject({ evidence: 0 });
+    expect(await evidencePaths()).toHaveLength(2);
+  });
+
+  it("does not move evidence when the downgrade confirm is missing", async () => {
+    const a = await input({ consentLevel: "hosted", thumbnailOk: false });
+    const original = await uploadAsBrowser("original", PDF, "application/pdf");
+    await createArtwork(a, { original }, "test");
+    const evidence = await uploadAsBrowser("evidence", PNG, "image/png");
+    await expect(
+      applyAdminAction(a.id, { action: "consent", consentLevel: "link_only", thumbnailOk: false, evidenceUploadId: evidence }, admin),
+    ).rejects.toSatisfy((e) => e instanceof ArtworkError && e.code === "confirm_mismatch");
+    expect(await evidencePaths()).toEqual([`pending/${evidence}`]);
+  });
+});
+
+describe("cleanup of evidence", () => {
+  it("removes stale pending evidence and moved evidence that no event recorded", async () => {
+    await uploadAsBrowser("evidence", PNG, "image/png");
+    const { db } = await import("@/lib/supabase/server");
+    const orphan = `artworks/${crypto.randomUUID()}/${crypto.randomUUID()}`;
+    await db().storage.from("consent-evidence").upload(orphan, PNG, { contentType: "image/png" });
+
+    expect(await cleanup()).toMatchObject({ evidence: 0 });
+    expect(await cleanup(later())).toMatchObject({ evidence: 2 });
+    expect(await evidencePaths()).toEqual([]);
+  });
+});
+
+describe("evidence view is admin only", () => {
+  async function recorded() {
+    const a = await input();
+    const evidence = await uploadAsBrowser("evidence", PNG, "image/png");
+    await createArtwork(a, { evidence }, "test");
+    const [created] = await events(a.id);
+    return created.id;
+  }
+
+  it("returns 401 to a request without an admin session", async () => {
+    const eventId = await recorded();
+    const res = await viewEvidence(new Request(`http://localhost/api/admin/evidence/${eventId}`), {
+      params: Promise.resolve({ eventId }),
+    });
+    expect(res.status).toBe(401);
+    expect(res.headers.get("location")).toBeNull();
+  });
+
+  it("signs only paths recorded on an event, for a short time", async () => {
+    const eventId = await recorded();
+    const url = await evidenceUrl(eventId);
+    expect(url).toContain("/consent-evidence/");
+    const res = await fetch(url!);
+    expect(new Uint8Array(await res.arrayBuffer())).toEqual(PNG);
+
+    expect(await evidenceUrl("999999")).toBeNull();
+    expect(await evidenceUrl("artworks/x/y")).toBeNull();
+    expect(await evidenceUrl("../artworks")).toBeNull();
+  });
+
+  it("cannot be read with the publishable key", async () => {
+    await recorded();
+    const [path] = await evidencePaths();
+    const anon = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!, {
+      auth: { persistSession: false },
+    });
+    const { data } = await anon.storage.from("consent-evidence").download(path);
+    expect(data).toBeNull();
+    const signed = await anon.storage.from("consent-evidence").createSignedUrl(path, 60);
+    expect(signed.data).toBeNull();
+  });
+
+  it("is not reachable from any public route", () => {
+    // 근거 버킷을 읽는 코드는 어드민 라우트·화면에서만 import한다.
+    const root = path.resolve(import.meta.dirname, "../../app");
+    const files = (readdirSync(root, { recursive: true }) as string[]).filter((f) => /\.tsx?$/.test(f));
+    const offenders = files.filter((f) => {
+      const admin = /^(api\/)?admin\//.test(f.split(path.sep).join("/"));
+      const src = readFileSync(path.join(root, f), "utf8");
+      return !admin && /consent-evidence|evidenceUrl|signedEvidenceUrl|promoteEvidence|EVIDENCE_BUCKET/.test(src);
+    });
+    expect(offenders).toEqual([]);
+  });
+});

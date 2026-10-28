@@ -17,7 +17,7 @@ async function hostedArtwork() {
   await createArtwork(
     {
       id, cardId: await cardId(), artistName: "정리", format: "psa", sourceUrl: null, sourceVisibility: null,
-      consentLevel: "hosted", thumbnailOk: true, printSizeVerified: false, evidencePath: null,
+      consentLevel: "hosted", thumbnailOk: true, printSizeVerified: false,
     },
     { original, thumbnail },
     "test",

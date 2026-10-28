@@ -47,8 +47,10 @@ export async function seedArtwork(s: Seed = {}): Promise<string> {
 
 export async function clearArtworks(): Promise<void> {
   await sql`truncate artworks, artwork_files, consent_events, reports, report_throttle, requests, card_demand, events cascade`;
-  const objects = await sql<{ name: string }[]>`select name from storage.objects where bucket_id = 'artworks'`;
-  if (objects.length) await service.storage.from("artworks").remove(objects.map((o) => o.name));
+  for (const bucket of ["artworks", "consent-evidence"]) {
+    const objects = await sql<{ name: string }[]>`select name from storage.objects where bucket_id = ${bucket}`;
+    if (objects.length) await service.storage.from(bucket).remove(objects.map((o) => o.name));
+  }
 }
 
 // 어드민 로그인용 계정. 공개 가입이 꺼져 있어 서비스 키로 만든다.

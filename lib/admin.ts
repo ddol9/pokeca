@@ -44,7 +44,7 @@ export type AdminArtworkAction =
       consentLevel: ConsentLevel;
       thumbnailOk: boolean;
       reason?: string;
-      evidencePath?: string;
+      evidenceUploadId?: string; // 허락 근거 업로드 ID (POST /api/admin/uploads, kind "evidence")
       confirm?: string;
     };
 
@@ -77,7 +77,11 @@ export async function applyAdminAction(id: string, input: AdminArtworkAction, ad
       return setConsent(
         id,
         { consentLevel: input.consentLevel, thumbnailOk: input.thumbnailOk },
-        { reason: input.reason, actor, evidencePath: input.evidencePath },
+        {
+          reason: input.reason,
+          actor,
+          evidenceUploadId: input.evidenceUploadId ? String(input.evidenceUploadId) : undefined,
+        },
       );
     }
     default:

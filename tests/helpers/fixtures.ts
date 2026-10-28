@@ -1,6 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import postgres from "postgres";
-import { createUpload, type FileKind } from "@/lib/storage";
+import { createUpload, type UploadKind } from "@/lib/storage";
 
 export const sql = postgres(process.env.SUPABASE_DB_URL!, { onnotice: () => {} });
 
@@ -15,10 +15,10 @@ const browser = createClient(
   { auth: { persistSession: false } },
 );
 
-export async function uploadAsBrowser(kind: FileKind, bytes: Uint8Array, mimeType: string): Promise<string> {
+export async function uploadAsBrowser(kind: UploadKind, bytes: Uint8Array, mimeType: string): Promise<string> {
   const { uploadId, path, token } = await createUpload({ kind, mimeType, sizeBytes: bytes.length });
   const { error } = await browser.storage
-    .from("artworks")
+    .from(kind === "evidence" ? "consent-evidence" : "artworks")
     .uploadToSignedUrl(path, token, new Blob([new Uint8Array(bytes)], { type: mimeType }), { contentType: mimeType });
   if (error) throw error;
   return uploadId;
@@ -32,15 +32,23 @@ export async function cardId(setCode = "sv2a", number = "201/165"): Promise<stri
 
 export async function resetArtworks(): Promise<void> {
   await sql`truncate artworks, artwork_files, consent_events, reports, report_throttle, requests, card_demand, events cascade`;
-  const objects = await sql<{ name: string }[]>`select name from storage.objects where bucket_id = 'artworks'`;
-  if (objects.length) {
-    const { db } = await import("@/lib/supabase/server");
-    await db().storage.from("artworks").remove(objects.map((o) => o.name));
+  for (const bucket of ["artworks", "consent-evidence"]) {
+    const objects = await sql<{ name: string }[]>`select name from storage.objects where bucket_id = ${bucket}`;
+    if (objects.length) {
+      const { db } = await import("@/lib/supabase/server");
+      await db().storage.from(bucket).remove(objects.map((o) => o.name));
+    }
   }
 }
 
 export async function storedPaths(): Promise<string[]> {
   const rows = await sql<{ name: string }[]>`
     select name from storage.objects where bucket_id = 'artworks' order by name`;
+  return rows.map((r) => r.name);
+}
+
+export async function evidencePaths(): Promise<string[]> {
+  const rows = await sql<{ name: string }[]>`
+    select name from storage.objects where bucket_id = 'consent-evidence' order by name`;
   return rows.map((r) => r.name);
 }

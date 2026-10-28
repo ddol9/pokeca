@@ -20,7 +20,7 @@ export function NewArtworkForm() {
   const [searching, setSearching] = useState(false);
   const [saving, setSaving] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const uploaded = useRef<Partial<Record<"original" | "thumbnail", Uploaded>>>({});
+  const uploaded = useRef<Partial<Record<"original" | "thumbnail" | "evidence", Uploaded>>>({});
 
   async function findCards(q: string) {
     if (!q.trim()) return;
@@ -35,11 +35,11 @@ export function NewArtworkForm() {
     }
   }
 
-  async function upload(kind: "original" | "thumbnail", file: File | null) {
+  async function upload(kind: "original" | "thumbnail" | "evidence", file: File | null) {
     if (!file || file.size === 0) return undefined;
     const prev = uploaded.current[kind];
     if (prev && prev.file === file) return prev.uploadId;
-    setSaving(kind === "original" ? "원본 올리는 중…" : "썸네일 올리는 중…");
+    setSaving({ original: "원본 올리는 중…", thumbnail: "썸네일 올리는 중…", evidence: "허락 근거 올리는 중…" }[kind]);
     const uploadId = await uploadFile(kind, file);
     uploaded.current[kind] = { file, uploadId };
     return uploadId;
@@ -60,6 +60,7 @@ export function NewArtworkForm() {
     try {
       const original = hosted ? await upload("original", form.get("original") as File | null) : undefined;
       const thumbnail = thumbnailOk ? await upload("thumbnail", form.get("thumbnail") as File | null) : undefined;
+      const evidence = await upload("evidence", form.get("evidence") as File | null);
       setSaving("저장 중…");
       const res = await fetch("/api/admin/artworks", {
         method: "POST",
@@ -74,7 +75,7 @@ export function NewArtworkForm() {
           consentLevel: hosted ? "hosted" : "link_only",
           thumbnailOk,
           printSizeVerified: form.get("printSizeVerified") === "on",
-          uploads: { original, thumbnail },
+          uploads: { original, thumbnail, evidence },
         }),
       });
       const body = await res.json().catch(() => ({}));
@@ -187,6 +188,11 @@ export function NewArtworkForm() {
         <label className={styles.check}>
           <input type="checkbox" name="hosted" />
           파일 보관·다운로드
+        </label>
+        <label className={styles.field}>
+          <span>허락 근거 (선택)</span>
+          <span>아티스트 DM 캡처 등. PNG·JPEG·PDF, 20 MB까지. 어드민만 볼 수 있어요.</span>
+          <input name="evidence" type="file" accept="image/png,image/jpeg,application/pdf" />
         </label>
       </fieldset>
 

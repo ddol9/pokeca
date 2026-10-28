@@ -26,7 +26,6 @@ async function base(overrides: Partial<NewArtwork> = {}): Promise<NewArtwork> {
     consentLevel: "hosted",
     thumbnailOk: true,
     printSizeVerified: false,
-    evidencePath: null,
     ...overrides,
   };
 }

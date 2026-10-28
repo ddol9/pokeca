@@ -44,10 +44,16 @@ test("register an artwork with uploaded files, then it is downloadable on the ca
   const file = (name: string) => ({ name, mimeType: "image/png", buffer: Buffer.from(PNG) });
   await page.getByLabel(/^원본 파일/).setInputFiles(file("original.png"));
   await page.getByLabel(/^썸네일 파일/).setInputFiles(file("thumb.png"));
+  await page.getByLabel(/^허락 근거/).setInputFiles(file("dm.png"));
   await page.getByRole("button", { name: "등록" }).click();
 
   await expect(page.getByRole("heading", { name: "sv2a 205/165 · @업로드작가" })).toBeVisible();
   await expect(page.getByText("등록 (파일 보관 + 썸네일)")).toBeVisible();
+  // 허락 근거는 어드민 라우트가 짧은 서명 URL로 보낸다 (설계 R3).
+  const evidence = page.getByRole("link", { name: /근거 보기/ });
+  const res = await page.request.get((await evidence.getAttribute("href"))!, { maxRedirects: 0 });
+  expect(res.status()).toBe(302);
+  expect(res.headers().location).toContain("/consent-evidence/");
 
   await page.goto("/cards/sv2a/205-165");
   await expect(page.getByRole("img", { name: "@업로드작가의 PSA 확장 아트 도안" })).toBeVisible();
