@@ -27,6 +27,19 @@ GitHub Actions(`.github/workflows/test.yml`)가 push·PR마다 lint, 타입 검�
 - 모든 테이블은 RLS를 켜고 정책을 두지 않는다. 데이터는 서버에서 `lib/supabase/server.ts`의 `db()`로만 읽고 쓴다.
 - 새 테이블이나 함수를 만들면 `tests/integration/access-boundary.test.ts`가 RLS 누락과 공개 실행 권한을 잡아낸다.
 
+## 카드 넣기 (CSV)
+
+```bash
+npm run cards:import -- cards.csv          # 검사만: 몇 장이 새로 들어가고 갱신되는지 보여 준다
+npm run cards:import -- cards.csv --apply  # 실제로 넣는다
+```
+
+- 컬럼: `set_code, collector_number, name_ko, rarity, illustrator, alias_set_code_ja, alias_number_ja, name_ja, alias_set_code_en, alias_number_en, name_en`. 앞의 셋만 필수이고 순서는 자유다.
+- DB에 없는 세트는 `set_name_ko` 컬럼에 세트 이름을 같이 준다.
+- 같은 카드(`set_code` + `collector_number`)는 갱신되고, 그 카드의 별칭은 파일 내용으로 바뀐다. 여러 번 돌려도 결과가 같다.
+- 오류가 하나라도 있으면 줄 번호와 함께 보여 주고 아무것도 넣지 않는다.
+- 운영 DB에 넣을 때는 `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SECRET_KEY`를 운영 값으로 주고 실행한다(출력 첫 줄의 "대상"을 확인).
+
 ## 어드민 계정 만들기
 
 공개 가입은 꺼져 있다. 어드민은 아래 순서로 직접 만든다.
