@@ -24,9 +24,14 @@
   font-size: var(--text-lg);
 }
 
-.compact .input {
+.compact .input,
+.header .input {
   min-height: var(--touch);
   font-size: var(--text-md);
+}
+
+.header .input::placeholder {
+  color: var(--color-muted);
 }
 
 .submit {

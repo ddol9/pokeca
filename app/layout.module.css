@@ -8,8 +8,23 @@
 
 .header {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  gap: var(--space) calc(var(--space) * 3);
   min-height: calc(var(--space) * 8);
+  padding-block: var(--space);
+}
+
+/* 넓은 화면에서는 워드마크 옆, 좁은 화면(375px)에서는 자리가 모자라 다음 줄 전체 너비로 내려간다. */
+.search {
+  flex: 1 1 calc(var(--space) * 36);
+  max-width: calc(var(--space) * 52);
+  /* 입력란의 기본 너비(리눅스 크롬에서 약 400px)가 최소 너비가 되어 375px 화면을 넘기지 않게 한다. */
+  min-width: 0;
+}
+
+.search:empty {
+  display: none;
 }
 
 .wordmark,

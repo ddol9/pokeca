@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
 import "wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.css";
+import { Suspense } from "react";
+import { HeaderSearch } from "@/components/HeaderSearch";
 import "./globals.css";
 import styles from "./layout.module.css";
 
@@ -18,6 +20,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Link href="/" className={styles.wordmark}>
             확장 아트 아카이브
           </Link>
+          {/* 카드 페이지처럼 동적 경로에서는 usePathname이 요청 시점까지 멈추므로 Suspense로 감싼다. */}
+          <div className={styles.search}>
+            <Suspense>
+              <HeaderSearch />
+            </Suspense>
+          </div>
         </header>
         <main className={styles.main}>{children}</main>
         <footer className={styles.footer}>
