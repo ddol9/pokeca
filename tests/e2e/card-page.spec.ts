@@ -48,17 +48,19 @@ test("download starts and shows print guidance with verified size (eng E8)", asy
   await page.getByRole("button", { name: /다운로드/ }).click();
   expect((await downloading).suggestedFilename()).toContain("sv2a_201-165");
   await expect(page.getByText("‘실제 크기(100%)’로")).toBeVisible();
-  await expect(page.getByText("9포켓 조각 63×88 mm로 확인됐어요")).toBeVisible();
+  await expect(page.getByText("9포켓 조각 8장, 각 63×88 mm로 확인됐어요")).toBeVisible();
 });
 
-test("a verified PSA file shows the storage case's inner size", async ({ page }) => {
-  await seedArtwork({ artist: "PSA확인", format: "psa", printSizeVerified: true });
-  await page.goto(CARD);
-  const downloading = page.waitForEvent("download");
-  await page.getByRole("button", { name: /다운로드/ }).click();
-  await downloading;
-  await expect(page.getByText("PSA 보관 케이스 안쪽 80×135 mm로 확인됐어요")).toBeVisible();
-});
+for (const format of ["psa", "brg"] as const) {
+  test(`a verified ${format} file shows the storage case's inner size`, async ({ page }) => {
+    await seedArtwork({ artist: "슬랩확인", format, printSizeVerified: true });
+    await page.goto(CARD);
+    const downloading = page.waitForEvent("download");
+    await page.getByRole("button", { name: /다운로드/ }).click();
+    await downloading;
+    await expect(page.getByText(`${format.toUpperCase()} 보관 케이스 안쪽 80×135 mm로 확인됐어요`)).toBeVisible();
+  });
+}
 
 test("unverified files point to the artist's own print guide", async ({ page }) => {
   await seedArtwork({ artist: "미확인", format: "psa" });
