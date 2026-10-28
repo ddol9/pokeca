@@ -1,0 +1,80 @@
+.page {
+  display: grid;
+  gap: calc(var(--space) * 4);
+  max-width: 960px;
+}
+
+.count {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin-bottom: calc(var(--space) * 2);
+}
+
+.miss {
+  display: grid;
+  gap: var(--space);
+}
+
+.miss p {
+  margin: 0;
+}
+
+.missTitle {
+  font-size: var(--text-lg);
+  font-weight: 600;
+}
+
+.muted {
+  color: var(--color-muted);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  text-align: left;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-muted);
+  padding: var(--space) var(--space) var(--space) 0;
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.table td {
+  padding: calc(var(--space) * 1.5) var(--space) calc(var(--space) * 1.5) 0;
+  border-bottom: 1px solid var(--color-rule);
+  vertical-align: baseline;
+}
+
+.cardLink,
+.cardLink:visited {
+  display: inline-block;
+  min-height: var(--touch);
+  line-height: var(--touch);
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+.number {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.countCol {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.empty .countCol {
+  color: var(--color-muted);
+}
+
+/* 모바일: 카드명·번호 + 도안 수만 (design 9A) */
+@media (max-width: 639px) {
+  .setCol,
+  .rarityCol {
+    display: none;
+  }
+}
