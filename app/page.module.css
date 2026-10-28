@@ -1,0 +1,60 @@
+.home {
+  max-width: 720px;
+  padding-block: calc(var(--space) * 6);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-xl);
+  margin-bottom: calc(var(--space) * 3);
+}
+
+.recent {
+  margin-top: calc(var(--space) * 6);
+}
+
+.recentHeading {
+  font-size: var(--text-md);
+  font-weight: 600;
+  color: var(--color-muted);
+  margin-bottom: var(--space);
+}
+
+.recentList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--color-rule);
+}
+
+.recentList li {
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.recentLink,
+.recentLink:visited {
+  display: flex;
+  align-items: baseline;
+  gap: calc(var(--space) * 2);
+  min-height: var(--touch);
+  padding-block: var(--space);
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.recentLink:hover .recentName {
+  text-decoration: underline;
+}
+
+.recentNumber {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.recentName {
+  color: var(--color-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

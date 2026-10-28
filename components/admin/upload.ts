@@ -1,0 +1,47 @@
+"use client";
+
+import { createClient } from "@supabase/supabase-js";
+
+// 어드민 브라우저 업로드 (eng D3). 서버가 발급한 서명 URL로 Supabase Storage에 직접 올린다.
+// 공개 키 클라이언트지만 서명 토큰이 있는 경로에만 쓸 수 있다.
+const storage = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!, {
+  auth: { persistSession: false },
+}).storage;
+
+export const UPLOAD_ERRORS: Record<string, string> = {
+  bad_file_type: "PNG·JPEG·PDF만 올릴 수 있어요(썸네일은 PNG·JPEG).",
+  file_too_large: "파일은 100 MB까지 올릴 수 있어요.",
+  upload_missing: "업로드한 파일을 찾지 못했어요. 다시 올려 주세요.",
+};
+
+export async function uploadFile(kind: "original" | "thumbnail", file: File): Promise<string> {
+  const res = await fetch("/api/admin/uploads", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ kind, mimeType: file.type, sizeBytes: file.size }),
+  });
+  const body = await res.json();
+  if (!res.ok) throw new Error(body.code ?? "upload_failed");
+  const { error } = await storage.from("artworks").uploadToSignedUrl(body.path, body.token, file, {
+    contentType: file.type,
+  });
+  if (error) throw new Error("upload_failed");
+  return body.uploadId as string;
+}
+
+export function errorMessage(code: string, fallback = "저장하지 못했어요. 다시 시도해 주세요."): string {
+  return UPLOAD_ERRORS[code] ?? ERRORS[code] ?? fallback;
+}
+
+const ERRORS: Record<string, string> = {
+  hosted_needs_original: "파일 보관을 허락받았다면 원본 파일이 필요해요.",
+  thumbnail_needs_file: "썸네일 허락이 있으면 썸네일 파일이 필요해요.",
+  link_only_needs_source: "링크만 허락이면 원본 글 주소가 필요해요.",
+  source_visibility_required: "원본 글 공개 범위를 골라 주세요.",
+  invalid_source_url: "원본 글 주소는 http(s)://로 시작해야 해요.",
+  artist_required: "작가 이름을 넣어 주세요.",
+  invalid_format: "규격을 골라 주세요.",
+  confirm_mismatch: "카드 번호가 맞지 않아요.",
+  withdrawn_is_final: "철회한 작품은 바꿀 수 없어요.",
+  unauthorized: "로그인이 풀렸어요. 다시 로그인해 주세요.",
+};

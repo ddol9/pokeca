@@ -1,0 +1,328 @@
+/* 어드민(OPERATE) 공통 스타일. 공개 화면과 같은 토큰을 쓰고, 표와 폼 위주로 단순하게 둔다. */
+.console {
+  display: grid;
+  gap: calc(var(--space) * 3);
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(var(--space) * 2);
+  padding-bottom: var(--space);
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.nav a,
+.nav a:visited {
+  color: var(--color-ink);
+  font-weight: 600;
+  min-height: var(--touch);
+  line-height: var(--touch);
+}
+
+.logout {
+  margin-left: auto;
+}
+
+.narrow {
+  display: grid;
+  gap: calc(var(--space) * 2);
+  max-width: 420px;
+}
+
+.title {
+  font-size: var(--text-xl);
+  font-weight: 700;
+}
+
+.subtitle {
+  font-size: var(--text-lg);
+  font-weight: 600;
+}
+
+.muted {
+  color: var(--color-muted);
+}
+
+.section {
+  display: grid;
+  gap: calc(var(--space) * 1.5);
+  padding-block: calc(var(--space) * 2);
+  border-top: 1px solid var(--color-rule);
+}
+
+.section p {
+  margin: 0;
+}
+
+.form {
+  display: grid;
+  gap: calc(var(--space) * 2);
+}
+
+.field {
+  display: grid;
+  gap: calc(var(--space) / 2);
+  font-weight: 600;
+}
+
+.field > span:not(:first-child),
+.hint {
+  font-weight: 400;
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+.input {
+  width: 100%;
+  min-height: var(--touch);
+  padding: var(--space) calc(var(--space) * 1.5);
+  background: var(--color-surface);
+  border: 1px solid var(--color-muted);
+  border-radius: var(--radius);
+  font-weight: 400;
+}
+
+.check {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space);
+  min-height: var(--touch);
+  padding-top: calc(var(--space) * 1.25);
+}
+
+.check input {
+  width: 20px;
+  height: 20px;
+  margin: 2px 0 0;
+  accent-color: var(--color-action);
+}
+
+.fieldset {
+  display: grid;
+  gap: var(--space);
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.fieldset legend {
+  padding: 0;
+  margin-bottom: var(--space);
+  font-weight: 600;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space);
+}
+
+.primary,
+.secondary,
+.danger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--touch);
+  padding-inline: calc(var(--space) * 2);
+  border-radius: var(--radius);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.primary {
+  background: var(--color-action);
+  border: 1px solid var(--color-action);
+  color: var(--color-on-action);
+}
+
+.secondary,
+.secondary:visited {
+  background: var(--color-surface);
+  border: 1px solid var(--color-rule);
+  color: var(--color-ink);
+}
+
+.danger {
+  background: var(--color-surface);
+  border: 2px solid var(--color-ink);
+  color: var(--color-ink);
+}
+
+.primary:disabled,
+.danger:disabled,
+.secondary:disabled {
+  background: var(--color-rule);
+  border-color: var(--color-rule);
+  color: var(--color-ink);
+}
+
+.linkButton {
+  min-height: var(--touch);
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--color-link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.error {
+  margin: 0;
+  font-weight: 600;
+}
+
+.ok {
+  margin: 0;
+  font-weight: 500;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: calc(var(--space) * 2);
+}
+
+.filters .input {
+  width: auto;
+}
+
+.tableWrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.table th {
+  text-align: left;
+  font-weight: 500;
+  color: var(--color-muted);
+  padding: var(--space) var(--space) var(--space) 0;
+  border-bottom: 1px solid var(--color-rule);
+  white-space: nowrap;
+}
+
+.table td {
+  padding: var(--space) var(--space) var(--space) 0;
+  border-bottom: 1px solid var(--color-rule);
+  vertical-align: middle;
+}
+
+.table .input {
+  width: auto;
+  min-height: 36px;
+  padding-block: 4px;
+}
+
+.table .secondary,
+.table .primary {
+  min-height: 36px;
+  padding-inline: var(--space);
+}
+
+.number {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.flag {
+  display: inline-block;
+  padding-inline: calc(var(--space) / 2);
+  border-radius: var(--radius);
+  background: var(--color-demand);
+  color: var(--color-demand-ink);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.timeline {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.timeline li {
+  padding-block: var(--space);
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.dangerZone {
+  display: grid;
+  gap: calc(var(--space) * 1.5);
+  padding: calc(var(--space) * 2);
+  border: 2px solid var(--color-ink);
+  border-radius: var(--radius);
+}
+
+.dangerZone p {
+  margin: 0;
+}
+
+.dialog {
+  width: min(480px, calc(100vw - 2 * var(--gutter)));
+  padding: calc(var(--space) * 3);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius);
+}
+
+.dialog::backdrop {
+  background: var(--color-backdrop);
+}
+
+.candidates {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.candidates li {
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.candidateButton {
+  display: block;
+  width: 100%;
+  min-height: var(--touch);
+  padding: var(--space) 0;
+  text-align: left;
+  background: none;
+  border: none;
+}
+
+.candidateButton[aria-pressed="true"] {
+  font-weight: 700;
+  color: var(--color-action);
+}
+
+.report {
+  display: grid;
+  gap: var(--space);
+  padding-block: calc(var(--space) * 2);
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.report p {
+  margin: 0;
+}
+
+.medium {
+  max-width: 720px;
+}
+
+.wide {
+  max-width: 840px;
+}
+
+.short {
+  max-width: 320px;
+}

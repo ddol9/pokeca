@@ -1,0 +1,171 @@
+.section {
+  display: grid;
+  gap: calc(var(--space) * 3);
+}
+
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(var(--space) * 2);
+}
+
+.heading {
+  font-size: var(--text-lg);
+  font-weight: 600;
+}
+
+.chips {
+  display: flex;
+  gap: var(--space);
+}
+
+/* 선택은 색만이 아니라 굵기·밑줄로도 구분한다 (design 10A) */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--space) / 2);
+  min-height: var(--touch);
+  padding-inline: calc(var(--space) * 1.5);
+  background: var(--color-surface);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius);
+  white-space: nowrap;
+}
+
+.chip[aria-pressed="true"] {
+  border-color: var(--color-action);
+  color: var(--color-action);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.chipEmpty {
+  color: var(--color-muted);
+}
+
+.chipCount {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+.chipRequested {
+  font-size: var(--text-sm);
+  color: var(--color-demand-ink);
+  background: var(--color-demand);
+  padding-inline: calc(var(--space) / 2);
+  border-radius: var(--radius);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: calc(var(--space) * 2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--color-rule);
+}
+
+/* 찾기 요청 영역: 노랑은 여기에만 (DESIGN.md) */
+.empty {
+  display: grid;
+  justify-items: start;
+  gap: var(--space);
+  padding: calc(var(--space) * 3);
+  border-left: 4px solid var(--color-demand);
+  background: var(--color-surface);
+}
+
+.empty p {
+  margin: 0;
+}
+
+.emptyTitle {
+  font-size: var(--text-lg);
+  font-weight: 600;
+}
+
+.emptyHint {
+  color: var(--color-muted);
+}
+
+.requestButton {
+  min-height: var(--touch);
+  padding-inline: calc(var(--space) * 2);
+  background: var(--color-demand);
+  color: var(--color-demand-ink);
+  border: 1px solid var(--color-demand);
+  border-radius: var(--radius);
+  font-weight: 600;
+}
+
+.requestButton:disabled {
+  background: var(--color-surface);
+  border-color: var(--color-rule);
+  color: var(--color-ink);
+}
+
+.done {
+  font-weight: 500;
+  animation: appear 200ms ease-out;
+}
+
+.waiting {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+.failed {
+  font-weight: 500;
+}
+
+.formatButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space);
+}
+
+.formatOption {
+  display: grid;
+  gap: calc(var(--space) / 2);
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* 모바일: 칩은 가로 스크롤 한 줄, 그리드 2열 (design 9A) */
+@media (max-width: 639px) {
+  .chips {
+    width: calc(100% + 2 * var(--gutter));
+    margin-inline: calc(-1 * var(--gutter));
+    padding-inline: var(--gutter);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space);
+  }
+
+  .empty {
+    padding: calc(var(--space) * 2);
+  }
+}

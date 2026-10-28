@@ -1,0 +1,39 @@
+import { expect, test } from "@playwright/test";
+import { clearArtworks, seedArtwork, sql } from "./db";
+
+// DB를 공유하므로 이 파일은 한 브라우저 프로젝트에서만, 순서대로 돈다.
+test.describe.configure({ mode: "serial" });
+test.skip(({ browserName, isMobile }) => browserName !== "chromium" || isMobile, "API test runs once");
+
+test.beforeEach(clearArtworks);
+
+test("hosted artwork returns a short-lived download URL", async ({ request }) => {
+  const id = await seedArtwork();
+  const res = await request.post(`/api/download/${id}`);
+  expect(res.status()).toBe(200);
+  const { url } = await res.json();
+  const file = await request.get(url);
+  expect(file.status()).toBe(200);
+  expect(file.headers()["content-disposition"]).toContain("sv2a_201-165");
+});
+
+test("unknown artwork is 404, hidden or link-only is 410 without details (eng E2)", async ({ request }) => {
+  expect((await request.post(`/api/download/${crypto.randomUUID()}`)).status()).toBe(404);
+
+  const hidden = await seedArtwork({ status: "hidden" });
+  const res = await request.post(`/api/download/${hidden}`);
+  expect(res.status()).toBe(410);
+  expect(await res.json()).toEqual({ code: "unavailable" });
+
+  const linkOnly = await seedArtwork({ consent: "link_only" });
+  expect((await request.post(`/api/download/${linkOnly}`)).status()).toBe(410);
+});
+
+test("thumbnail redirects only while active with consent", async ({ request }) => {
+  const id = await seedArtwork();
+  const ok = await request.get(`/api/thumbnails/${id}`, { maxRedirects: 0 });
+  expect(ok.status()).toBe(302);
+
+  await sql`update artworks set status = 'hidden' where id = ${id}`;
+  expect((await request.get(`/api/thumbnails/${id}`, { maxRedirects: 0 })).status()).toBe(404);
+});
