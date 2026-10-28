@@ -43,13 +43,15 @@ test("unknown card URL shows the not-in-list page", async ({ page }) => {
 test("header search on a card page jumps to another card", async ({ page }) => {
   await page.goto("/cards/sv2a/201-165");
   const header = page.getByRole("banner");
+  await expect(header.getByRole("button", { name: "찾기" })).toBeVisible();
+  // 모바일(375px)에서도 머리글 검색 때문에 가로 스크롤이 생기면 안 된다(리눅스 크롬에서 입력란 기본 너비로 넘친 적이 있음).
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+  expect(overflow).toBe(false);
+
   await header.getByLabel("카드 번호 또는 이름 검색").fill("sv2a 205/165");
   await header.getByRole("button", { name: "찾기" }).click();
   await expect(page).toHaveURL(/\/cards\/sv2a\/205-165$/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("sv2a 205/165");
-  // 모바일(375px)에서도 머리글 검색 때문에 가로 스크롤이 생기면 안 된다.
-  const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
-  expect(overflow).toBe(false);
 });
 
 test("home has no header search", async ({ page }) => {

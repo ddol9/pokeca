@@ -19,6 +19,8 @@
 .search {
   flex: 1 1 calc(var(--space) * 36);
   max-width: calc(var(--space) * 52);
+  /* 입력란의 기본 너비(리눅스 크롬에서 약 400px)가 최소 너비가 되어 375px 화면을 넘기지 않게 한다. */
+  min-width: 0;
 }
 
 .search:empty {
