@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><title>카드 상세 와이어프레임</title>
+<style>
+  body{font-family:-apple-system,system-ui,sans-serif;margin:0;background:#fff;color:#222;font-size:14px}
+  .wrap{max-width:1180px;margin:0 auto;padding:20px}
+  .box{border:1.5px solid #999;border-radius:6px}
+  .dash{border:1.5px dashed #aaa;border-radius:6px}
+  .muted{color:#777}
+  /* 검색이 1순위: 카드 번호로 찾는다는 핵심 고통에 대응 */
+  .search{display:flex;gap:8px;align-items:center;padding:12px 14px;font-size:16px}
+  .search .in{flex:1;color:#999}
+  .hint{font-size:12px;margin:6px 2px 18px}
+  /* 카드 정보 띠: 공식 카드 이미지는 쓰지 않고 실루엣 (IP 리스크) */
+  .card{display:flex;gap:16px;padding:14px;margin-bottom:18px}
+  .sil{width:63px;height:88px;background:repeating-linear-gradient(45deg,#eee,#eee 6px,#f8f8f8 6px,#f8f8f8 12px)}
+  .meta b{font-size:18px}
+  .chips{display:flex;gap:8px;margin-bottom:14px}
+  .chip{padding:5px 12px;border:1.5px solid #999;border-radius:4px}
+  .chip.on{background:#222;color:#fff;border-color:#222}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .tile{padding:10px}
+  .thumb{height:170px;position:relative;background:#f2f2f2;display:flex;align-items:center;justify-content:center}
+  .hole{width:48px;height:67px;border:1.5px dashed #888;background:#fff}
+  .artist{font-weight:600;margin-top:8px}  /* 아티스트 이름을 크게: 노출이 공급 동기 */
+  .row{display:flex;justify-content:space-between;align-items:center;margin-top:6px;font-size:12px}
+  .btn{padding:4px 10px;border:1.5px solid #222;border-radius:4px}
+  .link{text-decoration:underline}
+  .empty{padding:28px;text-align:center;margin-top:24px}
+  h3{margin:26px 0 10px;font-size:15px}
+</style></head><body><div class="wrap">
+
+<div class="box search">🔍 <span class="in">카드 번호 또는 이름 — 예: sv2a 201/165, 리자몽</span><span class="btn">검색</span></div>
+<div class="hint muted">확장팩 코드 + 번호로 찾으면 정확히 그 카드의 도안만 나옵니다</div>
+
+<div class="box card">
+  <div class="sil"></div>
+  <div class="meta">
+    <b>리자몽 ex</b> <span class="muted">· SAR</span><br>
+    <span class="muted">포켓몬 카드 151 (sv2a) · 201/165 · 일러스트: (원작 일러스트레이터)</span><br><br>
+    도안 <b>6</b>개 · PSA 2 · 9포켓 4
+  </div>
+</div>
+
+<div class="chips"><span class="chip on">전체 6</span><span class="chip">9포켓 바인더 4</span><span class="chip">PSA 슬랩 2</span><span class="chip">BRG 0</span></div>
+
+<div class="grid">
+  <!-- 허락받은 호스팅: 다운로드 버튼 -->
+  <div class="box tile"><div class="thumb"><div class="hole"></div></div>
+    <div class="artist">@불꽃그림쟁이</div>
+    <div class="row"><span class="muted">9포켓 바인더</span><span class="btn">다운로드</span></div></div>
+  <!-- 기본: 원본 글 링크 (아티스트가 소유·노출 유지) -->
+  <div class="box tile"><div class="thumb"><div class="hole"></div></div>
+    <div class="artist">@카드꾸미기장인</div>
+    <div class="row"><span class="muted">9포켓 바인더</span><span class="link">원본 글 보기 ↗</span></div></div>
+  <div class="box tile"><div class="thumb"><div class="hole"></div></div>
+    <div class="artist">@slab_painter</div>
+    <div class="row"><span class="muted">PSA 슬랩</span><span class="btn">다운로드</span></div></div>
+  <div class="box tile"><div class="thumb"><div class="hole"></div></div>
+    <div class="artist">@리자몽덕후</div>
+    <div class="row"><span class="muted">9포켓 바인더</span><span class="link">원본 글 보기 ↗</span></div></div>
+</div>
+
+<h3>BRG 슬랩 도안</h3>
+<!-- 빈 상태 = 요청 수요 측정 지점. 검색 실패 로그와 함께 다음에 무엇을 정리할지 결정 -->
+<div class="dash empty">
+  아직 이 카드의 BRG 슬랩 도안이 없어요<br><br>
+  <span class="btn">이 카드 도안 요청하기</span> <span class="muted">· 12명이 기다리는 중</span>
+</div>
+
+<p class="muted" style="font-size:12px;margin-top:28px">비영리 팬 아카이브 · 각 도안의 권리는 아티스트에게 있습니다 · 내림 요청: 신고 버튼 또는 이메일</p>
+</div></body></html>
