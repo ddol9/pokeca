@@ -1,4 +1,8 @@
 import { defineConfig, devices } from "@playwright/test";
+import { loadEnvConfig } from "@next/env";
+
+// 테스트 데이터 준비용(tests/e2e/db.ts)으로 .env.local의 로컬 Supabase 값을 읽는다.
+loadEnvConfig(process.cwd());
 
 const port = 3100;
 

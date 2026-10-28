@@ -1,0 +1,127 @@
+import "server-only";
+import { db } from "@/lib/supabase/server";
+
+// 파일 경로 규칙과 업로드 확정 (eng D3, D4, D9).
+//
+//   [admin browser] ─1. createUpload ─> 서명 업로드 URL (pending/<uploadId>)
+//   [admin browser] ─2. PUT 파일 ─> Supabase Storage (버킷이 100 MB·MIME 제한을 강제)
+//   [server] promoteUpload(uploadId):
+//       pending 있음 ─ 첫 16바이트 매직 바이트 확인 ─ 불일치 → pending 삭제, bad_file_type
+//                    └ 일치 → artworks/<artworkId>/<kind>-<uploadId> 로 이동
+//       pending 없음 + 대상 있음 → 이미 이동됨(재시도), 대상 정보 반환
+//   정리 작업(cleanup): 24시간 지난 pending/, 행 없는 artworks/, 철회 작품 파일 재삭제
+
+export const BUCKET = "artworks";
+export const MAX_BYTES = 100 * 1024 * 1024;
+const DOWNLOAD_TTL_SECONDS = 300;
+
+export type FileKind = "original" | "thumbnail";
+export type MimeType = "image/png" | "image/jpeg" | "application/pdf";
+
+const ALLOWED: Record<FileKind, MimeType[]> = {
+  original: ["image/png", "image/jpeg", "application/pdf"],
+  // 썸네일은 <img>로 보여 주므로 이미지 형식만.
+  thumbnail: ["image/png", "image/jpeg"],
+};
+
+export const EXTENSION: Record<MimeType, string> = {
+  "image/png": "png",
+  "image/jpeg": "jpg",
+  "application/pdf": "pdf",
+};
+
+export class StorageInputError extends Error {}
+
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+export function pendingPath(uploadId: string): string {
+  if (!UUID.test(uploadId)) throw new StorageInputError("invalid_upload_id");
+  return `pending/${uploadId}`;
+}
+
+export function finalPath(artworkId: string, kind: FileKind, uploadId: string): string {
+  return `artworks/${artworkId}/${kind}-${uploadId}`;
+}
+
+export function detectMime(head: Uint8Array): MimeType | null {
+  const starts = (sig: number[]) => sig.every((b, i) => head[i] === b);
+  if (starts([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a])) return "image/png";
+  if (starts([0xff, 0xd8, 0xff])) return "image/jpeg";
+  if (starts([0x25, 0x50, 0x44, 0x46, 0x2d])) return "application/pdf";
+  return null;
+}
+
+export async function createUpload(input: { kind: FileKind; mimeType: string; sizeBytes: number }) {
+  if (!ALLOWED[input.kind]?.includes(input.mimeType as MimeType)) {
+    throw new StorageInputError("bad_file_type");
+  }
+  if (!(input.sizeBytes > 0 && input.sizeBytes <= MAX_BYTES)) {
+    throw new StorageInputError("file_too_large");
+  }
+  const uploadId = crypto.randomUUID();
+  const { data, error } = await db().storage.from(BUCKET).createSignedUploadUrl(pendingPath(uploadId));
+  if (error) throw error;
+  return { uploadId, path: data.path, token: data.token };
+}
+
+export type StoredFile = { kind: FileKind; path: string; mimeType: MimeType; sizeBytes: number };
+
+async function readHead(path: string): Promise<Uint8Array> {
+  const { data, error } = await db().storage.from(BUCKET).createSignedUrl(path, 60);
+  if (error) throw error;
+  // 최대 100 MB 파일을 통째로 받지 않고 앞부분만 읽는다.
+  const res = await fetch(data.signedUrl, { headers: { Range: "bytes=0-15" } });
+  if (!res.ok) throw new Error(`head read failed: ${res.status}`);
+  return new Uint8Array(await res.arrayBuffer()).slice(0, 16);
+}
+
+async function fileInfo(path: string) {
+  const { data, error } = await db().storage.from(BUCKET).info(path);
+  return error ? null : data;
+}
+
+export async function promoteUpload(uploadId: string, artworkId: string, kind: FileKind): Promise<StoredFile> {
+  const from = pendingPath(uploadId);
+  const to = finalPath(artworkId, kind, uploadId);
+  const bucket = db().storage.from(BUCKET);
+
+  const pending = await fileInfo(from);
+  if (!pending) {
+    const moved = await fileInfo(to);
+    if (!moved) throw new StorageInputError("upload_missing");
+    return { kind, path: to, mimeType: moved.contentType as MimeType, sizeBytes: moved.size ?? 0 };
+  }
+
+  const mime = detectMime(await readHead(from));
+  if (!mime || !ALLOWED[kind].includes(mime)) {
+    await bucket.remove([from]);
+    throw new StorageInputError("bad_file_type");
+  }
+
+  const { error } = await bucket.move(from, to);
+  if (error) throw error;
+  return { kind, path: to, mimeType: mime, sizeBytes: pending.size ?? 0 };
+}
+
+export async function signedDownloadUrl(path: string, filename: string): Promise<string> {
+  const { data, error } = await db()
+    .storage.from(BUCKET)
+    .createSignedUrl(path, DOWNLOAD_TTL_SECONDS, { download: filename });
+  if (error) throw error;
+  return data.signedUrl;
+}
+
+export async function signedViewUrl(path: string): Promise<string> {
+  const { data, error } = await db().storage.from(BUCKET).createSignedUrl(path, DOWNLOAD_TTL_SECONDS);
+  if (error) throw error;
+  return data.signedUrl;
+}
+
+// 저장소에서 지운 뒤 DB에 반영한다. 실패하면 행이 남아 정리 작업이 다시 시도한다.
+export async function removeFiles(paths: string[]): Promise<void> {
+  if (paths.length === 0) return;
+  const { error } = await db().storage.from(BUCKET).remove(paths);
+  if (error) throw error;
+  const { error: dbError } = await db().rpc("artwork_files_removed", { p_paths: paths });
+  if (dbError) throw dbError;
+}
