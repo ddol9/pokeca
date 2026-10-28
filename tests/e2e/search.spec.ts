@@ -39,3 +39,21 @@ test("unknown card URL shows the not-in-list page", async ({ page }) => {
   await page.goto("/cards/sv2a/999-165");
   await expect(page.getByRole("heading", { name: "이 카드는 아직 목록에 없어요" })).toBeVisible();
 });
+
+test("header search on a card page jumps to another card", async ({ page }) => {
+  await page.goto("/cards/sv2a/201-165");
+  const header = page.getByRole("banner");
+  await header.getByLabel("카드 번호 또는 이름 검색").fill("sv2a 205/165");
+  await header.getByRole("button", { name: "찾기" }).click();
+  await expect(page).toHaveURL(/\/cards\/sv2a\/205-165$/);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("sv2a 205/165");
+  // 모바일(375px)에서도 머리글 검색 때문에 가로 스크롤이 생기면 안 된다.
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+  expect(overflow).toBe(false);
+});
+
+test("home has no header search", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByLabel("카드 번호 또는 이름", { exact: true })).toBeVisible();
+  await expect(page.getByRole("banner").getByRole("search")).toHaveCount(0);
+});
