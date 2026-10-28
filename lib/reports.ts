@@ -88,7 +88,5 @@ export async function submitReport(report: NewReport, ipHash: string): Promise<{
     });
     autoHidden = !!result?.changed;
   }
-  // 메일 서비스는 아직 정하지 않았다. 알림 실패가 신고 저장을 막지 않도록 여기서는 기록만 한다 (eng T7).
-  console.info("report received", { id, reason: report.reason, autoHidden });
   return { id, autoHidden };
 }
