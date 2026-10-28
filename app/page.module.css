@@ -1,0 +1,35 @@
+.home {
+  max-width: 720px;
+  padding-block: calc(var(--space) * 6);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-xl);
+  margin-bottom: calc(var(--space) * 3);
+}
+
+.form {
+  display: grid;
+  gap: var(--space);
+}
+
+.label {
+  font-weight: 500;
+}
+
+.input {
+  width: 100%;
+  min-height: calc(var(--space) * 7);
+  padding: 0 calc(var(--space) * 2);
+  background: var(--color-surface);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius);
+  font-size: var(--text-lg);
+}
+
+.hint {
+  margin: 0;
+  color: var(--color-muted);
+}
