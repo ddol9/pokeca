@@ -51,3 +51,5 @@ npm run cards:import -- cards.csv --apply  # 실제로 넣는다
 ## 배포 환경 변수
 
 `.env.example`의 값 전부. 특히 `CRON_SECRET`(정리 작업 인증)과 `REPORT_HASH_SECRET`(신고 IP 대역 해시)은 임의의 긴 문자열로 넣는다.
+
+신고 알림 메일은 Resend로 보낸다. Resend에서 보내는 도메인을 인증하고 `RESEND_API_KEY`, `REPORT_NOTIFY_TO`(받는 주소), `REPORT_NOTIFY_FROM`(인증한 도메인의 주소)을 넣는다. 셋 중 하나라도 비면 메일 없이 서버 로그에만 남고, 신고 저장에는 영향이 없다.
