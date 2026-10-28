@@ -16,7 +16,7 @@ async function hosted() {
     {
       id, cardId: await cardId(), artistName: "확인", format: "brg",
       sourceUrl: "https://cafe.naver.com/x/1", sourceVisibility: "public",
-      consentLevel: "hosted", thumbnailOk: true, printSizeVerified: false, evidencePath: null,
+      consentLevel: "hosted", thumbnailOk: true, printSizeVerified: false,
     },
     { original, thumbnail },
     "test",

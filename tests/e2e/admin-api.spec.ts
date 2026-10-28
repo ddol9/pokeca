@@ -9,6 +9,8 @@ test("admin APIs reject requests without an admin session", async ({ request }) 
     request.post("/api/admin/artworks", { data: { id } }),
     request.patch(`/api/admin/artworks/${id}`, { data: { action: "withdraw" } }),
     request.post(`/api/admin/artworks/${id}/files`, { data: { kind: "original", uploadId: id } }),
+    request.post("/api/admin/uploads", { data: { kind: "evidence", mimeType: "image/png", sizeBytes: 10 } }),
+    request.get("/api/admin/evidence/1", { maxRedirects: 0 }),
   ];
   for (const res of await Promise.all(calls)) {
     expect(res.status()).toBe(401);

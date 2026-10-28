@@ -2,6 +2,7 @@ import { adminRoute } from "@/lib/admin-route";
 import { createArtwork, type NewArtwork } from "@/lib/artworks";
 
 // 2단계: 작품 생성 + 업로드 확정. body.id는 폼이 만든 UUID라 재시도해도 같은 작품이 된다.
+// 허락 근거는 경로가 아니라 업로드 ID(body.uploads.evidence)로만 받는다.
 export const POST = adminRoute(async (request, _ctx, admin) => {
   const body = await request.json();
   const input: NewArtwork = {
@@ -14,7 +15,6 @@ export const POST = adminRoute(async (request, _ctx, admin) => {
     consentLevel: body.consentLevel,
     thumbnailOk: !!body.thumbnailOk,
     printSizeVerified: !!body.printSizeVerified,
-    evidencePath: body.evidencePath || null,
   };
   const id = await createArtwork(input, body.uploads ?? {}, admin.email);
   return Response.json({ id }, { status: 201 });

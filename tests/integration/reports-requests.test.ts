@@ -13,7 +13,7 @@ async function linkOnly(sourceUrl = "https://cafe.naver.com/pokeca/123") {
   await createArtwork(
     {
       id, cardId: await cardId(), artistName: "신고대상", format: "9pocket", sourceUrl, sourceVisibility: "public",
-      consentLevel: "link_only", thumbnailOk: false, printSizeVerified: false, evidencePath: null,
+      consentLevel: "link_only", thumbnailOk: false, printSizeVerified: false,
     },
     {},
     "test",

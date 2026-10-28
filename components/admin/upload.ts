@@ -10,11 +10,12 @@ const storage = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.
 
 export const UPLOAD_ERRORS: Record<string, string> = {
   bad_file_type: "PNG·JPEG·PDF만 올릴 수 있어요(썸네일은 PNG·JPEG).",
-  file_too_large: "파일은 100 MB까지 올릴 수 있어요.",
+  file_too_large: "파일이 너무 커요. 원본은 100 MB, 허락 근거는 20 MB까지 올릴 수 있어요.",
   upload_missing: "업로드한 파일을 찾지 못했어요. 다시 올려 주세요.",
 };
 
-export async function uploadFile(kind: "original" | "thumbnail", file: File): Promise<string> {
+// 허락 근거(evidence)는 별도 비공개 버킷에 올린다. 서명 토큰이 버킷·경로에 묶여 있어 다른 곳에는 못 쓴다.
+export async function uploadFile(kind: "original" | "thumbnail" | "evidence", file: File): Promise<string> {
   const res = await fetch("/api/admin/uploads", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -22,7 +23,8 @@ export async function uploadFile(kind: "original" | "thumbnail", file: File): Pr
   });
   const body = await res.json();
   if (!res.ok) throw new Error(body.code ?? "upload_failed");
-  const { error } = await storage.from("artworks").uploadToSignedUrl(body.path, body.token, file, {
+  const bucket = kind === "evidence" ? "consent-evidence" : "artworks";
+  const { error } = await storage.from(bucket).uploadToSignedUrl(body.path, body.token, file, {
     contentType: file.type,
   });
   if (error) throw new Error("upload_failed");

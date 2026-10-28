@@ -18,7 +18,7 @@ type Props = {
   hasSource: boolean;
 };
 
-type Pending = { body: Record<string, unknown>; title: string; detail: string } | null;
+type Pending = { body: Record<string, unknown>; evidence?: File; title: string; detail: string } | null;
 
 const normalize = (s: string) => s.normalize("NFKC").trim().toLowerCase().replace(/\s+/g, " ");
 
@@ -27,11 +27,20 @@ export function ArtworkControls(props: Props) {
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState<{ ok: boolean; text: string } | null>(null);
   const [confirming, setConfirming] = useState<Pending>(null);
+  const evidenceInput = useRef<HTMLInputElement>(null);
+  // 같은 근거 파일로 다시 저장하면 다시 올리지 않는다(확인 실패 후 재시도 등).
+  const evidenceUpload = useRef<{ file: File; uploadId: string } | null>(null);
 
-  async function patch(body: Record<string, unknown>) {
+  async function patch(body: Record<string, unknown>, evidence?: File) {
     setBusy(true);
     setMessage(null);
     try {
+      if (evidence) {
+        if (evidenceUpload.current?.file !== evidence) {
+          evidenceUpload.current = { file: evidence, uploadId: await uploadFile("evidence", evidence) };
+        }
+        body = { ...body, evidenceUploadId: evidenceUpload.current.uploadId };
+      }
       const res = await fetch(`/api/admin/artworks/${props.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
@@ -43,6 +52,7 @@ export function ArtworkControls(props: Props) {
         ok: true,
         text: data.purged === false ? "저장했어요. 파일 삭제는 정리 작업이 다시 시도해요." : "저장했어요.",
       });
+      if (evidence && evidenceInput.current) evidenceInput.current.value = "";
       router.refresh();
       return true;
     } catch (e) {
@@ -80,14 +90,16 @@ export function ArtworkControls(props: Props) {
     const consentLevel = form.get("consentLevel") as Props["consentLevel"];
     const thumbnailOk = form.get("thumbnailOk") === "on";
     const body = { action: "consent", consentLevel, thumbnailOk, reason: form.get("reason") || undefined };
+    const file = form.get("evidence") as File | null;
+    const evidence = file && file.size > 0 ? file : undefined;
     const lost = [
       props.consentLevel === "hosted" && consentLevel === "link_only" ? "보관 중인 원본 파일" : null,
       props.thumbnailOk && !thumbnailOk ? "썸네일 파일" : null,
     ].filter(Boolean);
     if (lost.length) {
-      setConfirming({ body, title: "허락 하향", detail: `${lost.join("과 ")}이 삭제되며 되돌릴 수 없어요.` });
+      setConfirming({ body, evidence, title: "허락 하향", detail: `${lost.join("과 ")}이 삭제되며 되돌릴 수 없어요.` });
     } else {
-      patch(body);
+      patch(body, evidence);
     }
   }
 
@@ -143,6 +155,11 @@ export function ArtworkControls(props: Props) {
             <span>사유</span>
             <input name="reason" className={styles.input} placeholder="예: 아티스트 DM 요청 (10/28)" />
           </label>
+          <label className={styles.field}>
+            <span>허락 근거 (선택)</span>
+            <span>아티스트 DM 캡처 등. PNG·JPEG·PDF, 20 MB까지. 허락이 그대로여도 근거만 남길 수 있어요.</span>
+            <input ref={evidenceInput} name="evidence" type="file" accept="image/png,image/jpeg,application/pdf" />
+          </label>
           <div>
             <button type="submit" className={styles.primary} disabled={busy}>
               허락 저장
@@ -191,7 +208,7 @@ export function ArtworkControls(props: Props) {
         busy={busy}
         onCancel={() => setConfirming(null)}
         onConfirm={async (confirm) => {
-          if (confirming && (await patch({ ...confirming.body, confirm }))) setConfirming(null);
+          if (confirming && (await patch({ ...confirming.body, confirm }, confirming.evidence))) setConfirming(null);
         }}
       />
     </>

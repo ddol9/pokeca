@@ -113,7 +113,15 @@ async function Detail({ params }: { params: PageProps<"/admin/artworks/[id]">["p
               <span className={styles.muted}>
                 {new Date(e.createdAt).toLocaleString("ko-KR")} · {e.actor}
                 {e.reason ? ` · ${e.reason}` : ""}
-                {e.evidencePath ? ` · 근거 ${e.evidencePath}` : ""}
+                {e.evidencePath && (
+                  <>
+                    {" · "}
+                    {/* 어드민 전용 라우트가 짧은 서명 URL로 보낸다. 경로는 화면에 내보내지 않는다. */}
+                    <a href={`/api/admin/evidence/${e.id}`} target="_blank" rel="noopener noreferrer">
+                      근거 보기<span className="visually-hidden">(새 탭)</span>
+                    </a>
+                  </>
+                )}
               </span>
             </li>
           ))}
@@ -134,5 +142,7 @@ function describe(e: ConsentEvent): string {
   const status = (v: Record<string, unknown> | null) => STATUS_LABEL[v?.status as keyof typeof STATUS_LABEL] ?? "";
   if (e.kind === "created") return `등록 (${consentText(e.after)})`;
   if (e.kind === "status") return `상태 ${status(e.before)} → ${status(e.after)}`;
-  return `허락 ${consentText(e.before)} → ${consentText(e.after)}`;
+  const before = consentText(e.before);
+  const after = consentText(e.after);
+  return before === after ? `허락 근거 추가 (${after})` : `허락 ${before} → ${after}`;
 }

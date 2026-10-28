@@ -2,6 +2,7 @@ import "server-only";
 import { db } from "@/lib/supabase/server";
 import {
   EXTENSION,
+  promoteEvidence,
   promoteUpload,
   removeFiles,
   signedDownloadUrl,
@@ -65,12 +66,12 @@ export type NewArtwork = {
   consentLevel: ConsentLevel;
   thumbnailOk: boolean;
   printSizeVerified: boolean;
-  evidencePath: string | null;
 };
 
+// uploads.evidence는 허락 근거 업로드 ID. 경로는 서버가 정한다(클라이언트가 보낸 경로는 받지 않는다).
 export async function createArtwork(
   input: NewArtwork,
-  uploads: { original?: string; thumbnail?: string },
+  uploads: { original?: string; thumbnail?: string; evidence?: string },
   actor: string,
 ): Promise<string> {
   if (!input.artistName.trim()) throw new ArtworkError("artist_required");
@@ -80,11 +81,13 @@ export async function createArtwork(
   if (!UUID.test(input.id)) throw new ArtworkError("invalid_id");
 
   const files: StoredFile[] = [];
+  let evidencePath: string | null = null;
   try {
     for (const kind of ["original", "thumbnail"] as FileKind[]) {
       const uploadId = uploads[kind];
       if (uploadId) files.push(await promoteUpload(uploadId, input.id, kind));
     }
+    if (uploads.evidence) evidencePath = await promoteEvidence(uploads.evidence, input.id);
   } catch (e) {
     if (e instanceof StorageInputError) throw new ArtworkError(e.message);
     throw e;
@@ -101,7 +104,7 @@ export async function createArtwork(
       consent_level: input.consentLevel,
       thumbnail_ok: input.thumbnailOk,
       print_size_verified: input.printSizeVerified,
-      evidence_path: input.evidencePath,
+      evidence_path: evidencePath,
     },
     p_files: files.map((f) => ({
       kind: f.kind,
@@ -135,18 +138,30 @@ export async function setStatus(
   return { changed, purged: await purgeAfterCommit(purge_paths) };
 }
 
+// opts.evidenceUploadId가 있으면 근거 파일을 확정해 이벤트에 경로를 남긴다.
+// 허락이 그대로여도 근거만 추가하는 이벤트를 기록한다(20261028140000_consent_evidence.sql).
 export async function setConsent(
   id: string,
   consent: { consentLevel: ConsentLevel; thumbnailOk: boolean },
-  opts: { reason?: string; actor: string; evidencePath?: string },
+  opts: { reason?: string; actor: string; evidenceUploadId?: string },
 ): Promise<ChangeResult> {
+  let evidencePath: string | null = null;
+  if (opts.evidenceUploadId) {
+    if (!UUID.test(id)) throw new ArtworkError("not_found");
+    try {
+      evidencePath = await promoteEvidence(opts.evidenceUploadId, id);
+    } catch (e) {
+      if (e instanceof StorageInputError) throw new ArtworkError(e.message);
+      throw e;
+    }
+  }
   const { data, error } = await db().rpc("artwork_set_consent", {
     p_id: id,
     p_consent_level: consent.consentLevel,
     p_thumbnail_ok: consent.thumbnailOk,
     p_reason: opts.reason ?? null,
     p_actor: opts.actor,
-    p_evidence_path: opts.evidencePath ?? null,
+    p_evidence_path: evidencePath,
   });
   if (error) rethrow(error);
   const { changed, purge_paths } = data as { changed: boolean; purge_paths: string[] };
