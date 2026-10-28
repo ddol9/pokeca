@@ -6,6 +6,7 @@ import { BUCKET, removeFiles } from "@/lib/storage";
 //   1. 24시간 지난 pending/ 업로드 (확정 전에 탭을 닫은 경우)
 //   2. 작품 행이 없는 artworks/<id>/ 파일 중 24시간 지난 것 (이동 후 행 생성 실패)
 //   3. 철회됐는데 files_purged = false인 작품의 파일 (커밋 후 삭제 실패)
+//   4. 24시간 지난 신고 남용 방지 카운터(report_throttle)
 // Supabase Storage 파일은 SQL로 지울 수 없어서 pg_cron 대신 앱 경로로 돈다.
 
 const PAGE = 1000;
@@ -24,7 +25,7 @@ async function listAll(prefix: string): Promise<Listed[]> {
 
 const isOlder = (createdAt: string | null, cutoff: Date) => !!createdAt && new Date(createdAt) < cutoff;
 
-export type CleanupReport = { pending: number; orphaned: number; withdrawn: number };
+export type CleanupReport = { pending: number; orphaned: number; withdrawn: number; throttle: number };
 
 export async function cleanup(now = new Date()): Promise<CleanupReport> {
   const cutoff = new Date(now.getTime() - 24 * 60 * 60 * 1000);
@@ -63,5 +64,11 @@ export async function cleanup(now = new Date()): Promise<CleanupReport> {
   const withdrawn = leftovers.map((f) => f.path as string);
   await removeFiles(withdrawn);
 
-  return { pending: stalePending.length, orphaned: orphaned.length, withdrawn: withdrawn.length };
+  const { count: throttle, error: throttleError } = await db()
+    .from("report_throttle")
+    .delete({ count: "exact" })
+    .lt("created_at", cutoff.toISOString());
+  if (throttleError) throw throttleError;
+
+  return { pending: stalePending.length, orphaned: orphaned.length, withdrawn: withdrawn.length, throttle: throttle ?? 0 };
 }

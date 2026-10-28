@@ -22,6 +22,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main className={styles.main}>{children}</main>
         <footer className={styles.footer}>
           <p>비영리 팬 아카이브입니다. 도안의 권리는 각 아티스트에게 있습니다.</p>
+          <p>
+            <Link href="/takedown">권리자 내림 요청</Link>
+          </p>
         </footer>
       </body>
     </html>

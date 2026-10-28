@@ -13,6 +13,7 @@
   --color-link: #4f6d8a;
   --color-link-visited: #6b4f8a;
   --color-disabled: #8a939e;
+  --color-backdrop: rgb(28 36 48 / 0.4);
 
   --font-body: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
     "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;

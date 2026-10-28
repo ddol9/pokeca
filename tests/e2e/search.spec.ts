@@ -7,7 +7,7 @@ test("card number search goes straight to the card", async ({ page }) => {
   await page.getByLabel("카드 번호 또는 이름").press("Enter");
   await expect(page).toHaveURL(/\/cards\/sv2a\/201-165$/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("sv2a 201/165");
-  await expect(page.getByText("리자몽 ex")).toBeVisible();
+  await expect(page.locator("strong", { hasText: "리자몽 ex" })).toBeVisible();
 });
 
 test("alias search explains it landed on the Korean card", async ({ page }) => {

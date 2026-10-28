@@ -1,0 +1,203 @@
+/* 그리드 타일: 테두리 상자는 타일에만 (DESIGN.md) */
+.tile {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  background: var(--color-surface);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius);
+  transition: transform 150ms ease-out, box-shadow 150ms ease-out;
+}
+
+.tile:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.preview {
+  aspect-ratio: 63 / 88;
+  border-bottom: 1px solid var(--color-rule);
+  overflow: hidden;
+}
+
+.preview img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.tile .body {
+  display: grid;
+  align-content: space-between;
+  gap: var(--space);
+  padding: calc(var(--space) * 1.5);
+}
+
+/* 한 줄 행: 상자 없이 구분선만 */
+.row {
+  border-bottom: 1px solid var(--color-rule);
+  padding-block: calc(var(--space) * 1.5);
+}
+
+.row .body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space) calc(var(--space) * 2);
+}
+
+.meta {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.artist {
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.domain {
+  color: var(--color-muted);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space);
+}
+
+.downloadButton,
+.sourceButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--touch);
+  padding-inline: calc(var(--space) * 2);
+  border-radius: var(--radius);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* 다운로드 = 채운 군청, 원본 글 = 테두리 + 링크색 (DESIGN.md) */
+.downloadButton {
+  background: var(--color-action);
+  color: var(--color-on-action);
+  border: 1px solid var(--color-action);
+}
+
+.downloadButton:disabled {
+  background: var(--color-rule);
+  border-color: var(--color-rule);
+  color: var(--color-ink);
+}
+
+.sourceButton,
+.sourceButton:visited {
+  background: var(--color-surface);
+  border: 1px solid currentColor;
+  color: var(--color-link);
+}
+
+.sourceButton:visited {
+  color: var(--color-link-visited);
+}
+
+button.sourceButton:disabled {
+  color: var(--color-disabled);
+  border-color: var(--color-rule);
+}
+
+.secondaryLink {
+  font-size: var(--text-sm);
+}
+
+.status {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+.feedback {
+  flex-basis: 100%;
+}
+
+.feedback:empty {
+  display: none;
+}
+
+.feedback p {
+  margin: 0;
+}
+
+.error {
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+  font-weight: 500;
+}
+
+.notice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space);
+  padding-top: var(--space);
+  font-size: var(--text-sm);
+}
+
+.noticeClose {
+  flex: none;
+  min-height: var(--touch);
+  padding-inline: var(--space);
+  background: none;
+  border: none;
+  color: var(--color-link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.more {
+  position: relative;
+  margin-left: auto;
+}
+
+.moreButton {
+  min-width: var(--touch);
+  min-height: var(--touch);
+  background: none;
+  border: none;
+  border-radius: var(--radius);
+  color: var(--color-muted);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.menu {
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+  z-index: 1;
+  background: var(--color-surface);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius);
+}
+
+.menuItem {
+  min-height: var(--touch);
+  padding-inline: calc(var(--space) * 2);
+  white-space: nowrap;
+  background: none;
+  border: none;
+}
+
+/* 모바일: 행동 버튼은 행 전체 폭 아래로 (design 9A) */
+@media (max-width: 639px) {
+  .row .body {
+    display: grid;
+  }
+
+  .row .downloadButton,
+  .row .sourceButton {
+    flex: 1;
+  }
+}

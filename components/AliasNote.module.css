@@ -1,0 +1,20 @@
+.note {
+  display: flex;
+  align-items: center;
+  gap: var(--space);
+}
+
+.note p {
+  margin: 0;
+}
+
+.close {
+  flex: none;
+  min-height: var(--touch);
+  padding-inline: var(--space);
+  background: none;
+  border: none;
+  color: var(--color-link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

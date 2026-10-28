@@ -31,7 +31,7 @@ export async function cardId(setCode = "sv2a", number = "201/165"): Promise<stri
 }
 
 export async function resetArtworks(): Promise<void> {
-  await sql`truncate artworks, artwork_files, consent_events, reports, requests, card_demand cascade`;
+  await sql`truncate artworks, artwork_files, consent_events, reports, report_throttle, requests, card_demand, events cascade`;
   const objects = await sql<{ name: string }[]>`select name from storage.objects where bucket_id = 'artworks'`;
   if (objects.length) {
     const { db } = await import("@/lib/supabase/server");

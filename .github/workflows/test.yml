@@ -36,6 +36,8 @@ jobs:
             echo "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=$PUBLISHABLE_KEY"
             echo "SUPABASE_SECRET_KEY=$SECRET_KEY"
             echo "SUPABASE_DB_URL=$DB_URL"
+            echo "REPORT_HASH_SECRET=ci-report-hash-secret"
+            echo "CRON_SECRET=ci-cron-secret"
           } >> "$GITHUB_ENV"
 
       - run: npm run lint

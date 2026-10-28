@@ -46,7 +46,24 @@ export async function seedArtwork(s: Seed = {}): Promise<string> {
 }
 
 export async function clearArtworks(): Promise<void> {
-  await sql`truncate artworks, artwork_files, consent_events, reports, requests, card_demand cascade`;
+  await sql`truncate artworks, artwork_files, consent_events, reports, report_throttle, requests, card_demand, events cascade`;
   const objects = await sql<{ name: string }[]>`select name from storage.objects where bucket_id = 'artworks'`;
   if (objects.length) await service.storage.from("artworks").remove(objects.map((o) => o.name));
+}
+
+// 어드민 로그인용 계정. 공개 가입이 꺼져 있어 서비스 키로 만든다.
+export const ADMIN = { email: "admin-e2e@example.com", password: "e2e-admin-password" };
+export const NOT_ADMIN = { email: "visitor-e2e@example.com", password: "e2e-visitor-password" };
+
+export async function ensureUser(user: { email: string; password: string }, admin: boolean): Promise<void> {
+  const { data } = await service.auth.admin.listUsers();
+  let found = data.users.find((u) => u.email === user.email);
+  if (!found) {
+    const created = await service.auth.admin.createUser({ ...user, email_confirm: true });
+    if (created.error) throw created.error;
+    found = created.data.user;
+  }
+  if (admin) {
+    await sql`insert into admins (user_id, email) values (${found.id}, ${user.email}) on conflict do nothing`;
+  }
 }

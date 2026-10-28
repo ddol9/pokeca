@@ -117,3 +117,16 @@ export async function getCard(setCode: string, collectorNumber: string): Promise
     setName: data.sets.name_ko,
   };
 }
+
+export type RecentCard = { setCode: string; collectorNumber: string; nameKo: string };
+
+// 홈 "최근 도안이 등록된 카드" (design 3A).
+export async function recentArtworkCards(limit = 6): Promise<RecentCard[]> {
+  const { data, error } = await db().rpc("recent_artwork_cards", { p_limit: limit });
+  if (error) throw error;
+  return (data as { set_code: string; collector_number: string; name_ko: string }[]).map((r) => ({
+    setCode: r.set_code,
+    collectorNumber: r.collector_number,
+    nameKo: r.name_ko,
+  }));
+}

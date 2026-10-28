@@ -9,6 +9,8 @@ const port = 3100;
 export default defineConfig({
   testDir: "tests/e2e",
   forbidOnly: !!process.env.CI,
+  // 여러 파일이 같은 로컬 DB를 비우고 채우므로 한 번에 하나씩 돈다.
+  workers: 1,
   retries: process.env.CI ? 1 : 0,
   reporter: process.env.CI ? "github" : "list",
   use: { baseURL: `http://127.0.0.1:${port}`, trace: "retain-on-failure" },

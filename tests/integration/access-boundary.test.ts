@@ -77,3 +77,10 @@ describe("access boundary", () => {
     ]);
   });
 });
+
+describe("admin accounts", () => {
+  it("cannot be created by public signup (설계: 일반 사용자 로그인 없음)", async () => {
+    const { error } = await anon.auth.signUp({ email: `stranger-${Date.now()}@example.com`, password: "stranger-password-1" });
+    expect(error?.message).toMatch(/signups not allowed/i);
+  });
+});

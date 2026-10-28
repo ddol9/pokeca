@@ -1,4 +1,5 @@
 import "server-only";
+import { redirect } from "next/navigation";
 import { authClient } from "@/lib/supabase/auth";
 import { db } from "@/lib/supabase/server";
 import { ArtworkError, setConsent, setStatus, type ConsentLevel } from "@/lib/artworks";
@@ -14,6 +15,13 @@ export async function currentAdmin(): Promise<Admin | null> {
   const { data, error } = await db().from("admins").select("user_id, email").eq("user_id", user.id).maybeSingle();
   if (error) throw error;
   return data ? { userId: data.user_id, email: data.email } : null;
+}
+
+// 어드민 화면과 server action의 첫 줄. 허용 목록에 없으면 로그인으로 보낸다.
+export async function requireAdmin(): Promise<Admin> {
+  const admin = await currentAdmin();
+  if (!admin) redirect("/admin/login?denied=1");
+  return admin;
 }
 
 // 파괴적 행동(철회, 허락 하향)은 화면 확인과 별개로 서버에서도 확인한다 (eng E1).

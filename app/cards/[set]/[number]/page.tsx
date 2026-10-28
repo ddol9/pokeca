@@ -1,5 +1,8 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
+import { AliasNote } from "@/components/AliasNote";
+import { FormatResults } from "@/components/FormatResults";
+import { listPublicArtworks } from "@/lib/artworks";
 import { getCard } from "@/lib/cards";
 import { numberFromPath } from "@/lib/search";
 import styles from "./page.module.css";
@@ -22,15 +25,22 @@ async function Card({
   const card = await getCard(decodeURIComponent(set), numberFromPath(number));
   if (!card) notFound();
 
-  const from = aliasFrom((await searchParams).from);
+  const [artworks, query] = await Promise.all([listPublicArtworks(card.cardId), searchParams]);
+  const from = aliasFrom(query.from);
 
   // design 2A: 번호 블록이 기준점. 상자 없이 글자 크기·간격·구분선으로 위계를 만든다.
   return (
     <article className={styles.card}>
-      <header className={styles.identity}>
+      {/* 모바일에서는 번호 줄이 위에 고정된다 (design 9A). sticky가 페이지 끝까지 유지되도록 article 바로 아래에 둔다. */}
+      <div className={styles.sticky}>
         <h1 className={styles.number}>
           <span>{card.setCode}</span> <span>{card.collectorNumber}</span>
         </h1>
+        <p className={styles.stickyName} aria-hidden="true">
+          {card.nameKo}
+        </p>
+      </div>
+      <header className={styles.identity}>
         <p className={styles.meta}>
           <strong className={styles.name}>{card.nameKo}</strong>
           {[card.rarity, card.setName, card.illustrator && `일러스트 ${card.illustrator}`]
@@ -40,16 +50,12 @@ async function Card({
             ))}
         </p>
         {from && (
-          <p className={styles.aliasNote}>
+          <AliasNote>
             입력한 {from.number}({LANG_LABEL[from.lang]}판)과 같은 그림의 한글판 카드예요. 도안은 한글판 기준이에요.
-          </p>
+          </AliasNote>
         )}
       </header>
-      <section aria-labelledby="artworks-heading" className={styles.artworks}>
-        <h2 id="artworks-heading" className={styles.artworksHeading}>
-          확장 아트 도안 0개
-        </h2>
-      </section>
+      <FormatResults cardId={card.cardId} artworks={artworks} />
     </article>
   );
 }

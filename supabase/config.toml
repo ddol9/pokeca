@@ -218,8 +218,8 @@ web3 = 30
 # secret = ""
 
 [auth.email]
-# Allow/disallow new user signups via email to your project.
-enable_signup = false
+# 이메일 로그인 제공자를 켠다. false면 로그인까지 막힌다. 공개 가입은 위 [auth] enable_signup = false가 막는다.
+enable_signup = true
 # If enabled, a user will be required to confirm any email change on both the old, and new email
 # addresses. If disabled, only the new email is required to confirm.
 double_confirm_changes = true

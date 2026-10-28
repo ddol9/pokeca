@@ -11,14 +11,14 @@ import {
   type MimeType,
   type StoredFile,
 } from "@/lib/storage";
+import { FORMATS, type Format } from "@/lib/formats";
 
 // 작품의 생성·상태·허락 변경은 이 모듈만 한다 (eng D5, D9, D10).
 // 전이 규칙과 consent_events 기록은 DB 함수(artwork_functions.sql)가 한 트랜잭션에서 처리하고,
 // 여기서는 커밋 뒤에 파일을 지운다. 삭제가 실패해도 DB가 기준이라 방문자에게는 이미 410이고,
 // 남은 파일은 정리 작업(cleanup)이 다시 지운다.
 
-export const FORMATS = ["9pocket", "psa", "brg"] as const;
-export type Format = (typeof FORMATS)[number];
+export { FORMATS, type Format } from "@/lib/formats";
 export type Status = "active" | "hidden" | "withdrawn";
 export type ConsentLevel = "link_only" | "hosted";
 

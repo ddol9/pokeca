@@ -32,6 +32,19 @@
   font-size: var(--text-sm);
 }
 
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space) calc(var(--space) * 2);
+}
+
 .footer p {
   margin: 0;
+}
+
+.footer a {
+  display: inline-block;
+  min-height: var(--touch);
+  line-height: var(--touch);
 }

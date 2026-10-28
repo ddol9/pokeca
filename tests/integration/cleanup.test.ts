@@ -62,4 +62,10 @@ describe("cleanup", () => {
     await cleanup(later());
     expect(await storedPaths()).toHaveLength(2);
   });
+
+  it("drops report abuse counters after 24 hours", async () => {
+    await sql`insert into report_throttle (ip_hash) values ('h1')`;
+    expect(await cleanup()).toMatchObject({ throttle: 0 });
+    expect(await cleanup(later())).toMatchObject({ throttle: 1 });
+  });
 });
