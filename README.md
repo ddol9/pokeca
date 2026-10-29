@@ -11,7 +11,10 @@ npm install
 npm run db:start                 # 로컬 Supabase (마이그레이션·시드 자동 적용)
 cp .env.example .env.local       # 값은 `npx supabase status -o env`에서 복사
 npm run dev
+npm run demo:seed                # (선택) 로컬 DB에 데모 도안 5개
 ```
+
+도안은 모두 사이트에 보관한다. 원본(PNG·JPEG·PDF)을 올리면 서버가 PNG·JPEG에서 webp 미리보기를 만든다. PDF 원본은 미리보기 이미지를 같이 올린다.
 
 ## 테스트
 

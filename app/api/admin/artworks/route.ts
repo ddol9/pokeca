@@ -12,8 +12,6 @@ export const POST = adminRoute(async (request, _ctx, admin) => {
     format: body.format,
     sourceUrl: body.sourceUrl || null,
     sourceVisibility: body.sourceUrl ? body.sourceVisibility : null,
-    consentLevel: body.consentLevel,
-    thumbnailOk: !!body.thumbnailOk,
     printSizeVerified: !!body.printSizeVerified,
   };
   const id = await createArtwork(input, body.uploads ?? {}, admin.email);

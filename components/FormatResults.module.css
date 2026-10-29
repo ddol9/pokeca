@@ -67,13 +67,6 @@
   list-style: none;
 }
 
-.rows {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  border-top: 1px solid var(--color-rule);
-}
-
 /* 찾기 요청 영역: 노랑은 여기에만 (DESIGN.md) */
 .empty {
   display: grid;

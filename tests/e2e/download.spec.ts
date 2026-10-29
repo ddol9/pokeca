@@ -17,7 +17,7 @@ test("hosted artwork returns a short-lived download URL", async ({ request }) =>
   expect(file.headers()["content-disposition"]).toContain("sv2a_201-165");
 });
 
-test("unknown artwork is 404, hidden or link-only is 410 without details (eng E2)", async ({ request }) => {
+test("unknown artwork is 404, hidden or withdrawn is 410 without details (eng E2)", async ({ request }) => {
   expect((await request.post(`/api/download/${crypto.randomUUID()}`)).status()).toBe(404);
 
   const hidden = await seedArtwork({ status: "hidden" });
@@ -25,11 +25,11 @@ test("unknown artwork is 404, hidden or link-only is 410 without details (eng E2
   expect(res.status()).toBe(410);
   expect(await res.json()).toEqual({ code: "unavailable" });
 
-  const linkOnly = await seedArtwork({ consent: "link_only" });
-  expect((await request.post(`/api/download/${linkOnly}`)).status()).toBe(410);
+  const withdrawn = await seedArtwork({ status: "withdrawn" });
+  expect((await request.post(`/api/download/${withdrawn}`)).status()).toBe(410);
 });
 
-test("thumbnail redirects only while active with consent", async ({ request }) => {
+test("preview redirects only while active", async ({ request }) => {
   const id = await seedArtwork();
   const ok = await request.get(`/api/thumbnails/${id}`, { maxRedirects: 0 });
   expect(ok.status()).toBe(302);
