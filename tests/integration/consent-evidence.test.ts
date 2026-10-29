@@ -4,7 +4,7 @@ import { createClient } from "@supabase/supabase-js";
 import { afterAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { applyAdminAction } from "@/lib/admin";
 import { evidenceUrl } from "@/lib/admin-data";
-import { ArtworkError, attachFile, createArtwork, type NewArtwork } from "@/lib/artworks";
+import { ArtworkError, createArtwork, type NewArtwork } from "@/lib/artworks";
 import { cleanup } from "@/lib/cleanup";
 import { createUpload, StorageInputError } from "@/lib/storage";
 import { GET as viewEvidence } from "@/app/api/admin/evidence/[eventId]/route";
@@ -38,11 +38,17 @@ async function input(overrides: Partial<NewArtwork> = {}): Promise<NewArtwork> {
     format: "9pocket",
     sourceUrl: "https://cafe.naver.com/example/7",
     sourceVisibility: "public",
-    consentLevel: "link_only",
-    thumbnailOk: false,
     printSizeVerified: false,
     ...overrides,
   };
+}
+
+// 원본(PDF)과 미리보기를 올려 작품을 만든다. extra로 허락 근거를 함께 넘길 수 있다.
+async function create(a: NewArtwork, extra: { evidence?: string } = {}) {
+  const original = await uploadAsBrowser("original", PDF, "application/pdf");
+  const thumbnail = await uploadAsBrowser("thumbnail", PNG, "image/png");
+  await createArtwork(a, { original, thumbnail, ...extra }, "test");
+  return { original, thumbnail };
 }
 
 async function events(id: string) {
@@ -72,7 +78,7 @@ describe("evidence upload validation", () => {
 
   it("deletes an evidence file whose bytes are not an allowed type and creates nothing", async () => {
     const evidence = await uploadAsBrowser("evidence", FAKE_PNG, "image/png");
-    await expect(createArtwork(await input(), { evidence }, "test")).rejects.toSatisfy(
+    await expect(create(await input(), { evidence })).rejects.toSatisfy(
       (e) => e instanceof ArtworkError && e.code === "bad_file_type",
     );
     expect(await evidencePaths()).toEqual([]);
@@ -85,56 +91,43 @@ describe("evidence_path is recorded", () => {
   it("on create, under the artwork in the evidence bucket", async () => {
     const a = await input();
     const evidence = await uploadAsBrowser("evidence", PDF, "application/pdf");
-    await createArtwork(a, { evidence }, "test");
+    const uploads = await create(a, { evidence });
     // 재시도해도 같은 경로(멱등).
-    await createArtwork(a, { evidence }, "test");
+    await createArtwork(a, { ...uploads, evidence }, "test");
 
     const [created] = await events(a.id);
     expect(created).toMatchObject({ kind: "created", evidence_path: `artworks/${a.id}/${evidence}` });
     expect(await evidencePaths()).toEqual([created.evidence_path]);
   });
 
-  it("on consent change, and on an evidence-only save that keeps the consent", async () => {
+  it("on each evidence added later from the admin page", async () => {
     const a = await input();
-    await createArtwork(a, {}, "test");
+    await create(a);
 
     const first = await uploadAsBrowser("evidence", PNG, "image/png");
-    await applyAdminAction(
-      a.id,
-      { action: "consent", consentLevel: "link_only", thumbnailOk: false, evidenceUploadId: first, reason: "DM" },
-      admin,
-    );
-    // 허락은 그대로(link_only, 썸네일 없음) → 근거만 기록, changed=false
-    const [created, evidenceOnly] = await events(a.id);
-    expect(created.evidence_path).toBeNull();
-    expect(evidenceOnly).toMatchObject({ kind: "consent", evidence_path: `artworks/${a.id}/${first}` });
-
-    const id = a.id;
-    const thumb = await uploadAsBrowser("thumbnail", PNG, "image/png");
-    await attachFile(id, "thumbnail", thumb);
+    await applyAdminAction(a.id, { action: "evidence", evidenceUploadId: first, reason: "DM" }, admin);
     const second = await uploadAsBrowser("evidence", PDF, "application/pdf");
-    await applyAdminAction(
-      id,
-      { action: "consent", consentLevel: "link_only", thumbnailOk: true, evidenceUploadId: second },
-      admin,
-    );
-    const [, , upgraded] = await events(id);
-    expect(upgraded).toMatchObject({ kind: "consent", evidence_path: `artworks/${id}/${second}` });
+    await applyAdminAction(a.id, { action: "evidence", evidenceUploadId: second }, admin);
+
+    const [created, ...added] = await events(a.id);
+    expect(created.evidence_path).toBeNull();
+    expect(added).toMatchObject([
+      { kind: "consent", evidence_path: `artworks/${a.id}/${first}` },
+      { kind: "consent", evidence_path: `artworks/${a.id}/${second}` },
+    ]);
 
     // 기록된 근거는 정리 작업이 지우지 않는다.
     expect(await cleanup(later())).toMatchObject({ evidence: 0 });
     expect(await evidencePaths()).toHaveLength(2);
   });
 
-  it("does not move evidence when the downgrade confirm is missing", async () => {
-    const a = await input({ consentLevel: "hosted", thumbnailOk: false });
-    const original = await uploadAsBrowser("original", PDF, "application/pdf");
-    await createArtwork(a, { original }, "test");
-    const evidence = await uploadAsBrowser("evidence", PNG, "image/png");
+  it("refuses an evidence action without a file", async () => {
+    const a = await input();
+    await create(a);
     await expect(
-      applyAdminAction(a.id, { action: "consent", consentLevel: "link_only", thumbnailOk: false, evidenceUploadId: evidence }, admin),
-    ).rejects.toSatisfy((e) => e instanceof ArtworkError && e.code === "confirm_mismatch");
-    expect(await evidencePaths()).toEqual([`pending/${evidence}`]);
+      applyAdminAction(a.id, { action: "evidence" } as never, admin),
+    ).rejects.toSatisfy((e) => e instanceof ArtworkError && e.code === "evidence_required");
+    expect(await events(a.id)).toHaveLength(1);
   });
 });
 
@@ -155,7 +148,7 @@ describe("evidence view is admin only", () => {
   async function recorded() {
     const a = await input();
     const evidence = await uploadAsBrowser("evidence", PNG, "image/png");
-    await createArtwork(a, { evidence }, "test");
+    await create(a, { evidence });
     const [created] = await events(a.id);
     return created.id;
   }

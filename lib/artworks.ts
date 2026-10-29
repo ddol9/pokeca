@@ -13,16 +13,17 @@ import {
   type StoredFile,
 } from "@/lib/storage";
 import { FORMATS, type Format } from "@/lib/formats";
+import { makePreview, PreviewError } from "@/lib/preview";
 import { UUID } from "@/lib/uuid";
 
-// 작품의 생성·상태·허락 변경은 이 모듈만 한다 (eng D5, D9, D10).
+// 작품의 생성·상태 변경·허락 근거 기록은 이 모듈만 한다 (eng D5, D9, D10).
+// 모든 작품은 사이트에 보관한다: 원본 + 미리보기(20261029090000_archive_only.sql).
 // 전이 규칙과 consent_events 기록은 DB 함수(artwork_functions.sql)가 한 트랜잭션에서 처리하고,
 // 여기서는 커밋 뒤에 파일을 지운다. 삭제가 실패해도 DB가 기준이라 방문자에게는 이미 410이고,
 // 남은 파일은 정리 작업(cleanup)이 다시 지운다.
 
 export { FORMATS, type Format } from "@/lib/formats";
 export type Status = "active" | "hidden" | "withdrawn";
-export type ConsentLevel = "link_only" | "hosted";
 
 export class ArtworkError extends Error {
   constructor(public code: string) {
@@ -34,9 +35,9 @@ const DB_ERROR_CODES = [
   "not_found",
   "withdrawn_is_final",
   "invalid_status",
-  "hosted_needs_original",
-  "thumbnail_needs_file",
-  "link_only_needs_source",
+  "original_required",
+  "thumbnail_required",
+  "evidence_required",
 ];
 
 function rethrow(error: { message: string }): never {
@@ -63,11 +64,15 @@ export type NewArtwork = {
   format: Format;
   sourceUrl: string | null;
   sourceVisibility: "public" | "members_only" | null;
-  consentLevel: ConsentLevel;
-  thumbnailOk: boolean;
   printSizeVerified: boolean;
 };
 
+function storageError(e: unknown): never {
+  if (e instanceof StorageInputError || e instanceof PreviewError) throw new ArtworkError(e.message);
+  throw e;
+}
+
+// 원본은 필수다. 미리보기를 따로 올리지 않았으면 원본에서 만든다(PDF 원본은 직접 올려야 한다).
 // uploads.evidence는 허락 근거 업로드 ID. 경로는 서버가 정한다(클라이언트가 보낸 경로는 받지 않는다).
 export async function createArtwork(
   input: NewArtwork,
@@ -79,18 +84,21 @@ export async function createArtwork(
   if (input.sourceUrl && !/^https?:\/\//.test(input.sourceUrl)) throw new ArtworkError("invalid_source_url");
   if (!!input.sourceUrl !== !!input.sourceVisibility) throw new ArtworkError("source_visibility_required");
   if (!UUID.test(input.id)) throw new ArtworkError("invalid_id");
+  if (!uploads.original) throw new ArtworkError("original_required");
 
   const files: StoredFile[] = [];
   let evidencePath: string | null = null;
   try {
-    for (const kind of ["original", "thumbnail"] as FileKind[]) {
-      const uploadId = uploads[kind];
-      if (uploadId) files.push(await promoteUpload(uploadId, input.id, kind));
-    }
+    const original = await promoteUpload(uploads.original, input.id, "original");
+    files.push(original);
+    files.push(
+      uploads.thumbnail
+        ? await promoteUpload(uploads.thumbnail, input.id, "thumbnail")
+        : await makePreview(input.id, original),
+    );
     if (uploads.evidence) evidencePath = await promoteEvidence(uploads.evidence, input.id);
   } catch (e) {
-    if (e instanceof StorageInputError) throw new ArtworkError(e.message);
-    throw e;
+    storageError(e);
   }
 
   const { data, error } = await db().rpc("artwork_create", {
@@ -101,8 +109,6 @@ export async function createArtwork(
       format: input.format,
       source_url: input.sourceUrl,
       source_visibility: input.sourceVisibility,
-      consent_level: input.consentLevel,
-      thumbnail_ok: input.thumbnailOk,
       print_size_verified: input.printSizeVerified,
       evidence_path: evidencePath,
     },
@@ -138,34 +144,27 @@ export async function setStatus(
   return { changed, purged: await purgeAfterCommit(purge_paths) };
 }
 
-// opts.evidenceUploadId가 있으면 근거 파일을 확정해 이벤트에 경로를 남긴다.
-// 허락이 그대로여도 근거만 추가하는 이벤트를 기록한다(20261028140000_consent_evidence.sql).
-export async function setConsent(
+// 허락 근거(DM 캡처 등)를 나중에 덧붙인다. 경로는 서버가 정한다.
+export async function addEvidence(
   id: string,
-  consent: { consentLevel: ConsentLevel; thumbnailOk: boolean },
-  opts: { reason?: string; actor: string; evidenceUploadId?: string },
-): Promise<ChangeResult> {
-  let evidencePath: string | null = null;
-  if (opts.evidenceUploadId) {
-    if (!UUID.test(id)) throw new ArtworkError("not_found");
-    try {
-      evidencePath = await promoteEvidence(opts.evidenceUploadId, id);
-    } catch (e) {
-      if (e instanceof StorageInputError) throw new ArtworkError(e.message);
-      throw e;
-    }
+  evidenceUploadId: string,
+  opts: { reason?: string; actor: string },
+): Promise<void> {
+  if (!UUID.test(id)) throw new ArtworkError("not_found");
+  if (!evidenceUploadId) throw new ArtworkError("evidence_required");
+  let evidencePath = "";
+  try {
+    evidencePath = await promoteEvidence(evidenceUploadId, id);
+  } catch (e) {
+    storageError(e);
   }
-  const { data, error } = await db().rpc("artwork_set_consent", {
+  const { error } = await db().rpc("artwork_add_evidence", {
     p_id: id,
-    p_consent_level: consent.consentLevel,
-    p_thumbnail_ok: consent.thumbnailOk,
     p_reason: opts.reason ?? null,
     p_actor: opts.actor,
     p_evidence_path: evidencePath,
   });
   if (error) rethrow(error);
-  const { changed, purge_paths } = data as { changed: boolean; purge_paths: string[] };
-  return { changed, purged: await purgeAfterCommit(purge_paths) };
 }
 
 export async function attachFile(id: string, kind: FileKind, uploadId: string): Promise<void> {
@@ -176,37 +175,39 @@ export async function attachFile(id: string, kind: FileKind, uploadId: string): 
   if (targetError) throw targetError;
   if (!target) throw new ArtworkError("not_found");
   if (target.status === "withdrawn") throw new ArtworkError("withdrawn_is_final");
-  let file: StoredFile;
+  // 원본을 바꾸면 미리보기도 새 원본에서 다시 만든다. PDF 원본이면 기존 미리보기를 둔다.
+  const files: StoredFile[] = [];
   try {
-    file = await promoteUpload(uploadId, id, kind);
+    const file = await promoteUpload(uploadId, id, kind);
+    files.push(file);
+    if (kind === "original" && file.mimeType !== "application/pdf") files.push(await makePreview(id, file));
   } catch (e) {
-    if (e instanceof StorageInputError) throw new ArtworkError(e.message);
-    throw e;
+    storageError(e);
   }
-  const { data, error } = await db().rpc("artwork_attach_file", {
-    p_id: id,
-    p_kind: kind,
-    p_path: file.path,
-    p_mime_type: file.mimeType,
-    p_size_bytes: file.sizeBytes,
-  });
-  if (error) rethrow(error);
-  await purgeAfterCommit((data as { purge_paths: string[] }).purge_paths);
+  for (const file of files) {
+    const { data, error } = await db().rpc("artwork_attach_file", {
+      p_id: id,
+      p_kind: file.kind,
+      p_path: file.path,
+      p_mime_type: file.mimeType,
+      p_size_bytes: file.sizeBytes,
+    });
+    if (error) rethrow(error);
+    await purgeAfterCommit((data as { purge_paths: string[] }).purge_paths);
+  }
 }
 
 // 공개 목록 -------------------------------------------------------------------
 
-// 공개 DTO (eng D6). 모양은 썸네일 허락으로, 행동은 보관 허락으로 정한다 (eng E3).
+// 공개 DTO (eng D6). 모든 작품은 미리보기 타일 + 크게 보기 + 다운로드다.
+// 원본 글은 출처 표시용 링크다. 사라졌거나 볼 수 없는 글은 링크를 내보내지 않는다.
 export type PublicArtwork = {
   id: string;
   artistName: string;
   format: Format;
-  layout: "tile" | "row";
-  action: "download" | "source";
   sourceUrl: string | null;
   sourceDomain: string | null;
   membersOnly: boolean;
-  sourceDeleted: boolean;
   printSizeVerified: boolean;
 };
 
@@ -216,68 +217,38 @@ type ArtworkRow = {
   format: Format;
   source_url: string | null;
   source_visibility: "public" | "members_only" | null;
-  consent_level: ConsentLevel;
-  thumbnail_ok: boolean;
   link_status: string;
   print_size_verified: boolean;
-  created_at: string;
-  artwork_files: { kind: FileKind }[];
 };
 
-function toPublic(r: ArtworkRow): PublicArtwork & { rank: number; createdAt: string } {
-  const has = (kind: FileKind) => r.artwork_files.some((f) => f.kind === kind);
-  const download = r.consent_level === "hosted" && has("original");
-  const layout = r.thumbnail_ok && has("thumbnail") ? "tile" : "row";
-  const membersOnly = r.source_visibility === "members_only";
-  const sourceDeleted = r.link_status === "deleted";
-  // design 12A 순서: 다운로드 → 미리보기 링크 → 미리보기 없는 링크 → 카페 가입 필요 → 원본 삭제
-  const rank = download ? 1 : sourceDeleted ? 5 : membersOnly ? 4 : layout === "tile" ? 2 : 3;
+export function toPublic(r: ArtworkRow): PublicArtwork {
+  const sourceUrl = r.link_status === "deleted" || r.link_status === "no_access" ? null : r.source_url;
   let sourceDomain: string | null = null;
   try {
-    sourceDomain = r.source_url ? new URL(r.source_url).hostname : null;
+    sourceDomain = sourceUrl ? new URL(sourceUrl).hostname : null;
   } catch {}
   return {
     id: r.id,
     artistName: r.artist_name,
     format: r.format,
-    layout,
-    action: download ? "download" : "source",
-    sourceUrl: r.source_url,
+    sourceUrl,
     sourceDomain,
-    membersOnly,
-    sourceDeleted,
+    membersOnly: !!sourceUrl && r.source_visibility === "members_only",
     printSizeVerified: r.print_size_verified,
-    rank,
-    createdAt: r.created_at,
   };
 }
 
-// 구획(타일 → 행)이 먼저, 각 구획 안에서 12A 순서, 같은 순위는 최신 등록 순 (eng E4).
-export function sortArtworks<T extends { layout: "tile" | "row"; rank: number; createdAt: string }>(items: T[]): T[] {
-  return [...items].sort(
-    (a, b) =>
-      (a.layout === b.layout ? 0 : a.layout === "tile" ? -1 : 1) ||
-      a.rank - b.rank ||
-      b.createdAt.localeCompare(a.createdAt),
-  );
-}
-
+// 최신 등록 순.
 export async function listPublicArtworks(cardId: string): Promise<PublicArtwork[]> {
   const { data, error } = await db()
     .from("artworks")
-    .select(
-      "id, artist_name, format, source_url, source_visibility, consent_level, thumbnail_ok, link_status, print_size_verified, created_at, artwork_files(kind)",
-    )
+    .select("id, artist_name, format, source_url, source_visibility, link_status, print_size_verified")
     .eq("card_id", cardId)
     .eq("status", "active")
+    .order("created_at", { ascending: false })
     .returns<ArtworkRow[]>();
   if (error) throw error;
-  return sortArtworks(data.map(toPublic)).map((item) => {
-    const dto: Partial<typeof item> = { ...item };
-    delete dto.rank;
-    delete dto.createdAt;
-    return dto as PublicArtwork;
-  });
+  return data.map(toPublic);
 }
 
 // 다운로드·썸네일 ---------------------------------------------------------------
@@ -285,8 +256,6 @@ export async function listPublicArtworks(cardId: string): Promise<PublicArtwork[
 type FileLookup = {
   id: string;
   status: Status;
-  consent_level: ConsentLevel;
-  thumbnail_ok: boolean;
   artist_name: string;
   format: Format;
   cards: { set_code: string; collector_number: string };
@@ -298,7 +267,7 @@ async function lookup(id: string): Promise<FileLookup | null> {
   const { data, error } = await db()
     .from("artworks")
     .select(
-      "id, status, consent_level, thumbnail_ok, artist_name, format, cards(set_code, collector_number), artwork_files(kind, path, mime_type)",
+      "id, status, artist_name, format, cards(set_code, collector_number), artwork_files(kind, path, mime_type)",
     )
     .eq("id", id)
     .maybeSingle<FileLookup>();
@@ -309,24 +278,24 @@ async function lookup(id: string): Promise<FileLookup | null> {
 export type DownloadResult =
   | { kind: "ok"; url: string }
   | { kind: "not_found" } // 404
-  | { kind: "unavailable" }; // 410: 숨김·철회·허락 밖 (eng E2)
+  | { kind: "unavailable" }; // 410: 숨김·철회 (eng E2)
 
-// 서명 URL은 원본 = active ∧ hosted 일 때만 발급한다 (eng D10).
+// 서명 URL은 active 작품에만 발급한다 (eng D10).
 export async function resolveDownload(id: string): Promise<DownloadResult> {
   const a = await lookup(id);
   if (!a) return { kind: "not_found" };
   const original = a.artwork_files.find((f) => f.kind === "original");
-  if (a.status !== "active" || a.consent_level !== "hosted" || !original) return { kind: "unavailable" };
+  if (a.status !== "active" || !original) return { kind: "unavailable" };
   const filename = [a.cards.set_code, a.cards.collector_number.replace("/", "-"), a.artist_name, a.format]
     .join("_")
     .replace(/[\\/:*?"<>|\s]+/g, "-");
   return { kind: "ok", url: await signedDownloadUrl(original.path, `${filename}.${EXTENSION[original.mime_type]}`) };
 }
 
-// 썸네일 = active ∧ thumbnail_ok.
+// 미리보기 = active.
 export async function resolveThumbnail(id: string): Promise<string | null> {
   const a = await lookup(id);
   const thumb = a?.artwork_files.find((f) => f.kind === "thumbnail");
-  if (!a || !thumb || a.status !== "active" || !a.thumbnail_ok) return null;
+  if (!a || !thumb || a.status !== "active") return null;
   return signedViewUrl(thumb.path);
 }

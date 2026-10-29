@@ -9,36 +9,56 @@ test.beforeEach(clearArtworks);
 const CARD = "/cards/sv2a/201-165";
 const EMPTY_CARD = "/cards/sv2a/205-165";
 
-async function artists(page: Page, list: string) {
-  return page.getByRole("list", { name: list }).locator("strong").allTextContents();
+async function artists(page: Page) {
+  return page.getByRole("list", { name: "도안" }).locator("strong").allTextContents();
 }
 
-test("tiles come before rows, design 12A order inside each section (eng E4)", async ({ page }) => {
-  await seedArtwork({ artist: "링크타일", consent: "link_only", thumbnail: true });
-  await seedArtwork({ artist: "보관타일", consent: "hosted", thumbnail: true });
-  await seedArtwork({ artist: "삭제행", consent: "link_only", thumbnail: false, linkStatus: "deleted" });
-  await seedArtwork({ artist: "회원행", consent: "link_only", thumbnail: false, visibility: "members_only" });
-  await seedArtwork({ artist: "링크행", consent: "link_only", thumbnail: false });
-  await seedArtwork({ artist: "보관행", consent: "hosted", thumbnail: false });
+test("every artwork is a preview tile, newest first, with a download (design 4A)", async ({ page }) => {
+  await seedArtwork({ artist: "먼저" });
+  await seedArtwork({ artist: "회원글", visibility: "members_only" });
+  await seedArtwork({ artist: "글삭제", linkStatus: "deleted" });
+  await seedArtwork({ artist: "파일만", sourceUrl: null });
 
   await page.goto(CARD);
-  await expect(page.getByRole("heading", { name: "확장 아트 도안 6개" })).toBeVisible();
-  await expect(page.getByRole("img").first()).toBeVisible();
-  expect(await artists(page, "미리보기가 있는 도안")).toEqual(["@보관타일", "@링크타일"]);
-  expect(await artists(page, "미리보기가 없는 도안")).toEqual(["@보관행", "@링크행", "@회원행", "@삭제행"]);
-
-  // 썸네일 없는 보관 작품도 다운로드할 수 있다 (eng E3).
-  const rows = page.getByRole("list", { name: "미리보기가 없는 도안" }).getByRole("listitem");
-  await expect(rows.nth(0).getByRole("button", { name: /다운로드/ })).toBeVisible();
-  await expect(rows.nth(1).getByRole("link", { name: /원본 글 보기 ↗ ?\(새 탭\)/ })).toHaveAttribute("target", "_blank");
-  await expect(rows.nth(2)).toContainText("카페 가입 필요");
-  await expect(rows.nth(3).getByRole("button", { name: "원본 글 보기" })).toBeDisabled();
-  await expect(rows.nth(3)).toContainText("원본 글이 사라졌어요");
-
-  await expect(page.getByRole("img", { name: "@보관타일의 9포켓 확장 아트 도안" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "확장 아트 도안 4개" })).toBeVisible();
+  expect(await artists(page)).toEqual(["@파일만", "@글삭제", "@회원글", "@먼저"]);
+  await expect(page.getByRole("img", { name: /확장 아트 도안$/ })).toHaveCount(4);
+  await expect(page.getByRole("button", { name: /도안 다운로드$/ })).toHaveCount(4);
+  await expect(page.getByRole("link", { name: /원본 글/ })).toHaveCount(0);
 
   const axe = await new AxeBuilder({ page }).analyze();
   expect(axe.violations).toEqual([]);
+});
+
+test("a tile opens the large view with download and the artist's source link", async ({ page }) => {
+  await seedArtwork({ artist: "크게", format: "psa", visibility: "members_only" });
+  await page.goto(CARD);
+  await page.getByRole("button", { name: "@크게의 PSA 도안 크게 보기" }).click();
+
+  const viewer = page.getByRole("dialog", { name: "@크게 · PSA" });
+  await expect(viewer.getByRole("img", { name: "@크게의 PSA 확장 아트 도안" })).toBeVisible();
+  await expect(viewer.getByText("PSA 보관 케이스 안쪽 80×135 mm")).toBeVisible();
+  await expect(viewer.getByRole("link", { name: /작가 원본 글 ↗ ?\(새 탭\)/ })).toHaveAttribute("target", "_blank");
+  await expect(viewer.getByText("카페 가입 필요")).toBeVisible();
+
+  const downloading = page.waitForEvent("download");
+  await viewer.getByRole("button", { name: /다운로드/ }).click();
+  expect((await downloading).suggestedFilename()).toContain("sv2a_201-165");
+
+  const axe = await new AxeBuilder({ page }).analyze();
+  expect(axe.violations).toEqual([]);
+
+  await page.keyboard.press("Escape");
+  await expect(viewer).toBeHidden();
+});
+
+test("a file without a source post gets format-based print guidance", async ({ page }) => {
+  await seedArtwork({ artist: "출처없음", sourceUrl: null });
+  await page.goto(CARD);
+  const downloading = page.waitForEvent("download");
+  await page.getByRole("button", { name: /다운로드/ }).click();
+  await downloading;
+  await expect(page.getByText("9포켓 규격에 맞춰 인쇄하세요.")).toBeVisible();
 });
 
 test("download starts and shows print guidance with verified size (eng E8)", async ({ page }) => {

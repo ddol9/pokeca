@@ -1,5 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import postgres from "postgres";
+import sharp from "sharp";
 import { createUpload, type UploadKind } from "@/lib/storage";
 
 export const sql = postgres(process.env.SUPABASE_DB_URL!, { onnotice: () => {} });
@@ -7,6 +8,12 @@ export const sql = postgres(process.env.SUPABASE_DB_URL!, { onnotice: () => {} }
 export const PNG = new Uint8Array([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0, 0, 0, 13, 1, 2, 3, 4]);
 export const PDF = new TextEncoder().encode("%PDF-1.7\n%test\n");
 export const FAKE_PNG = new TextEncoder().encode("this is not a png at all");
+// 미리보기를 만들 수 있는 진짜 이미지(반투명 PNG, 2000×2800 → 미리보기 최대 1600px로 줄어든다).
+export const ART_PNG = new Uint8Array(
+  await sharp({ create: { width: 2000, height: 2800, channels: 4, background: { r: 200, g: 40, b: 40, alpha: 0.5 } } })
+    .png()
+    .toBuffer(),
+);
 
 // 브라우저처럼 공개 키 클라이언트로 서명 업로드 URL에 올린다.
 const browser = createClient(

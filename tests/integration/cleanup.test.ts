@@ -1,5 +1,5 @@
 import { afterAll, beforeEach, describe, expect, it } from "vitest";
-import { attachFile, createArtwork, setConsent, setStatus } from "@/lib/artworks";
+import { attachFile, createArtwork, setStatus } from "@/lib/artworks";
 import { cleanup } from "@/lib/cleanup";
 import { db } from "@/lib/supabase/server";
 import { cardId, PDF, PNG, resetArtworks, sql, storedPaths, uploadAsBrowser } from "../helpers/fixtures";
@@ -17,7 +17,7 @@ async function hostedArtwork() {
   await createArtwork(
     {
       id, cardId: await cardId(), artistName: "정리", format: "psa", sourceUrl: null, sourceVisibility: null,
-      consentLevel: "hosted", thumbnailOk: true, printSizeVerified: false,
+      printSizeVerified: false,
     },
     { original, thumbnail },
     "test",
@@ -74,11 +74,14 @@ describe("cleanup", () => {
     expect(paths).not.toContain(stray);
   });
 
-  it("a consent downgrade stops tracking the file in the same transaction", async () => {
+  it("replacing a file tracks only the new one and deletes the old one", async () => {
     const id = await hostedArtwork();
-    await setConsent(id, { consentLevel: "hosted", thumbnailOk: false }, { actor: "test" });
-    const rows = await sql`select kind from artwork_files where artwork_id = ${id}`;
-    expect(rows.map((r) => r.kind)).toEqual(["original"]);
+    const [old] = await sql<{ path: string }[]>`select path from artwork_files where artwork_id = ${id} and kind = 'thumbnail'`;
+    const upload = await uploadAsBrowser("thumbnail", PNG, "image/png");
+    await attachFile(id, "thumbnail", upload);
+    const rows = await sql<{ path: string }[]>`select path from artwork_files where artwork_id = ${id} and kind = 'thumbnail'`;
+    expect(rows.map((r) => r.path)).toEqual([`artworks/${id}/thumbnail-${upload}`]);
+    expect(await storedPaths()).not.toContain(old.path);
   });
 
   it("does not move an upload into a withdrawn artwork, and rejects non-UUID ids", async () => {

@@ -9,7 +9,7 @@ const storage = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.
 }).storage;
 
 export const UPLOAD_ERRORS: Record<string, string> = {
-  bad_file_type: "PNG·JPEG·PDF만 올릴 수 있어요(썸네일은 PNG·JPEG).",
+  bad_file_type: "PNG·JPEG·PDF만 올릴 수 있어요(미리보기는 PNG·JPEG).",
   file_too_large: "파일이 너무 커요. 원본은 100 MB, 허락 근거는 20 MB까지 올릴 수 있어요.",
   upload_missing: "업로드한 파일을 찾지 못했어요. 다시 올려 주세요.",
 };
@@ -36,9 +36,11 @@ export function errorMessage(code: string, fallback = "저장하지 못했어요
 }
 
 const ERRORS: Record<string, string> = {
-  hosted_needs_original: "파일 보관을 허락받았다면 원본 파일이 필요해요.",
-  thumbnail_needs_file: "썸네일 허락이 있으면 썸네일 파일이 필요해요.",
-  link_only_needs_source: "링크만 허락이면 원본 글 주소가 필요해요.",
+  original_required: "원본 파일이 필요해요.",
+  thumbnail_required: "미리보기를 만들지 못했어요. 미리보기 파일을 직접 올려 주세요.",
+  pdf_needs_thumbnail: "PDF 원본은 미리보기를 만들 수 없어요. 미리보기(PNG·JPEG)를 함께 올려 주세요.",
+  preview_failed: "원본 이미지를 읽지 못해 미리보기를 만들지 못했어요. 파일을 확인해 주세요.",
+  evidence_required: "근거 파일을 골라 주세요.",
   source_visibility_required: "원본 글 공개 범위를 골라 주세요.",
   invalid_source_url: "원본 글 주소는 http(s)://로 시작해야 해요.",
   artist_required: "작가 이름을 넣어 주세요.",

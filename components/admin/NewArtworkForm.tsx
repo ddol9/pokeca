@@ -6,7 +6,8 @@ import { FORMAT_INFO, FORMATS, type Format } from "@/lib/formats";
 import { errorMessage, uploadFile } from "./upload";
 import styles from "@/app/admin/admin.module.css";
 
-// 작품 등록 (design 11A): 카드 찾기 → 규격 → 원본 글 → 허락 3단계 → 파일.
+// 작품 등록 (design 11A): 카드 찾기 → 규격 → 파일 → 출처 → 허락 근거.
+// 모든 작품은 사이트에 보관한다. 원본은 필수, 미리보기는 비워 두면 서버가 원본에서 만든다.
 // 작품 ID는 폼을 열 때 만든다. 저장이 중간에 실패해 다시 눌러도 같은 작품이 된다(서버 멱등).
 
 type Card = { cardId: string; label: string; name: string; setName: string };
@@ -39,7 +40,7 @@ export function NewArtworkForm() {
     if (!file || file.size === 0) return undefined;
     const prev = uploaded.current[kind];
     if (prev && prev.file === file) return prev.uploadId;
-    setSaving({ original: "원본 올리는 중…", thumbnail: "썸네일 올리는 중…", evidence: "허락 근거 올리는 중…" }[kind]);
+    setSaving({ original: "원본 올리는 중…", thumbnail: "미리보기 올리는 중…", evidence: "허락 근거 올리는 중…" }[kind]);
     const uploadId = await uploadFile(kind, file);
     uploaded.current[kind] = { file, uploadId };
     return uploadId;
@@ -50,16 +51,14 @@ export function NewArtworkForm() {
     setError(null);
     const form = new FormData(event.currentTarget);
     if (!card) return setError("카드를 먼저 골라 주세요.");
-    const hosted = form.get("hosted") === "on";
-    const thumbnailOk = form.get("thumbnailOk") === "on";
-    const linkOk = form.get("linkOk") === "on";
     const sourceUrl = String(form.get("sourceUrl") ?? "").trim();
-    if (!hosted && !linkOk) return setError("링크 공유나 파일 보관 중 하나는 허락받아야 등록할 수 있어요.");
-    if (sourceUrl && !linkOk) return setError("원본 글 주소를 넣었다면 링크 공유 허락에 체크해 주세요.");
+    const originalFile = form.get("original") as File | null;
+    if (!originalFile || originalFile.size === 0) return setError("원본 파일을 골라 주세요.");
+    if (form.get("consent") !== "on") return setError("작가에게 사이트 보관·다운로드 허락을 받았는지 확인해 주세요.");
 
     try {
-      const original = hosted ? await upload("original", form.get("original") as File | null) : undefined;
-      const thumbnail = thumbnailOk ? await upload("thumbnail", form.get("thumbnail") as File | null) : undefined;
+      const original = await upload("original", originalFile);
+      const thumbnail = await upload("thumbnail", form.get("thumbnail") as File | null);
       const evidence = await upload("evidence", form.get("evidence") as File | null);
       setSaving("저장 중…");
       const res = await fetch("/api/admin/artworks", {
@@ -72,8 +71,6 @@ export function NewArtworkForm() {
           format: form.get("format"),
           sourceUrl: sourceUrl || null,
           sourceVisibility: sourceUrl ? form.get("sourceVisibility") : null,
-          consentLevel: hosted ? "hosted" : "link_only",
-          thumbnailOk,
           printSizeVerified: form.get("printSizeVerified") === "on",
           uploads: { original, thumbnail, evidence },
         }),
@@ -157,10 +154,28 @@ export function NewArtworkForm() {
       </fieldset>
 
       <fieldset className={styles.fieldset}>
-        <legend>3. 원본 글</legend>
+        <legend>3. 파일</legend>
         <label className={styles.field}>
-          <span>원본 글 주소</span>
-          <span>아티스트가 파일만 보내 줬다면 비워 두세요.</span>
+          <span>원본 파일 (필수)</span>
+          <span>방문자가 받아 인쇄하는 파일이에요. PNG·JPEG·PDF, 100 MB까지</span>
+          <input name="original" type="file" required accept="image/png,image/jpeg,application/pdf" />
+        </label>
+        <label className={styles.field}>
+          <span>미리보기 (선택)</span>
+          <span>비워 두면 원본에서 자동으로 만들어요. PDF 원본이면 PNG·JPEG로 꼭 올려 주세요.</span>
+          <input name="thumbnail" type="file" accept="image/png,image/jpeg" />
+        </label>
+        <label className={styles.check}>
+          <input type="checkbox" name="printSizeVerified" />
+          파일 치수를 직접 확인함 (방문자에게 인쇄 치수를 안내)
+        </label>
+      </fieldset>
+
+      <fieldset className={styles.fieldset}>
+        <legend>4. 출처 (선택)</legend>
+        <label className={styles.field}>
+          <span>작가가 처음 올린 글 주소</span>
+          <span>도안 옆에 출처 링크로 보여 줘요. 파일만 받았다면 비워 두세요.</span>
           <input name="sourceUrl" type="url" placeholder="https://cafe.naver.com/…" className={styles.input} />
         </label>
         <div className={styles.row}>
@@ -176,41 +191,15 @@ export function NewArtworkForm() {
       </fieldset>
 
       <fieldset className={styles.fieldset}>
-        <legend>4. 아티스트 허락 (받은 것만 체크)</legend>
+        <legend>5. 아티스트 허락</legend>
         <label className={styles.check}>
-          <input type="checkbox" name="linkOk" defaultChecked />
-          원본 글 링크 공유
-        </label>
-        <label className={styles.check}>
-          <input type="checkbox" name="thumbnailOk" />
-          썸네일 표시
-        </label>
-        <label className={styles.check}>
-          <input type="checkbox" name="hosted" />
-          파일 보관·다운로드
+          <input type="checkbox" name="consent" required />
+          사이트에 파일을 보관하고 방문자가 미리보기·다운로드하는 것을 허락받았어요
         </label>
         <label className={styles.field}>
           <span>허락 근거 (선택)</span>
           <span>아티스트 DM 캡처 등. PNG·JPEG·PDF, 20 MB까지. 어드민만 볼 수 있어요.</span>
           <input name="evidence" type="file" accept="image/png,image/jpeg,application/pdf" />
-        </label>
-      </fieldset>
-
-      <fieldset className={styles.fieldset}>
-        <legend>5. 파일</legend>
-        <label className={styles.field}>
-          <span>원본 파일 (파일 보관 허락 시 필수)</span>
-          <span>PNG·JPEG·PDF, 100 MB까지</span>
-          <input name="original" type="file" accept="image/png,image/jpeg,application/pdf" />
-        </label>
-        <label className={styles.field}>
-          <span>썸네일 파일 (썸네일 허락 시 필수)</span>
-          <span>PNG·JPEG</span>
-          <input name="thumbnail" type="file" accept="image/png,image/jpeg" />
-        </label>
-        <label className={styles.check}>
-          <input type="checkbox" name="printSizeVerified" />
-          파일 치수를 직접 확인함 (방문자에게 인쇄 치수를 안내)
         </label>
       </fieldset>
 

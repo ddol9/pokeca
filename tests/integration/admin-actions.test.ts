@@ -16,7 +16,7 @@ async function hosted() {
     {
       id, cardId: await cardId(), artistName: "확인", format: "brg",
       sourceUrl: "https://cafe.naver.com/x/1", sourceVisibility: "public",
-      consentLevel: "hosted", thumbnailOk: true, printSizeVerified: false,
+      printSizeVerified: false,
     },
     { original, thumbnail },
     "test",
@@ -47,24 +47,6 @@ describe("admin destructive actions need the card number on the server (eng E1)"
     expect(await storedPaths()).toEqual([]);
     const [row] = await sql`select actor, reason from consent_events where artwork_id = ${id} and kind = 'status'`;
     expect(row).toEqual({ actor: "admin@test", reason: "요청" });
-  });
-
-  it("requires confirm for consent downgrades only", async () => {
-    const id = await hosted();
-    await expectMismatch(
-      applyAdminAction(id, { action: "consent", consentLevel: "link_only", thumbnailOk: true }, admin),
-    );
-    await expectMismatch(
-      applyAdminAction(id, { action: "consent", consentLevel: "hosted", thumbnailOk: false }, admin),
-    );
-    expect(await storedPaths()).toHaveLength(2);
-
-    await applyAdminAction(
-      id,
-      { action: "consent", consentLevel: "link_only", thumbnailOk: true, confirm: "sv2a 201/165" },
-      admin,
-    );
-    expect(await storedPaths()).toHaveLength(1);
   });
 
   it("hides and restores without confirm", async () => {

@@ -1,5 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
-import { ADMIN, clearArtworks, ensureUser, NOT_ADMIN, PNG, seedArtwork, sql } from "./db";
+import { ADMIN, clearArtworks, ensureUser, NOT_ADMIN, previewPng, seedArtwork, sql } from "./db";
 
 // 어드민 화면 (design 11A, eng E1·E6·E7). 데스크톱에서만, 순서대로 돈다.
 test.describe.configure({ mode: "serial" });
@@ -38,17 +38,17 @@ test("register an artwork with uploaded files, then it is downloadable on the ca
   await expect(page.getByText("선택한 카드: sv2a 205/165")).toBeVisible();
   await page.getByLabel("작가 이름(닉네임)").fill("업로드작가");
   await page.getByLabel("PSA").check();
-  await page.getByLabel("원본 글 링크 공유").uncheck();
-  await page.getByLabel("썸네일 표시").check();
-  await page.getByLabel("파일 보관·다운로드").check();
-  const file = (name: string) => ({ name, mimeType: "image/png", buffer: Buffer.from(PNG) });
+  const png = await previewPng();
+  const file = (name: string) => ({ name, mimeType: "image/png", buffer: png });
+  // 미리보기는 비워 둔다: 서버가 원본에서 만든다.
   await page.getByLabel(/^원본 파일/).setInputFiles(file("original.png"));
-  await page.getByLabel(/^썸네일 파일/).setInputFiles(file("thumb.png"));
+  await page.getByLabel(/미리보기·다운로드하는 것을 허락받았어요/).check();
   await page.getByLabel(/^허락 근거/).setInputFiles(file("dm.png"));
   await page.getByRole("button", { name: "등록" }).click();
 
   await expect(page.getByRole("heading", { name: "sv2a 205/165 · @업로드작가" })).toBeVisible();
-  await expect(page.getByText("등록 (파일 보관 + 썸네일)")).toBeVisible();
+  await expect(page.getByText("미리보기 · image/webp")).toBeVisible();
+  await expect(page.getByRole("region", { name: "변경 이력" }).getByText("등록", { exact: true })).toBeVisible();
   // 허락 근거는 어드민 라우트가 짧은 서명 URL로 보낸다 (설계 R3).
   const evidence = page.getByRole("link", { name: /근거 보기/ });
   const res = await page.request.get((await evidence.getAttribute("href"))!, { maxRedirects: 0 });
@@ -56,12 +56,14 @@ test("register an artwork with uploaded files, then it is downloadable on the ca
   expect(res.headers().location).toContain("/consent-evidence/");
 
   await page.goto("/cards/sv2a/205-165");
-  await expect(page.getByRole("img", { name: "@업로드작가의 PSA 확장 아트 도안" })).toBeVisible();
+  const img = page.getByRole("img", { name: "@업로드작가의 PSA 확장 아트 도안" });
+  await expect(img).toBeVisible();
+  await expect.poll(() => img.evaluate((el: HTMLImageElement) => el.naturalWidth)).toBeGreaterThan(0);
   await expect(page.getByRole("button", { name: /다운로드/ })).toBeVisible();
 });
 
 test("record a manual link check from the list (eng E6)", async ({ page }) => {
-  const id = await seedArtwork({ artist: "점검대상", consent: "link_only", linkStatus: "unchecked" });
+  const id = await seedArtwork({ artist: "점검대상", linkStatus: "unchecked" });
   await login(page);
   await page.goto("/admin/artworks?check=1");
   const row = page.getByRole("row", { name: /@점검대상/ });

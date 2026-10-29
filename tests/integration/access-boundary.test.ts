@@ -66,7 +66,8 @@ describe("access boundary", () => {
         id: "artworks",
         public: false,
         file_size_limit: 104857600,
-        allowed_mime_types: ["image/png", "image/jpeg", "application/pdf"],
+        // webp는 서버가 만드는 미리보기용. 업로드 서명 발급(createUpload)은 여전히 PNG·JPEG·PDF만 받는다.
+        allowed_mime_types: ["image/png", "image/jpeg", "image/webp", "application/pdf"],
       },
       {
         id: "consent-evidence",

@@ -84,7 +84,6 @@ async function ArtworkTable({ searchParams }: { searchParams: PageProps<"/admin/
               <th scope="col">작가</th>
               <th scope="col">규격</th>
               <th scope="col">상태</th>
-              <th scope="col">허락</th>
               <th scope="col">링크 상태</th>
               <th scope="col">최근 점검</th>
               <th scope="col">점검 기록</th>
@@ -102,11 +101,7 @@ async function ArtworkTable({ searchParams }: { searchParams: PageProps<"/admin/
                 <td>{FORMAT_INFO[r.format].label}</td>
                 <td>{STATUS_LABEL[r.status]}</td>
                 <td>
-                  {r.consentLevel === "hosted" ? "파일 보관" : "링크만"}
-                  {r.thumbnailOk ? " · 썸네일" : ""}
-                </td>
-                <td>
-                  {LINK_LABEL[r.linkStatus]}
+                  {r.sourceUrl ? LINK_LABEL[r.linkStatus] : "원본 글 없음"}
                   {r.sourceVisibility === "members_only" ? " · 회원 전용" : ""}{" "}
                   {r.needsCheck && <span className={styles.flag}>점검 필요</span>}
                 </td>

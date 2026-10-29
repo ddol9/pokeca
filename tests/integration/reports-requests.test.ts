@@ -3,19 +3,22 @@ import { listAdminArtworks, closeReport, findArtworksBySource, linkReport, setLi
 import { createArtwork } from "@/lib/artworks";
 import { hashRange, ReportError, submitReport } from "@/lib/reports";
 import { createRequest, requestState } from "@/lib/requests";
-import { cardId, resetArtworks, sql } from "../helpers/fixtures";
+import { cardId, PDF, PNG, resetArtworks, sql, uploadAsBrowser } from "../helpers/fixtures";
 
 afterAll(() => sql.end());
 beforeEach(resetArtworks);
 
-async function linkOnly(sourceUrl = "https://cafe.naver.com/pokeca/123") {
+async function stored(sourceUrl = "https://cafe.naver.com/pokeca/123") {
   const id = crypto.randomUUID();
   await createArtwork(
     {
       id, cardId: await cardId(), artistName: "신고대상", format: "9pocket", sourceUrl, sourceVisibility: "public",
-      consentLevel: "link_only", thumbnailOk: false, printSizeVerified: false,
+      printSizeVerified: false,
     },
-    {},
+    {
+      original: await uploadAsBrowser("original", PDF, "application/pdf"),
+      thumbnail: await uploadAsBrowser("thumbnail", PNG, "image/png"),
+    },
     "test",
   );
   return id;
@@ -27,7 +30,7 @@ const report = (artworkId: string | null, sourceUrl: string | null = null) => ({
 
 describe("reports (설계 신고 흐름)", () => {
   it("auto-hides after reports from 3 different ranges, not from one range", async () => {
-    const id = await linkOnly();
+    const id = await stored();
     const sameRange = hashRange("203.0.113.1", "t");
     await submitReport(report(id), sameRange);
     await submitReport(report(id), hashRange("203.0.113.9", "t"));
@@ -67,7 +70,7 @@ describe("reports (설계 신고 흐름)", () => {
   });
 
   it("links a URL-only report to the artwork it names and closes it (eng E7)", async () => {
-    const id = await linkOnly("https://cafe.naver.com/pokeca/123");
+    const id = await stored("https://cafe.naver.com/pokeca/123");
     const { id: reportId } = await submitReport(report(null, "https://cafe.naver.com/pokeca/123?art=1"), "h");
     const candidates = await findArtworksBySource("https://cafe.naver.com/pokeca/123?art=1");
     expect(candidates.map((c) => c.id)).toEqual([id]);
@@ -103,7 +106,7 @@ describe("find requests (design 5A, eng E5)", () => {
 
 describe("manual link checks (eng E6)", () => {
   it("records the result and drops the artwork from the needs-check filter", async () => {
-    const id = await linkOnly();
+    const id = await stored();
     expect((await listAdminArtworks({ needsCheck: true })).map((r) => r.id)).toEqual([id]);
 
     await setLinkStatus(id, "deleted");

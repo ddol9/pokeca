@@ -1,6 +1,6 @@
 import "server-only";
 import { db } from "@/lib/supabase/server";
-import { ArtworkError, type ConsentLevel, type Format, type Status } from "@/lib/artworks";
+import { ArtworkError, type Format, type Status } from "@/lib/artworks";
 import { signedEvidenceUrl } from "@/lib/storage";
 import { UUID } from "@/lib/uuid";
 
@@ -17,8 +17,6 @@ export type AdminArtworkRow = {
   artistName: string;
   format: Format;
   status: Status;
-  consentLevel: ConsentLevel;
-  thumbnailOk: boolean;
   sourceUrl: string | null;
   sourceVisibility: "public" | "members_only" | null;
   linkStatus: LinkStatus;
@@ -32,8 +30,6 @@ type Row = {
   artist_name: string;
   format: Format;
   status: Status;
-  consent_level: ConsentLevel;
-  thumbnail_ok: boolean;
   source_url: string | null;
   source_visibility: "public" | "members_only" | null;
   link_status: LinkStatus;
@@ -43,7 +39,7 @@ type Row = {
 };
 
 const BASE =
-  "id, artist_name, format, status, consent_level, thumbnail_ok, source_url, source_visibility, link_status, link_checked_at, created_at";
+  "id, artist_name, format, status, source_url, source_visibility, link_status, link_checked_at, created_at";
 const COLUMNS = `${BASE}, cards(set_code, collector_number)`;
 
 // 점검 필요 = 원본 링크가 있고, 7일 넘게 점검 안 했거나 의심 표시 (eng E6).
@@ -61,8 +57,6 @@ function toAdminRow(r: Row, now: Date): AdminArtworkRow {
     artistName: r.artist_name,
     format: r.format,
     status: r.status,
-    consentLevel: r.consent_level,
-    thumbnailOk: r.thumbnail_ok,
     sourceUrl: r.source_url,
     sourceVisibility: r.source_visibility,
     linkStatus: r.link_status,

@@ -26,7 +26,7 @@ const DOWNLOAD_TTL_SECONDS = 300;
 
 export type FileKind = "original" | "thumbnail";
 export type UploadKind = FileKind | "evidence";
-export type MimeType = "image/png" | "image/jpeg" | "application/pdf";
+export type MimeType = "image/png" | "image/jpeg" | "image/webp" | "application/pdf";
 
 const ALLOWED: Record<UploadKind, MimeType[]> = {
   original: ["image/png", "image/jpeg", "application/pdf"],
@@ -41,6 +41,7 @@ const maxBytesOf = (kind: UploadKind) => (kind === "evidence" ? EVIDENCE_MAX_BYT
 export const EXTENSION: Record<MimeType, string> = {
   "image/png": "png",
   "image/jpeg": "jpg",
+  "image/webp": "webp",
   "application/pdf": "pdf",
 };
 
@@ -125,6 +126,20 @@ async function promote(kind: UploadKind, from: string, to: string) {
 
 export async function promoteUpload(uploadId: string, artworkId: string, kind: FileKind): Promise<StoredFile> {
   return { kind, ...(await promote(kind, pendingPath(uploadId), finalPath(artworkId, kind, uploadId))) };
+}
+
+// 서버가 만든 파일(원본에서 만든 미리보기)을 최종 경로에 바로 올린다. 업로드 ID 자리에는 새 UUID를 쓴다.
+export async function storeGenerated(artworkId: string, kind: FileKind, bytes: Uint8Array, mimeType: MimeType): Promise<StoredFile> {
+  const path = finalPath(artworkId, kind, crypto.randomUUID());
+  const { error } = await db().storage.from(BUCKET).upload(path, bytes, { contentType: mimeType });
+  if (error) throw error;
+  return { kind, path, mimeType, sizeBytes: bytes.byteLength };
+}
+
+export async function readFile(path: string): Promise<Uint8Array> {
+  const { data, error } = await db().storage.from(BUCKET).download(path);
+  if (error) throw error;
+  return new Uint8Array(await data.arrayBuffer());
 }
 
 // 허락 근거를 consent-evidence 버킷 안에서 확정한다. 반환값은 consent_events.evidence_path에 넣을 경로.

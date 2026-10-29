@@ -6,19 +6,16 @@ import { errorMessage, uploadFile } from "./upload";
 import styles from "@/app/admin/admin.module.css";
 
 // 작품 상세의 변경 폼 (design 11A, eng E1).
-// 숨김·복구는 되돌릴 수 있어 바로 실행하고, 철회·허락 하향은 카드 번호를 입력해야 실행된다.
+// 숨김·복구는 되돌릴 수 있어 바로 실행하고, 철회는 카드 번호를 입력해야 실행된다.
 // 서버도 같은 확인을 다시 한다(PATCH /api/admin/artworks/[id]의 confirm).
 
 type Props = {
   id: string;
   cardNumber: string; // 예: "sv2a 201/165"
   status: "active" | "hidden" | "withdrawn";
-  consentLevel: "link_only" | "hosted";
-  thumbnailOk: boolean;
-  hasSource: boolean;
 };
 
-type Pending = { body: Record<string, unknown>; evidence?: File; title: string; detail: string } | null;
+type Pending = { body: Record<string, unknown>; title: string; detail: string } | null;
 
 const normalize = (s: string) => s.normalize("NFKC").trim().toLowerCase().replace(/\s+/g, " ");
 
@@ -75,7 +72,7 @@ export function ArtworkControls(props: Props) {
         body: JSON.stringify({ kind, uploadId }),
       });
       if (!res.ok) throw new Error((await res.json().catch(() => ({}))).code ?? "failed");
-      setMessage({ ok: true, text: kind === "original" ? "원본을 붙였어요." : "썸네일을 붙였어요." });
+      setMessage({ ok: true, text: kind === "original" ? "원본을 바꾸고 미리보기를 새로 만들었어요." : "미리보기를 바꿨어요." });
       router.refresh();
     } catch (e) {
       setMessage({ ok: false, text: errorMessage(e instanceof Error ? e.message : "") });
@@ -84,23 +81,12 @@ export function ArtworkControls(props: Props) {
     }
   }
 
-  function submitConsent(event: React.FormEvent<HTMLFormElement>) {
+  async function submitEvidence(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
-    const consentLevel = form.get("consentLevel") as Props["consentLevel"];
-    const thumbnailOk = form.get("thumbnailOk") === "on";
-    const body = { action: "consent", consentLevel, thumbnailOk, reason: form.get("reason") || undefined };
     const file = form.get("evidence") as File | null;
-    const evidence = file && file.size > 0 ? file : undefined;
-    const lost = [
-      props.consentLevel === "hosted" && consentLevel === "link_only" ? "보관 중인 원본 파일" : null,
-      props.thumbnailOk && !thumbnailOk ? "썸네일 파일" : null,
-    ].filter(Boolean);
-    if (lost.length) {
-      setConfirming({ body, evidence, title: "허락 하향", detail: `${lost.join("과 ")}이 삭제되며 되돌릴 수 없어요.` });
-    } else {
-      patch(body, evidence);
-    }
+    if (!file || file.size === 0) return setMessage({ ok: false, text: "근거 파일을 골라 주세요." });
+    await patch({ action: "evidence", reason: form.get("reason") || undefined }, file);
   }
 
   if (props.status === "withdrawn") {
@@ -133,36 +119,21 @@ export function ArtworkControls(props: Props) {
 
       <section className={styles.section} aria-labelledby="consent-heading">
         <h2 id="consent-heading" className={styles.subtitle}>
-          허락
+          허락 근거 추가
         </h2>
-        <form className={styles.form} onSubmit={submitConsent}>
-          <fieldset className={styles.fieldset}>
-            <legend>보관 범위</legend>
-            <label className={styles.check}>
-              <input type="radio" name="consentLevel" value="link_only" defaultChecked={props.consentLevel === "link_only"} disabled={!props.hasSource} />
-              링크만 {props.hasSource ? "" : "(원본 글 주소가 없어 선택할 수 없어요)"}
-            </label>
-            <label className={styles.check}>
-              <input type="radio" name="consentLevel" value="hosted" defaultChecked={props.consentLevel === "hosted"} />
-              파일 보관·다운로드
-            </label>
-          </fieldset>
-          <label className={styles.check}>
-            <input type="checkbox" name="thumbnailOk" defaultChecked={props.thumbnailOk} />
-            썸네일 표시
-          </label>
+        <form className={styles.form} onSubmit={submitEvidence}>
           <label className={styles.field}>
-            <span>사유</span>
-            <input name="reason" className={styles.input} placeholder="예: 아티스트 DM 요청 (10/28)" />
-          </label>
-          <label className={styles.field}>
-            <span>허락 근거 (선택)</span>
-            <span>아티스트 DM 캡처 등. PNG·JPEG·PDF, 20 MB까지. 허락이 그대로여도 근거만 남길 수 있어요.</span>
+            <span>근거 파일</span>
+            <span>아티스트 DM 캡처 등. PNG·JPEG·PDF, 20 MB까지. 어드민만 볼 수 있어요.</span>
             <input ref={evidenceInput} name="evidence" type="file" accept="image/png,image/jpeg,application/pdf" />
+          </label>
+          <label className={styles.field}>
+            <span>메모</span>
+            <input name="reason" className={styles.input} placeholder="예: 아티스트 DM 허락 (10/28)" />
           </label>
           <div>
             <button type="submit" className={styles.primary} disabled={busy}>
-              허락 저장
+              근거 저장
             </button>
           </div>
         </form>
@@ -170,15 +141,17 @@ export function ArtworkControls(props: Props) {
 
       <section className={styles.section} aria-labelledby="files-heading">
         <h2 id="files-heading" className={styles.subtitle}>
-          파일 붙이기·바꾸기
+          파일 바꾸기
         </h2>
-        <p className={styles.muted}>허락을 올리기 전에 파일을 먼저 붙여요. 같은 종류는 새 파일로 바뀌고 이전 파일은 지워져요.</p>
+        <p className={styles.muted}>
+          새 파일로 바뀌고 이전 파일은 지워져요. 원본을 바꾸면 미리보기도 새로 만들어요(PDF 원본이면 미리보기를 직접 올려 주세요).
+        </p>
         <label className={styles.field}>
           <span>원본</span>
           <input type="file" accept="image/png,image/jpeg,application/pdf" disabled={busy} onChange={(e) => attach("original", e.currentTarget.files?.[0])} />
         </label>
         <label className={styles.field}>
-          <span>썸네일</span>
+          <span>미리보기</span>
           <input type="file" accept="image/png,image/jpeg" disabled={busy} onChange={(e) => attach("thumbnail", e.currentTarget.files?.[0])} />
         </label>
       </section>
@@ -208,7 +181,7 @@ export function ArtworkControls(props: Props) {
         busy={busy}
         onCancel={() => setConfirming(null)}
         onConfirm={async (confirm) => {
-          if (confirming && (await patch({ ...confirming.body, confirm }, confirming.evidence))) setConfirming(null);
+          if (confirming && (await patch({ ...confirming.body, confirm }))) setConfirming(null);
         }}
       />
     </>

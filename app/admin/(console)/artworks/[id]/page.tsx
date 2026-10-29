@@ -11,7 +11,7 @@ import styles from "../../../admin.module.css";
 
 export const metadata = { title: "작품 상세 · 어드민" };
 
-// design 11A 작품 상세: 요약 + 상태·허락 변경 + 파일 + 철회(위험 영역) + consent_events 이력.
+// design 11A 작품 상세: 요약 + 공개 상태·허락 근거 + 파일 + 철회(위험 영역) + consent_events 이력.
 export default function ArtworkDetailPage(props: PageProps<"/admin/artworks/[id]">) {
   return (
     <Suspense fallback={<p className={styles.muted}>불러오는 중…</p>}>
@@ -37,9 +37,7 @@ async function Detail({ params }: { params: PageProps<"/admin/artworks/[id]">["p
           {cardNumber} · @{a.artistName}
         </h1>
         <p className={styles.muted}>
-          {a.cardName} · {FORMAT_INFO[a.format].label} · {STATUS_LABEL[a.status]} ·{" "}
-          {a.consentLevel === "hosted" ? "파일 보관" : "링크만"}
-          {a.thumbnailOk ? " · 썸네일" : ""}
+          {a.cardName} · {FORMAT_INFO[a.format].label} · {STATUS_LABEL[a.status]}
           {a.printSizeVerified ? " · 치수 확인됨" : ""}
         </p>
         <p>
@@ -67,7 +65,7 @@ async function Detail({ params }: { params: PageProps<"/admin/artworks/[id]">["p
           <ul>
             {a.files.map((f) => (
               <li key={f.kind}>
-                {f.kind === "original" ? "원본" : "썸네일"} · {f.mimeType} · {(f.sizeBytes / 1024 / 1024).toFixed(1)} MB
+                {f.kind === "original" ? "원본" : "미리보기"} · {f.mimeType} · {(f.sizeBytes / 1024 / 1024).toFixed(1)} MB
               </li>
             ))}
           </ul>
@@ -80,9 +78,6 @@ async function Detail({ params }: { params: PageProps<"/admin/artworks/[id]">["p
         id={a.id}
         cardNumber={cardNumber}
         status={a.status}
-        consentLevel={a.consentLevel}
-        thumbnailOk={a.thumbnailOk}
-        hasSource={!!a.sourceUrl}
       />
 
       {a.reports.length > 0 && (
@@ -131,18 +126,9 @@ async function Detail({ params }: { params: PageProps<"/admin/artworks/[id]">["p
   );
 }
 
-const CONSENT = { hosted: "파일 보관", link_only: "링크만" } as Record<string, string>;
-
-function consentText(v: Record<string, unknown> | null) {
-  if (!v) return "";
-  return `${CONSENT[String(v.consent_level)] ?? ""}${v.thumbnail_ok ? " + 썸네일" : ""}`;
-}
-
 function describe(e: ConsentEvent): string {
   const status = (v: Record<string, unknown> | null) => STATUS_LABEL[v?.status as keyof typeof STATUS_LABEL] ?? "";
-  if (e.kind === "created") return `등록 (${consentText(e.after)})`;
+  if (e.kind === "created") return "등록";
   if (e.kind === "status") return `상태 ${status(e.before)} → ${status(e.after)}`;
-  const before = consentText(e.before);
-  const after = consentText(e.after);
-  return before === after ? `허락 근거 추가 (${after})` : `허락 ${before} → ${after}`;
+  return "허락 근거 추가";
 }
