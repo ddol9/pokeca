@@ -29,7 +29,7 @@
 
 ## 다음 할 일 (우선순위 순)
 
-1. **카드 데이터 넣기.** 로컬: `npm run cards:import -- data/cards-kr.csv --apply`. 운영은 배포 뒤 같은 명령을 운영 키로. 자세한 건 `data/README.md`.
+1. **카드 데이터:** 로컬 DB에는 넣어 봤다(2026-10-30, 1,430장 · 별칭 1,357개, 검색 확인). 각자 로컬에는 `npm run cards:import -- data/cards-kr.csv --apply`로 넣는다. 운영 DB는 배포 뒤 같은 명령을 운영 키로. 자세한 건 `data/README.md`.
 2. **배포** (아래 체크리스트). 아직 아무것도 하지 않았다.
 3. **카드 데이터 다듬기:** 일본판 별칭 못 붙인 73장(`data/cards-kr-alias-review.csv`), 영문판 별칭, 2023년 이전 카드.
 4. **카카오 로그인:** 카카오 앱을 개인 비즈 앱으로 전환(본인인증, 무료)한 뒤 이메일 동의항목을 켜고 `supabase/config.toml`에서 카카오를 켠다. 앱·키는 만들어 두었다. 절차는 README "카카오·구글 로그인 설정".
@@ -54,6 +54,9 @@
 - **Next.js 16은 우리가 아는 Next와 다르다.** 코드를 쓰기 전에 `node_modules/next/dist/docs/`의 해당 문서를 읽는다(`AGENTS.md`). `cacheComponents`가 켜져 있다.
   - 요청 때만 해야 하는 일(세션 확인 등)은 `await connection()`(`next/server`)을 먼저 부른다. 안 그러면 미리 렌더 중 `Date.now()` 오류가 난다. `lib/supabase/auth.ts` 참고. 통합 테스트에서는 `next/server`의 `connection`을 mock한다(`tests/integration/consent-evidence.test.ts`).
   - 에러 경계 props는 `{ error, retry }`.
+- **테스트는 시드 DB 기준이다.** `supabase/seed.sql`의 카드 2장과 테스트용 영문 별칭(MEW 199/165)을 전제로 한다. 실제 카드 데이터를 넣은 로컬 DB에서는 검색·가져오기 테스트 8개가 실패하니, 테스트 전에 `npm run db:reset`을 하고 끝나면 카드 데이터를 다시 넣는다. CI는 매번 새 DB라 상관없다.
+- **카드 가져오기는 별칭을 파일 내용으로 바꾼다.** 이미 있는 카드를 다시 넣으면 그 카드의 별칭은 CSV에 있는 것만 남는다. 별칭을 DB에서 손으로 고치지 말고 CSV를 고쳐서 다시 넣는다.
+- **같은 번호가 두 카드에 걸릴 수 있다.** 한글판과 일본판 번호가 어긋난 카드(예: `SV1S 100/078`은 한글판 지니어이면서 일본판 모란의 번호)는 검색하면 바로 가지 않고 후보 2장을 보여 준다. 의도된 동작이다.
 - **데이터 접근:** 모든 테이블은 RLS를 켜고 정책이 없다. 서버에서 `lib/supabase/server.ts`의 `db()`로만 읽고 쓴다. 새 테이블·함수는 `tests/integration/access-boundary.test.ts`가 검사한다. 함수 실행 권한은 `service_role`에만 준다.
 - **방문자 쿠키:** 카드 페이지는 서버에서 방문자 쿠키를 읽지 않는다(캐시 때문). 방문자별 상태는 클라이언트가 마운트 뒤 API로 가져온다.
 - **로컬 주소:** `127.0.0.1`로 열었으면 끝까지 `127.0.0.1`. 로그인 콜백이 브라우저가 연 Host로 돌아오게 해 두었다.
