@@ -38,7 +38,8 @@ if (!out) {
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-async function page(id: string): Promise<string> {
+// patient가 아니면 500을 한 번만 다시 묻고 null을 돌려준다. 사이트가 없는 번호에도 500을 내기 때문이다.
+async function page(id: string, patient = true): Promise<string | null> {
   const cached = cacheDir && path.join(cacheDir, `${id}.html`);
   if (cached) {
     const hit = await readFile(cached, "utf8").catch(() => null);
@@ -47,14 +48,15 @@ async function page(id: string): Promise<string> {
   // 사이트가 가끔 상세 페이지 전체에 500을 낸다. 잠시 쉬었다가 다시 묻고, 계속 실패하면 멈춘다.
   let html = "";
   for (let attempt = 1; ; attempt++) {
-    await sleep(attempt === 1 ? delay : 30_000 * attempt);
+    await sleep(attempt === 1 ? delay : patient ? 30_000 * attempt : 5_000);
     const res = await fetch(BASE + id, { headers: { "User-Agent": "pokeca-archive card list (nonprofit fan archive)" } });
     if (res.ok) {
       html = await res.text();
       break;
     }
+    if (res.status >= 500 && !patient && attempt === 2) return null;
     if (res.status < 500 || attempt === 4) throw new Error(`${id}: HTTP ${res.status} (공식 사이트 상세 페이지 오류)`);
-    console.log(`${id}: HTTP ${res.status}, ${30 * (attempt + 1)}초 뒤 다시 시도`);
+    if (patient) console.log(`${id}: HTTP ${res.status}, ${30 * (attempt + 1)}초 뒤 다시 시도`);
   }
   if (cached) await writeFile(cached, html);
   return html;
@@ -65,7 +67,8 @@ const decode = (s: string) =>
 
 // 없는 번호는 200으로 빈 상세 화면을 돌려준다. 번호 칸이 없으면 카드가 없는 것으로 본다.
 export function parseDetail(html: string): Card | null {
-  const head = html.match(/symbol\/([A-Za-z0-9-]+)\.png"><img[^>]*symbol\/[A-Za-z0-9]+\.png"><span class="p_num">([^<]*)/);
+  // 세트 기호 다음에 레귤레이션 마크가 오지만, 마크가 없는 카드도 있다(SV2a 210 마스터볼).
+  const head = html.match(/symbol\/([A-Za-z0-9-]+)\.png">(?:<img[^>]*symbol\/[A-Za-z0-9]+\.png">)?<span class="p_num">([^<]*)/);
   if (!head) return null;
   const rarity = html.match(/id="no_wrap_by_admin">([^<]*)</)?.[1].trim() ?? "";
   const illustrator = html.match(/<p class="illustrator">일러스트<br\s*\/?>([^<]*)<\/p>/)?.[1].trim() ?? "";
@@ -88,15 +91,18 @@ const setNames = new Map<string, string>(
   ((await (await fetch(TCGDEX_KO_SETS)).json()) as { id: string; name: string }[]).map((s) => [s.id.toLowerCase(), s.name]),
 );
 
+// 사이트 전체가 고장 난 상태면 모든 제품이 빈 것처럼 보인다. 아는 카드 한 장으로 먼저 확인한다(오래 기다림).
+if (!parseDetail((await page("BS2023014201"))!)) throw new Error("공식 사이트에서 확인용 카드(SV2a 201)를 읽지 못했어요");
+
 const cards: Card[] = [];
 const broken: string[] = [];
 for (const year of years) {
   let misses = 0;
   for (let p = products?.[0] ?? 1; products ? p <= products[products.length - 1] : misses < 5; p++) {
-    // 특정 제품만 계속 500을 내기도 한다(2023-001 S12a). 그 제품은 건너뛰고 끝에 알린다.
-    const html = await page(id(year, p, 1)).catch((e: Error) => (broken.push(e.message), null));
-    if (html === null) continue;
-    const first = parseDetail(html);
+    // 없는 제품도, 고장 난 제품(2023-001 S12a)도 500을 낸다. 둘 다 빈 제품으로 세고, 열리지 않은 번호는 끝에 알린다.
+    const html = await page(id(year, p, 1), false);
+    if (html === null) broken.push(id(year, p, 1));
+    const first = html && parseDetail(html);
     if (!first) {
       misses++;
       continue;
@@ -110,7 +116,8 @@ for (const year of years) {
     const start = all ? 1 : total + 1;
     let found = 0;
     for (let n = start; n < 1000; n++) {
-      const card = n === 1 ? first : parseDetail(await page(id(year, p, n)));
+      const html = n === 1 ? null : await page(id(year, p, n), false);
+      const card = n === 1 ? first : html && parseDetail(html);
       if (!card) break;
       cards.push(card);
       found++;
@@ -127,5 +134,5 @@ const rows = [
 await writeFile(out, rows.map((r) => r.map(csvCell).join(",")).join("\n") + "\n");
 const missing = [...new Set(cards.map((c) => c.setCode).filter((s) => !setNames.has(s.toLowerCase())))];
 console.log(`\n카드 ${cards.length}장 → ${out}`);
-if (broken.length) console.log(`열리지 않아 건너뛴 제품: ${broken.join(", ")}`);
+if (broken.length) console.log(`500으로 열리지 않은 제품 첫 카드(없는 제품이면 정상): ${broken.join(", ")}`);
 if (missing.length) console.log(`세트 이름을 못 찾아 세트 코드로 채움: ${missing.join(", ")} (CSV에서 고쳐 주세요)`);
