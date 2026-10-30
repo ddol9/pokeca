@@ -1,0 +1,30 @@
+.toggle {
+  display: none;
+}
+
+@media (max-width: 639px) {
+  .toggle {
+    display: inline-grid;
+    place-items: center;
+    width: var(--touch);
+    height: var(--touch);
+    margin-left: auto;
+    background: none;
+    color: var(--color-ink);
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius);
+  }
+
+  .toggle[aria-expanded="true"] {
+    border-color: var(--color-action);
+  }
+
+  .panel {
+    display: none;
+  }
+
+  .open {
+    flex-basis: 100%;
+    min-width: 0;
+  }
+}

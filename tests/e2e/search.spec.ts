@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { sql } from "./db";
 
 // seed.sql: sv2a 201/165 리자몽 ex (영문 별칭 MEW 199/165), sv2a 205/165 뮤 ex
 test("card number search goes straight to the card", async ({ page }) => {
@@ -34,15 +35,40 @@ test("unknown card shows the miss message", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "‘sv2a 999/165’에 맞는 카드를 못 찾았어요" })).toBeVisible();
 });
 
+test("a missed number can be requested once", async ({ page }, info) => {
+  const query = `sv2a 9${info.project.name === "mobile" ? 8 : 7}0/165`;
+  await sql`delete from search_misses where query = ${query}`;
+  await page.goto(`/search?q=${encodeURIComponent(query)}`);
+  await page.getByRole("button", { name: "이 번호로 찾기 요청" }).click();
+  await expect(page.getByText("요청이 기록됐어요")).toBeVisible();
+  await expect(page.getByRole("button", { name: "이 번호로 찾기 요청" })).toHaveCount(0);
+  // 지나가며 남는 검색 실패 1줄 + 요청 1줄. 같은 방문자가 다시 요청해도 늘지 않는다.
+  const res = await page.request.post("/api/search-requests", { data: { query } });
+  expect(res.status()).toBe(204);
+  await expect
+    .poll(async () => (await sql`select requested from search_misses where query = ${query} order by id`).map((r) => r.requested))
+    .toEqual([false, true]);
+});
+
 test("unknown card URL shows the not-in-list page", async ({ page }) => {
   // 카드 조회가 스트리밍 안에서 일어나서 상태 코드는 200이다. Next가 noindex 메타를 붙인다.
   await page.goto("/cards/sv2a/999-165");
   await expect(page.getByRole("heading", { name: "이 카드는 아직 목록에 없어요" })).toBeVisible();
 });
 
-test("header search on a card page jumps to another card", async ({ page }) => {
+test("header search on a card page jumps to another card", async ({ page, isMobile }) => {
   await page.goto("/cards/sv2a/201-165");
   const header = page.getByRole("banner");
+  // 모바일은 ⌕ 버튼을 눌러야 검색창이 펼쳐지고, 입력란에 바로 포커스가 간다 (design 9A).
+  const toggle = header.getByRole("button", { name: "카드 검색 열기" });
+  if (isMobile) {
+    await expect(header.getByRole("button", { name: "찾기" })).toBeHidden();
+    await toggle.click();
+    await expect(header.getByLabel("카드 번호 또는 이름 검색")).toBeFocused();
+    await expect(header.getByText("예: sv2a 201/165, 리자몽")).toBeVisible();
+  } else {
+    await expect(toggle).toBeHidden();
+  }
   await expect(header.getByRole("button", { name: "찾기" })).toBeVisible();
   // 모바일(375px)에서도 머리글 검색 때문에 가로 스크롤이 생기면 안 된다(리눅스 크롬에서 입력란 기본 너비로 넘친 적이 있음).
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);

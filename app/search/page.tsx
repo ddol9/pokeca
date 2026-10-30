@@ -3,6 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { after } from "next/server";
 import { SearchForm } from "@/components/SearchForm";
+import { SearchMissRequest } from "@/components/SearchMissRequest";
 import { recordSearch, searchCards, type CardHit } from "@/lib/cards";
 import { cardPath } from "@/lib/search";
 import { visitorId } from "@/lib/visitor";
@@ -52,7 +53,10 @@ async function Results({ searchParams }: { searchParams: PageProps<"/search">["s
           <p>
             세트 코드와 번호를 함께 넣어 보세요: <code>sv2a 201/165</code> 또는 <code>sv2a-201</code>
           </p>
-          <p className={styles.muted}>찾지 못한 검색은 기록돼서, 목록에 카드를 추가할 때 참고해요.</p>
+          <SearchMissRequest
+            query={query}
+            label={result.parsed.kind === "name" ? "이 카드 찾기 요청" : "이 번호로 찾기 요청"}
+          />
         </div>
       </SearchShell>
     );
