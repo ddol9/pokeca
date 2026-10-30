@@ -11,9 +11,8 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const BASE = "https://pokemoncard.co.kr/cards/detail/";
-const TCGDEX_KO_SETS = "https://api.tcgdex.net/v2/ko/sets";
 
-type Card = { setCode: string; number: string; nameKo: string; rarity: string; illustrator: string };
+type Card = { setCode: string; number: string; nameKo: string; rarity: string; illustrator: string; setName: string };
 
 const args = process.argv.slice(2);
 function opt(name: string): string | undefined {
@@ -73,7 +72,11 @@ export function parseDetail(html: string): Card | null {
   const rarity = html.match(/id="no_wrap_by_admin">([^<]*)</)?.[1].trim() ?? "";
   const illustrator = html.match(/<p class="illustrator">일러스트<br\s*\/?>([^<]*)<\/p>/)?.[1].trim() ?? "";
   const nameKo = html.match(/<span class="card-hp title">([^<]*)<\/span>/)?.[1].trim() ?? "";
-  return { setCode: head[1], number: head[2].trim(), nameKo: decode(nameKo), rarity, illustrator: decode(illustrator) };
+  // 제품명 "스칼렛&바이올렛 확장팩 「스텔라미라클」"에서 낫표 안을 세트 이름으로 쓴다. 낫표가 없으면 제품명 전체.
+  const product = decode(html.match(/class="search_href">([^<]*)</)?.[1].trim() ?? "");
+  const setName = product.match(/「(.+)」/)?.[1] ?? product;
+  // 번호에 공백이 섞인 카드가 있다("2 50 /193").
+  return { setCode: head[1], number: head[2].replace(/\s+/g, ""), nameKo: decode(nameKo), rarity, illustrator: decode(illustrator), setName };
 }
 
 const id = (year: number, product: number, n: number) =>
@@ -86,10 +89,6 @@ const officialTotal = (number: string) => {
 };
 
 if (cacheDir) await mkdir(cacheDir, { recursive: true });
-
-const setNames = new Map<string, string>(
-  ((await (await fetch(TCGDEX_KO_SETS)).json()) as { id: string; name: string }[]).map((s) => [s.id.toLowerCase(), s.name]),
-);
 
 // 사이트 전체가 고장 난 상태면 모든 제품이 빈 것처럼 보인다. 아는 카드 한 장으로 먼저 확인한다(오래 기다림).
 if (!parseDetail((await page("BS2023014201"))!)) throw new Error("공식 사이트에서 확인용 카드(SV2a 201)를 읽지 못했어요");
@@ -122,17 +121,21 @@ for (const year of years) {
       cards.push(card);
       found++;
     }
-    console.log(`${id(year, p, 0)} ${first.setCode} (${setNames.get(first.setCode.toLowerCase()) ?? "이름 없음"}) 기본 ${total}장 · 가져옴 ${found}장`);
+    console.log(`${id(year, p, 0)} ${first.setCode} (${first.setName || "이름 없음"}) 기본 ${total}장 · 가져옴 ${found}장`);
   }
 }
+
+// 덱 제품은 같은 번호의 카드가 여러 장 들어 있다. 세트·번호마다 한 줄만 남긴다.
+const seen = new Set<string>();
+const unique = cards.filter((c) => !seen.has(`${c.setCode} ${c.number}`) && seen.add(`${c.setCode} ${c.number}`));
 
 const csvCell = (v: string) => (/[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v);
 const rows = [
   ["set_code", "collector_number", "name_ko", "rarity", "illustrator", "set_name_ko"],
-  ...cards.map((c) => [c.setCode, c.number, c.nameKo, c.rarity, c.illustrator, setNames.get(c.setCode.toLowerCase()) ?? c.setCode]),
+  ...unique.map((c) => [c.setCode, c.number, c.nameKo, c.rarity, c.illustrator, c.setName || c.setCode]),
 ];
 await writeFile(out, rows.map((r) => r.map(csvCell).join(",")).join("\n") + "\n");
-const missing = [...new Set(cards.map((c) => c.setCode).filter((s) => !setNames.has(s.toLowerCase())))];
-console.log(`\n카드 ${cards.length}장 → ${out}`);
+const missing = [...new Set(cards.filter((c) => !c.setName).map((c) => c.setCode))];
+console.log(`\n카드 ${unique.length}장 → ${out}`);
 if (broken.length) console.log(`500으로 열리지 않은 제품 첫 카드(없는 제품이면 정상): ${broken.join(", ")}`);
 if (missing.length) console.log(`세트 이름을 못 찾아 세트 코드로 채움: ${missing.join(", ")} (CSV에서 고쳐 주세요)`);

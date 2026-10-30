@@ -67,7 +67,9 @@ const c = {
   aliasNumber: col("alias_number_ja"),
   name: col("name_ja"),
 };
-const norm = (s: string | undefined) => (s ?? "").trim().toLowerCase().replace(/\s+/g, " ");
+// 대소문자·공백·악센트 차이는 같은 이름으로 본다("Mékayu" = "Mekayu").
+const norm = (s: string | undefined) =>
+  (s ?? "").normalize("NFD").replace(/\p{M}/gu, "").trim().toLowerCase().replace(/\s+/g, " ");
 
 // 세트의 기본 번호를 넘는 일본판 카드들(번호 → 카드). 번호가 어긋난 카드를 일러스트레이터로 찾을 때만 받는다.
 const secretCards = new Map<string, Promise<JaCard[]>>();
@@ -95,6 +97,16 @@ const used = new Set(rows.slice(1).filter((r) => r.cells[c.aliasSet]).map((r) =>
 let added = 0;
 const skipped: string[] = [];
 const moved: string[] = [];
+const attach = (cells: string[], setId: string, aliasNumber: string, jaName: string) => {
+  used.add(`${setId} ${aliasNumber}`);
+  cells[c.aliasSet] = setId;
+  cells[c.aliasNumber] = aliasNumber;
+  cells[c.name] = jaName;
+  added++;
+};
+
+// 1차: 번호와 일러스트레이터가 모두 같은 카드를 먼저 붙인다. 번호가 어긋난 카드는 2차에서 남은 일본판 카드로 맞춘다.
+const renumbered: { label: string; cells: string[]; setId: string; ja: JaCard }[] = [];
 for (const { line, cells } of rows.slice(1)) {
   const setCode = cells[c.set];
   const number = cells[c.number];
@@ -111,27 +123,26 @@ for (const { line, cells } of rows.slice(1)) {
     skipped.push(`${label}: 일본판 카드 없음`);
     continue;
   }
-  let aliasNumber = number;
-  let jaName = ja.name;
-  if (norm(ja.illustrator) !== norm(cells[c.illustrator])) {
-    const total = Number(number.split("/")[1]);
-    const same = Number.isFinite(total) && cells[c.illustrator]
-      ? (await jaSecrets(setId, total)).filter((card) => norm(card.illustrator) === norm(cells[c.illustrator]))
-      : [];
-    if (same.length === 1 && !used.has(`${setId} ${same[0].localId}/${total}`)) {
-      aliasNumber = `${same[0].localId}/${total}`;
-      jaName = same[0].name;
-    } else {
-      skipped.push(`${label}: 일러스트레이터 다름 (한글 ${cells[c.illustrator] || "-"} / 일본 ${ja.illustrator ?? "-"})`);
-      continue;
-    }
+  if (norm(ja.illustrator) === norm(cells[c.illustrator])) attach(cells, setId, number, ja.name);
+  else renumbered.push({ label, cells, setId, ja });
+}
+
+for (const { label, cells, setId, ja } of renumbered) {
+  const [kr, base] = cells[c.number].split("/");
+  const illustrator = cells[c.illustrator];
+  // 한글판 번호와 같은 자릿수로 맞춘다(일본 "99" → "099/073"). 이미 다른 행에 붙은 일본판 카드는 후보에서 뺀다.
+  const pad = (localId: string) => `${localId.padStart(kr.length, "0")}/${base}`;
+  const same = illustrator
+    ? (await jaSecrets(setId, Number(base))).filter(
+        (card) => norm(card.illustrator) === norm(illustrator) && !used.has(`${setId} ${pad(card.localId)}`),
+      )
+    : [];
+  if (same.length !== 1) {
+    skipped.push(`${label}: 일러스트레이터 다름 (한글 ${illustrator || "-"} / 일본 ${ja.illustrator ?? "-"})`);
+    continue;
   }
-  if (aliasNumber !== number) moved.push(`${label} → 일본 ${aliasNumber} ${jaName}`);
-  used.add(`${setId} ${aliasNumber}`);
-  cells[c.aliasSet] = setId;
-  cells[c.aliasNumber] = aliasNumber;
-  cells[c.name] = jaName;
-  added++;
+  moved.push(`${label} → 일본 ${pad(same[0].localId)} ${same[0].name}`);
+  attach(cells, setId, pad(same[0].localId), same[0].name);
 }
 
 const cell = (v = "") => (/[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v);
