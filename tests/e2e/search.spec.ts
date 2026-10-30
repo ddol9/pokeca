@@ -71,6 +71,8 @@ test("header search on a card page jumps to another card", async ({ page, isMobi
   }
   await expect(header.getByRole("button", { name: "찾기" })).toBeVisible();
   // 모바일(375px)에서도 머리글 검색 때문에 가로 스크롤이 생기면 안 된다(리눅스 크롬에서 입력란 기본 너비로 넘친 적이 있음).
+  // 맥에서도 잡히도록 입력란 기본 너비를 넓혀 놓고 잰다.
+  await page.evaluate(() => document.querySelector("#q-header")?.setAttribute("size", "60"));
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
   expect(overflow).toBe(false);
 
