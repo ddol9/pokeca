@@ -15,7 +15,7 @@
   padding-block: var(--space);
 }
 
-/* 넓은 화면에서는 워드마크 옆, 좁은 화면(375px)에서는 자리가 모자라 다음 줄 전체 너비로 내려간다. */
+/* 넓은 화면에서는 워드마크 옆에 검색창을 둔다. */
 .search {
   flex: 1 1 calc(var(--space) * 36);
   max-width: calc(var(--space) * 52);
@@ -25,6 +25,13 @@
 
 .search:empty {
   display: none;
+}
+
+/* 모바일: ⌕ 버튼은 워드마크 줄 오른쪽에, 펼친 입력창은 다음 줄 전체 폭으로 (design 9A, HeaderSearch). */
+@media (max-width: 639px) {
+  .search {
+    display: contents;
+  }
 }
 
 .wordmark,

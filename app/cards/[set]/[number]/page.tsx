@@ -58,6 +58,8 @@ async function Card({
           </AliasNote>
         )}
       </header>
+      {/* 공식 카드 이미지는 쓰지 않는다. 번호 블록 옆의 보조 요소로 중립 실루엣만 둔다 (design 2A). */}
+      <div className={styles.silhouette} aria-hidden="true" />
       <FormatResults cardId={card.cardId} artworks={artworks} />
     </article>
   );
