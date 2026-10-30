@@ -1,0 +1,141 @@
+// 공식 한국 카드 사이트(pokemoncard.co.kr)에서 카드 목록을 모아 cards:import용 CSV로 만든다.
+//
+//   npm run cards:fetch -- --years 2023-2026 --out data/cards-kr.csv
+//   npm run cards:fetch -- --years 2023 --products 14 --out /tmp/151.csv     # 151 한 세트만
+//
+// 카드 상세 주소는 /cards/detail/BS{연도}{제품 3자리}{번호 3자리}다(예: BS2023014201 = SV2a 201/165).
+// 기본은 확장 아트 대상인 "기본 번호를 넘는 카드"(AR·SR·SAR 등)만 모은다. --all이면 세트 전체.
+// 그림·효과 문구는 가져오지 않고 세트·번호·이름·레어도·일러스트레이터만 쓴다. 요청은 --delay(기본 700ms) 간격으로 보낸다.
+// --cache 폴더에 받은 HTML을 남겨 두면 다시 돌릴 때 사이트에 요청하지 않는다.
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import path from "node:path";
+
+const BASE = "https://pokemoncard.co.kr/cards/detail/";
+
+type Card = { setCode: string; number: string; nameKo: string; rarity: string; illustrator: string; setName: string };
+
+const args = process.argv.slice(2);
+function opt(name: string): string | undefined {
+  const i = args.indexOf(`--${name}`);
+  return i >= 0 ? args[i + 1] : undefined;
+}
+function range(value: string | undefined, fallback: [number, number]): number[] {
+  const [a, b] = value ? value.split("-").map(Number) : fallback;
+  return Array.from({ length: (b ?? a) - a + 1 }, (_, i) => a + i);
+}
+
+const years = range(opt("years"), [2023, new Date().getFullYear()]);
+const products = opt("products") ? range(opt("products"), [1, 1]) : null;
+const out = opt("out");
+const cacheDir = opt("cache");
+const delay = Number(opt("delay") ?? 700);
+const all = args.includes("--all");
+if (!out) {
+  console.error("사용법: npm run cards:fetch -- --years 2023-2026 [--products 1-40] [--all] [--cache dir] --out cards.csv");
+  process.exit(2);
+}
+
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+// patient가 아니면 500을 한 번만 다시 묻고 null을 돌려준다. 사이트가 없는 번호에도 500을 내기 때문이다.
+async function page(id: string, patient = true): Promise<string | null> {
+  const cached = cacheDir && path.join(cacheDir, `${id}.html`);
+  if (cached) {
+    const hit = await readFile(cached, "utf8").catch(() => null);
+    if (hit !== null) return hit;
+  }
+  // 사이트가 가끔 상세 페이지 전체에 500을 낸다. 잠시 쉬었다가 다시 묻고, 계속 실패하면 멈춘다.
+  let html = "";
+  for (let attempt = 1; ; attempt++) {
+    await sleep(attempt === 1 ? delay : patient ? 30_000 * attempt : 5_000);
+    const res = await fetch(BASE + id, { headers: { "User-Agent": "pokeca-archive card list (nonprofit fan archive)" } });
+    if (res.ok) {
+      html = await res.text();
+      break;
+    }
+    if (res.status >= 500 && !patient && attempt === 2) return null;
+    if (res.status < 500 || attempt === 4) throw new Error(`${id}: HTTP ${res.status} (공식 사이트 상세 페이지 오류)`);
+    if (patient) console.log(`${id}: HTTP ${res.status}, ${30 * (attempt + 1)}초 뒤 다시 시도`);
+  }
+  if (cached) await writeFile(cached, html);
+  return html;
+}
+
+const decode = (s: string) =>
+  s.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&#0?39;|&apos;/g, "'").replace(/&quot;/g, '"');
+
+// 없는 번호는 200으로 빈 상세 화면을 돌려준다. 번호 칸이 없으면 카드가 없는 것으로 본다.
+export function parseDetail(html: string): Card | null {
+  // 세트 기호 다음에 레귤레이션 마크가 오지만, 마크가 없는 카드도 있다(SV2a 210 마스터볼).
+  const head = html.match(/symbol\/([A-Za-z0-9-]+)\.png">(?:<img[^>]*symbol\/[A-Za-z0-9]+\.png">)?<span class="p_num">([^<]*)/);
+  if (!head) return null;
+  const rarity = html.match(/id="no_wrap_by_admin">([^<]*)</)?.[1].trim() ?? "";
+  const illustrator = html.match(/<p class="illustrator">일러스트<br\s*\/?>([^<]*)<\/p>/)?.[1].trim() ?? "";
+  const nameKo = html.match(/<span class="card-hp title">([^<]*)<\/span>/)?.[1].trim() ?? "";
+  // 제품명 "스칼렛&바이올렛 확장팩 「스텔라미라클」"에서 낫표 안을 세트 이름으로 쓴다. 낫표가 없으면 제품명 전체.
+  const product = decode(html.match(/class="search_href">([^<]*)</)?.[1].trim() ?? "");
+  const setName = product.match(/「(.+)」/)?.[1] ?? product;
+  // 번호에 공백이 섞인 카드가 있다("2 50 /193").
+  return { setCode: head[1], number: head[2].replace(/\s+/g, ""), nameKo: decode(nameKo), rarity, illustrator: decode(illustrator), setName };
+}
+
+const id = (year: number, product: number, n: number) =>
+  `BS${year}${String(product).padStart(3, "0")}${String(n).padStart(3, "0")}`;
+
+// 기본 번호("201/165"의 165). 프로모처럼 분모가 숫자가 아니면 null.
+const officialTotal = (number: string) => {
+  const m = number.match(/^\d+\/(\d+)$/);
+  return m ? Number(m[1]) : null;
+};
+
+if (cacheDir) await mkdir(cacheDir, { recursive: true });
+
+// 사이트 전체가 고장 난 상태면 모든 제품이 빈 것처럼 보인다. 아는 카드 한 장으로 먼저 확인한다(오래 기다림).
+if (!parseDetail((await page("BS2023014201"))!)) throw new Error("공식 사이트에서 확인용 카드(SV2a 201)를 읽지 못했어요");
+
+const cards: Card[] = [];
+const broken: string[] = [];
+for (const year of years) {
+  let misses = 0;
+  for (let p = products?.[0] ?? 1; products ? p <= products[products.length - 1] : misses < 5; p++) {
+    // 없는 제품도, 고장 난 제품(2023-001 S12a)도 500을 낸다. 둘 다 빈 제품으로 세고, 열리지 않은 번호는 끝에 알린다.
+    const html = await page(id(year, p, 1), false);
+    if (html === null) broken.push(id(year, p, 1));
+    const first = html && parseDetail(html);
+    if (!first) {
+      misses++;
+      continue;
+    }
+    misses = 0;
+    const total = officialTotal(first.number);
+    if (total === null) {
+      console.log(`${id(year, p, 0)} ${first.setCode} ${first.number}: 번호 체계가 달라 건너뜀`);
+      continue;
+    }
+    const start = all ? 1 : total + 1;
+    let found = 0;
+    for (let n = start; n < 1000; n++) {
+      const html = n === 1 ? null : await page(id(year, p, n), false);
+      const card = n === 1 ? first : html && parseDetail(html);
+      if (!card) break;
+      cards.push(card);
+      found++;
+    }
+    console.log(`${id(year, p, 0)} ${first.setCode} (${first.setName || "이름 없음"}) 기본 ${total}장 · 가져옴 ${found}장`);
+  }
+}
+
+// 덱 제품은 같은 번호의 카드가 여러 장 들어 있다. 세트·번호마다 한 줄만 남긴다.
+const seen = new Set<string>();
+const unique = cards.filter((c) => !seen.has(`${c.setCode} ${c.number}`) && seen.add(`${c.setCode} ${c.number}`));
+
+const csvCell = (v: string) => (/[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v);
+const rows = [
+  ["set_code", "collector_number", "name_ko", "rarity", "illustrator", "set_name_ko"],
+  ...unique.map((c) => [c.setCode, c.number, c.nameKo, c.rarity, c.illustrator, c.setName || c.setCode]),
+];
+await writeFile(out, rows.map((r) => r.map(csvCell).join(",")).join("\n") + "\n");
+const missing = [...new Set(cards.filter((c) => !c.setName).map((c) => c.setCode))];
+console.log(`\n카드 ${unique.length}장 → ${out}`);
+if (broken.length) console.log(`500으로 열리지 않은 제품 첫 카드(없는 제품이면 정상): ${broken.join(", ")}`);
+if (missing.length) console.log(`세트 이름을 못 찾아 세트 코드로 채움: ${missing.join(", ")} (CSV에서 고쳐 주세요)`);

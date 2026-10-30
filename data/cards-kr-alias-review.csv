@@ -1,0 +1,74 @@
+set_code,collector_number,name_ko,rarity,illustrator,reason
+SVG,050/049,이상해씨,,Orca,일본판 세트 없음
+SVG,051/049,파이리,,MINAMINAMI Take,일본판 세트 없음
+SVG,052/049,꼬부기,,Saboteri,일본판 세트 없음
+SVI,061/066,박사의 연구,,kirisAki,일본판 세트 없음
+SVI,062/066,반바지 꼬마,,Hitoshi Ariga,일본판 세트 없음
+SVI,063/066,보스의 지령,,NC Empire,일본판 세트 없음
+SVI,064/066,저지맨,,Hideki Ishikawa,일본판 세트 없음
+SVI,066/066,피크닉걸,,Susumu Maeya,일본판 세트 없음
+SVI,WAT,기본 물 에너지,,,일본판 세트 없음
+SVI,DAR,기본 악 에너지,,,일본판 세트 없음
+SVI,029/066,요가랑,,GOTO minori,일본판 세트 없음
+SVI,030/066,요가램,,Fujimoto Gold,일본판 세트 없음
+SVI,031/066,리오르,,Souichirou Gunjima,일본판 세트 없음
+SVI,032/066,루카리오 ex,,PLANETA Igarashi,일본판 세트 없음
+SVI,033/066,코라이돈,,kawayoo,일본판 세트 없음
+SVI,039/066,지라치,,Kuroimori,일본판 세트 없음
+SVI,040/066,멜탄,,Yuka Morii,일본판 세트 없음
+SVI,041/066,멜메탈 ex,,takuyoa,일본판 세트 없음
+SVI,042/066,부르롱,,Shiburingaru,일본판 세트 없음
+SVI,043/066,부르르룸,,GOSSAN,일본판 세트 없음
+SVI,046/066,잠만보,,Po-Suzuki,일본판 세트 없음
+SVI,047/066,맛보돈,,REND,일본판 세트 없음
+SVI,049/066,몬스터볼,,Studio Bora Inc.,일본판 세트 없음
+SVI,051/066,슈퍼볼,,Studio Bora Inc.,일본판 세트 없음
+SVI,055/066,포켓몬 교체,,Studio Bora Inc.,일본판 세트 없음
+SVI,056/066,포켓몬 캐처,,Studio Bora Inc.,일본판 세트 없음
+SVI,057/066,기력의머리띠,,Studio Bora Inc.,일본판 세트 없음
+SVI,058/066,네모,,Sanosuke Sakuma,일본판 세트 없음
+SVI,060/066,박사의 연구,,kirisAki,일본판 세트 없음
+SVI,065/066,쿡,,Hideki Ishikawa,일본판 세트 없음
+SVI,FIG,기본 격투 에너지,,,일본판 세트 없음
+SVI,MET,기본 강철 에너지,,,일본판 세트 없음
+SVJL,FIR,기본 불꽃   에너지,,,일본판 세트 없음
+SVJP,WAT,기본 물   에너지,,,일본판 세트 없음
+SVP2,GRA,기본 풀 에너지,,,일본판 세트 없음
+SVP2,LIG,기본 번개 에너지,,,일본판 세트 없음
+SVP2,PSY,기본 초 에너지,,,일본판 세트 없음
+SVOD,019/018,성호의 메탕,,hncl,일본판 세트 없음
+SVOM,020/019,마리의 모르페코,,Susumu Maeya,일본판 세트 없음
+MBG,022/021,고우스트,,Arai Kiriko,일본판 세트 없음
+MBD,022/021,메로엣타,,Keisin,일본판 세트 없음
+M6a,104/103,알로라 나시,AR,AYUMI ODASHIMA,일본판 세트 없음
+M6a,105/103,파이어,AR,mashu,일본판 세트 없음
+M6a,106/103,라프라스,AR,Amelicart,일본판 세트 없음
+M6a,107/103,프리져,AR,mashu,일본판 세트 없음
+M6a,108/103,썬더,AR,mashu,일본판 세트 없음
+M6a,109/103,스트린더,AR,Kazumasa Yasukuni,일본판 세트 없음
+M6a,110/103,모르페코,AR,Yoshimi Miyoshi,일본판 세트 없음
+M6a,111/103,흔들풍손,AR,Whisker,일본판 세트 없음
+M6a,112/103,샹델라,AR,YASHIRO Nanaco,일본판 세트 없음
+M6a,113/103,루가루암,AR,Raita Kazama,일본판 세트 없음
+M6a,114/103,니드리나,AR,Taiga Kasai,일본판 세트 없음
+M6a,115/103,알로라 나옹,AR,OKUBO,일본판 세트 없음
+M6a,116/103,곤율랭,AR,GOSSAN,일본판 세트 없음
+M6a,117/103,가라르 나옹,AR,OKUBO,일본판 세트 없음
+M6a,118/103,타부자고,AR,toriyufu,일본판 세트 없음
+MEE,020/019,이브이,,Hideki Ishikawa,일본판 세트 없음
+MEZ,020/019,조로아,,GOSSAN,일본판 세트 없음
+MEM,018/017,나오하,,Jiro Sasumo,일본판 세트 없음
+SV2D,090/071,모야모,SR,Sanosuke Sakuma,일러스트레이터 다름 (한글 Sanosuke Sakuma / 일본 nagimiso)
+SV2D,096/071,사구아로,SAR,Sanosuke Sakuma,일러스트레이터 다름 (한글 Sanosuke Sakuma / 일본 kirisAki)
+SV5a,096/066,루미너스 에너지,UR,,일러스트레이터 다름 (한글 - / 일본 5ban Graphics)
+SV8a,189/187,레포르,SR,hncl,일러스트레이터 다름 (한글 hncl / 일본 Teeziro)
+SV8a,193/187,청목의 수완,SR,hncl,일러스트레이터 다름 (한글 hncl / 일본 Yuu Nishida)
+SV8a,195/187,추명,SR,GIDORA,일러스트레이터 다름 (한글 GIDORA / 일본 Cona Nitanda)
+SV8a,196/187,콜사,SR,GIDORA,일러스트레이터 다름 (한글 GIDORA / 일본 GOSSAN)
+SV9,132/100,스파이크 에너지,UR,5ban Graphics,일러스트레이터 다름 (한글 5ban Graphics / 일본 -)
+M1S,065/063,아이스크,AR,Tetsu Kayama,일러스트레이터 다름 (한글 Tetsu Kayama / 일본 Teeziro)
+M5,082/081,짜랑랑,AR,Jiro Sasumo,일러스트레이터 다름 (한글 Jiro Sasumo / 일본 Jiro Sasuno)
+M5,102/081,다크벨,SR,Toyste Beach,일러스트레이터 다름 (한글 Toyste Beach / 일본 Studio Bora Inc.)
+M5,105/081,크래시 해머,SR,Ayaka Yoshida,일러스트레이터 다름 (한글 Ayaka Yoshida / 일본 Toyste Beach)
+M5,106/081,브레이브뱅글,SR,Toyste Beach,일러스트레이터 다름 (한글 Toyste Beach / 일본 inose yukie)
+M6,110/076,메가레쿠쟈 ex,SAR,Kazuki Minami,일러스트레이터 다름 (한글 Kazuki Minami / 일본 Kozuki Minami)
