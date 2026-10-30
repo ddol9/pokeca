@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 화면 지도: 2026-10-30 로컬 데모 데이터로 캡처한 21개 화면. 브라우저로 이 파일을 열면 된다. -->
+<title>확장 아트 아카이브 화면 지도</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: 세 갈래(방문자·작가·어드민) 페이지 지도 → 갈래별 화면 카드(데스크톱 + 모바일 캡처). 색은 DESIGN.md 토큰. */
+:root {
+  --page: #E9EDF1;
+  --surface: #F7F9FB;
+  --ink: #1C2430;
+  --muted: #5B6675;
+  --rule: #C9D1DA;
+  --action: #2445A8;
+  --on-action: #FFFFFF;
+  --demand: #F4C430;
+  --demand-ink: #3A2E00;
+  --link: #4F6D8A;
+  --shade: rgba(28, 36, 48, .72);
+  --font-body: "Pretendard Variable", Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", system-ui, sans-serif;
+  --font-num: "Pretendard Variable", Pretendard, "IBM Plex Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --page: #141A22; --surface: #1C2430; --ink: #E6EBF1; --muted: #A3AEBB; --rule: #33404F;
+    --action: #8FA8F0; --on-action: #0E1830; --demand: #F4C430; --demand-ink: #3A2E00; --link: #9DB7D1;
+    --shade: rgba(0, 0, 0, .8); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --page: #141A22; --surface: #1C2430; --ink: #E6EBF1; --muted: #A3AEBB; --rule: #33404F;
+  --action: #8FA8F0; --on-action: #0E1830; --demand: #F4C430; --demand-ink: #3A2E00; --link: #9DB7D1;
+  --shade: rgba(0, 0, 0, .8); color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--page);
+  color: var(--ink);
+  font: 400 16px/1.6 var(--font-body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1200px; margin: 0 auto; padding-block: 40px 80px; display: grid; gap: 56px; }
+h1, h2, h3 { margin: 0; text-wrap: balance; line-height: 1.3; }
+p { margin: 0; }
+a { color: var(--link); text-underline-offset: 3px; }
+code, .route { font-family: var(--font-num); font-feature-settings: "tnum"; font-size: 14px; }
+:focus-visible { outline: 2px solid var(--action); outline-offset: 2px; }
+
+header.top { display: grid; gap: 12px; padding-bottom: 24px; border-bottom: 1px solid var(--rule); }
+.eyebrow { font-size: 14px; color: var(--muted); letter-spacing: .02em; }
+header.top h1 { font-size: 40px; font-weight: 700; letter-spacing: -.01em; }
+.lede { color: var(--muted); max-width: 65ch; }
+.stats { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 14px; }
+.stats b { font-family: var(--font-num); font-feature-settings: "tnum"; font-size: 20px; margin-right: 4px; }
+
+/* 페이지 지도 */
+.map h2, .lane-head h2 { font-size: 28px; }
+.map { display: grid; gap: 20px; }
+.lanes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.lane { display: grid; align-content: start; gap: 0; padding: 20px; background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; }
+.lane h3 { font-size: 20px; margin-bottom: 4px; }
+.lane .who { font-size: 14px; color: var(--muted); margin-bottom: 16px; }
+.node { display: grid; gap: 2px; padding: 10px 12px; border-left: 3px solid var(--rule); text-decoration: none; color: var(--ink); border-radius: 0 4px 4px 0; }
+.node:hover { background: var(--page); border-left-color: var(--action); }
+.node .name { font-weight: 600; }
+.node .route { color: var(--muted); }
+.node.sub { margin-left: 20px; border-left-style: dashed; }
+.arrow { margin-left: 14px; padding: 2px 0 2px 12px; font-size: 14px; color: var(--muted); border-left: 1px solid var(--rule); }
+.arrow::before { content: "↓ "; color: var(--action); }
+
+/* 화면 목록 */
+.lane-section { display: grid; gap: 24px; }
+.lane-head { display: grid; gap: 6px; padding-bottom: 12px; border-bottom: 1px solid var(--rule); }
+.lane-head p { color: var(--muted); }
+.screens { display: grid; gap: 40px; }
+.screen { display: grid; gap: 12px; scroll-margin-top: 24px; }
+.screen-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+.screen-head h3 { font-size: 20px; }
+.ref { font-size: 14px; padding: 0 8px; border: 1px solid var(--rule); border-radius: 4px; color: var(--muted); }
+.ref.new { background: var(--demand); color: var(--demand-ink); border-color: var(--demand); }
+.desc { color: var(--muted); max-width: 70ch; }
+.shots { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+.shot { display: grid; gap: 6px; margin: 0; }
+.shot button { padding: 0; border: 1px solid var(--rule); border-radius: 4px; background: var(--surface); cursor: zoom-in; display: block; overflow: hidden; max-height: 640px; }
+.shot img { display: block; width: 100%; height: auto; }
+.shot figcaption { font-size: 14px; color: var(--muted); }
+.shot.mobile button { max-height: 640px; }
+
+/* 크게 보기 */
+dialog { padding: 0; border: 0; background: transparent; max-width: 100vw; max-height: 100vh; width: 100vw; height: 100vh; }
+dialog::backdrop { background: var(--shade); }
+.viewer { height: 100%; overflow: auto; display: grid; justify-items: center; padding: 56px 16px 32px; }
+.viewer img { max-width: min(1280px, 100%); height: auto; border-radius: 4px; }
+.close { position: fixed; top: calc(12px + env(safe-area-inset-top, 0px)); right: calc(12px + env(safe-area-inset-right, 0px)); min-height: 44px; padding: 0 16px; border: 0; border-radius: 4px; background: var(--action); color: var(--on-action); font: 600 16px var(--font-body); cursor: pointer; }
+
+footer.note { font-size: 14px; color: var(--muted); padding-top: 24px; border-top: 1px solid var(--rule); display: grid; gap: 6px; }
+
+@media (max-width: 900px) {
+  .lanes { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+  header.top h1 { font-size: 28px; }
+  .shots { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .shot.desktop { grid-column: 1 / -1; }
+  .shot.mobile { max-width: 220px; }
+  .shot button, .shot.mobile button { max-height: 420px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .node { transition: background .15s ease-out, border-color .15s ease-out; }
+}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <p class="eyebrow">확장 아트 아카이브 · 2026-10-30 로컬 데모 데이터로 캡처 · 브랜치 feat/design-gaps</p>
+    <h1>화면 지도</h1>
+    <p class="lede">지금 만들어진 모든 화면을 방문자, 작가, 어드민 세 갈래로 묶었어요. 위 지도에서 화면 이름을 누르면 아래 캡처로 가고, 캡처를 누르면 원래 크기로 열려요. 데스크톱은 1280px, 모바일은 375px 폭이에요.</p>
+    <p class="stats"><span><b>21</b>개 화면</span><span><b>3</b>갈래</span><span><b>42</b>장 캡처</span></p>
+  </header>
+
+  <section class="map" aria-labelledby="map-h">
+    <h2 id="map-h">페이지 구성</h2>
+    <div class="lanes">
+      <div class="lane">
+        <h3>방문자</h3>
+        <p class="who">로그인 없음 · 카드 번호로 도안을 찾고 받기</p>
+        <a class="node" href="#home"><span class="name">홈</span><span class="route">/</span></a>
+        <p class="arrow">카드 번호나 이름으로 검색</p>
+        <a class="node" href="#search-list"><span class="name">검색 결과 (후보 표)</span><span class="route">/search?q=…</span></a>
+        <a class="node sub" href="#search-miss"><span class="name">결과 없음 + 찾기 요청</span><span class="route">0건일 때</span></a>
+        <p class="arrow">1건이면 바로, 여러 건이면 표에서 고르기</p>
+        <a class="node" href="#card"><span class="name">카드 상세</span><span class="route">/cards/[세트]/[번호]</span></a>
+        <a class="node sub" href="#card-filter"><span class="name">규격 거르기</span><span class="route">9포켓 · PSA · BRG</span></a>
+        <a class="node sub" href="#card-empty"><span class="name">빈 규격 + 찾기 요청</span><span class="route">0개 규격 선택 시</span></a>
+        <a class="node sub" href="#viewer"><span class="name">크게 보기 · 다운로드</span><span class="route">대화상자</span></a>
+        <a class="node sub" href="#report"><span class="name">신고·내림 요청</span><span class="route">··· 메뉴 대화상자</span></a>
+        <a class="node sub" href="#card-404"><span class="name">목록에 없는 카드</span><span class="route">404</span></a>
+        <p class="arrow">작가 이름을 누르면</p>
+        <a class="node" href="#artist-page"><span class="name">작가 페이지</span><span class="route">/artists/[주소 이름]</span></a>
+        <p class="arrow">푸터 링크</p>
+        <a class="node" href="#takedown"><span class="name">권리자 내림 요청</span><span class="route">/takedown</span></a>
+      </div>
+
+      <div class="lane">
+        <h3>작가</h3>
+        <p class="who">카카오·구글 로그인 · 어드민 승인 뒤 직접 올리기</p>
+        <a class="node" href="#artist-login"><span class="name">작가 로그인</span><span class="route">/artist/login</span></a>
+        <p class="arrow">처음 로그인하면</p>
+        <a class="node" href="#artist-signup"><span class="name">작가 신청</span><span class="route">/artist/signup</span></a>
+        <p class="arrow">어드민이 승인하면</p>
+        <a class="node" href="#studio"><span class="name">내 도안 (작가 홈)</span><span class="route">/artist</span></a>
+        <a class="node sub" href="#studio-new"><span class="name">도안 올리기</span><span class="route">/artist/new</span></a>
+        <p class="arrow">올리면 바로 공개</p>
+        <a class="node" href="#artist-page"><span class="name">카드 상세 · 작가 페이지에 노출</span><span class="route">방문자 화면</span></a>
+      </div>
+
+      <div class="lane">
+        <h3>어드민</h3>
+        <p class="who">이메일·비밀번호 · admins 허용 목록</p>
+        <a class="node" href="#admin-login"><span class="name">어드민 로그인</span><span class="route">/admin/login</span></a>
+        <p class="arrow">상단 메뉴: 작품 · 작품 등록 · 작가 · 신고</p>
+        <a class="node" href="#admin-artworks"><span class="name">작품 목록 · 링크 점검</span><span class="route">/admin/artworks</span></a>
+        <a class="node sub" href="#admin-detail"><span class="name">작품 상세 · 숨김 · 철회</span><span class="route">/admin/artworks/[id]</span></a>
+        <a class="node" href="#admin-new"><span class="name">작품 등록</span><span class="route">/admin/artworks/new</span></a>
+        <a class="node" href="#admin-artists"><span class="name">작가 승인</span><span class="route">/admin/artists</span></a>
+        <a class="node" href="#admin-reports"><span class="name">신고 처리</span><span class="route">/admin/reports</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="lane-section" aria-labelledby="visitor-h">
+    <div class="lane-head">
+      <h2 id="visitor-h">방문자 화면</h2>
+      <p>로그인 없이 쓰는 공개 화면이에요. 머리글 검색은 홈에서는 숨고, 모바일에서는 돋보기 버튼으로 펼쳐요.</p>
+    </div>
+    <div class="screens" id="visitor-screens"></div>
+  </section>
+
+  <section class="lane-section" aria-labelledby="artist-h">
+    <div class="lane-head">
+      <h2 id="artist-h">작가 화면</h2>
+      <p>PR #9에서 추가했어요. 지금은 구글 로그인만 켜져 있고, 카카오는 비즈 앱 전환 뒤 켜요.</p>
+    </div>
+    <div class="screens" id="artist-screens"></div>
+  </section>
+
+  <section class="lane-section" aria-labelledby="admin-h">
+    <div class="lane-head">
+      <h2 id="admin-h">어드민 화면</h2>
+      <p>창업자 한 명이 쓰는 운영 화면이에요. 표와 폼 위주로, 공개 화면과 같은 색을 써요.</p>
+    </div>
+    <div class="screens" id="admin-screens"></div>
+  </section>
+
+  <footer class="note">
+    <p>데모 도안 그림은 자리 표시용으로 만든 그라데이션이에요. 실제 작가 도안이 아니에요.</p>
+    <p>노란 표시는 이번 PR #10에서 새로 생기거나 바뀐 화면이에요. 괄호 안의 2A, 5A 같은 번호는 설계 문서의 디자인 결정 번호예요.</p>
+  </footer>
+</div>
+
+<dialog id="viewer" aria-label="캡처 크게 보기">
+  <button class="close" type="button" id="close">닫기</button>
+  <div class="viewer"><img id="viewer-img" alt=""></div>
+</dialog>
+
+<script>
+const SCREENS = {
+  visitor: [
+    ["home", "홈", "/", "3A", "제목, 큰 검색창, 최근 도안이 등록된 카드 6장만 둬요. 머리글 검색은 숨겨요."],
+    ["search-list", "검색 결과 (후보 표)", "/search?q=ex", "3A", "카드당 한 줄 표예요. 도안이 많은 순으로, 도안 0개 카드는 '도안 없음'으로 흐리게 보여요. 모바일은 카드명·번호와 도안 수만 남겨요."],
+    ["search-miss", "결과 없음 + 찾기 요청", "/search?q=sv2a 999/165", "6A", "못 찾은 이유와 입력 예시를 보여 주고, 노란 영역에서 '이 번호로 찾기 요청'을 받아요.", true],
+    ["card", "카드 상세", "/cards/sv2a/201-165", "2A · 4A", "큰 카드 번호가 기준점이에요. 번호 옆 실루엣은 이번에 추가했어요. 규격 칩 아래에 도안 타일이 4열(태블릿 3열, 모바일 2열)로 나와요. 모바일은 번호 줄이 위에 고정돼요.", true],
+    ["card-filter", "규격 거르기", "BRG 칩 선택", "5A", "칩은 결과만 바꾸고 타일 모양은 그대로예요. 선택한 칩은 굵기와 밑줄로도 표시해요."],
+    ["card-empty", "빈 규격 + 찾기 요청", "/cards/sv2a/205-165 · BRG", "5A", "도안이 0개인 규격을 고르면 '이 카드의 BRG 도안 찾아 주세요'와 찾기 요청 버튼이 나와요. 3명 이상 기다리면 대기 수를 보여 줘요."],
+    ["viewer", "크게 보기 · 다운로드", "타일 미리보기 클릭", "DESIGN.md", "데스크톱은 그림 왼쪽·정보 오른쪽, 모바일은 위아래예요. 다운로드 뒤에는 인쇄 안내(실제 크기 100%, 규격 치수)가 나와요."],
+    ["report", "신고·내림 요청", "··· → 신고·내림 요청", "14A", "사유 3개, 선택 연락처, 내용을 받아요. 작품은 자동으로 붙어요."],
+    ["card-404", "목록에 없는 카드", "/cards/sv2a/999-165", "6A", "'이 카드는 아직 목록에 없어요'와 함께 홈 검색으로 안내해요."],
+    ["artist-page", "작가 페이지", "/artists/byeolbit", "작가 계정", "승인된 작가의 소개, 작품 올리는 곳 링크, 그 작가의 도안 모음이에요."],
+    ["takedown", "권리자 내림 요청", "/takedown", "14A", "푸터에서 들어오는 신고 폼이에요. 작품을 고르지 않고 원본 URL을 받아요."],
+  ],
+  artist: [
+    ["artist-login", "작가 로그인", "/artist/login", "작가 계정", "카카오·구글 버튼만 있어요. 비밀번호는 받지 않아요."],
+    ["artist-signup", "작가 신청", "/artist/signup", "작가 계정", "처음 로그인하면 여기로 와요. 작가 이름(소셜 닉네임으로 채움), 작가 페이지 주소, 작품 올리는 곳을 받아요."],
+    ["studio", "내 도안 (작가 홈)", "/artist", "작가 계정", "올린 도안 목록이에요. 각 도안은 카드 번호를 직접 입력해서 내릴 수 있어요. 승인 전에는 '작가 신청을 받았어요'만 보여요."],
+    ["studio-new", "도안 올리기", "/artist/new", "작가 계정", "카드 검색 → 규격 → 원본·미리보기 파일 → 원본 글 주소 순서예요. 올리면 바로 공개돼요."],
+  ],
+  admin: [
+    ["admin-login", "어드민 로그인", "/admin/login", "11A", "이메일·비밀번호 로그인이에요. 계정은 Supabase 대시보드에서 만들고 admins 표에 넣어요."],
+    ["admin-artworks", "작품 목록 · 링크 점검", "/admin/artworks", "11A · E6", "상태·링크 상태로 거르고, 점검이 필요한 작품을 위로 올려요. 행마다 원본 열기, 상태 선택, 점검 완료가 있어요."],
+    ["admin-detail", "작품 상세", "/admin/artworks/[id]", "11A · E1", "원본 글과 파일, 숨김·복구, 허락 근거, 파일 바꾸기, 철회 위험 영역, 신고와 변경 이력이에요. 철회는 카드 번호를 직접 입력해야 버튼이 켜져요."],
+    ["admin-new", "작품 등록", "/admin/artworks/new", "11A", "카드 검색 → 규격 → 원본 URL·가시성 → 파일 업로드로 어드민이 직접 등록해요."],
+    ["admin-artists", "작가 승인", "/admin/artists", "작가 계정", "신청한 작가 목록과 승인 대기 수예요. 승인하거나 업로드를 막을 수 있어요."],
+    ["admin-reports", "신고 처리", "/admin/reports", "11A · E7", "미처리 신고를 먼저 보여 줘요. 작품으로 바로 가거나, 원본 URL로 작품을 찾아 연결하고 처리 완료로 닫아요."],
+  ],
+};
+
+function render(group, list) {
+  const root = document.getElementById(group + "-screens");
+  for (const [id, name, route, ref, desc, isNew] of list) {
+    const el = document.createElement("article");
+    el.className = "screen";
+    el.id = id;
+    el.innerHTML = `
+      <div class="screen-head">
+        <h3>${name}</h3>
+        <span class="route">${route}</span>
+        <span class="ref${isNew ? " new" : ""}">${isNew ? "PR #10 · " : ""}${ref}</span>
+      </div>
+      <p class="desc">${desc}</p>
+      <div class="shots">
+        <figure class="shot desktop">
+          <button type="button" data-src="img/${id}-desktop.webp" aria-label="${name} 데스크톱 캡처 크게 보기">
+            <img src="img/${id}-desktop.webp" alt="${name} 데스크톱 화면" loading="lazy" width="960">
+          </button>
+          <figcaption>데스크톱 1280px</figcaption>
+        </figure>
+        <figure class="shot mobile">
+          <button type="button" data-src="img/${id}-mobile.webp" aria-label="${name} 모바일 캡처 크게 보기">
+            <img src="img/${id}-mobile.webp" alt="${name} 모바일 화면" loading="lazy" width="375">
+          </button>
+          <figcaption>모바일 375px</figcaption>
+        </figure>
+      </div>`;
+    root.appendChild(el);
+  }
+}
+for (const [group, list] of Object.entries(SCREENS)) render(group, list);
+
+const dialog = document.getElementById("viewer");
+const big = document.getElementById("viewer-img");
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest("button[data-src]");
+  if (!btn) return;
+  big.src = btn.dataset.src;
+  big.alt = btn.querySelector("img").alt;
+  dialog.showModal();
+});
+document.getElementById("close").addEventListener("click", () => dialog.close());
+dialog.addEventListener("click", (e) => { if (e.target === dialog || e.target.classList.contains("viewer")) dialog.close(); });
+
+if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
+</script>
