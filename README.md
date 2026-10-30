@@ -20,6 +20,8 @@ npm run demo:seed                # (선택) 로컬 DB에 데모 도안 5개
 
 ## 테스트
 
+테스트는 시드 데이터를 전제로 한다. 실제 카드 데이터를 넣은 DB라면 먼저 `npm run db:reset`을 한다.
+
 ```bash
 npm test          # Vitest: 단위 + 로컬 Supabase 통합 테스트
 npm run test:e2e  # Playwright: 데스크톱·모바일, axe 접근성 검사
