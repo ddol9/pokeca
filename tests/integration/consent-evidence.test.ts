@@ -22,6 +22,7 @@ import {
 
 // 라우트 핸들러를 요청 밖에서 부르므로 쿠키 저장소를 빈 것으로 바꾼다(= 로그인하지 않은 요청).
 vi.mock("next/headers", () => ({ cookies: async () => ({ getAll: () => [], set: () => {} }) }));
+vi.mock("next/server", async (original) => ({ ...(await original<typeof import("next/server")>()), connection: async () => {} }));
 
 afterAll(() => sql.end());
 beforeEach(resetArtworks);
