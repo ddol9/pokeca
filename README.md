@@ -2,6 +2,8 @@
 
 카드 번호로 포켓몬 카드 확장 아트 도안을 찾는 비영리 아카이브. 설계는 `docs/designs/extended-art-archive-mvp.md`, 디자인 토큰은 `DESIGN.md`.
 
+**처음이면 [`docs/HANDOFF.md`](docs/HANDOFF.md)부터 읽는다.** 지금 상태, PR 머지 순서, 다음 할 일, 배포 체크리스트, 함정이 있다. 화면 전체는 `docs/designs/screen-map/index.html`을 브라우저로 연다.
+
 ## 로컬 실행
 
 필요: Node 22, Docker.
@@ -42,6 +44,7 @@ npm run cards:import -- cards.csv --apply  # 실제로 넣는다
 - 같은 카드(`set_code` + `collector_number`)는 갱신되고, 그 카드의 별칭은 파일 내용으로 바뀐다. 여러 번 돌려도 결과가 같다.
 - 오류가 하나라도 있으면 줄 번호와 함께 보여 주고 아무것도 넣지 않는다.
 - 운영 DB에 넣을 때는 `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SECRET_KEY`를 운영 값으로 주고 실행한다(출력 첫 줄의 "대상"을 확인).
+- 실제 한글판 카드 목록은 `data/cards-kr.csv`(1,430장, 일본판 별칭 포함)에 있다. 공식 한국 사이트에서 다시 받는 방법(`npm run cards:fetch`, `npm run cards:aliases-ja`)은 [`data/README.md`](data/README.md).
 
 ## 어드민 계정 만들기
 

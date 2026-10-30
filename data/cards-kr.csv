@@ -1,0 +1,1431 @@
+set_code,collector_number,name_ko,rarity,illustrator,set_name_ko,alias_set_code_ja,alias_number_ja,name_ja
+SV1S,079/078,올리뇨,AR,Oswaldo KATO,스칼렛 ex,SV1S,079/078,オリーニョ
+SV1S,080/078,카디나르마,AR,nagimiso,스칼렛 ex,SV1S,080/078,グレンアルマ
+SV1S,081/078,바다그다,AR,You Iribi,스칼렛 ex,SV1S,081/078,ウミディグダ
+SV1S,082/078,어써러셔,AR,AKIRA EGAWA,스칼렛 ex,SV1S,082/078,ヘイラッシャ
+SV1S,083/078,랄토스,AR,Jiro Sasumo,스칼렛 ex,SV1S,083/078,ラルトス
+SV1S,084/078,킬리아,AR,Jiro Sasumo,스칼렛 ex,SV1S,084/078,キルリア
+SV1S,085/078,쫀도기,AR,Tika Matsuno,스칼렛 ex,SV1S,085/078,パピモッチ
+SV1S,086/078,리오르,AR,Nelnal,스칼렛 ex,SV1S,086/078,リオル
+SV1S,087/078,깜눈크,AR,Nurikabe,스칼렛 ex,SV1S,087/078,メグロコ
+SV1S,088/078,절벼게,AR,Mina Nakai,스칼렛 ex,SV1S,088/078,ガケガニ
+SV1S,089/078,대도각참,AR,Shin Nagasawa,스칼렛 ex,SV1S,089/078,ドドゲザン
+SV1S,090/078,찌르꼬,AR,saino misaki,스칼렛 ex,SV1S,090/078,ムックル
+SV1S,091/078,갸라도스 ex,SR,5ban Graphics,스칼렛 ex,SV1S,091/078,ギャラドスex
+SV1S,092/078,가디안 ex,SR,N-DESIGN Inc.,스칼렛 ex,SV1S,092/078,サーナイトex
+SV1S,093/078,위대한엄니 ex,SR,5ban Graphics,스칼렛 ex,SV1S,093/078,イダイナキバex
+SV1S,094/078,코라이돈 ex,SR,aky CG Works,스칼렛 ex,SV1S,094/078,コライドンex
+SV1S,095/078,독개굴 ex,SR,PLANETA Hiiragi,스칼렛 ex,SV1S,095/078,ドクロッグex
+SV1S,096/078,퍼퓨돈 ex,SR,aky CG Works,스칼렛 ex,SV1S,096/078,パフュートンex
+SV1S,097/078,모란,SR,yuu,스칼렛 ex,SV1S,100/078,ボタン
+SV1S,098/078,박사의 연구(올림박사),SR,kirisAki,스칼렛 ex,SV1S,099/078,博士の研究（オーリム博士）
+SV1S,099/078,스타단의 조무래기,SR,nagimiso,스칼렛 ex,SV1S,098/078,スター団のしたっぱ
+SV1S,100/078,지니어,SR,GIDORA,스칼렛 ex,SV1S,097/078,ジニア
+SV1S,101/078,가디안 ex,SAR,Jiro Sasumo,스칼렛 ex,SV1S,101/078,サーナイトex
+SV1S,102/078,위대한엄니 ex,SAR,Pani Kobayashi,스칼렛 ex,SV1S,102/078,イダイナキバex
+SV1S,103/078,코라이돈 ex,SAR,Ryota Murayama,스칼렛 ex,SV1S,103/078,コライドンex
+SV1S,104/078,모란,SAR,OKACHEKE,스칼렛 ex,SV1S,105/078,ボタン
+SV1S,105/078,지니어,SAR,Oswaldo KATO,스칼렛 ex,SV1S,104/078,ジニア
+SV1S,106/078,코라이돈 ex,UR,aky CG Works,스칼렛 ex,SV1S,106/078,コライドンex
+SV1S,107/078,네스트볼,UR,Toyste Beach,스칼렛 ex,SV1S,107/078,ネストボール
+SV1S,108/078,기본 격투 에너지,UR,,스칼렛 ex,SV1S,108/078,基本闘エネルギー
+SV1V,079/078,타랜툴라,AR,Miki Tanaka,바이올렛 ex,SV1V,079/078,タマンチュラ
+SV1V,080/078,들눈해,AR,Akira Komayama,바이올렛 ex,SV1V,080/078,ノノクラゲ
+SV1V,081/078,스코빌런,AR,KIYOTAKA OSHIYAMA,바이올렛 ex,SV1V,081/078,スコヴィラン
+SV1V,082/078,야돈,AR,Toshinao Aoki,바이올렛 ex,SV1V,082/078,ヤドン
+SV1V,083/078,완철포,AR,Shinya Komatsu,바이올렛 ex,SV1V,083/078,ウデッポウ
+SV1V,084/078,파치리스,AR,zig,바이올렛 ex,SV1V,084/078,パチリス
+SV1V,085/078,빠르모트,AR,Kouki Saitou,바이올렛 ex,SV1V,085/078,パーモット
+SV1V,086/078,슬리프,AR,Tomokazu Komiya,바이올렛 ex,SV1V,086/078,スリープ
+SV1V,087/078,망망이,AR,sowsow,바이올렛 ex,SV1V,087/078,ボチ
+SV1V,088/078,마피티프,AR,OKACHEKE,바이올렛 ex,SV1V,088/078,マフィティフ
+SV1V,089/078,떨구새,AR,Shibuzoh.,바이올렛 ex,SV1V,089/078,オトシドリ
+SV1V,090/078,탐리스,AR,Teeziro,바이올렛 ex,SV1V,090/078,ホシガリス
+SV1V,091/078,트래피더 ex,SR,takuyoa,바이올렛 ex,SV1V,091/078,ワナイダーex
+SV1V,092/078,윈디 ex,SR,5ban Graphics,바이올렛 ex,SV1V,092/078,ウインディex
+SV1V,093/078,자포코일 ex,SR,PLANETA Tsuji,바이올렛 ex,SV1V,093/078,ジバコイルex
+SV1V,094/078,미라이돈 ex,SR,5ban Graphics,바이올렛 ex,SV1V,094/078,ミライドンex
+SV1V,095/078,다크펫 ex,SR,PLANETA Mochizuki,바이올렛 ex,SV1V,095/078,ジュペッタex
+SV1V,096/078,무쇠바퀴 ex,SR,5ban Graphics,바이올렛 ex,SV1V,096/078,テツノワダチex
+SV1V,097/078,단풍,SR,Akira Komayama,바이올렛 ex,SV1V,097/078,カエデ
+SV1V,098/078,미모사,SR,Sanosuke Sakuma,바이올렛 ex,SV1V,100/078,ミモザ
+SV1V,099/078,박사의 연구(투로박사),SR,kirisAki,바이올렛 ex,SV1V,098/078,博士の研究（フトゥー博士）
+SV1V,100/078,페퍼,SR,GIDORA,바이올렛 ex,SV1V,099/078,ペパー
+SV1V,101/078,트래피더 ex,SAR,Miki Tanaka,바이올렛 ex,SV1V,101/078,ワナイダーex
+SV1V,102/078,미라이돈 ex,SAR,kantaro,바이올렛 ex,SV1V,102/078,ミライドンex
+SV1V,103/078,무쇠바퀴 ex,SAR,KEIICHIRO ITO,바이올렛 ex,SV1V,103/078,テツノワダチex
+SV1V,104/078,미모사,SAR,Akira Komayama,바이올렛 ex,SV1V,105/078,ミモザ
+SV1V,105/078,페퍼,SAR,kantaro,바이올렛 ex,SV1V,104/078,ペパー
+SV1V,106/078,미라이돈 ex,UR,5ban Graphics,바이올렛 ex,SV1V,106/078,ミライドンex
+SV1V,107/078,이상한사탕,UR,Studio Bora Inc.,바이올렛 ex,SV1V,107/078,ふしぎなアメ
+SV1V,108/078,기본 번개 에너지,UR,,바이올렛 ex,SV1V,108/078,基本雷エネルギー
+SV1a,074/073,트로피우스,AR,Jerky,트리플렛비트,SV1a,074/073,トロピウス
+SV1a,075/073,나오하,AR,Kouki Saitou,트리플렛비트,SV1a,075/073,ニャオハ
+SV1a,076/073,나로테,AR,Kouki Saitou,트리플렛비트,SV1a,076/073,ニャローテ
+SV1a,077/073,화염레오,AR,Po-Suzuki,트리플렛비트,SV1a,077/073,カエンジシ
+SV1a,078/073,뜨아거,AR,kantaro,트리플렛비트,SV1a,078/073,ホゲータ
+SV1a,079/073,악뜨거,AR,kantaro,트리플렛비트,SV1a,079/073,アチゲータ
+SV1a,080/073,잉어킹,AR,Shinji Kanda,트리플렛비트,SV1a,080/073,コイキング
+SV1a,081/073,꾸왁스,AR,Souichirou Gunjima,트리플렛비트,SV1a,081/073,クワッス
+SV1a,082/073,아꾸왁,AR,Souichirou Gunjima,트리플렛비트,SV1a,082/073,ウェルカモ
+SV1a,083/073,무우마직,AR,aoki,트리플렛비트,SV1a,083/073,ムウマージ
+SV1a,084/073,팔데아 켄타로스,AR,Anesaki Dynamic,트리플렛비트,SV1a,084/073,パルデア ケンタロス
+SV1a,085/073,팔데아 우파,AR,Miki Tanaka,트리플렛비트,SV1a,085/073,パルデア ウパー
+SV1a,086/073,마스카나 ex,SR,5ban Graphics,트리플렛비트,SV1a,086/073,マスカーニャex
+SV1a,087/073,라우드본 ex,SR,5ban Graphics,트리플렛비트,SV1a,087/073,ラウドボーンex
+SV1a,088/073,웨이니발 ex,SR,5ban Graphics,트리플렛비트,SV1a,088/073,ウェーニバルex
+SV1a,089/073,데덴네 ex,SR,aky CG Works,트리플렛비트,SV1a,089/073,デデンネex
+SV1a,090/073,루가루암 ex,SR,Ayaka Yoshida,트리플렛비트,SV1a,090/073,ルガルガンex
+SV1a,091/073,팔데아 토오 ex,SR,PLANETA Mochizuki,트리플렛비트,SV1a,091/073,パルデア ドオーex
+SV1a,092/073,보스의 지령(게치스),SR,Hideki Ishikawa,트리플렛비트,SV1a,095/073,ボスの指令（ゲーチス）
+SV1a,093/073,비상,SR,Ryuta Fuse,트리플렛비트,SV1a,094/073,ハヤト
+SV1a,094/073,운향,SR,yuu,트리플렛비트,SV1a,092/073,キハダ
+SV1a,095/073,클라벨,SR,Sanosuke Sakuma,트리플렛비트,SV1a,093/073,クラベル
+SV1a,096/073,마스카나 ex,SAR,Kouki Saitou,트리플렛비트,SV1a,096/073,マスカーニャex
+SV1a,097/073,라우드본 ex,SAR,kantaro,트리플렛비트,SV1a,097/073,ラウドボーンex
+SV1a,098/073,웨이니발 ex,SAR,Souichirou Gunjima,트리플렛비트,SV1a,098/073,ウェーニバルex
+SV1a,099/073,보스의 지령(게치스),SAR,hncl,트리플렛비트,SV1a,100/073,ボスの指令（ゲーチス）
+SV1a,100/073,운향,SAR,GIDORA,트리플렛비트,SV1a,099/073,キハダ
+SV1a,101/073,마스카나 ex,UR,5ban Graphics,트리플렛비트,SV1a,101/073,マスカーニャex
+SV1a,102/073,라우드본 ex,UR,5ban Graphics,트리플렛비트,SV1a,102/073,ラウドボーンex
+SV1a,103/073,웨이니발 ex,UR,5ban Graphics,트리플렛비트,SV1a,103/073,ウェーニバルex
+SV2P,072/071,그푸리,AR,sowsow,스노해저드,SV2P,072/071,アノクサ
+SV2P,073/071,마릴,AR,Atsuya Uki,스노해저드,SV2P,073/071,マリル
+SV2P,074/071,빙큐보,AR,Nelnal,스노해저드,SV2P,074/071,コオリッポ
+SV2P,075/071,드니차,AR,Tomokazu Komiya,스노해저드,SV2P,075/071,セビエ
+SV2P,076/071,드니꽁,AR,Tomokazu Komiya,스노해저드,SV2P,076/071,セゴール
+SV2P,077/071,드닐레이브,AR,Tomokazu Komiya,스노해저드,SV2P,077/071,セグレイブ
+SV2P,078/071,고디보미,AR,SIE NANAHARA,스노해저드,SV2P,078/071,ゴチミル
+SV2P,079/071,베라카스,AR,nagimiso,스노해저드,SV2P,079/071,ベラカス
+SV2P,080/071,꼬지모,AR,Narumi Sato,스노해저드,SV2P,080/071,ウソッキー
+SV2P,081/071,꿈트렁,AR,OKACHEKE,스노해저드,SV2P,081/071,ミミズズ
+SV2P,082/071,파라꼬,AR,GOSSAN,스노해저드,SV2P,082/071,ココガラ
+SV2P,083/071,노고고치,AR,Saya Tsuruta,스노해저드,SV2P,083/071,ノココッチ
+SV2P,084/071,총지엔 ex,SR,5ban Graphics,스노해저드,SV2P,084/071,チオンジェンex
+SV2P,085/071,파오젠 ex,SR,aky CG Works,스노해저드,SV2P,085/071,パオジアンex
+SV2P,086/071,야도킹 ex,SR,5ban Graphics,스노해저드,SV2P,086/071,ヤドキングex
+SV2P,087/071,저승갓숭 ex,SR,PLANETA Hiiragi,스노해저드,SV2P,087/071,コノヨザルex
+SV2P,088/071,대왕끼리동 ex,SR,Eske Yoshinob,스노해저드,SV2P,088/071,ダイオウドウex
+SV2P,089/071,시비꼬 ex,SR,PLANETA Mochizuki,스노해저드,SV2P,089/071,イキリンコex
+SV2P,090/071,그루샤,SR,GIDORA,스노해저드,SV2P,090/071,グルーシャ
+SV2P,091/071,피나,SR,kantaro,스노해저드,SV2P,091/071,ピーニャ
+SV2P,092/071,총지엔 ex,SAR,takuyoa,스노해저드,SV2P,092/071,チオンジェンex
+SV2P,093/071,파오젠 ex,SAR,kodama,스노해저드,SV2P,093/071,パオジアンex
+SV2P,094/071,시비꼬 ex,SAR,Amelicart,스노해저드,SV2P,094/071,イキリンコex
+SV2P,095/071,그루샤,SAR,DOM,스노해저드,SV2P,095/071,グルーシャ
+SV2P,096/071,피나,SAR,KIYOTAKA OSHIYAMA,스노해저드,SV2P,096/071,ピーニャ
+SV2P,097/071,파오젠 ex,UR,aky CG Works,스노해저드,SV2P,097/071,パオジアンex
+SV2P,098/071,대단한낚싯대,UR,Toyste Beach,스노해저드,SV2P,098/071,すごいつりざお
+SV2P,099/071,기본 물 에너지,UR,,스노해저드,SV2P,099/071,基本水エネルギー
+SV2D,072/071,헤라크로스,AR,Kurata So,클레이버스트,SV2D,072/071,ヘラクロス
+SV2D,073/071,불화살빈,AR,Atsushi Furusawa,클레이버스트,SV2D,073/071,ヒノヤコマ
+SV2D,074/071,라이츄,AR,Toshinao Aoki,클레이버스트,SV2D,074/071,ライチュウ
+SV2D,075/071,모래꿍,AR,Teeziro,클레이버스트,SV2D,075/071,スナバァ
+SV2D,076/071,어리짱,AR,Tika Matsuno,클레이버스트,SV2D,076/071,カヌチャン
+SV2D,077/071,벼리짱,AR,Tika Matsuno,클레이버스트,SV2D,077/071,ナカヌチャン
+SV2D,078/071,베베솔트,AR,Ryota Murayama,클레이버스트,SV2D,078/071,コジオ
+SV2D,079/071,마기라스,AR,Nurikabe,클레이버스트,SV2D,079/071,バンギラス
+SV2D,080/071,태깅구르,AR,Oswaldo KATO,클레이버스트,SV2D,080/071,タギングル
+SV2D,081/071,파밀리쥐,AR,Mizue,클레이버스트,SV2D,081/071,イッカネズミ
+SV2D,082/071,꼬이밍고,AR,Shibuzoh.,클레이버스트,SV2D,082/071,カラミンゴ
+SV2D,083/071,키키링,AR,Mina Nakai,클레이버스트,SV2D,083/071,リキキリン
+SV2D,084/071,쏘콘 ex,SR,5ban Graphics,클레이버스트,SV2D,084/071,フォレトスex
+SV2D,085/071,위유이 ex,SR,PLANETA Yamashita,클레이버스트,SV2D,085/071,イーユイex
+SV2D,086/071,찌리배리 ex,SR,PLANETA Yamashita,클레이버스트,SV2D,086/071,ハラバリーex
+SV2D,087/071,두드리짱 ex,SR,takuyoa,클레이버스트,SV2D,087/071,デカヌチャンex
+SV2D,088/071,딩루 ex,SR,5ban Graphics,클레이버스트,SV2D,088/071,ディンルーex
+SV2D,089/071,음번 ex,SR,Eske Yoshinob,클레이버스트,SV2D,089/071,オンバーンex
+SV2D,090/071,모야모,SR,Sanosuke Sakuma,클레이버스트,,,
+SV2D,091/071,사구아로,SR,nagimiso,클레이버스트,SV2D,090/071,サワロ
+SV2D,092/071,위유이 ex,SAR,AKIRA EGAWA,클레이버스트,SV2D,092/071,イーユイex
+SV2D,093/071,두드리짱 ex,SAR,Tika Matsuno,클레이버스트,SV2D,093/071,デカヌチャンex
+SV2D,094/071,딩루 ex,SAR,KEIICHIRO ITO,클레이버스트,SV2D,094/071,ディンルーex
+SV2D,095/071,모야모,SAR,kirisAki,클레이버스트,SV2D,096/071,ナンジャモ
+SV2D,096/071,사구아로,SAR,Sanosuke Sakuma,클레이버스트,,,
+SV2D,097/071,딩루 ex,UR,5ban Graphics,클레이버스트,SV2D,097/071,ディンルーex
+SV2D,098/071,수퍼 에너지 회수,UR,Studio Bora Inc.,클레이버스트,SV2D,098/071,スーパーエネルギー回収
+SV2D,099/071,기본 풀 에너지,UR,,클레이버스트,SV2D,099/071,基本草エネルギー
+SV2a,166/165,이상해씨,AR,Yoriyuki Ikegami,포켓몬 카드 151,SV2a,166/165,フシギダネ
+SV2a,167/165,이상해풀,AR,Yoriyuki Ikegami,포켓몬 카드 151,SV2a,167/165,フシギソウ
+SV2a,168/165,파이리,AR,miki kudo,포켓몬 카드 151,SV2a,168/165,ヒトカゲ
+SV2a,169/165,리자드,AR,miki kudo,포켓몬 카드 151,SV2a,169/165,リザード
+SV2a,170/165,꼬부기,AR,Mitsuhiro Arita,포켓몬 카드 151,SV2a,170/165,ゼニガメ
+SV2a,171/165,어니부기,AR,Mitsuhiro Arita,포켓몬 카드 151,SV2a,171/165,カメール
+SV2a,172/165,캐터피,AR,Teeziro,포켓몬 카드 151,SV2a,172/165,キャタピー
+SV2a,173/165,피카츄,AR,Hiroyuki Yamamoto,포켓몬 카드 151,SV2a,173/165,ピカチュウ
+SV2a,174/165,니드킹,AR,Misaki Hashimoto,포켓몬 카드 151,SV2a,174/165,ニドキング
+SV2a,175/165,고라파덕,AR,Whisker,포켓몬 카드 151,SV2a,175/165,コダック
+SV2a,176/165,슈륙챙이,AR,Gemi,포켓몬 카드 151,SV2a,176/165,ニョロゾ
+SV2a,177/165,근육몬,AR,Tetsu Kayama,포켓몬 카드 151,SV2a,177/165,ゴーリキー
+SV2a,178/165,덩쿠리,AR,Oswaldo KATO,포켓몬 카드 151,SV2a,178/165,モンジャラ
+SV2a,179/165,마임맨,AR,OKACHEKE,포켓몬 카드 151,SV2a,179/165,バリヤード
+SV2a,180/165,암나이트,AR,Yano Keiji,포켓몬 카드 151,SV2a,180/165,オムナイト
+SV2a,181/165,잠만보,AR,GOSSAN,포켓몬 카드 151,SV2a,181/165,カビゴン
+SV2a,182/165,신뇽,AR,rika,포켓몬 카드 151,SV2a,182/165,ハクリュー
+SV2a,183/165,뮤츠,AR,Bun Toujo,포켓몬 카드 151,SV2a,183/165,ミュウツー
+SV2a,184/165,이상해꽃 ex,SR,PLANETA Yamashita,포켓몬 카드 151,SV2a,184/165,フシギバナex
+SV2a,185/165,리자몽 ex,SR,PLANETA Mochizuki,포켓몬 카드 151,SV2a,185/165,リザードンex
+SV2a,186/165,거북왕 ex,SR,PLANETA Yamashita,포켓몬 카드 151,SV2a,186/165,カメックスex
+SV2a,187/165,아보크 ex,SR,Eske Yoshinob,포켓몬 카드 151,SV2a,187/165,アーボックex
+SV2a,188/165,나인테일 ex,SR,PLANETA Tsuji,포켓몬 카드 151,SV2a,188/165,キュウコンex
+SV2a,189/165,푸크린 ex,SR,Saki Hayashiro,포켓몬 카드 151,SV2a,189/165,プクリンex
+SV2a,190/165,후딘 ex,SR,PLANETA Tsuji,포켓몬 카드 151,SV2a,190/165,フーディンex
+SV2a,191/165,딱구리 ex,SR,PLANETA Igarashi,포켓몬 카드 151,SV2a,191/165,ゴローニャex
+SV2a,192/165,캥카 ex,SR,N-DESIGN Inc.,포켓몬 카드 151,SV2a,192/165,ガルーラex
+SV2a,193/165,루주라 ex,SR,Ayaka Yoshida,포켓몬 카드 151,SV2a,193/165,ルージュラex
+SV2a,194/165,썬더 ex,SR,takuyoa,포켓몬 카드 151,SV2a,194/165,サンダーex
+SV2a,195/165,뮤 ex,SR,aky CG Works,포켓몬 카드 151,SV2a,195/165,ミュウex
+SV2a,196/165,남나리의 도움,SR,Fumie Kittaka,포켓몬 카드 151,SV2a,198/165,ナナミの手助け
+SV2a,197/165,민화의 초대,SR,saino misaki,포켓몬 카드 151,SV2a,196/165,エリカの招待
+SV2a,198/165,비주기의 카리스마,SR,hncl,포켓몬 카드 151,SV2a,197/165,サカキのカリスマ
+SV2a,199/165,이수재의 전송,SR,GIDORA,포켓몬 카드 151,SV2a,199/165,マサキの転送
+SV2a,200/165,이상해꽃 ex,SAR,Yoriyuki Ikegami,포켓몬 카드 151,SV2a,200/165,フシギバナex
+SV2a,201/165,리자몽 ex,SAR,miki kudo,포켓몬 카드 151,SV2a,201/165,リザードンex
+SV2a,202/165,거북왕 ex,SAR,Mitsuhiro Arita,포켓몬 카드 151,SV2a,202/165,カメックスex
+SV2a,203/165,후딘 ex,SAR,Shinya Komatsu,포켓몬 카드 151,SV2a,203/165,フーディンex
+SV2a,204/165,썬더 ex,SAR,Shiburingaru,포켓몬 카드 151,SV2a,204/165,サンダーex
+SV2a,205/165,뮤 ex,SAR,Natsumi Yoshida,포켓몬 카드 151,SV2a,205/165,ミュウex
+SV2a,206/165,민화의 초대,SAR,Cona Nitanda,포켓몬 카드 151,SV2a,206/165,エリカの招待
+SV2a,207/165,비주기의 카리스마,SAR,Hideki Ishikawa,포켓몬 카드 151,SV2a,207/165,サカキのカリスマ
+SV2a,208/165,뮤 ex,UR,aky CG Works,포켓몬 카드 151,SV2a,208/165,ミュウex
+SV2a,209/165,포켓몬 교체,UR,Studio Bora Inc.,포켓몬 카드 151,SV2a,209/165,ポケモンいれかえ
+SV2a,210/165,기본 초 에너지,UR,,포켓몬 카드 151,SV2a,210/165,基本超エネルギー
+SV3,109/108,냄새꼬,AR,Masako Tomii,흑염의 지배자,SV3,109/108,クサイハナ
+SV3,110/108,나인테일,AR,SIE NANAHARA,흑염의 지배자,SV3,110/108,キュウコン
+SV3,111/108,돌핀맨,AR,Akira Komayama,흑염의 지배자,SV3,111/108,イルカマン
+SV3,112/108,찌리배리,AR,KEIICHIRO ITO,흑염의 지배자,SV3,112/108,ハラバリー
+SV3,113/108,삐,AR,HYOGONOSUKE,흑염의 지배자,SV3,113/108,ピィ
+SV3,114/108,애버라스,AR,Miki Tanaka,흑염의 지배자,SV3,114/108,ヨーギラス
+SV3,115/108,델빌,AR,KYUPIYAMA,흑염의 지배자,SV3,115/108,デルビル
+SV3,116/108,핫삼,AR,Oku,흑염의 지배자,SV3,116/108,ハッサム
+SV3,117/108,부르롱,AR,Souichirou Gunjima,흑염의 지배자,SV3,117/108,ブロロン
+SV3,118/108,구구,AR,Jerky,흑염의 지배자,SV3,118/108,ポッポ
+SV3,119/108,피죤,AR,Jerky,흑염의 지배자,SV3,119/108,ピジョン
+SV3,120/108,맛보돈,AR,Narumi Sato,흑염의 지배자,SV3,120/108,グルトン
+SV3,121/108,빙큐보 ex,SR,5ban Graphics,흑염의 지배자,SV3,121/108,コオリッポex
+SV3,122/108,마기라스 ex,SR,5ban Graphics,흑염의 지배자,SV3,122/108,バンギラスex
+SV3,123/108,비퀸 ex,SR,5ban Graphics,흑염의 지배자,SV3,123/108,ビークインex
+SV3,124/108,킬라플로르 ex,SR,5ban Graphics,흑염의 지배자,SV3,124/108,キラフロルex
+SV3,125/108,리자몽 ex,SR,5ban Graphics,흑염의 지배자,SV3,125/108,リザードンex
+SV3,126/108,앱솔 ex,SR,PLANETA Mochizuki,흑염의 지배자,SV3,126/108,アブソルex
+SV3,127/108,부르르룸 ex,SR,takuyoa,흑염의 지배자,SV3,127/108,ブロロロームex
+SV3,128/108,피죤투 ex,SR,takuyoa,흑염의 지배자,SV3,128/108,ピジョットex
+SV3,129/108,라임,SR,nagimiso,흑염의 지배자,SV3,132/108,ライム
+SV3,130/108,뽀삐,SR,yuu,흑염의 지배자,SV3,131/108,ポピー
+SV3,131/108,오르티가,SR,Naoki Saito,흑염의 지배자,SV3,130/108,オルティガ
+SV3,132/108,테사,SR,kirisAki,흑염의 지배자,SV3,129/108,オモダカ
+SV3,133/108,빙큐보 ex,SAR,Toshinao Aoki,흑염의 지배자,SV3,133/108,コオリッポex
+SV3,134/108,리자몽 ex,SAR,AKIRA EGAWA,흑염의 지배자,SV3,134/108,リザードンex
+SV3,135/108,부르르룸 ex,SAR,Souichirou Gunjima,흑염의 지배자,SV3,135/108,ブロロロームex
+SV3,136/108,피죤투 ex,SAR,Jerky,흑염의 지배자,SV3,136/108,ピジョットex
+SV3,137/108,뽀삐,SAR,Ryota Murayama,흑염의 지배자,SV3,138/108,ポピー
+SV3,138/108,테사,SAR,DOM,흑염의 지배자,SV3,137/108,オモダカ
+SV3,139/108,리자몽 ex,UR,5ban Graphics,흑염의 지배자,SV3,139/108,リザードンex
+SV3,140/108,보울마을,UR,Oswaldo KATO,흑염의 지배자,SV3,140/108,ボウルタウン
+SV3,141/108,기본 불꽃 에너지,UR,,흑염의 지배자,SV3,141/108,基本炎エネルギー
+SV3a,063/062,눈꼬마,AR,Narumi Sato,레이징서프,SV3a,063/062,ユキワラシ
+SV3a,064/062,타만타,AR,rika,레이징서프,SV3a,064/062,タマンタ
+SV3a,065/062,플러시,AR,OKACHEKE,레이징서프,SV3a,065/062,プラスル
+SV3a,066/062,마이농,AR,OKACHEKE,레이징서프,SV3a,066/062,マイナン
+SV3a,067/062,파쪼옥,AR,Atsushi Furusawa,레이징서프,SV3a,067/062,バチュル
+SV3a,068/062,모으령,AR,Akira Komayama,레이징서프,SV3a,068/062,コレクレー
+SV3a,069/062,그란돈,AR,Nurikabe,레이징서프,SV3a,069/062,グラードン
+SV3a,070/062,메테노,AR,0313,레이징서프,SV3a,070/062,メテノ
+SV3a,071/062,이벨타르,AR,Masako Tomii,레이징서프,SV3a,071/062,イベルタル
+SV3a,072/062,너트령,AR,Kurata So,레이징서프,SV3a,072/062,ナットレイ
+SV3a,073/062,킬가르도,AR,Takumi Wada,레이징서프,SV3a,073/062,ギルガルド
+SV3a,074/062,모토마,AR,Mina Nakai,레이징서프,SV3a,074/062,モトトカゲ
+SV3a,075/062,눈여아 ex,SR,5ban Graphics,레이징서프,SV3a,075/062,ユキメノコex
+SV3a,076/062,한카리아스 ex,SR,5ban Graphics,레이징서프,SV3a,076/062,ガブリアスex
+SV3a,077/062,카푸꼬꼬꼭 ex,SR,PLANETA Igarashi,레이징서프,SV3a,077/062,カプ・コケコex
+SV3a,078/062,후파 ex,SR,5ban Graphics,레이징서프,SV3a,078/062,フーパex
+SV3a,079/062,타부자고 ex,SR,takuyoa,레이징서프,SV3a,079/062,サーフゴーex
+SV3a,080/062,떨구새 ex,SR,PLANETA Mochizuki,레이징서프,SV3a,080/062,オトシドリex
+SV3a,081/062,망초,SR,En Morikura,레이징서프,SV3a,082/062,シキミ
+SV3a,082/062,청목,SR,Akira Komayama,레이징서프,SV3a,081/062,アオキ
+SV3a,083/062,칠리,SR,GIDORA,레이징서프,SV3a,083/062,チリ
+SV3a,084/062,파라솔 아가씨,SR,Cona Nitanda,레이징서프,SV3a,084/062,パラソルおねえさん
+SV3a,085/062,한카리아스 ex,SAR,Oswaldo KATO,레이징서프,SV3a,085/062,ガブリアスex
+SV3a,086/062,카푸꼬꼬꼭 ex,SAR,Jerky,레이징서프,SV3a,086/062,カプ・コケコex
+SV3a,087/062,타부자고 ex,SAR,Akira Komayama,레이징서프,SV3a,087/062,サーフゴーex
+SV3a,088/062,칠리,SAR,kantaro,레이징서프,SV3a,088/062,チリ
+SV3a,089/062,파라솔 아가씨,SAR,En Morikura,레이징서프,SV3a,089/062,パラソルおねえさん
+SV3a,090/062,한카리아스 ex,UR,5ban Graphics,레이징서프,SV3a,090/062,ガブリアスex
+SV3a,091/062,비치코트,UR,Oswaldo KATO,레이징서프,SV3a,091/062,ビーチコート
+SV3a,092/062,리버설 에너지,UR,,레이징서프,SV3a,092/062,リバーサルエネルギー
+SV4K,067/066,암팰리스,AR,OKUBO,고대의 포효,SV4K,067/066,イワパレス
+SV4K,068/066,마그비,AR,Mina Nakai,고대의 포효,SV4K,068/066,ブビィ
+SV4K,069/066,꼬시레,AR,Oku,고대의 포효,SV4K,069/066,コソクムシ
+SV4K,070/066,가비루사,AR,Shibuzoh.,고대의 포효,SV4K,070/066,ミガルーサ
+SV4K,071/066,우렁찬꼬리,AR,GIDORA,고대의 포효,SV4K,071/066,サケブシッポ
+SV4K,072/066,비조도,AR,Taira Akitsu,고대의 포효,SV4K,072/066,コジョンド
+SV4K,073/066,콜로솔트,AR,kodama,고대의 포효,SV4K,073/066,キョジオーン
+SV4K,074/066,땅을기는날개,AR,Takeshi Nakamura,고대의 포효,SV4K,074/066,チヲハウハネ
+SV4K,075/066,더스트나,AR,Shinya Komatsu,고대의 포효,SV4K,075/066,ダストダス
+SV4K,076/066,모르페코,AR,Yuu Nishida,고대의 포효,SV4K,076/066,モルペコ
+SV4K,077/066,사나운버섯,AR,Tomokazu Komiya,고대의 포효,SV4K,077/066,アラブルタケ
+SV4K,078/066,노공룡,AR,NC Empire,고대의 포효,SV4K,078/066,ドゴーム
+SV4K,079/066,카디나르마 ex,SR,takuyoa,고대의 포효,SV4K,079/066,グレンアルマex
+SV4K,080/066,달코퀸 ex,SR,5ban Graphics,고대의 포효,SV4K,080/066,アマージョex
+SV4K,081/066,갑주무사 ex,SR,N-DESIGN Inc.,고대의 포효,SV4K,081/066,グソクムシャex
+SV4K,082/066,데스니칸 ex,SR,Eske Yoshinob,고대의 포효,SV4K,082/066,デスカーンex
+SV4K,083/066,모래털가죽 ex,SR,PLANETA Mochizuki,고대의 포효,SV4K,083/066,スナノケガワex
+SV4K,084/066,고동치는달 ex,SR,takuyoa,고대의 포효,SV4K,084/066,トドロクツキex
+SV4K,085/066,멜로코,SR,kirisAki,고대의 포효,SV4K,087/066,メロコ
+SV4K,086/066,올림박사의 기백,SR,Megumi Mizutani,고대의 포효,SV4K,085/066,オーリム博士の気迫
+SV4K,087/066,종길,SR,Hideki Ishikawa,고대의 포효,SV4K,086/066,センリ
+SV4K,088/066,갑주무사 ex,SAR,Oku,고대의 포효,SV4K,088/066,グソクムシャex
+SV4K,089/066,모래털가죽 ex,SAR,Toshinao Aoki,고대의 포효,SV4K,089/066,スナノケガワex
+SV4K,090/066,고동치는달 ex,SAR,Ryota Murayama,고대의 포효,SV4K,090/066,トドロクツキex
+SV4K,091/066,멜로코,SAR,rika,고대의 포효,SV4K,092/066,メロコ
+SV4K,092/066,올림박사의 기백,SAR,Ryota Murayama,고대의 포효,SV4K,091/066,オーリム博士の気迫
+SV4K,093/066,고동치는달 ex,UR,takuyoa,고대의 포효,SV4K,093/066,トドロクツキex
+SV4K,094/066,럭셔리망토,UR,Toyste Beach,고대의 포효,SV4K,094/066,ゴージャスマント
+SV4K,095/066,기본 악 에너지,UR,,고대의 포효,SV4K,095/066,基本悪エネルギー
+SV4M,067/066,레돔벌레,AR,Tetsu Kayama,미래의 일섬,SV4M,067/066,レドームシ
+SV4M,068/066,육파리,AR,KEIICHIRO ITO,미래의 일섬,SV4M,068/066,リククラゲ
+SV4M,069/066,무쇠독나방,AR,Takeshi Nakamura,미래의 일섬,SV4M,069/066,テツノドクガ
+SV4M,070/066,바닐리치,AR,Taiga Kayama,미래의 일섬,SV4M,070/066,バニリッチ
+SV4M,071/066,무쇠보따리,AR,Teeziro,미래의 일섬,SV4M,071/066,テツノツツミ
+SV4M,072/066,줄뮤마,AR,matazo,미래의 일섬,SV4M,072/066,シママ
+SV4M,073/066,클레스퍼트라,AR,AKIRA EGAWA,미래의 일섬,SV4M,073/066,クエスパトラ
+SV4M,074/066,강철톤,AR,nisimono,미래의 일섬,SV4M,074/066,ハガネール
+SV4M,075/066,에이팜,AR,Yuka Morii,미래의 일섬,SV4M,075/066,エイパム
+SV4M,076/066,파비코,AR,Jiro Sasumo,미래의 일섬,SV4M,076/066,チルット
+SV4M,077/066,폴리곤Z,AR,GOSSAN,미래의 일섬,SV4M,077/066,ポリゴンZ
+SV4M,078/066,무쇠머리,AR,GIDORA,미래의 일섬,SV4M,078/066,テツノコウベ
+SV4M,079/066,무쇠손 ex,SR,PLANETA Mochizuki,미래의 일섬,SV4M,079/066,テツノカイナex
+SV4M,080/066,무쇠무인 ex,SR,aky CG Works,미래의 일섬,SV4M,080/066,テツノブジンex
+SV4M,081/066,스트린더 ex,SR,5ban Graphics,미래의 일섬,SV4M,081/066,ストリンダーex
+SV4M,082/066,킬가르도 ex,SR,Satoshi Shirai,미래의 일섬,SV4M,082/066,ギルガルドex
+SV4M,083/066,파비코리 ex,SR,Saki Hayashiro,미래의 일섬,SV4M,083/066,チルタリスex
+SV4M,084/066,파밀리쥐 ex,SR,5ban Graphics,미래의 일섬,SV4M,084/066,イッカネズミex
+SV4M,085/066,강석,SR,Ryuta Fuse,미래의 일섬,SV4M,085/066,ヒョウタ
+SV4M,086/066,리파,SR,Naoki Saito,미래의 일섬,SV4M,087/066,リップ
+SV4M,087/066,투로박사의 시나리오,SR,hncl,미래의 일섬,SV4M,086/066,フトゥー博士のシナリオ
+SV4M,088/066,무쇠손 ex,SAR,Toshinao Aoki,미래의 일섬,SV4M,088/066,テツノカイナex
+SV4M,089/066,무쇠무인 ex,SAR,kantaro,미래의 일섬,SV4M,089/066,テツノブジンex
+SV4M,090/066,파비코리 ex,SAR,Jiro Sasumo,미래의 일섬,SV4M,090/066,チルタリスex
+SV4M,091/066,리파,SAR,AKIRA EGAWA,미래의 일섬,SV4M,092/066,リップ
+SV4M,092/066,투로박사의 시나리오,SAR,Atsushi Furusawa,미래의 일섬,SV4M,091/066,フトゥー博士のシナリオ
+SV4M,093/066,무쇠무인 ex,UR,aky CG Works,미래의 일섬,SV4M,093/066,テツノブジンex
+SV4M,094/066,카운터 캐처,UR,Toyste Beach,미래의 일섬,SV4M,094/066,カウンターキャッチャー
+SV4M,095/066,기본 강철 에너지,UR,,미래의 일섬,SV4M,095/066,基本鋼エネルギー
+SVG,050/049,이상해씨,,Orca,이상해꽃·리자몽·거북왕,,,
+SVG,051/049,파이리,,MINAMINAMI Take,이상해꽃·리자몽·거북왕,,,
+SVG,052/049,꼬부기,,Saboteri,이상해꽃·리자몽·거북왕,,,
+SV4a,191/190,뚜벅쵸,S,otumami,샤이니트레저 ex,SV4a,191/190,ナゾノクサ
+SV4a,192/190,냄새꼬,S,OKACHEKE,샤이니트레저 ex,SV4a,192/190,クサイハナ
+SV4a,193/190,라플레시아,S,0313,샤이니트레저 ex,SV4a,193/190,ラフレシア
+SV4a,194/190,스라크,S,Hitoshi Ariga,샤이니트레저 ex,SV4a,194/190,ストライク
+SV4a,195/190,통통코,S,Saya Tsuruta,샤이니트레저 ex,SV4a,195/190,ハネッコ
+SV4a,196/190,두코,S,Mizue,샤이니트레저 ex,SV4a,196/190,ポポッコ
+SV4a,197/190,솜솜코,S,Lee HyunJung,샤이니트레저 ex,SV4a,197/190,ワタッコ
+SV4a,198/190,피콘,S,Scav,샤이니트레저 ex,SV4a,198/190,クヌギダマ
+SV4a,199/190,눈쓰개,S,Saya Tsuruta,샤이니트레저 ex,SV4a,199/190,ユキカブリ
+SV4a,200/190,눈설왕,S,Hitoshi Ariga,샤이니트레저 ex,SV4a,200/190,ユキノオー
+SV4a,201/190,나오하,S,kurumitsu,샤이니트레저 ex,SV4a,201/190,ニャオハ
+SV4a,202/190,나로테,S,GIDORA,샤이니트레저 ex,SV4a,202/190,ニャローテ
+SV4a,203/190,미니브,S,otumami,샤이니트레저 ex,SV4a,203/190,ミニーブ
+SV4a,204/190,올리뇨,S,saino misaki,샤이니트레저 ex,SV4a,204/190,オリーニョ
+SV4a,205/190,올리르바,S,Hideki Ishikawa,샤이니트레저 ex,SV4a,205/190,オリーヴァ
+SV4a,206/190,들눈해,S,Ryuta Fuse,샤이니트레저 ex,SV4a,206/190,ノノクラゲ
+SV4a,207/190,캡싸이,S,OKACHEKE,샤이니트레저 ex,SV4a,207/190,カプサイジ
+SV4a,208/190,스코빌런,S,Kouki Saitou,샤이니트레저 ex,SV4a,208/190,スコヴィラン
+SV4a,209/190,구르데,S,Misa Tsutsui,샤이니트레저 ex,SV4a,209/190,シガロコ
+SV4a,210/190,파이리,S,sowsow,샤이니트레저 ex,SV4a,210/190,ヒトカゲ
+SV4a,211/190,리자드,S,Kouki Saitou,샤이니트레저 ex,SV4a,211/190,リザード
+SV4a,212/190,팔데아 켄타로스,S,Hitoshi Ariga,샤이니트레저 ex,SV4a,212/190,パルデア ケンタロス
+SV4a,213/190,앤테이,S,Ryuta Fuse,샤이니트레저 ex,SV4a,213/190,エンテイ
+SV4a,214/190,춤추새,S,Akira Komayama,샤이니트레저 ex,SV4a,214/190,オドリドリ
+SV4a,215/190,뜨아거,S,OKACHEKE,샤이니트레저 ex,SV4a,215/190,ホゲータ
+SV4a,216/190,악뜨거,S,Hideki Ishikawa,샤이니트레저 ex,SV4a,216/190,アチゲータ
+SV4a,217/190,카르본,S,Masakazu Fukuda,샤이니트레저 ex,SV4a,217/190,カルボウ
+SV4a,218/190,카디나르마,S,Atsushi Furusawa,샤이니트레저 ex,SV4a,218/190,グレンアルマ
+SV4a,219/190,야돈,S,Taira Akitsu,샤이니트레저 ex,SV4a,219/190,ヤドン
+SV4a,220/190,야도란,S,Souichirou Gunjima,샤이니트레저 ex,SV4a,220/190,ヤドラン
+SV4a,221/190,별가사리,S,Nisota Niso,샤이니트레저 ex,SV4a,221/190,ヒトデマン
+SV4a,222/190,아쿠스타,S,Shigenori Negishi,샤이니트레저 ex,SV4a,222/190,スターミー
+SV4a,223/190,팔데아 켄타로스,S,GOSSAN,샤이니트레저 ex,SV4a,223/190,パルデア ケンタロス
+SV4a,224/190,꾸왁스,S,GIDORA,샤이니트레저 ex,SV4a,224/190,クワッス
+SV4a,225/190,아꾸왁,S,Atsushi Furusawa,샤이니트레저 ex,SV4a,225/190,ウェルカモ
+SV4a,226/190,바다그다,S,Misa Tsutsui,샤이니트레저 ex,SV4a,226/190,ウミディグダ
+SV4a,227/190,바닥트리오,S,Kyoko Umemoto,샤이니트레저 ex,SV4a,227/190,ウミトリオ
+SV4a,228/190,맨돌핀,S,kurumitsu,샤이니트레저 ex,SV4a,228/190,ナミイルカ
+SV4a,229/190,돌핀맨,S,Shin Nagasawa,샤이니트레저 ex,SV4a,229/190,イルカマン
+SV4a,230/190,가비루사,S,Nelnal,샤이니트레저 ex,SV4a,230/190,ミガルーサ
+SV4a,231/190,어써러셔,S,Shigenori Negishi,샤이니트레저 ex,SV4a,231/190,ヘイラッシャ
+SV4a,232/190,싸리용,S,Kagemaru Himeno,샤이니트레저 ex,SV4a,232/190,シャリタツ
+SV4a,233/190,드니차,S,Taira Akitsu,샤이니트레저 ex,SV4a,233/190,セビエ
+SV4a,234/190,드니꽁,S,Kouki Saitou,샤이니트레저 ex,SV4a,234/190,セゴール
+SV4a,235/190,드닐레이브,S,GOSSAN,샤이니트레저 ex,SV4a,235/190,セグレイブ
+SV4a,236/190,피카츄,S,Yuu Nishida,샤이니트레저 ex,SV4a,236/190,ピカチュウ
+SV4a,237/190,라이츄,S,Sanosuke Sakuma,샤이니트레저 ex,SV4a,237/190,ライチュウ
+SV4a,238/190,찌리리공,S,Misa Tsutsui,샤이니트레저 ex,SV4a,238/190,ビリリダマ
+SV4a,239/190,붐볼,S,Masakazu Fukuda,샤이니트레저 ex,SV4a,239/190,マルマイン
+SV4a,240/190,꼬링크,S,Saya Tsuruta,샤이니트레저 ex,SV4a,240/190,コリンク
+SV4a,241/190,럭시오,S,Souichirou Gunjima,샤이니트레저 ex,SV4a,241/190,ルクシオ
+SV4a,242/190,렌트라,S,kantaro,샤이니트레저 ex,SV4a,242/190,レントラー
+SV4a,243/190,파치리스,S,saino misaki,샤이니트레저 ex,SV4a,243/190,パチリス
+SV4a,244/190,볼트로스,S,Shin Nagasawa,샤이니트레저 ex,SV4a,244/190,ボルトロス
+SV4a,245/190,일레즌,S,Lee HyunJung,샤이니트레저 ex,SV4a,245/190,エレズン
+SV4a,246/190,스트린더,S,GIDORA,샤이니트레저 ex,SV4a,246/190,ストリンダー
+SV4a,247/190,빠모,S,kurumitsu,샤이니트레저 ex,SV4a,247/190,パモ
+SV4a,248/190,빠모트,S,Mizue,샤이니트레저 ex,SV4a,248/190,パモット
+SV4a,249/190,빠르모트,S,Atsushi Furusawa,샤이니트레저 ex,SV4a,249/190,パーモット
+SV4a,250/190,찌리비,S,Scav,샤이니트레저 ex,SV4a,250/190,カイデン
+SV4a,251/190,찌리비크,S,Nisota Niso,샤이니트레저 ex,SV4a,251/190,タイカイデン
+SV4a,252/190,푸크린,S,Kagemaru Himeno,샤이니트레저 ex,SV4a,252/190,プクリン
+SV4a,253/190,캐이시,S,Kouki Saitou,샤이니트레저 ex,SV4a,253/190,ケーシィ
+SV4a,254/190,윤겔라,S,Souichirou Gunjima,샤이니트레저 ex,SV4a,254/190,ユンゲラー
+SV4a,255/190,삐,S,Mizue,샤이니트레저 ex,SV4a,255/190,ピィ
+SV4a,256/190,네이티,S,sowsow,샤이니트레저 ex,SV4a,256/190,ネイティ
+SV4a,257/190,네이티오,S,nagimiso,샤이니트레저 ex,SV4a,257/190,ネイティオ
+SV4a,258/190,랄토스,S,yuu,샤이니트레저 ex,SV4a,258/190,ラルトス
+SV4a,259/190,킬리아,S,Ryuta Fuse,샤이니트레저 ex,SV4a,259/190,キルリア
+SV4a,260/190,흔들풍손,S,Kyoko Umemoto,샤이니트레저 ex,SV4a,260/190,フワンテ
+SV4a,261/190,둥실라이드,S,otumami,샤이니트레저 ex,SV4a,261/190,フワライド
+SV4a,262/190,흉내내,S,Saya Tsuruta,샤이니트레저 ex,SV4a,262/190,マネネ
+SV4a,263/190,화강돌,S,MAHOU,샤이니트레저 ex,SV4a,263/190,ミカルゲ
+SV4a,264/190,클레피,S,yuu,샤이니트레저 ex,SV4a,264/190,クレッフィ
+SV4a,265/190,따라큐,S,Nelnal,샤이니트레저 ex,SV4a,265/190,ミミッキュ
+SV4a,266/190,쫀도기,S,sowsow,샤이니트레저 ex,SV4a,266/190,パピモッチ
+SV4a,267/190,바우첼,S,Sanosuke Sakuma,샤이니트레저 ex,SV4a,267/190,バウッツェル
+SV4a,268/190,파라블레이즈,S,Kouki Saitou,샤이니트레저 ex,SV4a,268/190,ソウブレイズ
+SV4a,269/190,베라카스,S,Nelnal,샤이니트레저 ex,SV4a,269/190,ベラカス
+SV4a,270/190,하느라기,S,Kyoko Umemoto,샤이니트레저 ex,SV4a,270/190,ヒラヒナ
+SV4a,271/190,어리짱,S,yuu,샤이니트레저 ex,SV4a,271/190,カヌチャン
+SV4a,272/190,벼리짱,S,Yuu Nishida,샤이니트레저 ex,SV4a,272/190,ナカヌチャン
+SV4a,273/190,두드리짱,S,Kagemaru Himeno,샤이니트레저 ex,SV4a,273/190,デカヌチャン
+SV4a,274/190,망망이,S,Nisota Niso,샤이니트레저 ex,SV4a,274/190,ボチ
+SV4a,275/190,묘두기,S,Shin Nagasawa,샤이니트레저 ex,SV4a,275/190,ハカドッグ
+SV4a,276/190,망키,S,nagimiso,샤이니트레저 ex,SV4a,276/190,マンキー
+SV4a,277/190,성원숭,S,Scav,샤이니트레저 ex,SV4a,277/190,オコリザル
+SV4a,278/190,저승갓숭,S,Hitoshi Ariga,샤이니트레저 ex,SV4a,278/190,コノヨザル
+SV4a,279/190,팔데아 켄타로스,S,nagimiso,샤이니트레저 ex,SV4a,279/190,パルデア ケンタロス
+SV4a,280/190,리오르,S,sowsow,샤이니트레저 ex,SV4a,280/190,リオル
+SV4a,281/190,루카리오,S,Shin Nagasawa,샤이니트레저 ex,SV4a,281/190,ルカリオ
+SV4a,282/190,루차불,S,Souichirou Gunjima,샤이니트레저 ex,SV4a,282/190,ルチャブル
+SV4a,283/190,베베솔트,S,Yuu Nishida,샤이니트레저 ex,SV4a,283/190,コジオ
+SV4a,284/190,스태솔트,S,otumami,샤이니트레저 ex,SV4a,284/190,ジオヅム
+SV4a,285/190,콜로솔트,S,Kouki Saitou,샤이니트레저 ex,SV4a,285/190,キョジオーン
+SV4a,286/190,초롱순,S,nagimiso,샤이니트레저 ex,SV4a,286/190,キラーメ
+SV4a,287/190,팔데아 우파,S,Nisota Niso,샤이니트레저 ex,SV4a,287/190,パルデア ウパー
+SV4a,288/190,니로우,S,Hitoshi Ariga,샤이니트레저 ex,SV4a,288/190,ヤミカラス
+SV4a,289/190,포푸니,S,Kagemaru Himeno,샤이니트레저 ex,SV4a,289/190,ニューラ
+SV4a,290/190,포푸니라,S,Shin Nagasawa,샤이니트레저 ex,SV4a,290/190,マニューラ
+SV4a,291/190,깜까미,S,nagimiso,샤이니트레저 ex,SV4a,291/190,ヤミラミ
+SV4a,292/190,자망칼,S,Misa Tsutsui,샤이니트레저 ex,SV4a,292/190,コマタナ
+SV4a,293/190,절각참,S,Souichirou Gunjima,샤이니트레저 ex,SV4a,293/190,キリキザン
+SV4a,294/190,대도각참,S,Shin Nagasawa,샤이니트레저 ex,SV4a,294/190,ドドゲザン
+SV4a,295/190,오라티프,S,Kagemaru Himeno,샤이니트레저 ex,SV4a,295/190,オラチフ
+SV4a,296/190,마피티프,S,Hitoshi Ariga,샤이니트레저 ex,SV4a,296/190,マフィティフ
+SV4a,297/190,땃쭈르,S,otumami,샤이니트레저 ex,SV4a,297/190,シルシュルー
+SV4a,298/190,태깅구르,S,Scav,샤이니트레저 ex,SV4a,298/190,タギングル
+SV4a,299/190,핫삼,S,GOSSAN,샤이니트레저 ex,SV4a,299/190,ハッサム
+SV4a,300/190,부르롱,S,Masakazu Fukuda,샤이니트레저 ex,SV4a,300/190,ブロロン
+SV4a,301/190,부르르룸,S,GOSSAN,샤이니트레저 ex,SV4a,301/190,ブロロローム
+SV4a,302/190,음뱃,S,Nelnal,샤이니트레저 ex,SV4a,302/190,オンバット
+SV4a,303/190,모토마,S,Souichirou Gunjima,샤이니트레저 ex,SV4a,303/190,モトトカゲ
+SV4a,304/190,구구,S,sowsow,샤이니트레저 ex,SV4a,304/190,ポッポ
+SV4a,305/190,피죤,S,Kouki Saitou,샤이니트레저 ex,SV4a,305/190,ピジョン
+SV4a,306/190,푸린,S,Misa Tsutsui,샤이니트레저 ex,SV4a,306/190,プリン
+SV4a,307/190,두두,S,Saya Tsuruta,샤이니트레저 ex,SV4a,307/190,ドードー
+SV4a,308/190,두트리오,S,nagimiso,샤이니트레저 ex,SV4a,308/190,ドードリオ
+SV4a,309/190,메타몽,S,0313,샤이니트레저 ex,SV4a,309/190,メタモン
+SV4a,310/190,잠만보,S,Shigenori Negishi,샤이니트레저 ex,SV4a,310/190,カビゴン
+SV4a,311/190,갈모매,S,kurumitsu,샤이니트레저 ex,SV4a,311/190,キャモメ
+SV4a,312/190,패리퍼,S,Masakazu Fukuda,샤이니트레저 ex,SV4a,312/190,ペリッパー
+SV4a,313/190,탐리스,S,Sanosuke Sakuma,샤이니트레저 ex,SV4a,313/190,ホシガリス
+SV4a,314/190,요씽리스,S,Kagemaru Himeno,샤이니트레저 ex,SV4a,314/190,ヨクバリス
+SV4a,315/190,맛보돈,S,Akira Komayama,샤이니트레저 ex,SV4a,315/190,グルトン
+SV4a,316/190,퍼퓨돈,S,Misa Tsutsui,샤이니트레저 ex,SV4a,316/190,パフュートン
+SV4a,317/190,두리쥐,S,Lee HyunJung,샤이니트레저 ex,SV4a,317/190,ワッカネズミ
+SV4a,318/190,파밀리쥐,S,Shigenori Negishi,샤이니트레저 ex,SV4a,318/190,イッカネズミ
+SV4a,319/190,꼬이밍고,S,Akira Komayama,샤이니트레저 ex,SV4a,319/190,カラミンゴ
+SV4a,320/190,쏘콘 ex,SSR,5ban Graphics,샤이니트레저 ex,SV4a,320/190,フォレトスex
+SV4a,321/190,마스카나 ex,SSR,5ban Graphics,샤이니트레저 ex,SV4a,321/190,マスカーニャex
+SV4a,322/190,육파리 ex,SSR,5ban Graphics,샤이니트레저 ex,SV4a,322/190,リククラゲex
+SV4a,323/190,클레스퍼트라 ex,SSR,takuyoa,샤이니트레저 ex,SV4a,323/190,クエスパトラex
+SV4a,324/190,라우드본 ex,SSR,5ban Graphics,샤이니트레저 ex,SV4a,324/190,ラウドボーンex
+SV4a,325/190,웨이니발 ex,SSR,5ban Graphics,샤이니트레저 ex,SV4a,325/190,ウェーニバルex
+SV4a,326/190,후딘 ex,SSR,PLANETA Tsuji,샤이니트레저 ex,SV4a,326/190,フーディンex
+SV4a,327/190,뮤 ex,SSR,aky CG Works,샤이니트레저 ex,SV4a,327/190,ミュウex
+SV4a,328/190,가디안 ex,SSR,N-DESIGN Inc.,샤이니트레저 ex,SV4a,328/190,サーナイトex
+SV4a,329/190,킬라플로르 ex,SSR,5ban Graphics,샤이니트레저 ex,SV4a,329/190,キラフロルex
+SV4a,330/190,위대한엄니 ex,SSR,5ban Graphics,샤이니트레저 ex,SV4a,330/190,イダイナキバex
+SV4a,331/190,리자몽 ex,SSR,5ban Graphics,샤이니트레저 ex,SV4a,331/190,リザードンex
+SV4a,332/190,팔데아 토오 ex,SSR,PLANETA Mochizuki,샤이니트레저 ex,SV4a,332/190,パルデア ドオーex
+SV4a,333/190,무쇠바퀴 ex,SSR,5ban Graphics,샤이니트레저 ex,SV4a,333/190,テツノワダチex
+SV4a,334/190,음번 ex,SSR,Eske Yoshinob,샤이니트레저 ex,SV4a,334/190,オンバーンex
+SV4a,335/190,피죤투 ex,SSR,takuyoa,샤이니트레저 ex,SV4a,335/190,ピジョットex
+SV4a,336/190,푸크린 ex,SSR,Saki Hayashiro,샤이니트레저 ex,SV4a,336/190,プクリンex
+SV4a,337/190,시비꼬 ex,SSR,PLANETA Mochizuki,샤이니트레저 ex,SV4a,337/190,イキリンコex
+SV4a,338/190,바닥트리오,AR,Tetsu Kayama,샤이니트레저 ex,SV4a,338/190,ウミトリオ
+SV4a,339/190,돌핀맨,AR,akagi,샤이니트레저 ex,SV4a,339/190,イルカマン
+SV4a,340/190,빠모,AR,REND,샤이니트레저 ex,SV4a,340/190,パモ
+SV4a,341/190,따라큐,AR,Mitsuhiro Arita,샤이니트레저 ex,SV4a,341/190,ミミッキュ
+SV4a,342/190,네르케,SR,GOSSAN,샤이니트레저 ex,SV4a,344/190,ネルケ
+SV4a,343/190,네모,SR,Sanosuke Sakuma,샤이니트레저 ex,SV4a,343/190,ネモ
+SV4a,344/190,저지맨,SR,Hideki Ishikawa,샤이니트레저 ex,SV4a,342/190,ジャッジマン
+SV4a,345/190,팔데아의 학생,SR,Cona Nitanda,샤이니트레저 ex,SV4a,345/190,パルデアの学生
+SV4a,346/190,팔데아의 학생,SR,Naoki Saito,샤이니트레저 ex,SV4a,346/190,パルデアの学生
+SV4a,347/190,뮤 ex,SAR,USGMEN,샤이니트레저 ex,SV4a,347/190,ミュウex
+SV4a,348/190,가디안 ex,SAR,Kuroimori,샤이니트레저 ex,SV4a,348/190,サーナイトex
+SV4a,349/190,리자몽 ex,SAR,AKIRA EGAWA,샤이니트레저 ex,SV4a,349/190,リザードンex
+SV4a,350/190,네르케,SAR,Taiga Kayama,샤이니트레저 ex,SV4a,352/190,ネルケ
+SV4a,351/190,네모,SAR,aspara,샤이니트레저 ex,SV4a,351/190,ネモ
+SV4a,352/190,모란,SAR,aspara,샤이니트레저 ex,SV4a,353/190,ペパー
+SV4a,353/190,모야모,SAR,hanabushi,샤이니트레저 ex,SV4a,350/190,ナンジャモ
+SV4a,354/190,페퍼,SAR,aspara,샤이니트레저 ex,SV4a,354/190,ボタン
+SV4a,355/190,총지엔 ex,UR,5ban Graphics,샤이니트레저 ex,SV4a,355/190,チオンジェンex
+SV4a,356/190,위유이 ex,UR,PLANETA Yamashita,샤이니트레저 ex,SV4a,356/190,イーユイex
+SV4a,357/190,파오젠 ex,UR,aky CG Works,샤이니트레저 ex,SV4a,357/190,パオジアンex
+SV4a,358/190,미라이돈 ex,UR,5ban Graphics,샤이니트레저 ex,SV4a,358/190,ミライドンex
+SV4a,359/190,딩루 ex,UR,5ban Graphics,샤이니트레저 ex,SV4a,359/190,ディンルーex
+SV4a,360/190,코라이돈 ex,UR,aky CG Works,샤이니트레저 ex,SV4a,360/190,コライドンex
+SV5K,072/071,수풀부기,AR,Oswaldo KATO,와일드포스,SV5K,072/071,ハヤシガメ
+SV5K,073/071,누니머기,AR,N-DESIGN Inc.,와일드포스,SV5K,073/071,ユキハミ
+SV5K,074/071,동미러,AR,sowsow,와일드포스,SV5K,074/071,ドーミラー
+SV5K,075/071,란쿨루스,AR,Atsushi Furusawa,와일드포스,SV5K,075/071,ランクルス
+SV5K,076/071,날개치는머리,AR,Takumi Wada,와일드포스,SV5K,076/071,ハバタクカミ
+SV5K,077/071,시라칸,AR,Mitsuhiro Arita,와일드포스,SV5K,077/071,ジーランス
+SV5K,078/071,만마드,AR,MINAMINAMI Take,와일드포스,SV5K,078/071,バンバドロ
+SV5K,079/071,아보크,AR,OKUBO,와일드포스,SV5K,079/071,アーボック
+SV5K,080/071,고오스,AR,Mousho,와일드포스,SV5K,080/071,ゴース
+SV5K,081/071,페라페,AR,Scav,와일드포스,SV5K,081/071,ペラップ
+SV5K,082/071,치라미,AR,Shibuzoh.,와일드포스,SV5K,082/071,チラーミィ
+SV5K,083/071,치라치노,AR,Shibuzoh.,와일드포스,SV5K,083/071,チラチーノ
+SV5K,084/071,토대부기 ex,SR,PLANETA Tsuji,와일드포스,SV5K,084/071,ドダイトスex
+SV5K,085/071,꿰뚫는화염 ex,SR,5ban Graphics,와일드포스,SV5K,085/071,ウガツホムラex
+SV5K,086/071,굽이치는물결 ex,SR,takuyoa,와일드포스,SV5K,086/071,ウネルミナモex
+SV5K,087/071,바닥트리오 ex,SR,5ban Graphics,와일드포스,SV5K,087/071,ウミトリオex
+SV5K,088/071,팬텀 ex,SR,Satoshi Shirai,와일드포스,SV5K,088/071,ゲンガーex
+SV5K,089/071,날뛰는우레 ex,SR,aky CG Works,와일드포스,SV5K,089/071,タケルライコex
+SV5K,090/071,비파,SR,GOSSAN,와일드포스,SV5K,091/071,ビワ
+SV5K,091/071,유빈의 확신,SR,GIDORA,와일드포스,SV5K,092/071,マツバの確信
+SV5K,092/071,탐험가의 선도,SR,Hideki Ishikawa,와일드포스,SV5K,090/071,探検家の先導
+SV5K,093/071,꿰뚫는화염 ex,SAR,Teeziro,와일드포스,SV5K,093/071,ウガツホムラex
+SV5K,094/071,굽이치는물결 ex,SAR,Teeziro,와일드포스,SV5K,094/071,ウネルミナモex
+SV5K,095/071,날뛰는우레 ex,SAR,Teeziro,와일드포스,SV5K,095/071,タケルライコex
+SV5K,096/071,비파,SAR,DOM,와일드포스,SV5K,096/071,ビワ
+SV5K,097/071,유빈의 확신,SAR,Megumi Mizutani,와일드포스,SV5K,097/071,マツバの確信
+SV5K,098/071,꿰뚫는화염 ex,UR,5ban Graphics,와일드포스,SV5K,098/071,ウガツホムラex
+SV5K,099/071,굽이치는물결 ex,UR,takuyoa,와일드포스,SV5K,099/071,ウネルミナモex
+SV5K,100/071,날뛰는우레 ex,UR,aky CG Works,와일드포스,SV5K,100/071,タケルライコex
+SV5M,072/071,다탱구,AR,SIE NANAHARA,사이버저지,SV5M,072/071,ダーテング
+SV5M,073/071,사철록,AR,Susumu Maeya,사이버저지,SV5M,073/071,シキジカ
+SV5M,074/071,바라철록,AR,Susumu Maeya,사이버저지,SV5M,074/071,メブキジカ
+SV5M,075/071,냐오불,AR,Makura Tami,사이버저지,SV5M,075/071,ニャビー
+SV5M,076/071,전지충이,AR,Mina Nakai,사이버저지,SV5M,076/071,デンヂムシ
+SV5M,077/071,무쇠가시,AR,Tonji Matsuno,사이버저지,SV5M,077/071,テツノイバラ
+SV5M,078/071,에블리,AR,REND,사이버저지,SV5M,078/071,アブリー
+SV5M,079/071,몰드류,AR,Saboteri,사이버저지,SV5M,079/071,ドリュウズ
+SV5M,080/071,메타그로스,AR,Katsunori Sato,사이버저지,SV5M,080/071,メタグロス
+SV5M,081/071,멜탄,AR,Masa,사이버저지,SV5M,081/071,メルタン
+SV5M,082/071,내루미,AR,Orca,사이버저지,SV5M,082/071,ベロリンガ
+SV5M,083/071,할비롱,AR,Mékayu,사이버저지,SV5M,083/071,ジジーロン
+SV5M,084/071,무쇠잎새 ex,SR,5ban Graphics,사이버저지,SV5M,084/071,テツノイサハex
+SV5M,085/071,어흥염 ex,SR,N-DESIGN Inc.,사이버저지,SV5M,085/071,ガオガエンex
+SV5M,086/071,무쇠감투 ex,SR,5ban Graphics,사이버저지,SV5M,086/071,テツノカシラex
+SV5M,087/071,무쇠암석 ex,SR,5ban Graphics,사이버저지,SV5M,087/071,テツノイワオex
+SV5M,088/071,키키링 ex,SR,5ban Graphics,사이버저지,SV5M,088/071,リキキリンex
+SV5M,089/071,핫삼 ex,SR,Eske Yoshinob,사이버저지,SV5M,089/071,ハッサムex
+SV5M,090/071,벨의 진심,SR,En Morikura,사이버저지,SV5M,092/071,ベルのまごころ
+SV5M,091/071,세이지,SR,Ryuta Fuse,사이버저지,SV5M,091/071,セイジ
+SV5M,092/071,암호마니아의 해독,SR,Taira Akitsu,사이버저지,SV5M,090/071,暗号マニアの解読
+SV5M,093/071,무쇠잎새 ex,SAR,nagimiso,사이버저지,SV5M,093/071,テツノイサハex
+SV5M,094/071,무쇠감투 ex,SAR,nagimiso,사이버저지,SV5M,094/071,テツノカシラex
+SV5M,095/071,무쇠암석 ex,SAR,nagimiso,사이버저지,SV5M,095/071,テツノイワオex
+SV5M,096/071,벨의 진심,SAR,Cona Nitanda,사이버저지,SV5M,097/071,ベルのまごころ
+SV5M,097/071,세이지,SAR,Tetsu Kayama,사이버저지,SV5M,096/071,セイジ
+SV5M,098/071,무쇠잎새 ex,UR,5ban Graphics,사이버저지,SV5M,098/071,テツノイサハex
+SV5M,099/071,무쇠감투 ex,UR,5ban Graphics,사이버저지,SV5M,099/071,テツノカシラex
+SV5M,100/071,무쇠암석 ex,UR,5ban Graphics,사이버저지,SV5M,100/071,テツノイワオex
+SVI,061/066,박사의 연구,,kirisAki,배틀 아카데미,,,
+SVI,062/066,반바지 꼬마,,Hitoshi Ariga,배틀 아카데미,,,
+SVI,063/066,보스의 지령,,NC Empire,배틀 아카데미,,,
+SVI,064/066,저지맨,,Hideki Ishikawa,배틀 아카데미,,,
+SVI,066/066,피크닉걸,,Susumu Maeya,배틀 아카데미,,,
+SVI,WAT,기본 물 에너지,,,배틀 아카데미,,,
+SVI,DAR,기본 악 에너지,,,배틀 아카데미,,,
+SVI,029/066,요가랑,,GOTO minori,배틀 아카데미,,,
+SVI,030/066,요가램,,Fujimoto Gold,배틀 아카데미,,,
+SVI,031/066,리오르,,Souichirou Gunjima,배틀 아카데미,,,
+SVI,032/066,루카리오 ex,,PLANETA Igarashi,배틀 아카데미,,,
+SVI,033/066,코라이돈,,kawayoo,배틀 아카데미,,,
+SVI,039/066,지라치,,Kuroimori,배틀 아카데미,,,
+SVI,040/066,멜탄,,Yuka Morii,배틀 아카데미,,,
+SVI,041/066,멜메탈 ex,,takuyoa,배틀 아카데미,,,
+SVI,042/066,부르롱,,Shiburingaru,배틀 아카데미,,,
+SVI,043/066,부르르룸,,GOSSAN,배틀 아카데미,,,
+SVI,046/066,잠만보,,Po-Suzuki,배틀 아카데미,,,
+SVI,047/066,맛보돈,,REND,배틀 아카데미,,,
+SVI,049/066,몬스터볼,,Studio Bora Inc.,배틀 아카데미,,,
+SVI,051/066,슈퍼볼,,Studio Bora Inc.,배틀 아카데미,,,
+SVI,055/066,포켓몬 교체,,Studio Bora Inc.,배틀 아카데미,,,
+SVI,056/066,포켓몬 캐처,,Studio Bora Inc.,배틀 아카데미,,,
+SVI,057/066,기력의머리띠,,Studio Bora Inc.,배틀 아카데미,,,
+SVI,058/066,네모,,Sanosuke Sakuma,배틀 아카데미,,,
+SVI,060/066,박사의 연구,,kirisAki,배틀 아카데미,,,
+SVI,065/066,쿡,,Hideki Ishikawa,배틀 아카데미,,,
+SVI,FIG,기본 격투 에너지,,,배틀 아카데미,,,
+SVI,MET,기본 강철 에너지,,,배틀 아카데미,,,
+SV5a,067/066,쁘사이저,AR,Yukihiro Tada,크림슨헤이즈,SV5a,067/066,カイロス
+SV5a,068/066,차데스,AR,Saboteri,크림슨헤이즈,SV5a,068/066,チャデス
+SV5a,069/066,코터스,AR,Masa,크림슨헤이즈,SV5a,069/066,コータス
+SV5a,070/066,초염몽,AR,Krgc,크림슨헤이즈,SV5a,070/066,ゴウカザル
+SV5a,071/066,피오네,AR,takashi shiraishi,크림슨헤이즈,SV5a,071/066,フィオネ
+SV5a,072/066,윽우지,AR,Fujimoto Gold,크림슨헤이즈,SV5a,072/066,ウッウ
+SV5a,073/066,일레도리자드,AR,Tonji Matsuno,크림슨헤이즈,SV5a,073/066,エレザード
+SV5a,074/066,러브로스,AR,GOTO minori,크림슨헤이즈,SV5a,074/066,ラブトロス
+SV5a,075/066,히스이 가디,AR,GIDORA,크림슨헤이즈,SV5a,075/066,ヒスイ ガーディ
+SV5a,076/066,대코파스,AR,Kariya,크림슨헤이즈,SV5a,076/066,ダイノーズ
+SV5a,077/066,과사삭벌레,AR,Katsunori Sato,크림슨헤이즈,SV5a,077/066,カジッチュ
+SV5a,078/066,이브이,AR,Narumi Sato,크림슨헤이즈,SV5a,078/066,イーブイ
+SV5a,079/066,그우린차 ex,SR,aky CG Works,크림슨헤이즈,SV5a,079/066,ヤバソチャex
+SV5a,080/066,마그카르고 ex,SR,PLANETA Yamashita,크림슨헤이즈,SV5a,080/066,マグカルゴex
+SV5a,081/066,무쇠가시 ex,SR,PLANETA Mochizuki,크림슨헤이즈,SV5a,081/066,テツノイバラex
+SV5a,082/066,우렁찬꼬리 ex,SR,PLANETA Hiiragi,크림슨헤이즈,SV5a,082/066,サケブシッポex
+SV5a,083/066,개굴닌자 ex,SR,5ban Graphics,크림슨헤이즈,SV5a,083/066,ゲッコウガex
+SV5a,084/066,다투곰 붉은 달 ex,SR,aky CG Works,크림슨헤이즈,SV5a,084/066,ガチグマ アカツキex
+SV5a,085/066,관리인,SR,Akira Komayama,크림슨헤이즈,SV5a,085/066,管理人
+SV5a,086/066,세류,SR,Naoki Saito,크림슨헤이즈,SV5a,087/066,サザレ
+SV5a,087/066,수련의 돌봄,SR,Atsushi Furusawa,크림슨헤이즈,SV5a,088/066,スイレンのお世話
+SV5a,088/066,오엽,SR,hncl,크림슨헤이즈,SV5a,086/066,ゴヨウ
+SV5a,089/066,그우린차 ex,SAR,Saboteri,크림슨헤이즈,SV5a,089/066,ヤバソチャex
+SV5a,090/066,개굴닌자 ex,SAR,akagi,크림슨헤이즈,SV5a,090/066,ゲッコウガex
+SV5a,091/066,다투곰 붉은 달 ex,SAR,MINAMINAMI Take,크림슨헤이즈,SV5a,091/066,ガチグマ アカツキex
+SV5a,092/066,세류,SAR,GIDORA,크림슨헤이즈,SV5a,092/066,サザレ
+SV5a,093/066,수련의 돌봄,SAR,Toshinao Aoki,크림슨헤이즈,SV5a,093/066,スイレンのお世話
+SV5a,094/066,다투곰 붉은 달 ex,UR,aky CG Works,크림슨헤이즈,SV5a,094/066,ガチグマ アカツキex
+SV5a,095/066,긴급 보드,UR,Toyste Beach,크림슨헤이즈,SV5a,095/066,緊急ボード
+SV5a,096/066,루미너스 에너지,UR,,크림슨헤이즈,,,
+SV6,102/101,해루미,AR,Shinya Komatsu,변환의 가면,SV6,102/101,キマワリ
+SV6,103/101,과미르,AR,Akira Komayama,변환의 가면,SV6,103/101,カミッチュ
+SV6,104/101,눈여아,AR,matazo,변환의 가면,SV6,104/101,ユキメノコ
+SV6,105/101,찌리비,AR,Mitsuhiro Arita,변환의 가면,SV6,105/101,カイデン
+SV6,106/101,치렁,AR,REND,변환의 가면,SV6,106/101,チリーン
+SV6,107/101,이야후,AR,Teeziro,변환의 가면,SV6,107/101,マシマシラ
+SV6,108/101,기로치,AR,KEIICHIRO ITO,변환의 가면,SV6,108/101,キチキギス
+SV6,109/101,으랏차,AR,Yuriko Akase,변환의 가면,SV6,109/101,ドッコラー
+SV6,110/101,조타구,AR,AKIRA EGAWA,변환의 가면,SV6,110/101,イイネイヌ
+SV6,111/101,갱도라,AR,Dsuke,변환의 가면,SV6,111/101,コドラ
+SV6,112/101,싸리용,AR,osare,변환의 가면,SV6,112/101,シャリタツ
+SV6,113/101,럭키,AR,Toshinao Aoki,변환의 가면,SV6,113/101,ラッキー
+SV6,114/101,오거폰 벽록의 가면 ex,SR,5ban Graphics,변환의 가면,SV6,114/101,オーガポン みどりのめんex
+SV6,115/101,오거폰 화덕의 가면 ex,SR,5ban Graphics,변환의 가면,SV6,115/101,オーガポン かまどのめんex
+SV6,116/101,돌핀맨 ex,SR,PLANETA Mochizuki,변환의 가면,SV6,116/101,イルカマンex
+SV6,117/101,오거폰 우물의 가면 ex,SR,5ban Graphics,변환의 가면,SV6,117/101,オーガポン いどのめんex
+SV6,118/101,렌트라 ex,SR,PLANETA Yamashita,변환의 가면,SV6,118/101,レントラーex
+SV6,119/101,오거폰 주춧돌의 가면 ex,SR,5ban Graphics,변환의 가면,SV6,119/101,オーガポン いしずえのめんex
+SV6,120/101,드래펄트 ex,SR,5ban Graphics,변환의 가면,SV6,120/101,ドラパルトex
+SV6,121/101,해피너스 ex,SR,PLANETA Tsuji,변환의 가면,SV6,121/101,ハピナスex
+SV6,122/101,시유,SR,kantaro,변환의 가면,SV6,123/101,ゼイユ
+SV6,123/101,카지,SR,GIDORA,변환의 가면,SV6,122/101,スグリ
+SV6,124/101,팔자크,SR,GOSSAN,변환의 가면,SV6,124/101,ハッサク
+SV6,125/101,오거폰 벽록의 가면 ex,SAR,Yano Keiji,변환의 가면,SV6,125/101,オーガポン みどりのめんex
+SV6,126/101,오거폰 화덕의 가면 ex,SAR,Yano Keiji,변환의 가면,SV6,126/101,オーガポン かまどのめんex
+SV6,127/101,오거폰 우물의 가면 ex,SAR,Yano Keiji,변환의 가면,SV6,127/101,オーガポン いどのめんex
+SV6,128/101,오거폰 주춧돌의 가면 ex,SAR,Yano Keiji,변환의 가면,SV6,128/101,オーガポン いしずえのめんex
+SV6,129/101,시유,SAR,En Morikura,변환의 가면,SV6,130/101,ゼイユ
+SV6,130/101,카지,SAR,Teeziro,변환의 가면,SV6,129/101,スグリ
+SV6,131/101,오거폰 벽록의 가면 ex,UR,5ban Graphics,변환의 가면,SV6,131/101,オーガポン みどりのめんex
+SV6,132/101,개조해머,UR,Eske Yoshinob,변환의 가면,SV6,132/101,改造ハンマー
+SV6,133/101,절친 포핀,UR,AYUMI ODASHIMA,변환의 가면,SV6,133/101,なかよしポフィン
+SVJL,FIR,기본 불꽃   에너지,,,테라스탈 리자몽 ex,,,
+SVJP,WAT,기본 물   에너지,,,파오젠 ex,,,
+SV6a,065/064,카푸브루루,AR,IKEDA Saki,나이트원더러,SV6a,065/064,カプ・ブルル
+SV6a,066/064,헬가,AR,Taiga Kasai,나이트원더러,SV6a,066/064,ヘルガー
+SV6a,067/064,쏘드라,AR,Shinya Komatsu,나이트원더러,SV6a,067/064,タッツー
+SV6a,068/064,해골몽,AR,James Turner,나이트원더러,SV6a,068/064,ヨマワル
+SV6a,069/064,미라몽,AR,James Turner,나이트원더러,SV6a,069/064,サマヨール
+SV6a,070/064,야느와르몽,AR,James Turner,나이트원더러,SV6a,070/064,ヨノワール
+SV6a,071/064,크레세리아,AR,satoma,나이트원더러,SV6a,071/064,クレセリア
+SV6a,072/064,조로아,AR,REND,나이트원더러,SV6a,072/064,ゾロア
+SV6a,073/064,끼리동,AR,Mina Nakai,나이트원더러,SV6a,073/064,ゾウドウ
+SV6a,074/064,액슨도,AR,MINAMINAMI Take,나이트원더러,SV6a,074/064,オノンド
+SV6a,075/064,페르시온,AR,Whisker,나이트원더러,SV6a,075/064,ペルシアン
+SV6a,076/064,이븐곰,AR,Takeshi Nakamura,나이트원더러,SV6a,076/064,キテルグマ
+SV6a,077/064,킹드라 ex,SR,PLANETA Igarashi,나이트원더러,SV6a,077/064,キングドラex
+SV6a,078/064,부르르룸 ex,SR,PLANETA Mochizuki,나이트원더러,SV6a,078/064,ブロロロームex
+SV6a,079/064,조타구 ex,SR,5ban Graphics,나이트원더러,SV6a,079/064,イイネイヌex
+SV6a,080/064,이야후 ex,SR,5ban Graphics,나이트원더러,SV6a,080/064,マシマシラex
+SV6a,081/064,기로치 ex,SR,5ban Graphics,나이트원더러,SV6a,081/064,キチキギスex
+SV6a,082/064,복숭악동 ex,SR,aky CG Works,나이트원더러,SV6a,082/064,モモワロウex
+SV6a,083/064,도희의 비기,SR,Taira Akitsu,나이트원더러,SV6a,084/064,アンズの秘技
+SV6a,084/064,아크로마의 집념,SR,hncl,나이트원더러,SV6a,083/064,アクロマの執念
+SV6a,085/064,카시오페아,SR,Atsushi Furusawa,나이트원더러,SV6a,085/064,カシオペア
+SV6a,086/064,크세로시키의 속셈,SR,GOSSAN,나이트원더러,SV6a,086/064,クセロシキのたくらみ
+SV6a,087/064,조타구 ex,SAR,kantaro,나이트원더러,SV6a,087/064,イイネイヌex
+SV6a,088/064,이야후 ex,SAR,kantaro,나이트원더러,SV6a,088/064,マシマシラex
+SV6a,089/064,기로치 ex,SAR,kantaro,나이트원더러,SV6a,089/064,キチキギスex
+SV6a,090/064,복숭악동 ex,SAR,kantaro,나이트원더러,SV6a,090/064,モモワロウex
+SV6a,091/064,카시오페아,SAR,burari,나이트원더러,SV6a,091/064,カシオペア
+SV6a,092/064,복숭악동 ex,UR,aky CG Works,나이트원더러,SV6a,092/064,モモワロウex
+SV6a,093/064,대지의 그릇,UR,AYUMI ODASHIMA,나이트원더러,SV6a,093/064,大地の器
+SV6a,094/064,힘의 모래시계,UR,Studio Bora Inc.,나이트원더러,SV6a,094/064,力の砂時計
+SV7,103/102,레디안,AR,HYOGONOSUKE,스텔라미라클,SV7,103/102,レディアン
+SV7,104/102,릴링,AR,Mori Yuu,스텔라미라클,SV7,104/102,リリーラ
+SV7,105/102,폭거북스,AR,Yukihiro Tada,스텔라미라클,SV7,105/102,バクガメス
+SV7,106/102,래비풋,AR,rika,스텔라미라클,SV7,106/102,ラビフット
+SV7,107/102,모단단게,AR,Mitsuhiro Arita,스텔라미라클,SV7,107/102,ケケンカニ
+SV7,108/102,파쪼옥,AR,MARINA Chikazawa,스텔라미라클,SV7,108/102,バチュル
+SV7,109/102,제라오라,AR,Kazumasa Yasukuni,스텔라미라클,SV7,109/102,ゼラオラ
+SV7,110/102,마빌크,AR,Dsuke,스텔라미라클,SV7,110/102,マホミル
+SV7,111/102,요가랑,AR,Yuriko Akase,스텔라미라클,SV7,111/102,アサナン
+SV7,112/102,꼴깍몬,AR,Jerky,스텔라미라클,SV7,112/102,ゴクリン
+SV7,113/102,브리두라스,AR,Toshinao Aoki,스텔라미라클,SV7,113/102,ブリジュラス
+SV7,114/102,야부엉,AR,Tetsu Kayama,스텔라미라클,SV7,114/102,ヨルノズク
+SV7,115/102,과미드라 ex,SR,5ban Graphics,스텔라미라클,SV7,115/102,カミツオロチex
+SV7,116/102,에이스번 ex,SR,5ban Graphics,스텔라미라클,SV7,116/102,エースバーンex
+SV7,117/102,라프라스 ex,SR,5ban Graphics,스텔라미라클,SV7,117/102,ラプラスex
+SV7,118/102,전툴라 ex,SR,5ban Graphics,스텔라미라클,SV7,118/102,デンチュラex
+SV7,119/102,바우첼 ex,SR,PLANETA Mochizuki,스텔라미라클,SV7,119/102,バウッツェルex
+SV7,120/102,요가램 ex,SR,PLANETA Yamashita,스텔라미라클,SV7,120/102,チャーレムex
+SV7,121/102,꿈트렁 ex,SR,PLANETA Mochizuki,스텔라미라클,SV7,121/102,ミミズズex
+SV7,122/102,테라파고스 ex,SR,5ban Graphics,스텔라미라클,SV7,122/102,テラパゴスex
+SV7,123/102,곤포,SR,Hideki Ishikawa,스텔라미라클,SV7,125/102,ハイダイ
+SV7,124/102,브라이어,SR,Naoki Saito,스텔라미라클,SV7,126/102,ブライア
+SV7,125/102,타로,SR,Sanosuke Sakuma,스텔라미라클,SV7,124/102,タロ
+SV7,126/102,하솔,SR,GIDORA,스텔라미라클,SV7,123/102,アカマツ
+SV7,127/102,과미드라 ex,SAR,Teeziro,스텔라미라클,SV7,127/102,カミツオロチex
+SV7,128/102,전툴라 ex,SAR,MARINA Chikazawa,스텔라미라클,SV7,128/102,デンチュラex
+SV7,129/102,바우첼 ex,SAR,Yuu Nishida,스텔라미라클,SV7,129/102,バウッツェルex
+SV7,130/102,테라파고스 ex,SAR,Saboteri,스텔라미라클,SV7,130/102,テラパゴスex
+SV7,131/102,브라이어,SAR,DOM,스텔라미라클,SV7,132/102,ブライア
+SV7,132/102,타로,SAR,Souichirou Gunjima,스텔라미라클,SV7,131/102,タロ
+SV7,133/102,테라파고스 ex,UR,5ban Graphics,스텔라미라클,SV7,133/102,テラパゴスex
+SV7,134/102,용기의부적,UR,Toyste Beach,스텔라미라클,SV7,134/102,勇気のおまもり
+SV7,135/102,제로의 대공동,UR,MARINA Chikazawa,스텔라미라클,SV7,135/102,ゼロの大空洞
+SV7a,065/064,아라리,AR,Yuriko Akase,낙원드래고나,SV7a,065/064,タマタマ
+SV7a,066/064,마셰이드,AR,matazo,낙원드래고나,SV7a,066/064,マシェード
+SV7a,067/064,캐스퐁 태양의 모습,AR,Narano,낙원드래고나,SV7a,067/064,ポワルン たいようのすがた
+SV7a,068/064,치갈기,AR,Mitsuhiro Arita,낙원드래고나,SV7a,068/064,ハギギシリ
+SV7a,069/064,우락고래,AR,Jerky,낙원드래고나,SV7a,069/064,ハルクジラ
+SV7a,070/064,라티오스,AR,OKACHEKE,낙원드래고나,SV7a,070/064,ラティオス
+SV7a,071/064,비브라바,AR,toriyufu,낙원드래고나,SV7a,071/064,ビブラーバ
+SV7a,072/064,때때무노,AR,USGMEN,낙원드래고나,SV7a,072/064,タタッコ
+SV7a,073/064,무장조,AR,Takumi Wada,낙원드래고나,SV7a,073/064,エアームド
+SV7a,074/064,애프룡,AR,Uninori,낙원드래고나,SV7a,074/064,アップリュー
+SV7a,075/064,단지래플,AR,MINAMINAMI Take,낙원드래고나,SV7a,075/064,タルップル
+SV7a,076/064,워글,AR,Gapao,낙원드래고나,SV7a,076/064,ウォーグル
+SV7a,077/064,블랙큐레무 ex,SR,N-DESIGN Inc.,낙원드래고나,SV7a,077/064,ブラックキュレムex
+SV7a,078/064,라티아스 ex,SR,takuyoa,낙원드래고나,SV7a,078/064,ラティアスex
+SV7a,079/064,플라이곤 ex,SR,5ban Graphics,낙원드래고나,SV7a,079/064,フライゴンex
+SV7a,080/064,브리두라스 ex,SR,5ban Graphics,낙원드래고나,SV7a,080/064,ブリジュラスex
+SV7a,081/064,알로라 나시 ex,SR,aky CG Works,낙원드래고나,SV7a,081/064,アローラ ナッシーex
+SV7a,082/064,모토마 ex,SR,5ban Graphics,낙원드래고나,SV7a,082/064,モトトカゲex
+SV7a,083/064,드라세나,SR,Hideki Ishikawa,낙원드래고나,SV7a,085/064,ドラセナ
+SV7a,084/064,루티아의 어필,SR,En Morikura,낙원드래고나,SV7a,086/064,ルチアのアピール
+SV7a,085/064,서퍼,SR,Sanosuke Sakuma,낙원드래고나,SV7a,084/064,サーファー
+SV7a,086/064,제빈,SR,GIDORA,낙원드래고나,SV7a,083/064,カキツバタ
+SV7a,087/064,라티아스 ex,SAR,OKACHEKE,낙원드래고나,SV7a,087/064,ラティアスex
+SV7a,088/064,브리두라스 ex,SAR,Shinya Mizuno,낙원드래고나,SV7a,088/064,ブリジュラスex
+SV7a,089/064,알로라 나시 ex,SAR,Yuriko Akase,낙원드래고나,SV7a,089/064,アローラ ナッシーex
+SV7a,090/064,루티아의 어필,SAR,Nobusawa/Mochipuyo,낙원드래고나,SV7a,091/064,ルチアのアピール
+SV7a,091/064,제빈,SAR,DOM,낙원드래고나,SV7a,090/064,カキツバタ
+SV7a,092/064,알로라 나시 ex,UR,aky CG Works,낙원드래고나,SV7a,092/064,アローラ ナッシーex
+SV7a,093/064,카운터 게인,UR,Toyste Beach,낙원드래고나,SV7a,093/064,カウンターゲイン
+SV7a,094/064,제트 에너지,UR,,낙원드래고나,SV7a,094/064,ジェットエネルギー
+SV8,107/106,비비용,AR,REND,초전브레이커,SV8,107/106,ビビヨン
+SV8,108/106,활화르바,AR,Whisker,초전브레이커,SV8,108/106,メラルバ
+SV8,109/106,파라블레이즈,AR,Rond,초전브레이커,SV8,109/106,ソウブレイズ
+SV8,110/106,빈티나,AR,Kuroimori,초전브레이커,SV8,110/106,ヒンバス
+SV8,111/106,대굴레오,AR,miki kudo,초전브레이커,SV8,111/106,タマザラシ
+SV8,112/106,레어코일,AR,Shinji Kanda,초전브레이커,SV8,112/106,レアコイル
+SV8,113/106,메더,AR,N-DESIGN Inc.,초전브레이커,SV8,113/106,マッギョ
+SV8,114/106,엠라이트,AR,HYOGONOSUKE,초전브레이커,SV8,114/106,エムリット
+SV8,115/106,코코리,AR,Saboteri,초전브레이커,SV8,115/106,ゴマゾウ
+SV8,116/106,알로라 닥트리오,AR,Yukihiro Tada,초전브레이커,SV8,116/106,アローラ ダグトリオ
+SV8,117/106,게을로,AR,Mékayu,초전브레이커,SV8,117/106,ナマケロ
+SV8,118/106,켈리몬,AR,Mori Yuu,초전브레이커,SV8,118/106,カクレオン
+SV8,119/106,아이앤트 ex,SR,PLANETA Tsuji,초전브레이커,SV8,119/106,アイアントex
+SV8,120/106,스코빌런 ex,SR,PLANETA Igarashi,초전브레이커,SV8,120/106,スコヴィランex
+SV8,121/106,밀로틱 ex,SR,N-DESIGN Inc.,초전브레이커,SV8,121/106,ミロカロスex
+SV8,122/106,피카츄 ex,SR,aky CG Works,초전브레이커,SV8,122/106,ピカチュウex
+SV8,123/106,모래성이당 ex,SR,5ban Graphics,초전브레이커,SV8,123/106,シロデスナex
+SV8,124/106,삼삼드래 ex,SR,5ban Graphics,초전브레이커,SV8,124/106,サザンドラex
+SV8,125/106,싸리용 ex,SR,5ban Graphics,초전브레이커,SV8,125/106,シャリタツex
+SV8,126/106,게을킹 ex,SR,PLANETA Igarashi,초전브레이커,SV8,126/106,ケッキングex
+SV8,127/106,규리의 눈빛,SR,Taira Akitsu,초전브레이커,SV8,129/106,ミカンのまなざし
+SV8,128/106,시아노,SR,Akira Komayama,초전브레이커,SV8,127/106,シアノ
+SV8,129/106,시트론의 재치,SR,Naoki Saito,초전브레이커,SV8,128/106,シトロンの機転
+SV8,130/106,아이앤트 ex,SAR,osare,초전브레이커,SV8,130/106,アイアントex
+SV8,131/106,밀로틱 ex,SAR,Kuroimori,초전브레이커,SV8,131/106,ミロカロスex
+SV8,132/106,피카츄 ex,SAR,GIDORA,초전브레이커,SV8,132/106,ピカチュウex
+SV8,133/106,삼삼드래 ex,SAR,AKIRA EGAWA,초전브레이커,SV8,133/106,サザンドラex
+SV8,134/106,규리의 눈빛,SAR,Fujimoto Gold,초전브레이커,SV8,135/106,ミカンのまなざし
+SV8,135/106,시트론의 재치,SAR,Shinya Mizuno,초전브레이커,SV8,134/106,シトロンの機転
+SV8,136/106,피카츄 ex,UR,aky CG Works,초전브레이커,SV8,136/106,ピカチュウex
+SV8,137/106,밤의 들것,UR,Toyste Beach,초전브레이커,SV8,137/106,夜のタンカ
+SV8,138/106,그래비티 마운틴,UR,AYUMI ODASHIMA,초전브레이커,SV8,138/106,グラビティーマウンテン
+SV8a,188/187,네리네,SR,Akira Komayama,테라스탈 페스타 ex,SV8a,194/187,ネリネ
+SV8a,189/187,레포르,SR,hncl,테라스탈 페스타 ex,,,
+SV8a,190/187,멜로코,SR,Naoki Saito,테라스탈 페스타 ex,SV8a,198/187,メロコ
+SV8a,191/187,비파,SR,Ryuta Fuse,테라스탈 페스타 ex,SV8a,197/187,ビワ
+SV8a,192/187,오르티가,SR,Teeziro,테라스탈 페스타 ex,SV8a,189/187,オルティガ
+SV8a,193/187,청목의 수완,SR,hncl,테라스탈 페스타 ex,,,
+SV8a,194/187,추명,SR,kantaro,테라스탈 페스타 ex,SV8a,191/187,シュウメイ
+SV8a,195/187,추명,SR,GIDORA,테라스탈 페스타 ex,,,
+SV8a,196/187,콜사,SR,GIDORA,테라스탈 페스타 ex,,,
+SV8a,197/187,타임,SR,Yuu Nishida,테라스탈 페스타 ex,SV8a,193/187,タイム
+SV8a,198/187,팔데아의 동료들,SR,Cona Nitanda,테라스탈 페스타 ex,SV8a,195/187,パルデアの仲間たち
+SV8a,199/187,피나,SR,GOSSAN,테라스탈 페스타 ex,SV8a,196/187,ピーニャ
+SV8a,200/187,리피아 ex,SAR,Jiro Sasumo,테라스탈 페스타 ex,SV8a,200/187,リーフィアex
+SV8a,201/187,오거폰 벽록의 가면 ex,SAR,Yukihiro Tada,테라스탈 페스타 ex,SV8a,201/187,オーガポン みどりのめんex
+SV8a,202/187,부스터 ex,SAR,Nurikabe,테라스탈 페스타 ex,SV8a,202/187,ブースターex
+SV8a,203/187,파라블레이즈 ex,SAR,akagi,테라스탈 페스타 ex,SV8a,203/187,ソウブレイズex
+SV8a,204/187,오거폰 화덕의 가면 ex,SAR,Yukihiro Tada,테라스탈 페스타 ex,SV8a,204/187,オーガポン かまどのめんex
+SV8a,205/187,샤미드 ex,SAR,Narano,테라스탈 페스타 ex,SV8a,205/187,シャワーズex
+SV8a,206/187,글레이시아 ex,SAR,Kamome Shirahama,테라스탈 페스타 ex,SV8a,206/187,グレイシアex
+SV8a,207/187,돌핀맨 ex,SAR,Tetsuo Hara,테라스탈 페스타 ex,SV8a,207/187,イルカマンex
+SV8a,208/187,오거폰 우물의 가면 ex,SAR,Yukihiro Tada,테라스탈 페스타 ex,SV8a,208/187,オーガポン いどのめんex
+SV8a,209/187,쥬피썬더 ex,SAR,kantaro,테라스탈 페스타 ex,SV8a,209/187,サンダースex
+SV8a,210/187,무쇠손 ex,SAR,Kazumasa Yasukuni,테라스탈 페스타 ex,SV8a,210/187,テツノカイナex
+SV8a,211/187,에브이 ex,SAR,sui,테라스탈 페스타 ex,SV8a,211/187,エーフィex
+SV8a,212/187,님피아 ex,SAR,Cona Nitanda,테라스탈 페스타 ex,SV8a,212/187,ニンフィアex
+SV8a,213/187,무쇠무인 ex,SAR,danciao,테라스탈 페스타 ex,SV8a,213/187,テツノブジンex
+SV8a,214/187,무쇠감투 ex,SAR,OKUBO,테라스탈 페스타 ex,SV8a,214/187,テツノカシラex
+SV8a,215/187,모래털가죽 ex,SAR,Tetsu Kayama,테라스탈 페스타 ex,SV8a,215/187,スナノケガワex
+SV8a,216/187,오거폰 주춧돌의 가면 ex,SAR,Yukihiro Tada,테라스탈 페스타 ex,SV8a,216/187,オーガポン いしずえのめんex
+SV8a,217/187,블래키 ex,SAR,YASHIRO Nanaco,테라스탈 페스타 ex,SV8a,217/187,ブラッキーex
+SV8a,218/187,고동치는달 ex,SAR,Shinji Kanda,테라스탈 페스타 ex,SV8a,218/187,トドロクツキex
+SV8a,219/187,복숭악동 ex,SAR,osare,테라스탈 페스타 ex,SV8a,219/187,モモワロウex
+SV8a,220/187,타부자고 ex,SAR,Shigenori Negishi,테라스탈 페스타 ex,SV8a,220/187,サーフゴーex
+SV8a,221/187,드래펄트 ex,SAR,Jerky,테라스탈 페스타 ex,SV8a,221/187,ドラパルトex
+SV8a,222/187,날뛰는우레 ex,SAR,Uninori,테라스탈 페스타 ex,SV8a,222/187,タケルライコex
+SV8a,223/187,이브이 ex,SAR,tono,테라스탈 페스타 ex,SV8a,223/187,イーブイex
+SV8a,224/187,이브이 ex,SAR,Natsuko Shoji été,테라스탈 페스타 ex,SV8a,224/187,イーブイex
+SV8a,225/187,다투곰 붉은 달 ex,SAR,Yano Keiji,테라스탈 페스타 ex,SV8a,225/187,ガチグマ アカツキex
+SV8a,226/187,테라파고스 ex,SAR,mashu,테라스탈 페스타 ex,SV8a,226/187,テラパゴスex
+SV8a,227/187,네리네,SAR,Tomowaka,테라스탈 페스타 ex,SV8a,227/187,アカマツ
+SV8a,228/187,도희의 비기,SAR,Ligton,테라스탈 페스타 ex,SV8a,228/187,アンズの秘技
+SV8a,229/187,제빈,SAR,Tomowaka,테라스탈 페스타 ex,SV8a,229/187,カキツバタ
+SV8a,230/187,카지,SAR,Iori Suzuki,테라스탈 페스타 ex,SV8a,230/187,スグリ
+SV8a,231/187,타로,SAR,Tomowaka,테라스탈 페스타 ex,SV8a,231/187,タロ
+SV8a,232/187,하솔,SAR,Tomowaka,테라스탈 페스타 ex,SV8a,232/187,ネリネ
+SV8a,233/187,무쇠잎새 ex,UR,5ban Graphics,테라스탈 페스타 ex,SV8a,233/187,テツノイサハex
+SV8a,234/187,오거폰 벽록의 가면 ex,UR,5ban Graphics,테라스탈 페스타 ex,SV8a,234/187,オーガポン みどりのめんex
+SV8a,235/187,굽이치는물결 ex,UR,takuyoa,테라스탈 페스타 ex,SV8a,235/187,ウネルミナモex
+SV8a,236/187,피카츄 ex,UR,aky CG Works,테라스탈 페스타 ex,SV8a,236/187,ピカチュウex
+SV8a,237/187,테라파고스 ex,UR,5ban Graphics,테라스탈 페스타 ex,SV8a,237/187,テラパゴスex
+SVP2,GRA,기본 풀 에너지,,,ex 스페셜 세트 ver.2,,,
+SVP2,LIG,기본 번개 에너지,,,ex 스페셜 세트 ver.2,,,
+SVP2,PSY,기본 초 에너지,,,ex 스페셜 세트 ver.2,,,
+SV9,101/100,마라카치,AR,Ounishi,배틀파트너즈,SV9,101/100,マラカッチ
+SV9,102/100,프리져,AR,Kuroimori,배틀파트너즈,SV9,102/100,フリーザー
+SV9,103/100,고래왕,AR,Katsunori Sato,배틀파트너즈,SV9,103/100,ホエルオー
+SV9,104/100,모야모의 찌리비크,AR,Terada Tera,배틀파트너즈,SV9,104/100,ナンジャモのタイカイデン
+SV9,105/100,릴리에의 에리본,AR,saino misaki,배틀파트너즈,SV9,105/100,リーリエのアブリボン
+SV9,106/100,꾸꾸리,AR,Nakamura Ippan,배틀파트너즈,SV9,106/100,ウリムー
+SV9,107/100,루가루암,AR,GIDORA,배틀파트너즈,SV9,107/100,ルガルガン
+SV9,108/100,N의 조로아,AR,Megumi Mizutani,배틀파트너즈,SV9,108/100,Nのゾロア
+SV9,109/100,N의 레시라무,AR,Bun Toujo,배틀파트너즈,SV9,109/100,Nのレシラム
+SV9,110/100,다꼬리,AR,REND,배틀파트너즈,SV9,110/100,オオタチ
+SV9,111/100,음뱃,AR,sowsow,배틀파트너즈,SV9,111/100,オンバット
+SV9,112/100,호브의 우르,AR,MINAMINAMI Take,배틀파트너즈,SV9,112/100,ホップのウールー
+SV9,113/100,볼케니온 ex,SR,5ban Graphics,배틀파트너즈,SV9,113/100,ボルケニオンex
+SV9,114/100,모야모의 찌리배리 ex,SR,5ban Graphics,배틀파트너즈,SV9,114/100,ナンジャモのハラバリーex
+SV9,115/100,릴리에의 삐삐 ex,SR,5ban Graphics,배틀파트너즈,SV9,115/100,リーリエのピッピex
+SV9,116/100,맘모꾸리 ex,SR,N-DESIGN Inc.,배틀파트너즈,SV9,116/100,マンムーex
+SV9,117/100,N의 조로아크 ex,SR,takuyoa,배틀파트너즈,SV9,117/100,Nのゾロアークex
+SV9,118/100,호브의 자시안 ex,SR,aky CG Works,배틀파트너즈,SV9,118/100,ホップのザシアンex
+SV9,119/100,보만다 ex,SR,5ban Graphics,배틀파트너즈,SV9,119/100,ボーマンダex
+SV9,120/100,노고고치 ex,SR,5ban Graphics,배틀파트너즈,SV9,120/100,ノココッチex
+SV9,121/100,무서운 청년,SR,Hideki Ishikawa,배틀파트너즈,SV9,122/100,怖いお兄さん
+SV9,122/100,아이리스의 투지,SR,yuu,배틀파트너즈,SV9,121/100,アイリスの闘志
+SV9,123/100,웅의 스카우트,SR,Teeziro,배틀파트너즈,SV9,123/100,タケシのスカウト
+SV9,124/100,볼케니온 ex,SAR,akagi,배틀파트너즈,SV9,124/100,ボルケニオンex
+SV9,125/100,모야모의 찌리배리 ex,SAR,Yuu Nishida,배틀파트너즈,SV9,125/100,ナンジャモのハラバリーex
+SV9,126/100,릴리에의 삐삐 ex,SAR,Susumu Maeya,배틀파트너즈,SV9,126/100,リーリエのピッピex
+SV9,127/100,N의 조로아크 ex,SAR,Megumi Mizutani,배틀파트너즈,SV9,127/100,Nのゾロアークex
+SV9,128/100,호브의 자시안 ex,SAR,DOM,배틀파트너즈,SV9,128/100,ホップのザシアンex
+SV9,129/100,보만다 ex,SAR,Tsuyoshi Nagano,배틀파트너즈,SV9,129/100,ボーマンダex
+SV9,130/100,모야모의 찌리배리 ex,UR,5ban Graphics,배틀파트너즈,SV9,130/100,ナンジャモのハラバリーex
+SV9,131/100,N의 조로아크 ex,UR,takuyoa,배틀파트너즈,SV9,131/100,Nのゾロアークex
+SV9,132/100,스파이크 에너지,UR,5ban Graphics,배틀파트너즈,,,
+SVOD,019/018,성호의 메탕,,hncl,성호의 메탕&메타그로스 ex,,,
+SVOM,020/019,마리의 모르페코,,Susumu Maeya,마리의 모르페코&오롱털 ex,,,
+SV9a,064/063,왕자리,AR,Ayako Ozaki,열풍의 아레나,SV9a,064/063,ヤンヤンマ
+SV9a,065/063,난천의 로즈레이드,AR,rika,열풍의 아레나,SV9a,065/063,シロナのロズレイド
+SV9a,066/063,쉐이미,AR,Heisuke Kitazawa,열풍의 아레나,SV9a,066/063,シェイミ
+SV9a,067/063,암팰리스,AR,Takumi Wada,열풍의 아레나,SV9a,067/063,イワパレス
+SV9a,068/063,과미드라,AR,Jerky,열풍의 아레나,SV9a,068/063,カミツオロチ
+SV9a,069/063,날쌩마,AR,Rond,열풍의 아레나,SV9a,069/063,ギャロップ
+SV9a,070/063,심향의 블레이범,AR,GIDORA,열풍의 아레나,SV9a,070/063,ヒビキのバクフーン
+SV9a,071/063,이슬의 고라파덕,AR,OKACHEKE,열풍의 아레나,SV9a,071/063,カスミのコダック
+SV9a,072/063,이슬의 라프라스,AR,Orca,열풍의 아레나,SV9a,072/063,カスミのラプラス
+SV9a,073/063,썬더라이,AR,Nakamura Ippan,열풍의 아레나,SV9a,073/063,ラクライ
+SV9a,074/063,로토무,AR,Taiga Kayama,열풍의 아레나,SV9a,074/063,ロトム
+SV9a,075/063,페퍼의 요씽리스,AR,Natsumi Yoshida,열풍의 아레나,SV9a,075/063,ペパーのヨクバリス
+SV9a,076/063,메가자리 ex,SR,takuyoa,열풍의 아레나,SV9a,076/063,メガヤンマex
+SV9a,077/063,심향의 칠색조 ex,SR,aky CG Works,열풍의 아레나,SV9a,077/063,ヒビキのホウオウex
+SV9a,078/063,어써러셔 ex,SR,N-DESIGN Inc.,열풍의 아레나,SV9a,078/063,ヘイラッシャex
+SV9a,079/063,에레키블 ex,SR,PLANETA Mochizuki,열풍의 아레나,SV9a,079/063,エレキブルex
+SV9a,080/063,난천의 한카리아스 ex,SR,5ban Graphics,열풍의 아레나,SV9a,080/063,シロナのガブリアスex
+SV9a,081/063,페퍼의 마피티프 ex,SR,PLANETA Igarashi,열풍의 아레나,SV9a,081/063,ペパーのマフィティフex
+SV9a,082/063,MC의 호응유도,SR,Cona Nitanda,열풍의 아레나,SV9a,082/063,MCの盛り上げ
+SV9a,083/063,심향의 모험,SR,Iori Suzuki,열풍의 아레나,SV9a,084/063,ヒビキの冒険
+SV9a,084/063,저지맨,SR,kantaro,열풍의 아레나,SV9a,083/063,ジャッジマン
+SV9a,085/063,메가자리 ex,SAR,Tonji Matsuno,열풍의 아레나,SV9a,085/063,メガヤンマex
+SV9a,086/063,심향의 칠색조 ex,SAR,Atsushi Furusawa,열풍의 아레나,SV9a,086/063,ヒビキのホウオウex
+SV9a,087/063,난천의 한카리아스 ex,SAR,HICO KIM,열풍의 아레나,SV9a,087/063,シロナのガブリアスex
+SV9a,088/063,페퍼의 마피티프 ex,SAR,Yuriko Akase,열풍의 아레나,SV9a,088/063,ペパーのマフィティフex
+SV9a,089/063,심향의 모험,SAR,Kariya,열풍의 아레나,SV9a,089/063,ヒビキの冒険
+SV9a,090/063,심향의 칠색조 ex,UR,aky CG Works,열풍의 아레나,SV9a,090/063,ヒビキのホウオウex
+SV9a,091/063,난천의 한카리아스 ex,UR,5ban Graphics,열풍의 아레나,SV9a,091/063,シロナのガブリアスex
+SV9a,092/063,누룩스시티,UR,MARINA Chikazawa,열풍의 아레나,SV9a,092/063,ハッコウシティ
+SV10,099/098,로켓단의 트래피더,AR,NC Empire,로켓단의 영광,SV10,099/098,ロケット団のワナイダー
+SV10,100/098,로켓단의 헬가,AR,nagimiso,로켓단의 영광,SV10,100/098,ロケット団のヘルガー
+SV10,101/098,번치코,AR,kodama,로켓단의 영광,SV10,101/098,バシャーモ
+SV10,102/098,진주몽,AR,Mori Yuu,로켓단의 영광,SV10,102/098,パールル
+SV10,103/098,로켓단의 마자용,AR,Saboteri,로켓단의 영광,SV10,103/098,ロケット団のソーナンス
+SV10,104/098,로켓단의 이올브,AR,HYOGONOSUKE,로켓단의 영광,SV10,104/098,ロケット団のイオルブ
+SV10,105/098,로켓단의 또도가스,AR,Yukihiro Tada,로켓단의 영광,SV10,105/098,ロケット団のマタドガス
+SV10,106/098,로켓단의 니로우,AR,Akira Komayama,로켓단의 영광,SV10,106/098,ロケット団のヤミカラス
+SV10,107/098,자마젠타,AR,Takumi Wada,로켓단의 영광,SV10,107/098,ザマゼンタ
+SV10,108/098,로켓단의 레트라,AR,Mékayu,로켓단의 영광,SV10,108/098,ロケット団のラッタ
+SV10,109/098,로켓단의 나옹,AR,Shimaris Yukichi,로켓단의 영광,SV10,109/098,ロケット団のニャース
+SV10,110/098,캥카,AR,Mékayu,로켓단의 영광,SV10,110/098,ガルーラ
+SV10,111/098,올리르바 ex,SR,PLANETA Tsuji,로켓단의 영광,SV10,111/098,オリーヴァex
+SV10,112/098,로켓단의 파이어 ex,SR,5ban Graphics,로켓단의 영광,SV10,112/098,ロケット団のファイヤーex
+SV10,113/098,우락고래 ex,SR,PLANETA Tsuji,로켓단의 영광,SV10,113/098,ハルクジラex
+SV10,114/098,로켓단의 뮤츠 ex,SR,aky CG Works,로켓단의 영광,SV10,114/098,ロケット団のミュウツーex
+SV10,115/098,레지락 ex,SR,PLANETA Mochizuki,로켓단의 영광,SV10,115/098,レジロックex
+SV10,116/098,로켓단의 니드킹 ex,SR,5ban Graphics,로켓단의 영광,SV10,116/098,ロケット団のニドキングex
+SV10,117/098,로켓단의 크로뱃 ex,SR,5ban Graphics,로켓단의 영광,SV10,117/098,ロケット団のクロバットex
+SV10,118/098,로켓단의 페르시온 ex,SR,5ban Graphics,로켓단의 영광,SV10,118/098,ロケット団のペルシアンex
+SV10,119/098,로켓단의 람다,SR,GOSSAN,로켓단의 영광,SV10,122/098,ロケット団のラムダ
+SV10,120/098,로켓단의 랜스,SR,Naoki Saito,로켓단의 영광,SV10,123/098,ロケット団のランス
+SV10,121/098,로켓단의 비주기,SR,akagi,로켓단의 영광,SV10,121/098,ロケット団のサカキ
+SV10,122/098,로켓단의 아테나,SR,hncl,로켓단의 영광,SV10,119/098,ロケット団のアテナ
+SV10,123/098,로켓단의 아폴로,SR,Hideki Ishikawa,로켓단의 영광,SV10,120/098,ロケット団のアポロ
+SV10,124/098,로켓단의 파이어 ex,SAR,AKIRA EGAWA,로켓단의 영광,SV10,124/098,ロケット団のファイヤーex
+SV10,125/098,로켓단의 뮤츠 ex,SAR,Iwamoto05,로켓단의 영광,SV10,125/098,ロケット団のミュウツーex
+SV10,126/098,로켓단의 니드킹 ex,SAR,Uninori,로켓단의 영광,SV10,126/098,ロケット団のニドキングex
+SV10,127/098,로켓단의 크로뱃 ex,SAR,cochi8i,로켓단의 영광,SV10,127/098,ロケット団のクロバットex
+SV10,128/098,로켓단의 비주기,SAR,Krgc,로켓단의 영광,SV10,129/098,ロケット団のサカキ
+SV10,129/098,로켓단의 아테나,SAR,Yoshioka,로켓단의 영광,SV10,128/098,ロケット団のアテナ
+SV10,130/098,로켓단의 뮤츠 ex,UR,aky CG Works,로켓단의 영광,SV10,130/098,ロケット団のミュウツーex
+SV10,131/098,로켓단의 크로뱃 ex,UR,5ban Graphics,로켓단의 영광,SV10,131/098,ロケット団のクロバットex
+SV10,132/098,재밍타워,UR,AYUMI ODASHIMA,로켓단의 영광,SV10,132/098,ジャミングタワー
+SV11B,087/086,주리비얀,AR,Yoshimi Miyoshi,블랙볼트,SV11B,087/086,ツタージャ
+SV11B,088/086,샤비,AR,Jiro Sasumo,블랙볼트,SV11B,088/086,ジャノビー
+SV11B,089/086,야나프,AR,saino misaki,블랙볼트,SV11B,089/086,ヤナップ
+SV11B,090/086,야나키,AR,Yuka Tanaka,블랙볼트,SV11B,090/086,ヤナッキー
+SV11B,091/086,치릴리,AR,Tika Matsuno,블랙볼트,SV11B,091/086,チュリネ
+SV11B,092/086,드레디어,AR,En Morikura,블랙볼트,SV11B,092/086,ドレディア
+SV11B,093/086,마라카치,AR,Heisuke Kitazawa,블랙볼트,SV11B,093/086,マラカッチ
+SV11B,094/086,딱정곤,AR,Tomokazu Komiya,블랙볼트,SV11B,094/086,カブルモ
+SV11B,095/086,깜놀버슬,AR,buchi,블랙볼트,SV11B,095/086,タマゲタケ
+SV11B,096/086,뽀록나,AR,OKUBO,블랙볼트,SV11B,096/086,モロバレル
+SV11B,097/086,비크티니,AR,Amelicart,블랙볼트,SV11B,097/086,ビクティニ
+SV11B,098/086,달막화,AR,Tomowaka,블랙볼트,SV11B,098/086,ダルマッカ
+SV11B,099/086,불비달마,AR,Nisota Niso,블랙볼트,SV11B,099/086,ヒヒダルマ
+SV11B,100/086,불켜미,AR,Naoyo Kimura,블랙볼트,SV11B,100/086,ヒトモシ
+SV11B,101/086,램프라,AR,Ligton,블랙볼트,SV11B,101/086,ランプラー
+SV11B,102/086,샹델라,AR,Kuroimori,블랙볼트,SV11B,102/086,シャンデラ
+SV11B,103/086,활화르바,AR,Katsunori Sato,블랙볼트,SV11B,103/086,メラルバ
+SV11B,104/086,불카모스,AR,AKIRA EGAWA,블랙볼트,SV11B,104/086,ウルガモス
+SV11B,105/086,앗차프,AR,Hoshino KURO,블랙볼트,SV11B,105/086,ヒヤップ
+SV11B,106/086,앗차키,AR,Yoriyuki Ikegami,블랙볼트,SV11B,106/086,ヒヤッキー
+SV11B,107/086,동챙이,AR,aspara,블랙볼트,SV11B,107/086,オタマロ
+SV11B,108/086,두까비,AR,KEIICHIRO ITO,블랙볼트,SV11B,108/086,ガマガル
+SV11B,109/086,두빅굴,AR,Shinji Kanda,블랙볼트,SV11B,109/086,ガマゲロゲ
+SV11B,110/086,프로토가,AR,Akino Fukuji,블랙볼트,SV11B,110/086,プロトーガ
+SV11B,111/086,늑골라,AR,Takeshi Nakamura,블랙볼트,SV11B,111/086,アバゴーラ
+SV11B,112/086,맘복치,AR,Rond,블랙볼트,SV11B,112/086,ママンボウ
+SV11B,113/086,코고미,AR,osare,블랙볼트,SV11B,113/086,クマシュン
+SV11B,114/086,툰베어,AR,Whisker,블랙볼트,SV11B,114/086,ツンベアー
+SV11B,115/086,프리지오,AR,rika,블랙볼트,SV11B,115/086,フリージオ
+SV11B,116/086,에몽가,AR,Tomomi Ozaki,블랙볼트,SV11B,116/086,エモンガ
+SV11B,117/086,저리어,AR,ryoma uratsuka,블랙볼트,SV11B,117/086,シビシラス
+SV11B,118/086,저리릴,AR,Kurata So,블랙볼트,SV11B,118/086,シビビール
+SV11B,119/086,저리더프,AR,Yukiko Baba,블랙볼트,SV11B,119/086,シビルドン
+SV11B,120/086,볼트로스,AR,Anesaki Dynamic,블랙볼트,SV11B,120/086,ボルトロス
+SV11B,121/086,몽나,AR,miki kudo,블랙볼트,SV11B,121/086,ムンナ
+SV11B,122/086,몽얌나,AR,Mizue,블랙볼트,SV11B,122/086,ムシャーナ
+SV11B,123/086,유니란,AR,USGMEN,블랙볼트,SV11B,123/086,ユニラン
+SV11B,124/086,듀란,AR,Kedamahadaitai Yawarakai,블랙볼트,SV11B,124/086,ダブラン
+SV11B,125/086,란쿨루스,AR,satoma,블랙볼트,SV11B,125/086,ランクルス
+SV11B,126/086,리그레,AR,Masako Tomii,블랙볼트,SV11B,126/086,リグレー
+SV11B,127/086,벰크,AR,Aya Kusube,블랙볼트,SV11B,127/086,オーベム
+SV11B,128/086,골비람,AR,Nabatame Kazutaka,블랙볼트,SV11B,128/086,ゴビット
+SV11B,129/086,골루그,AR,Shinya Mizuno,블랙볼트,SV11B,129/086,ゴルーグ
+SV11B,130/086,두더류,AR,Koji Nakata,블랙볼트,SV11B,130/086,モグリュー
+SV11B,131/086,으랏차,AR,Shigenori Negishi,블랙볼트,SV11B,131/086,ドッコラー
+SV11B,132/086,토쇠골,AR,Souichirou Gunjima,블랙볼트,SV11B,132/086,ドテッコツ
+SV11B,133/086,노보청,AR,Kazumasa Yasukuni,블랙볼트,SV11B,133/086,ローブシン
+SV11B,134/086,던지미,AR,GOSSAN,블랙볼트,SV11B,134/086,ナゲキ
+SV11B,135/086,돌살이,AR,Shimaris Yukichi,블랙볼트,SV11B,135/086,イシズマイ
+SV11B,136/086,암팰리스,AR,MINAMINAMI Take,블랙볼트,SV11B,136/086,イワパレス
+SV11B,137/086,랜드로스,AR,SIE NANAHARA,블랙볼트,SV11B,137/086,ランドロス
+SV11B,138/086,마디네,AR,Apios,블랙볼트,SV11B,138/086,フシデ
+SV11B,139/086,휠구,AR,kurumitsu,블랙볼트,SV11B,139/086,ホイーガ
+SV11B,140/086,펜드라,AR,Oku,블랙볼트,SV11B,140/086,ペンドラー
+SV11B,141/086,깜눈크,AR,Fujimoto Gold,블랙볼트,SV11B,141/086,メグロコ
+SV11B,142/086,악비르,AR,Tonji Matsuno,블랙볼트,SV11B,142/086,ワルビル
+SV11B,143/086,악비아르,AR,Uninori,블랙볼트,SV11B,143/086,ワルビアル
+SV11B,144/086,벌차이,AR,Saya Tsuruta,블랙볼트,SV11B,144/086,バルチャイ
+SV11B,145/086,버랜지나,AR,Bun Toujo,블랙볼트,SV11B,145/086,バルジーナ
+SV11B,146/086,슈바르고,AR,Uta,블랙볼트,SV11B,146/086,シュバルゴ
+SV11B,147/086,자망칼,AR,Dsuke,블랙볼트,SV11B,147/086,コマタナ
+SV11B,148/086,절각참,AR,toriyufu,블랙볼트,SV11B,148/086,キリキザン
+SV11B,149/086,코바르온,AR,hncl,블랙볼트,SV11B,149/086,コバルオン
+SV11B,150/086,터검니,AR,Ayako Ozaki,블랙볼트,SV11B,150/086,キバゴ
+SV11B,151/086,액슨도,AR,Yuya Oka,블랙볼트,SV11B,151/086,オノンド
+SV11B,152/086,액스라이즈,AR,akagi,블랙볼트,SV11B,152/086,オノノクス
+SV11B,153/086,콩둘기,AR,Mori Yuu,블랙볼트,SV11B,153/086,マメパト
+SV11B,154/086,유토브,AR,cochi8i,블랙볼트,SV11B,154/086,ハトーボー
+SV11B,155/086,켄호로우,AR,Yoshioka,블랙볼트,SV11B,155/086,ケンホロウ
+SV11B,156/086,다부니,AR,Asako Ito,블랙볼트,SV11B,156/086,タブンネ
+SV11B,157/086,치라미,AR,Natsumi Yoshida,블랙볼트,SV11B,157/086,チラーミィ
+SV11B,158/086,치라치노,AR,tono,블랙볼트,SV11B,158/086,チラチーノ
+SV11B,159/086,샤로다 ex,SR,N-DESIGN Inc.,블랙볼트,SV11B,159/086,ジャローダex
+SV11B,160/086,큐레무 ex,SR,N-DESIGN Inc.,블랙볼트,SV11B,160/086,キュレムex
+SV11B,161/086,제크로무 ex,SR,takuyoa,블랙볼트,SV11B,161/086,ゼクロムex
+SV11B,162/086,메로엣타 ex,SR,5ban Graphics,블랙볼트,SV11B,162/086,メロエッタex
+SV11B,163/086,몰드류 ex,SR,N-DESIGN Inc.,블랙볼트,SV11B,163/086,ドリュウズex
+SV11B,164/086,게노세크트 ex,SR,5ban Graphics,블랙볼트,SV11B,164/086,ゲノセクトex
+SV11B,165/086,N의 방안,SR,hncl,블랙볼트,SV11B,165/086,Nの筋書き
+SV11B,166/086,주리,SR,Yuu Nishida,블랙볼트,SV11B,166/086,マコモ
+SV11B,167/086,샤로다 ex,SAR,Ryota Murayama,블랙볼트,SV11B,167/086,ジャローダex
+SV11B,168/086,큐레무 ex,SAR,chibi,블랙볼트,SV11B,168/086,キュレムex
+SV11B,169/086,제크로무 ex,SAR,danciao,블랙볼트,SV11B,169/086,ゼクロムex
+SV11B,170/086,메로엣타 ex,SAR,LINNE,블랙볼트,SV11B,170/086,メロエッタex
+SV11B,171/086,몰드류 ex,SAR,Mitsuhiro Arita,블랙볼트,SV11B,171/086,ドリュウズex
+SV11B,172/086,게노세크트 ex,SAR,kantaro,블랙볼트,SV11B,172/086,ゲノセクトex
+SV11B,173/086,N의 방안,SAR,REND,블랙볼트,SV11B,173/086,Nの筋書き
+SV11B,174/086,제크로무 ex,BWR,takuyoa,블랙볼트,SV11B,174/086,ゼクロムex
+SV11W,087/086,두르보,AR,nisimono,화이트플레어,SV11W,087/086,クルミル
+SV11W,088/086,두르쿤,AR,0313,화이트플레어,SV11W,088/086,クルマユ
+SV11W,089/086,모아머,AR,mashu,화이트플레어,SV11W,089/086,ハハコモリ
+SV11W,090/086,소미안,AR,Keisin,화이트플레어,SV11W,090/086,モンメン
+SV11W,091/086,사철록,AR,takashi shiraishi,화이트플레어,SV11W,091/086,シキジカ
+SV11W,092/086,바라철록,AR,Yano Keiji,화이트플레어,SV11W,092/086,メブキジカ
+SV11W,093/086,쪼마리,AR,Mékayu,화이트플레어,SV11W,093/086,チョボマキ
+SV11W,094/086,어지리더,AR,Taiga Kasai,화이트플레어,SV11W,094/086,アギルダー
+SV11W,095/086,비리디온,AR,kodama,화이트플레어,SV11W,095/086,ビリジオン
+SV11W,096/086,뚜꾸리,AR,Orca,화이트플레어,SV11W,096/086,ポカブ
+SV11W,097/086,차오꿀,AR,Masa,화이트플레어,SV11W,097/086,チャオブー
+SV11W,098/086,염무왕,AR,NC Empire,화이트플레어,SV11W,098/086,エンブオー
+SV11W,099/086,바오프,AR,GOTO minori,화이트플레어,SV11W,099/086,バオップ
+SV11W,100/086,바오키,AR,sowsow,화이트플레어,SV11W,100/086,バオッキー
+SV11W,101/086,앤티골,AR,Kariya,화이트플레어,SV11W,101/086,クイタラン
+SV11W,102/086,수댕이,AR,OKACHEKE,화이트플레어,SV11W,102/086,ミジュマル
+SV11W,103/086,쌍검자비,AR,Taira Akitsu,화이트플레어,SV11W,103/086,フタチマル
+SV11W,104/086,대검귀,AR,DOM,화이트플레어,SV11W,104/086,ダイケンキ
+SV11W,105/086,배쓰나이,AR,Nakamura Ippan,화이트플레어,SV11W,105/086,バスラオ
+SV11W,106/086,꼬지보리,AR,GIDORA,화이트플레어,SV11W,106/086,コアルヒー
+SV11W,107/086,스완나,AR,Gemi,화이트플레어,SV11W,107/086,スワンナ
+SV11W,108/086,바닐프티,AR,Mina Nakai,화이트플레어,SV11W,108/086,バニプッチ
+SV11W,109/086,바닐리치,AR,Yoko Hishida,화이트플레어,SV11W,109/086,バニリッチ
+SV11W,110/086,배바닐라,AR,aoki,화이트플레어,SV11W,110/086,バイバニラ
+SV11W,111/086,줄뮤마,AR,Natsumi Miyanose,화이트플레어,SV11W,111/086,シママ
+SV11W,112/086,제브라이카,AR,REND,화이트플레어,SV11W,112/086,ゼブライカ
+SV11W,113/086,파쪼옥,AR,HYOGONOSUKE,화이트플레어,SV11W,113/086,バチュル
+SV11W,114/086,전툴라,AR,Akira Komayama,화이트플레어,SV11W,114/086,デンチュラ
+SV11W,115/086,메더,AR,Toshinao Aoki,화이트플레어,SV11W,115/086,マッギョ
+SV11W,116/086,또르박쥐,AR,Shibuzoh.,화이트플레어,SV11W,116/086,コロモリ
+SV11W,117/086,맘박쥐,AR,Saboteri,화이트플레어,SV11W,117/086,ココロモリ
+SV11W,118/086,심보러,AR,mingo,화이트플레어,SV11W,118/086,シンボラー
+SV11W,119/086,데스마스,AR,YASHIRO Nanaco,화이트플레어,SV11W,119/086,デスマス
+SV11W,120/086,데스니칸,AR,Haru Akasaka,화이트플레어,SV11W,120/086,デスカーン
+SV11W,121/086,고디탱,AR,Kanami Ogata,화이트플레어,SV11W,121/086,ゴチム
+SV11W,122/086,고디보미,AR,Terada Tera,화이트플레어,SV11W,122/086,ゴチミル
+SV11W,123/086,고디모아젤,AR,IKEDA Saki,화이트플레어,SV11W,123/086,ゴチルゼル
+SV11W,124/086,탱그릴,AR,Shinya Komatsu,화이트플레어,SV11W,124/086,プルリル
+SV11W,125/086,단굴,AR,Yuriko Akase,화이트플레어,SV11W,125/086,ダンゴロ
+SV11W,126/086,암트르,AR,Krgc,화이트플레어,SV11W,126/086,ガントル
+SV11W,127/086,기가이어스,AR,toi8,화이트플레어,SV11W,127/086,ギガイアス
+SV11W,128/086,타격귀,AR,nagimiso,화이트플레어,SV11W,128/086,ダゲキ
+SV11W,129/086,아켄,AR,Ounishi,화이트플레어,SV11W,129/086,アーケン
+SV11W,130/086,아케오스,AR,Jerky,화이트플레어,SV11W,130/086,アーケオス
+SV11W,131/086,비조푸,AR,Iori Suzuki,화이트플레어,SV11W,131/086,コジョフー
+SV11W,132/086,비조도,AR,Atsuya Uki,화이트플레어,SV11W,132/086,コジョンド
+SV11W,133/086,테라키온,AR,Shiburingaru,화이트플레어,SV11W,133/086,テラキオン
+SV11W,134/086,쌔비냥,AR,Mugi Hamada,화이트플레어,SV11W,134/086,チョロネコ
+SV11W,135/086,레파르다스,AR,matazo,화이트플레어,SV11W,135/086,レパルダス
+SV11W,136/086,곤율랭,AR,Nelnal,화이트플레어,SV11W,136/086,ズルッグ
+SV11W,137/086,곤율거니,AR,Tetsu Kayama,화이트플레어,SV11W,137/086,ズルズキン
+SV11W,138/086,깨봉이,AR,Oswaldo KATO,화이트플레어,SV11W,138/086,ヤブクロン
+SV11W,139/086,더스트나,AR,Gapao,화이트플레어,SV11W,139/086,ダストダス
+SV11W,140/086,조로아,AR,Naoki Saito,화이트플레어,SV11W,140/086,ゾロア
+SV11W,141/086,조로아크,AR,Iwamoto05,화이트플레어,SV11W,141/086,ゾロアーク
+SV11W,142/086,모노두,AR,Teeziro,화이트플레어,SV11W,142/086,モノズ
+SV11W,143/086,디헤드,AR,Kyoko Umemoto,화이트플레어,SV11W,143/086,ジヘッド
+SV11W,144/086,철시드,AR,Nurikabe,화이트플레어,SV11W,144/086,テッシード
+SV11W,145/086,너트령,AR,Minahamu,화이트플레어,SV11W,145/086,ナットレイ
+SV11W,146/086,기어르,AR,Nobuhiro Imagawa,화이트플레어,SV11W,146/086,ギアル
+SV11W,147/086,기기어르,AR,okayamatakatoshi,화이트플레어,SV11W,147/086,ギギアル
+SV11W,148/086,기기기어르,AR,Yuka Morii,화이트플레어,SV11W,148/086,ギギギアル
+SV11W,149/086,아이앤트,AR,Scav,화이트플레어,SV11W,149/086,アイアント
+SV11W,150/086,크리만,AR,Kamome Shirahama,화이트플레어,SV11W,150/086,クリムガン
+SV11W,151/086,보르쥐,AR,Yukihiro Tada,화이트플레어,SV11W,151/086,ミネズミ
+SV11W,152/086,보르그,AR,Mousho,화이트플레어,SV11W,152/086,ミルホッグ
+SV11W,153/086,요테리,AR,Narumi Sato,화이트플레어,SV11W,153/086,ヨーテリー
+SV11W,154/086,하데리어,AR,Makura Tami,화이트플레어,SV11W,154/086,ハーデリア
+SV11W,155/086,바랜드,AR,Eri Kamei,화이트플레어,SV11W,155/086,ムーランド
+SV11W,156/086,수리둥보,AR,Miki Tanaka,화이트플레어,SV11W,156/086,ワシボン
+SV11W,157/086,워글,AR,kamonabe,화이트플레어,SV11W,157/086,ウォーグル
+SV11W,158/086,토네로스,AR,Kouki Saitou,화이트플레어,SV11W,158/086,トルネロス
+SV11W,159/086,엘풍 ex,SR,5ban Graphics,화이트플레어,SV11W,159/086,エルフーンex
+SV11W,160/086,레시라무 ex,SR,5ban Graphics,화이트플레어,SV11W,160/086,レシラムex
+SV11W,161/086,케르디오 ex,SR,N-DESIGN Inc.,화이트플레어,SV11W,161/086,ケルディオex
+SV11W,162/086,탱탱겔 ex,SR,N-DESIGN Inc.,화이트플레어,SV11W,162/086,ブルンゲルex
+SV11W,163/086,삼삼드래 ex,SR,5ban Graphics,화이트플레어,SV11W,163/086,サザンドラex
+SV11W,164/086,버프론 ex,SR,N-DESIGN Inc.,화이트플레어,SV11W,164/086,バッフロンex
+SV11W,165/086,어릿광대,SR,Teeziro,화이트플레어,SV11W,165/086,クラウン
+SV11W,166/086,투희,SR,yuu,화이트플레어,SV11W,166/086,トウコ
+SV11W,167/086,엘풍 ex,SAR,mele,화이트플레어,SV11W,167/086,エルフーンex
+SV11W,168/086,레시라무 ex,SAR,kawayoo,화이트플레어,SV11W,168/086,レシラムex
+SV11W,169/086,케르디오 ex,SAR,Yuu Nishida,화이트플레어,SV11W,169/086,ケルディオex
+SV11W,170/086,탱탱겔 ex,SAR,Narano,화이트플레어,SV11W,170/086,ブルンゲルex
+SV11W,171/086,삼삼드래 ex,SAR,Takumi Wada,화이트플레어,SV11W,171/086,サザンドラex
+SV11W,172/086,버프론 ex,SAR,Rianti Hidayat,화이트플레어,SV11W,172/086,バッフロンex
+SV11W,173/086,투희,SAR,Naoki Saito,화이트플레어,SV11W,173/086,トウコ
+SV11W,174/086,레시라무 ex,BWR,5ban Graphics,화이트플레어,SV11W,174/086,レシラムex
+M1L,064/063,이상해씨,AR,mashu,메가브레이브,M1L,064/063,フシギダネ
+M1L,065/063,이상해풀,AR,mashu,메가브레이브,M1L,065/063,フシギソウ
+M1L,066/063,나시,AR,Yukihiro Tada,메가브레이브,M1L,066/063,ナッシー
+M1L,067/063,식스테일,AR,saino misaki,메가브레이브,M1L,067/063,ロコン
+M1L,068/063,리오르,AR,GOSSAN,메가브레이브,M1L,068/063,リオル
+M1L,069/063,마샤도,AR,0313,메가브레이브,M1L,069/063,マーシャドー
+M1L,070/063,콜로솔트,AR,Yano Keiji,메가브레이브,M1L,070/063,キョジオーン
+M1L,071/063,화강돌,AR,IKEDA Saki,메가브레이브,M1L,071/063,ミカルゲ
+M1L,072/063,땃쭈르,AR,Shimaris Yukichi,메가브레이브,M1L,072/063,シルシュルー
+M1L,073/063,강철톤,AR,Tonji Matsuno,메가브레이브,M1L,073/063,ハガネール
+M1L,074/063,깨비참,AR,MINAMINAMI Take,메가브레이브,M1L,074/063,オニスズメ
+M1L,075/063,형사구스,AR,Mina Nakai,메가브레이브,M1L,075/063,デカグース
+M1L,076/063,메가이상해꽃 ex,SR,5ban Graphics,메가브레이브,M1L,076/063,メガフシギバナex
+M1L,077/063,메가폭타 ex,SR,5ban Graphics,메가브레이브,M1L,077/063,メガバクーダex
+M1L,078/063,메가루카리오 ex,SR,takuyoa,메가브레이브,M1L,078/063,メガルカリオex
+M1L,079/063,메가앱솔 ex,SR,aky CG Works,메가브레이브,M1L,079/063,メガアブソルex
+M1L,080/063,메가입치트 ex,SR,aky CG Works,메가브레이브,M1L,080/063,メガクチートex
+M1L,081/063,밤의 들것,SR,Toyste Beach,메가브레이브,M1L,081/063,パワープロテイン
+M1L,082/063,파워프로틴,SR,Toyste Beach,메가브레이브,M1L,082/063,ファイトゴング
+M1L,083/063,파이팅공,SR,Toyste Beach,메가브레이브,M1L,083/063,夜のタンカ
+M1L,084/063,풍선,SR,Studio Bora Inc.,메가브레이브,M1L,084/063,ふうせん
+M1L,085/063,릴리에의 결심,SR,Atsushi Furusawa,메가브레이브,M1L,086/063,リーリエの決心
+M1L,086/063,마티스의 거래,SR,Hideki Ishikawa,메가브레이브,M1L,085/063,マチスの取引
+M1L,087/063,메가이상해꽃 ex,SAR,mashu,메가브레이브,M1L,087/063,メガフシギバナex
+M1L,088/063,메가루카리오 ex,SAR,Atsushi Furusawa,메가브레이브,M1L,088/063,メガルカリオex
+M1L,089/063,메가앱솔 ex,SAR,Mitsuhiro Arita,메가브레이브,M1L,089/063,メガアブソルex
+M1L,090/063,릴리에의 결심,SAR,satoma,메가브레이브,M1L,091/063,リーリエの決心
+M1L,091/063,마티스의 거래,SAR,osare,메가브레이브,M1L,090/063,マチスの取引
+M1L,092/063,메가루카리오 ex,MUR,5ban Graphics,메가브레이브,M1L,092/063,メガルカリオex
+M1S,064/063,단단지,AR,OKUBO,메가심포니아,M1S,064/063,ツボツボ
+M1S,065/063,아이스크,AR,Tetsu Kayama,메가심포니아,,,
+M1S,066/063,레오꼬,AR,Teeziro,메가심포니아,M1S,066/063,シシコ
+M1S,067/063,눈쓰개,AR,Nurikabe,메가심포니아,M1S,067/063,ユキカブリ
+M1S,068/063,블로스터,AR,Mori Yuu,메가심포니아,M1S,068/063,ブロスター
+M1S,069/063,인텔리레온,AR,Ligton,메가심포니아,M1S,069/063,インテレオン
+M1S,070/063,목도리키텔,AR,Akira Komayama,메가심포니아,M1S,070/063,エリキテル
+M1S,071/063,후딘,AR,Aya Kusube,메가심포니아,M1S,071/063,フーディン
+M1S,072/063,껍질몬,AR,Tetsu Kayama,메가심포니아,M1S,072/063,ヌケニン
+M1S,073/063,묘두기,AR,Arai Kiriko,메가심포니아,M1S,073/063,ハカドッグ
+M1S,074/063,딜리버드,AR,Takeshi Nakamura,메가심포니아,M1S,074/063,デリバード
+M1S,075/063,포곰곰,AR,OKACHEKE,메가심포니아,M1S,075/063,ヌイコグマ
+M1S,076/063,메가눈설왕 ex,SR,5ban Graphics,메가심포니아,M1S,076/063,メガユキノオーex
+M1S,077/063,메가썬더볼트 ex,SR,5ban Graphics,메가심포니아,M1S,077/063,メガライボルトex
+M1S,078/063,메가가디안 ex,SR,takuyoa,메가심포니아,M1S,078/063,メガサーナイトex
+M1S,079/063,메가라티아스 ex,SR,5ban Graphics,메가심포니아,M1S,079/063,メガラティアスex
+M1S,080/063,메가캥카 ex,SR,5ban Graphics,메가심포니아,M1S,080/063,メガガルーラex
+M1S,081/063,메가시그널,SR,inose yukie,메가심포니아,M1S,083/063,メガシグナル
+M1S,082/063,이상한사탕,SR,Studio Bora Inc.,메가심포니아,M1S,082/063,ふしぎなアメ
+M1S,083/063,절친 포핀,SR,AYUMI ODASHIMA,메가심포니아,M1S,081/063,なかよしポフィン
+M1S,084/063,민진의 헤아림,SR,Iori Suzuki,메가심포니아,M1S,085/063,ミツルの思いやり
+M1S,085/063,아세로라의 장난,SR,Yuu Nishida,메가심포니아,M1S,084/063,アセロラのいたずら
+M1S,086/063,미스터리 가든,SR,AYUMI ODASHIMA,메가심포니아,M1S,086/063,ミステリーガーデン
+M1S,087/063,메가가디안 ex,SAR,Raita Kazama,메가심포니아,M1S,087/063,メガサーナイトex
+M1S,088/063,메가라티아스 ex,SAR,AKIRA EGAWA,메가심포니아,M1S,088/063,メガラティアスex
+M1S,089/063,메가캥카 ex,SAR,GOTO minori,메가심포니아,M1S,089/063,メガガルーラex
+M1S,090/063,민진의 헤아림,SAR,Jiro Sasumo,메가심포니아,M1S,091/063,ミツルの思いやり
+M1S,091/063,아세로라의 장난,SAR,sui,메가심포니아,M1S,090/063,アセロラのいたずら
+M1S,092/063,메가가디안 ex,MUR,5ban Graphics,메가심포니아,M1S,092/063,メガサーナイトex
+MBG,022/021,고우스트,,Arai Kiriko,메가팬텀 ex,,,
+MBD,022/021,메로엣타,,Keisin,메가디안시 ex,,,
+M2,081/080,로파파,AR,Jerky,인페르노X,M2,081/080,ルンパッパ
+M2,082/080,콩알뚜기,AR,Nakamura Ippan,인페르노X,M2,082/080,マメバッタ
+M2,083/080,카르본,AR,Teeziro,인페르노X,M2,083/080,カルボウ
+M2,084/080,쥬레곤,AR,satoma,인페르노X,M2,084/080,ジュゴン
+M2,085/080,팽도리,AR,Jiro Sasumo,인페르노X,M2,085/080,ポッチャマ
+M2,086/080,멍파치,AR,tono,인페르노X,M2,086/080,ワンパチ
+M2,087/080,자시안,AR,Yoriyuki Ikegami,인페르노X,M2,087/080,ザシアン
+M2,088/080,플라이곤,AR,Ryota Murayama,인페르노X,M2,088/080,フライゴン
+M2,089/080,스트린더,AR,Terada Tera,인페르노X,M2,089/080,ストリンダー
+M2,090/080,토게데마루,AR,Orca,인페르노X,M2,090/080,トゲデマル
+M2,091/080,푸크린,AR,REND,인페르노X,M2,091/080,プクリン
+M2,092/080,겟핸보숭,AR,Shigenori Negishi,인페르노X,M2,092/080,エテボース
+M2,093/080,메가헤라크로스 ex,SR,5ban Graphics,인페르노X,M2,093/080,メガヘラクロスex
+M2,094/080,메가리자몽X ex,SR,takuyoa,인페르노X,M2,094/080,メガリザードンXex
+M2,095/080,춤추새 ex,SR,5ban Graphics,인페르노X,M2,095/080,オドリドリex
+M2,096/080,로토무 ex,SR,5ban Graphics,인페르노X,M2,096/080,ロトムex
+M2,097/080,무우마직 ex,SR,5ban Graphics,인페르노X,M2,097/080,ムウマージex
+M2,098/080,메가샤크니아 ex,SR,5ban Graphics,인페르노X,M2,098/080,メガサメハダーex
+M2,099/080,엠페르트 ex,SR,5ban Graphics,인페르노X,M2,099/080,エンペルトex
+M2,100/080,메가이어롭 ex,SR,5ban Graphics,인페르노X,M2,100/080,メガミミロップex
+M2,101/080,포켓몬 교체,SR,Studio Bora Inc.,인페르노X,M2,102/080,ポケモンいれかえ
+M2,102/080,히트 버너,SR,Toyste Beach,인페르노X,M2,101/080,ヒートバーナー
+M2,103/080,성스러운 부적,SR,Toyste Beach,인페르노X,M2,103/080,せいなるおまもり
+M2,104/080,펑크멧,SR,Studio Bora Inc.,인페르노X,M2,104/080,パンクメット
+M2,105/080,불놀이꾼,SR,Naoki Saito,인페르노X,M2,107/080,ひふきやろう
+M2,106/080,블래리의 한 수,SR,GIDORA,인페르노X,M2,105/080,ギーマの一手
+M2,107/080,빛나,SR,Yuu Nishida,인페르노X,M2,106/080,ヒカリ
+M2,108/080,배틀 콜로세움,SR,MARINA Chikazawa,인페르노X,M2,108/080,バトルコロシアム
+M2,109/080,이그니션 에너지,SR,,인페르노X,M2,109/080,イグニッションエネルギー
+M2,110/080,메가리자몽X ex,SAR,danciao,인페르노X,M2,110/080,メガリザードンXex
+M2,111/080,춤추새 ex,SAR,Shinji Kanda,인페르노X,M2,111/080,オドリドリex
+M2,112/080,로토무 ex,SAR,Yoshimi Miyoshi,인페르노X,M2,112/080,ロトムex
+M2,113/080,메가샤크니아 ex,SAR,nagimiso,인페르노X,M2,113/080,メガサメハダーex
+M2,114/080,메가이어롭 ex,SAR,Kinu Nishimura,인페르노X,M2,114/080,メガミミロップex
+M2,115/080,빛나,SAR,Atsushi Furusawa,인페르노X,M2,115/080,ヒカリ
+M2,116/080,메가리자몽X ex,MUR,takuyoa,인페르노X,M2,116/080,メガリザードンXex
+M2a,194/193,뷰티플라이,AR,Mori Yuu,MEGA 드림 ex,M2a,194/193,アゲハント
+M2a,195/193,독케일,AR,IKEDA Saki,MEGA 드림 ex,M2a,195/193,ドクケイル
+M2a,196/193,꼬몽울,AR,Yoko Hishida,MEGA 드림 ex,M2a,196/193,スボミー
+M2a,197/193,심향의 마그카르고,AR,Hideki Ishikawa,MEGA 드림 ex,M2a,197/193,ヒビキのマグカルゴ
+M2a,198/193,둔타,AR,Yoshimi Miyoshi,MEGA 드림 ex,M2a,198/193,ドンメル
+M2a,199/193,고라파덕,AR,REND,MEGA 드림 ex,M2a,199/193,コダック
+M2a,200/193,눈꼬마,AR,June,MEGA 드림 ex,M2a,200/193,ユキワラシ
+M2a,201/193,일레도리자드,AR,Takeshi Nakamura,MEGA 드림 ex,M2a,201/193,エレザード
+M2a,202/193,무우마,AR,mashu,MEGA 드림 ex,M2a,202/193,ムウマ
+M2a,203/193,토게키스,AR,satoma,MEGA 드림 ex,M2a,203/193,トゲキッス
+M2a,204/193,호브의 대로트,AR,Tomowaka,MEGA 드림 ex,M2a,204/193,ホップのオーロット
+M2a,205/193,로켓단의 따라큐,AR,GOSSAN,MEGA 드림 ex,M2a,205/193,ロケット団のミミッキュ
+M2a,206/193,로켓단의 닥트리오,AR,Whisker,MEGA 드림 ex,M2a,206/193,ロケット団のダグトリオ
+M2a,207/193,요가램,AR,KEIICHIRO ITO,MEGA 드림 ex,M2a,207/193,チャーレム
+M2a,208/193,난천의 화강돌,AR,hncl,MEGA 드림 ex,M2a,208/193,シロナのミカルゲ
+M2a,209/193,가라르 가로막구리,AR,Krgc,MEGA 드림 ex,M2a,209/193,ガラル タチフサグマ
+M2a,210/193,N의 제크로무,AR,Bun Toujo,MEGA 드림 ex,M2a,210/193,Nのゼクロム
+M2a,211/193,드라꼰,AR,Jerky,MEGA 드림 ex,M2a,211/193,ドラメシヤ
+M2a,212/193,드래런치,AR,Jerky,MEGA 드림 ex,M2a,212/193,ドロンチ
+M2a,213/193,스핀로토무,AR,Yukihiro Tada,MEGA 드림 ex,M2a,213/193,スピンロトム
+M2a,214/193,N의 포인트업,SR,Toyste Beach,MEGA 드림 ex,M2a,214/193,Nのポイントアップ
+M2a,215/193,로켓단의 리시버,SR,inose yukie,MEGA 드림 ex,M2a,217/193,ロケット団のレシーバー
+M2a,216/193,유리나팔,SR,Toyste Beach,MEGA 드림 ex,M2a,215/193,ガラスのラッパ
+M2a,217/193,하이퍼볼,SR,Studio Bora Inc.,MEGA 드림 ex,M2a,216/193,ハイパーボール
+M2a,218/193,카운터 게인,SR,Toyste Beach,MEGA 드림 ex,M2a,218/193,カウンターゲイン
+M2a,219/193,버베나와 헬레나,SR,Sanosuke Sakuma,MEGA 드림 ex,M2a,221/193,バーベナとヘレナ
+M2a,220/193,카나리,SR,Naoki Saito,MEGA 드림 ex,M2a,219/193,カナリィ
+M2a,221/193,태권왕의 수련,SR,GOSSAN,MEGA 드림 ex,M2a,220/193,からておうの稽古
+M2a,222/193,재밍타워,SR,AYUMI ODASHIMA,MEGA 드림 ex,M2a,222/193,ジャミングタワー
+M2a,223/193,메가리자몽X ex,MA,Saboteri,MEGA 드림 ex,M2a,223/193,メガリザードンXex
+M2a,224/193,메가눈여아 ex,MA,Saboteri,MEGA 드림 ex,M2a,224/193,メガユキメノコex
+M2a,225/193,메가저리더프 ex,MA,DOM,MEGA 드림 ex,M2a,225/193,メガシビルドンex
+M2a,226/193,메가가디안 ex,MA,Saboteri,MEGA 드림 ex,M2a,226/193,メガサーナイトex
+M2a,227/193,메가디안시 ex,MA,DOM,MEGA 드림 ex,M2a,227/193,メガディアンシーex
+M2a,228/193,메가루카리오 ex,MA,5ban Graphics,MEGA 드림 ex,M2a,228/193,メガルカリオex
+M2a,229/193,메가루차불 ex,MA,Taiga Kasai,MEGA 드림 ex,M2a,229/193,メガルチャブルex
+M2a,230/193,메가팬텀 ex,MA,Taiga Kasai,MEGA 드림 ex,M2a,230/193,メガゲンガーex
+M2a,231/193,메가곤율거니 ex,MA,Taiga Kasai,MEGA 드림 ex,M2a,231/193,メガズルズキンex
+M2a,232/193,메가망나뇽 ex,MA,DOM,MEGA 드림 ex,M2a,232/193,メガカイリューex
+M2a,233/193,메가눈여아 ex,SAR,Teeziro,MEGA 드림 ex,M2a,233/193,メガユキメノコex
+M2a,234/193,피카츄 ex,SAR,James Turner,MEGA 드림 ex,M2a,234/193,ピカチュウex
+M2a,235/193,메가저리더프 ex,SAR,akagi,MEGA 드림 ex,M2a,235/193,メガシビルドンex
+M2a,236/193,모야모의 찌리배리 ex,SAR,Akira Komayama,MEGA 드림 ex,M2a,236/193,ナンジャモのハラバリーex
+M2a,237/193,로켓단의 뮤츠 ex,SAR,Mitsuhiro Arita,MEGA 드림 ex,M2a,237/193,ロケット団のミュウツーex
+M2a,238/193,메가디안시 ex,SAR,Narano,MEGA 드림 ex,M2a,238/193,メガディアンシーex
+M2a,239/193,메가루차불 ex,SAR,AKIRA EGAWA,MEGA 드림 ex,M2a,239/193,メガルチャブルex
+M2a,240/193,메가팬텀 ex,SAR,danciao,MEGA 드림 ex,M2a,240/193,メガゲンガーex
+M2a,241/193,메가곤율거니 ex,SAR,nagimiso,MEGA 드림 ex,M2a,241/193,メガズルズキンex
+M2a,242/193,N의 조로아크 ex,SAR,Raita Kazama,MEGA 드림 ex,M2a,242/193,Nのゾロアークex
+M2a,243/193,마리의 오롱털 ex,SAR,Ligton,MEGA 드림 ex,M2a,243/193,マリィのオーロンゲex
+M2a,244/193,기로치 ex,SAR,SIE NANAHARA,MEGA 드림 ex,M2a,244/193,キチキギスex
+M2a,245/193,성호의 메타그로스 ex,SAR,chibi,MEGA 드림 ex,M2a,245/193,ダイゴのメタグロスex
+M2a,246/193,메가망나뇽 ex,SAR,DOM,MEGA 드림 ex,M2a,246/193,メガカイリューex
+M2a,247/193,서퍼,SAR,OKUBO,MEGA 드림 ex,M2a,249/193,サーファー
+M2a,248/193,아이리스의 투지,SAR,Kuroimori,MEGA 드림 ex,M2a,247/193,アイリスの闘志
+M2a,249/193,카나리,SAR,kantaro,MEGA 드림 ex,M2a,248/193,カナリィ
+M2a,250/193,메가망나뇽 ex,MUR,aky CG Works,MEGA 드림 ex,M2a,250/193,メガカイリューex
+MC,743/742,민화의 덩쿠리,,buchi,스타트 덱 100 배틀컬렉션,MC,743/742,エリカのモンジャラ
+MC,744/742,염뉴트,,Dsuke,스타트 덱 100 배틀컬렉션,MC,744/742,エンニュート
+MC,745/742,염버니,,Yuu Nishida,스타트 덱 100 배틀컬렉션,MC,745/742,ヒバニー
+MC,746/742,포푸니라,,Uninori,스타트 덱 100 배틀컬렉션,MC,746/742,マニューラ
+MC,747/742,투구뿌논,,Tonji Matsuno,스타트 덱 100 배틀컬렉션,MC,747/742,クワガノン
+MC,748/742,마릴,,Rond,스타트 덱 100 배틀컬렉션,MC,748/742,マリル
+MC,749/742,다크펫,,YASHIRO Nanaco,스타트 덱 100 배틀컬렉션,MC,749/742,ジュペッタ
+MC,750/742,나루림,,Yoshimoto Yoshimon,스타트 덱 100 배틀컬렉션,MC,750/742,ペロリーム
+MC,751/742,카포에라,,osare,스타트 덱 100 배틀컬렉션,MC,751/742,カポエラー
+MC,752/742,멜리시,,sui,스타트 덱 100 배틀컬렉션,MC,752/742,メレシー
+MC,753/742,그라에나,,Yano Keiji,스타트 덱 100 배틀컬렉션,MC,753/742,グラエナ
+MC,754/742,입치트,,sowsow,스타트 덱 100 배틀컬렉션,MC,754/742,クチート
+MC,755/742,이브이,,Makura Tami,스타트 덱 100 배틀컬렉션,MC,755/742,イーブイ
+MC,756/742,청목의 찌르호크,,kantaro,스타트 덱 100 배틀컬렉션,MC,756/742,アオキのムクホーク
+MC,757/742,나오하 ex,,5ban Graphics,스타트 덱 100 배틀컬렉션,MC,757/742,ニャオハex
+MC,758/742,메더 ex,,5ban Graphics,스타트 덱 100 배틀컬렉션,MC,758/742,マッギョex
+MC,759/742,메가다부니 ex,,5ban Graphics,스타트 덱 100 배틀컬렉션,MC,759/742,メガタブンネex
+MC,760/742,보스의 지령,,akagi,스타트 덱 100 배틀컬렉션,MC,760/742,ボスの指令
+MC,761/742,메가메가니움 ex,,Tika Matsuno,스타트 덱 100 배틀컬렉션,MC,761/742,メガメガニウムex
+MC,762/742,메가염무왕 ex,,nagimiso,스타트 덱 100 배틀컬렉션,MC,762/742,メガエンブオーex
+MC,763/742,메가장크로다일 ex,,Souichirou Gunjima,스타트 덱 100 배틀컬렉션,MC,763/742,メガオーダイルex
+MC,764/742,피카츄 ex,,booota,스타트 덱 100 배틀컬렉션,MC,764/742,ピカチュウex
+MC,765/742,릴리에의 삐삐 ex,,Naoki Saito,스타트 덱 100 배틀컬렉션,MC,765/742,リーリエのピッピex
+MC,766/742,메가리자몽Y ex,,aky CG Works,스타트 덱 100 배틀컬렉션,MC,766/742,メガリザードンYex
+M3,081/080,분떠도리,AR,kamonabe,니힐제로,M3,081/080,コフーライ
+M3,082/080,나몰빼미,AR,ryoma uratsuka,니힐제로,M3,082/080,モクロー
+M3,083/080,파이어로,AR,OKACHEKE,니힐제로,M3,083/080,ファイアロー
+M3,084/080,아마루르가,AR,Masa,니힐제로,M3,084/080,アマルルガ
+M3,085/080,데덴네,AR,HYOGONOSUKE,니힐제로,M3,085/080,デデンネ
+M3,086/080,삐삐,AR,Cona Nitanda,니힐제로,M3,086/080,ピッピ
+M3,087/080,냐스퍼,AR,MINAMINAMI Take,니힐제로,M3,087/080,ニャスパー
+M3,088/080,대코파스,AR,Kinu Nishimura,니힐제로,M3,088/080,ダイノーズ
+M3,089/080,티고라스,AR,Shimaris Yukichi,니힐제로,M3,089/080,チゴラス
+M3,090/080,드래피온,AR,kawayoo,니힐제로,M3,090/080,ドラピオン
+M3,091/080,쌍검킬,AR,Anesaki Dynamic,니힐제로,M3,091/080,ニダンギル
+M3,092/080,레트라,AR,Mina Nakai,니힐제로,M3,092/080,ラッタ
+M3,093/080,모크나이퍼 ex,SR,5ban Graphics,니힐제로,M3,093/080,ジュナイパーex
+M3,094/080,염뉴트 ex,SR,5ban Graphics,니힐제로,M3,094/080,エンニュートex
+M3,095/080,메가아쿠스타 ex,SR,5ban Graphics,니힐제로,M3,095/080,メガスターミーex
+M3,096/080,메가픽시 ex,SR,aky CG Works,니힐제로,M3,096/080,メガピクシーex
+M3,097/080,메가지가르데 ex,SR,takuyoa,니힐제로,M3,097/080,メガジガルデex
+M3,098/080,이벨타르 ex,SR,5ban Graphics,니힐제로,M3,098/080,イベルタルex
+M3,099/080,메가무장조 ex,SR,5ban Graphics,니힐제로,M3,099/080,メガエアームドex
+M3,100/080,나옹 ex,SR,5ban Graphics,니힐제로,M3,100/080,ニャースex
+M3,101/080,성스러운분말,SR,Toyste Beach,니힐제로,M3,101/080,エネルギーリサイクル
+M3,102/080,에너지 리사이클,SR,Toyste Beach,니힐제로,M3,102/080,せいなるはい
+M3,103/080,원더패치,SR,Studio Bora Inc.,니힐제로,M3,103/080,ポケパッド
+M3,104/080,포켓패드,SR,Studio Bora Inc.,니힐제로,M3,104/080,ワンダーパッチ
+M3,105/080,명희의 격려,SR,Atsushi Furusawa,니힐제로,M3,107/080,メイのはげまし
+M3,106/080,유카리,SR,Susumu Maeya,니힐제로,M3,108/080,ユカリ
+M3,107/080,이노,SR,DOM,니힐제로,M3,106/080,ピュール
+M3,108/080,타라곤,SR,Akira Komayama,니힐제로,M3,105/080,タラゴン
+M3,109/080,미르시티,SR,MARINA Chikazawa,니힐제로,M3,110/080,ミアレシティ
+M3,110/080,활력의 숲,SR,AYUMI ODASHIMA,니힐제로,M3,109/080,活力の森
+M3,111/080,메가아쿠스타 ex,SAR,takuyoa,니힐제로,M3,111/080,メガスターミーex
+M3,112/080,메가픽시 ex,SAR,Cona Nitanda,니힐제로,M3,112/080,メガピクシーex
+M3,113/080,메가지가르데 ex,SAR,kantaro,니힐제로,M3,113/080,メガジガルデex
+M3,114/080,나옹 ex,SAR,Natsumi Yoshida,니힐제로,M3,114/080,ニャースex
+M3,115/080,명희의 격려,SAR,Iori Suzuki,니힐제로,M3,115/080,メイのはげまし
+M3,116/080,유카리,SAR,Souichirou Gunjima,니힐제로,M3,116/080,ユカリ
+M3,117/080,메가지가르데 ex,MUR,takuyoa,니힐제로,M3,117/080,メガジガルデex
+M4,084/083,도치마론,AR,Atsushi Furusawa,닌자스피너,M4,084/083,ハリマロン
+M4,085/083,푸호꼬,AR,satoma,닌자스피너,M4,085/083,フォッコ
+M4,086/083,개구마르,AR,Susumu Maeya,닌자스피너,M4,086/083,ケロマツ
+M4,087/083,개굴반장,AR,Susumu Maeya,닌자스피너,M4,087/083,ゲコガシラ
+M4,088/083,전룡,AR,saino misaki,닌자스피너,M4,088/083,デンリュウ
+M4,089/083,제르네아스,AR,YASHIRO Nanaco,닌자스피너,M4,089/083,ゼルネアス
+M4,090/083,점토도리,AR,matazo,닌자스피너,M4,090/083,ネンドール
+M4,091/083,크로뱃,AR,Kazuhisa Uragami,닌자스피너,M4,091/083,クロバット
+M4,092/083,메탕구,AR,Kurata So,닌자스피너,M4,092/083,メタング
+M4,093/083,미끄네일,AR,aspara,닌자스피너,M4,093/083,ヌメイル
+M4,094/083,켄타로스,AR,Tsuyoshi Nagano,닌자스피너,M4,094/083,ケンタロス
+M4,095/083,보르그,AR,MARINA Chikazawa,닌자스피너,M4,095/083,ミルホッグ
+M4,096/083,독침붕 ex,SR,5ban Graphics,닌자스피너,M4,096/083,スピアーex
+M4,097/083,메가화염레오 ex,SR,Keisuke Azuma,닌자스피너,M4,097/083,メガカエンジシex
+M4,098/083,메가개굴닌자 ex,SR,takuyoa,닌자스피너,M4,098/083,メガゲッコウガex
+M4,099/083,메가플라엣테 ex,SR,aky CG Works,닌자스피너,M4,099/083,メガフラエッテex
+M4,100/083,펌킨인 ex,SR,5ban Graphics,닌자스피너,M4,100/083,パンプジンex
+M4,101/083,코바르온 ex,SR,5ban Graphics,닌자스피너,M4,101/083,コバルオンex
+M4,102/083,메가드래캄 ex,SR,5ban Graphics,닌자스피너,M4,102/083,メガドラミドロex
+M4,103/083,치라치노 ex,SR,5ban Graphics,닌자스피너,M4,103/083,チラチーノex
+M4,104/083,스페셜 레드카드,SR,Studio Bora Inc.,닌자스피너,M4,104/083,エネルギー回収
+M4,105/083,에너지 회수,SR,Studio Bora Inc.,닌자스피너,M4,106/083,スペシャルレッドカード
+M4,106/083,점보 아이스,SR,AYUMI ODASHIMA,닌자스피너,M4,105/083,ジャンボアイス
+M4,107/083,툴스크래퍼,SR,Studio Bora Inc.,닌자스피너,M4,107/083,ツールスクラッパー
+M4,108/083,AZ의 평온,SR,GIDORA,닌자스피너,M4,108/083,AZの安らぎ
+M4,109/083,마티에르,SR,Akira Komayama,닌자스피너,M4,111/083,マチエール
+M4,110/083,보미카의 연주,SR,Nobusawa/Mochipuyo,닌자스피너,M4,110/083,ホミカの演奏
+M4,111/083,지프,SR,Souichirou Gunjima,닌자스피너,M4,109/083,ジプソ
+M4,112/083,파도타기 비치,SR,AYUMI ODASHIMA,닌자스피너,M4,112/083,なみのりビーチ
+M4,113/083,프리즘타워,SR,MARINA Chikazawa,닌자스피너,M4,113/083,プリズムタワー
+M4,114/083,메가개굴닌자 ex,SAR,Susumu Maeya,닌자스피너,M4,114/083,メガゲッコウガex
+M4,115/083,메가플라엣테 ex,SAR,Teeziro,닌자스피너,M4,115/083,メガフラエッテex
+M4,116/083,메가드래캄 ex,SAR,Kazumasa Yasukuni,닌자스피너,M4,116/083,メガドラミドロex
+M4,117/083,치라치노 ex,SAR,Keisin,닌자스피너,M4,117/083,チラチーノex
+M4,118/083,AZ의 평온,SAR,OKACHEKE,닌자스피너,M4,118/083,AZの安らぎ
+M4,119/083,보미카의 연주,SAR,Tomowaka,닌자스피너,M4,119/083,ホミカの演奏
+M4,120/083,메가개굴닌자 ex,MUR,takuyoa,닌자스피너,M4,120/083,メガゲッコウガex
+M5,082/081,짜랑랑,AR,Jiro Sasumo,어비스아이,,,
+M5,083/081,카디나르마,AR,Iwamoto05,어비스아이,M5,083/081,グレンアルマ
+M5,084/081,콘치,AR,Gemi,어비스아이,M5,084/081,トサキント
+M5,085/081,누리레느,AR,satoma,어비스아이,M5,085/081,アシレーヌ
+M5,086/081,썬더볼트,AR,HICO KIM,어비스아이,M5,086/081,ライボルト
+M5,087/081,야도란,AR,Mékayu,어비스아이,M5,087/081,ヤドラン
+M5,088/081,타타륜,AR,Nakamura Ippan,어비스아이,M5,088/081,ダダリン
+M5,089/081,폭슬라이,AR,Jerky,어비스아이,M5,089/081,フォクスライ
+M5,090/081,자루도,AR,IKEDA Saki,어비스아이,M5,090/081,ザルード
+M5,091/081,바리톱스,AR,Yoriyuki Ikegami,어비스아이,M5,091/081,トリデプス
+M5,092/081,왕큰부리,AR,miki kudo,어비스아이,M5,092/081,ドデカバシ
+M5,093/081,실버디,AR,DOM,어비스아이,M5,093/081,シルヴァディ
+M5,094/081,라란티스 ex,SR,5ban Graphics,어비스아이,M5,094/081,ラランテスex
+M5,095/081,고래왕 ex,SR,5ban Graphics,어비스아이,M5,095/081,ホエルオーex
+M5,096/081,메가제라오라 ex,SR,5ban Graphics,어비스아이,M5,096/081,メガゼラオラex
+M5,097/081,메가샹델라 ex,SR,5ban Graphics,어비스아이,M5,097/081,メガシャンデラex
+M5,098/081,램펄드 ex,SR,5ban Graphics,어비스아이,M5,098/081,ラムパルドex
+M5,099/081,메가다크라이 ex,SR,5ban Graphics,어비스아이,M5,099/081,メガダークライex
+M5,100/081,모르페코 ex,SR,5ban Graphics,어비스아이,M5,100/081,モルペコex
+M5,101/081,메가몰드류 ex,SR,Keisuke Azuma,어비스아이,M5,101/081,メガドリュウズex
+M5,102/081,다크벨,SR,Toyste Beach,어비스아이,,,
+M5,103/081,아이언 디펜드업,SR,Studio Bora Inc.,어비스아이,M5,103/081,エネルギーつけかえ
+M5,104/081,에너지 갈아 달기,SR,Studio Bora Inc.,어비스아이,M5,102/081,アイアンディフェンダー
+M5,105/081,크래시 해머,SR,Ayaka Yoshida,어비스아이,,,
+M5,106/081,브레이브뱅글,SR,Toyste Beach,어비스아이,,,
+M5,107/081,호쾌봄,SR,inose yukie,어비스아이,M5,106/081,ごうかいボム
+M5,108/081,글라디오의 결전,SR,akagi,어비스아이,M5,109/081,グラジオの決戦
+M5,109/081,녹청파의 조무래기,SR,Teeziro,어비스아이,M5,110/081,サビ組のしたっぱ
+M5,110/081,무쿠,SR,nagimiso,어비스아이,M5,111/081,ムク
+M5,111/081,이슬의 기력,SR,En Morikura,어비스아이,M5,108/081,カスミの元気
+M5,112/081,메가제라오라 ex,SAR,GIDORA,어비스아이,M5,112/081,メガゼラオラex
+M5,113/081,메가샹델라 ex,SAR,REND,어비스아이,M5,113/081,メガシャンデラex
+M5,114/081,메가다크라이 ex,SAR,AKIRA EGAWA,어비스아이,M5,114/081,メガダークライex
+M5,115/081,모르페코 ex,SAR,NC Empire,어비스아이,M5,115/081,モルペコex
+M5,116/081,글라디오의 결전,SAR,DOM,어비스아이,M5,116/081,グラジオの決戦
+M5,117/081,무쿠,SAR,Naoki Saito,어비스아이,M5,117/081,ムク
+M5,118/081,메가다크라이 ex,MUR,5ban Graphics,어비스아이,M5,118/081,メガダークライex
+M6,077/076,비나방,AR,REND,스톰에메랄다,M6,077/076,アメモース
+M6,078/076,가디,AR,Yoshimoto Yoshimon,스톰에메랄다,M6,078/076,ガーディ
+M6,079/076,마그마번,AR,Taiga Kasai,스톰에메랄다,M6,079/076,ブーバーン
+M6,080/076,가이오가,AR,Nurikabe,스톰에메랄다,M6,080/076,カイオーガ
+M6,081/076,에레키블,AR,Rianti Hidayat,스톰에메랄다,M6,081/076,エレキブル
+M6,082/076,찌르성게,AR,Tetsu Kayama,스톰에메랄다,M6,082/076,バチンウニ
+M6,083/076,러브로스,AR,Taira Akitsu,스톰에메랄다,M6,083/076,ラブトロス
+M6,084/076,그란돈,AR,Ryota Murayama,스톰에메랄다,M6,084/076,グラードン
+M6,085/076,오케이징,AR,Rond,스톰에메랄다,M6,085/076,マーイーカ
+M6,086/076,루리리,AR,Narumi Sato,스톰에메랄다,M6,086/076,ルリリ
+M6,087/076,파비코리,AR,kodama,스톰에메랄다,M6,087/076,チルタリス
+M6,088/076,켈리몬,AR,Tomokazu Komiya,스톰에메랄다,M6,088/076,カクレオン
+M6,089/076,메가갑주무사 ex,SR,5ban Graphics,스톰에메랄다,M6,089/076,メガグソクムシャex
+M6,090/076,히트로토무 ex,SR,5ban Graphics,스톰에메랄다,M6,090/076,ヒートロトムex
+M6,091/076,약어리 ex,SR,5ban Graphics,스톰에메랄다,M6,091/076,ヨワシex
+M6,092/076,라이코 ex,SR,aky CG Works,스톰에메랄다,M6,092/076,ライコウex
+M6,093/076,메가골루그 ex,SR,5ban Graphics,스톰에메랄다,M6,093/076,メガゴルーグex
+M6,094/076,메가칼라마네로 ex,SR,5ban Graphics,스톰에메랄다,M6,094/076,メガカラマネロex
+M6,095/076,메가레쿠쟈 ex,SR,5ban Graphics,스톰에메랄다,M6,095/076,メガレックウザex
+M6,096/076,파이어로 ex,SR,5ban Graphics,스톰에메랄다,M6,096/076,ファイアローex
+M6,097/076,모험 랜턴,SR,inose yukie,스톰에메랄다,M6,097/076,ぼうけんのランタン
+M6,098/076,포켓몬 캐처,SR,Studio Bora Inc.,스톰에메랄다,M6,098/076,とくちゅうチョッキ
+M6,099/076,특별주문조끼,SR,Toyste Beach,스톰에메랄다,M6,099/076,ポケモンキャッチャー
+M6,100/076,MC의 호응유도,SR,DOM,스톰에메랄다,M6,100/076,MCの盛り上げ
+M6,101/076,성한,SR,Sanosuke Sakuma,스톰에메랄다,M6,101/076,ギリー
+M6,102/076,풍&란의 수행,SR,Yuu Nishida,스톰에메랄다,M6,103/076,フウとランの修行
+M6,103/076,피아나의 신뢰,SR,GIDORA,스톰에메랄다,M6,102/076,ヒガナの信頼
+M6,104/076,그로우 풀 에너지,SR,,스톰에메랄다,M6,104/076,グロウ草エネルギー
+M6,105/076,니트로 불꽃 에너지,SR,,스톰에메랄다,M6,105/076,ニトロ炎エネルギー
+M6,106/076,버블 물 에너지,SR,,스톰에메랄다,M6,106/076,バブル水エネルギー
+M6,107/076,메가갑주무사 ex,SAR,nagimiso,스톰에메랄다,M6,107/076,メガグソクムシャex
+M6,108/076,라이코 ex,SAR,Oku,스톰에메랄다,M6,108/076,ライコウex
+M6,109/076,메가골루그 ex,SAR,Takeshi Nakamura,스톰에메랄다,M6,109/076,メガゴルーグex
+M6,110/076,메가레쿠쟈 ex,SAR,Kazuki Minami,스톰에메랄다,,,
+M6,111/076,성한,SAR,Shimaris Yukichi,스톰에메랄다,M6,111/076,ギリー
+M6,112/076,피아나의 신뢰,SAR,Teeziro,스톰에메랄다,M6,112/076,ヒガナの信頼
+M6,113/076,메가레쿠쟈 ex,MUR,takuyoa,스톰에메랄다,M6,113/076,メガレックウザex
+M6a,104/103,알로라 나시,AR,AYUMI ODASHIMA,30th CELEBRATION,,,
+M6a,105/103,파이어,AR,mashu,30th CELEBRATION,,,
+M6a,106/103,라프라스,AR,Amelicart,30th CELEBRATION,,,
+M6a,107/103,프리져,AR,mashu,30th CELEBRATION,,,
+M6a,108/103,썬더,AR,mashu,30th CELEBRATION,,,
+M6a,109/103,스트린더,AR,Kazumasa Yasukuni,30th CELEBRATION,,,
+M6a,110/103,모르페코,AR,Yoshimi Miyoshi,30th CELEBRATION,,,
+M6a,111/103,흔들풍손,AR,Whisker,30th CELEBRATION,,,
+M6a,112/103,샹델라,AR,YASHIRO Nanaco,30th CELEBRATION,,,
+M6a,113/103,루가루암,AR,Raita Kazama,30th CELEBRATION,,,
+M6a,114/103,니드리나,AR,Taiga Kasai,30th CELEBRATION,,,
+M6a,115/103,알로라 나옹,AR,OKUBO,30th CELEBRATION,,,
+M6a,116/103,곤율랭,AR,GOSSAN,30th CELEBRATION,,,
+M6a,117/103,가라르 나옹,AR,OKUBO,30th CELEBRATION,,,
+M6a,118/103,타부자고,AR,toriyufu,30th CELEBRATION,,,
+MEE,020/019,이브이,,Hideki Ishikawa,이브이 ex,,,
+MEZ,020/019,조로아,,GOSSAN,조로아&조로아크 ex,,,
+MEM,018/017,나오하,,Jiro Sasumo,나오하&마스카나 ex,,,
