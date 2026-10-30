@@ -61,8 +61,10 @@
 
 /* 모바일 머리글: ⌕ 버튼으로 펼친 전체 폭 입력창 아래에 예시를 둔다 (design 9A). */
 @media (max-width: 639px) {
+  /* 열 너비를 화면 폭에 묶는다. 안 그러면 입력란 기본 너비(리눅스 크롬에서 더 넓다)만큼 열이 늘어나 가로 스크롤이 생긴다. */
   .header {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: var(--space);
   }
 
