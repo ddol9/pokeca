@@ -89,10 +89,14 @@ const setNames = new Map<string, string>(
 );
 
 const cards: Card[] = [];
+const broken: string[] = [];
 for (const year of years) {
   let misses = 0;
   for (let p = products?.[0] ?? 1; products ? p <= products[products.length - 1] : misses < 5; p++) {
-    const first = parseDetail(await page(id(year, p, 1)));
+    // 특정 제품만 계속 500을 내기도 한다(2023-001 S12a). 그 제품은 건너뛰고 끝에 알린다.
+    const html = await page(id(year, p, 1)).catch((e: Error) => (broken.push(e.message), null));
+    if (html === null) continue;
+    const first = parseDetail(html);
     if (!first) {
       misses++;
       continue;
@@ -123,4 +127,5 @@ const rows = [
 await writeFile(out, rows.map((r) => r.map(csvCell).join(",")).join("\n") + "\n");
 const missing = [...new Set(cards.map((c) => c.setCode).filter((s) => !setNames.has(s.toLowerCase())))];
 console.log(`\n카드 ${cards.length}장 → ${out}`);
+if (broken.length) console.log(`열리지 않아 건너뛴 제품: ${broken.join(", ")}`);
 if (missing.length) console.log(`세트 이름을 못 찾아 세트 코드로 채움: ${missing.join(", ")} (CSV에서 고쳐 주세요)`);

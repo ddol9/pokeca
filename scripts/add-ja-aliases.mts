@@ -3,7 +3,9 @@
 //   npm run cards:aliases-ja -- --in data/cards-kr.csv --out data/cards-kr.csv
 //
 // SV·메가 시리즈는 한글판과 일본판이 같은 세트 코드·번호를 쓴다(예: SV2a 201/165). TCGdex 일본어 데이터에서
-// 같은 코드·번호의 카드를 찾고, 일러스트레이터까지 같을 때만 별칭으로 붙인다. 다르면 붙이지 않고 목록으로 보여 준다.
+// 같은 코드·번호의 카드를 찾고, 일러스트레이터까지 같을 때만 별칭으로 붙인다. 한글판은 트레이너스 카드를
+// 가나다순으로 다시 매겨 번호가 어긋나기도 한다(한글 SV2a 196 = 일본 198). 그때는 같은 세트의 기본 번호를 넘는
+// 카드 가운데 일러스트레이터가 같은 카드가 하나뿐일 때만 그 번호로 붙인다. 그래도 못 찾으면 목록으로 보여 준다.
 // --cache 폴더에 받은 응답을 남겨 두면 다시 돌릴 때 요청하지 않는다.
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
@@ -67,8 +69,32 @@ const c = {
 };
 const norm = (s: string | undefined) => (s ?? "").trim().toLowerCase().replace(/\s+/g, " ");
 
+// 세트의 기본 번호를 넘는 일본판 카드들(번호 → 카드). 번호가 어긋난 카드를 일러스트레이터로 찾을 때만 받는다.
+const secretCards = new Map<string, Promise<JaCard[]>>();
+function jaSecrets(setId: string, total: number): Promise<JaCard[]> {
+  const key = `${setId}/${total}`;
+  if (!secretCards.has(key))
+    secretCards.set(
+      key,
+      (async () => {
+        const set = (await (await fetch(`${API}/sets/${encodeURIComponent(setId)}`)).json()) as { cards: { localId: string }[] };
+        const ids = set.cards.map((card) => card.localId).filter((id) => Number(id) > total);
+        const cards: JaCard[] = [];
+        for (const id of ids) {
+          const card = await jaCard(setId, id);
+          if (card) cards.push(card);
+        }
+        return cards;
+      })(),
+    );
+  return secretCards.get(key)!;
+}
+// 이미 다른 행에 붙은 일본판 번호(세트별). 같은 카드를 두 번 붙이지 않는다.
+const used = new Set(rows.slice(1).filter((r) => r.cells[c.aliasSet]).map((r) => `${r.cells[c.aliasSet]} ${r.cells[c.aliasNumber]}`));
+
 let added = 0;
 const skipped: string[] = [];
+const moved: string[] = [];
 for (const { line, cells } of rows.slice(1)) {
   const setCode = cells[c.set];
   const number = cells[c.number];
@@ -85,17 +111,31 @@ for (const { line, cells } of rows.slice(1)) {
     skipped.push(`${label}: 일본판 카드 없음`);
     continue;
   }
+  let aliasNumber = number;
+  let jaName = ja.name;
   if (norm(ja.illustrator) !== norm(cells[c.illustrator])) {
-    skipped.push(`${label}: 일러스트레이터 다름 (한글 ${cells[c.illustrator] || "-"} / 일본 ${ja.illustrator ?? "-"})`);
-    continue;
+    const total = Number(number.split("/")[1]);
+    const same = Number.isFinite(total) && cells[c.illustrator]
+      ? (await jaSecrets(setId, total)).filter((card) => norm(card.illustrator) === norm(cells[c.illustrator]))
+      : [];
+    if (same.length === 1 && !used.has(`${setId} ${same[0].localId}/${total}`)) {
+      aliasNumber = `${same[0].localId}/${total}`;
+      jaName = same[0].name;
+    } else {
+      skipped.push(`${label}: 일러스트레이터 다름 (한글 ${cells[c.illustrator] || "-"} / 일본 ${ja.illustrator ?? "-"})`);
+      continue;
+    }
   }
+  if (aliasNumber !== number) moved.push(`${label} → 일본 ${aliasNumber} ${jaName}`);
+  used.add(`${setId} ${aliasNumber}`);
   cells[c.aliasSet] = setId;
-  cells[c.aliasNumber] = number;
-  cells[c.name] = ja.name;
+  cells[c.aliasNumber] = aliasNumber;
+  cells[c.name] = jaName;
   added++;
 }
 
 const cell = (v = "") => (/[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v);
 await writeFile(out!, rows.map((r) => header.map((_, i) => cell(r.cells[i])).join(",")).join("\n") + "\n");
 console.log(`일본판 별칭 ${added}장 추가 → ${out}`);
+if (moved.length) console.log(`번호가 달라 일러스트레이터로 맞춤 ${moved.length}장:\n  ${moved.join("\n  ")}`);
 if (skipped.length) console.log(`붙이지 않음 ${skipped.length}장:\n  ${skipped.join("\n  ")}`);
