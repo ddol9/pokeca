@@ -42,6 +42,8 @@ test("artist pages send signed-out visitors to the Kakao/Google login", async ({
     const authorize = page.waitForRequest((r) => r.url().includes(`/auth/v1/authorize?provider=${provider}`));
     await page.getByRole("button", { name }).click();
     expect(new URL((await authorize).url()).searchParams.get("redirect_to")).toMatch(/\/artist\/callback$/);
+    // 페이지가 사이트를 떠날 때까지 기다린다. 아니면 늦게 시작된 공급자 이동이 다음 goto를 끊는다.
+    await page.waitForURL((u) => u.port !== "3100", { waitUntil: "commit" });
   }
 });
 
