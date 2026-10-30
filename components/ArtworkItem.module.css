@@ -52,6 +52,18 @@
   font-weight: 700;
 }
 
+a.artist,
+a.artist:visited {
+  color: var(--color-ink);
+}
+
+.card {
+  margin: 0;
+  font-feature-settings: "tnum";
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
 .domain {
   color: var(--color-muted);
 }

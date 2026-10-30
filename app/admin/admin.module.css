@@ -326,3 +326,25 @@
 .short {
   max-width: 320px;
 }
+
+/* 작가 소셜 로그인 버튼. 각 공급자의 버튼 규칙(카카오 노랑 + 검정 글자, 구글 흰 바탕 + 테두리)을 따른다. */
+.kakao,
+.google {
+  min-height: var(--touch);
+  padding-inline: calc(var(--space) * 2);
+  border-radius: var(--radius);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.kakao {
+  background: var(--color-kakao);
+  color: var(--color-kakao-ink);
+  border: 1px solid var(--color-kakao);
+}
+
+.google {
+  background: var(--color-google);
+  color: var(--color-google-ink);
+  border: 1px solid var(--color-google-rule);
+}

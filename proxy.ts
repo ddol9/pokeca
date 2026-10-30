@@ -4,7 +4,12 @@ import { isVisitorId, VISITOR_COOKIE } from "@/lib/visitor";
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  if (pathname.startsWith("/admin") || pathname.startsWith("/api/admin")) return adminSession(request);
+  if (pathname.startsWith("/admin") || pathname.startsWith("/api/admin")) {
+    return session(request, "/admin", ["/admin/login"]);
+  }
+  if (pathname.startsWith("/artist/") || pathname === "/artist" || pathname.startsWith("/api/artist")) {
+    return session(request, "/artist", ["/artist/login", "/artist/callback"]);
+  }
   return visitor(request);
 }
 
@@ -27,9 +32,10 @@ function visitor(request: NextRequest) {
   return response;
 }
 
-// 어드민 로그인 세션 갱신. 서버 컴포넌트는 쿠키를 쓸 수 없어서 만료된 토큰을 여기서 새로 받아 둔다.
-// 로그인하지 않은 화면 요청은 로그인으로 보낸다. 허용 목록 확인은 각 화면·API의 requireAdmin()이 한다.
-async function adminSession(request: NextRequest) {
+// 어드민·작가 로그인 세션 갱신. 서버 컴포넌트는 쿠키를 쓸 수 없어서 만료된 토큰을 여기서 새로 받아 둔다.
+// 로그인하지 않은 화면 요청은 그 영역의 로그인으로 보낸다.
+// 권한 확인은 각 화면·API가 한다(어드민 requireAdmin(), 작가 requireArtist()).
+async function session(request: NextRequest, area: "/admin" | "/artist", open: string[]) {
   let response = NextResponse.next({ request });
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -50,9 +56,9 @@ async function adminSession(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   const { pathname } = request.nextUrl;
-  if (!user && pathname.startsWith("/admin") && pathname !== "/admin/login") {
+  if (!user && pathname.startsWith(area) && !open.includes(pathname)) {
     const login = request.nextUrl.clone();
-    login.pathname = "/admin/login";
+    login.pathname = `${area}/login`;
     login.search = "";
     return NextResponse.redirect(login);
   }

@@ -1,19 +1,23 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { PublicArtwork } from "@/lib/artworks";
 import { FORMAT_INFO } from "@/lib/formats";
 import styles from "./ArtworkItem.module.css";
 
 // 작품 하나 (design 4A). 모든 작품은 사이트에 보관한 도안이다.
-//   미리보기(누르면 크게 보기) + @작가 · 규격 + [다운로드] [···]
+//   미리보기(누르면 크게 보기) + [카드 번호] + @작가 · 규격 + [다운로드] [···]
+// 카드 번호는 작가 페이지처럼 여러 카드가 섞인 목록에서만 보여 준다.
 export function ArtworkItem({
   artwork,
+  card,
   onView,
   onReport,
 }: {
   artwork: PublicArtwork;
+  card?: { label: string; path: string; name: string };
   onView: (a: PublicArtwork) => void;
   onReport: (a: PublicArtwork) => void;
 }) {
@@ -36,8 +40,13 @@ export function ArtworkItem({
         />
       </button>
       <div className={styles.body}>
+        {card && (
+          <p className={styles.card}>
+            <Link href={card.path}>{card.label}</Link> <span className={styles.domain}>{card.name}</span>
+          </p>
+        )}
         <p className={styles.meta}>
-          <strong className={styles.artist}>@{artwork.artistName}</strong>
+          <ArtistName artwork={artwork} />
           <span> · {label}</span>
         </p>
         <div className={styles.actions}>
@@ -46,6 +55,17 @@ export function ArtworkItem({
         </div>
       </div>
     </li>
+  );
+}
+
+// 승인된 작가 계정의 작품이면 작가 페이지로 잇는다.
+export function ArtistName({ artwork }: { artwork: PublicArtwork }) {
+  return artwork.artistHandle ? (
+    <Link href={`/artists/${artwork.artistHandle}`} className={styles.artist}>
+      @{artwork.artistName}
+    </Link>
+  ) : (
+    <strong className={styles.artist}>@{artwork.artistName}</strong>
   );
 }
 

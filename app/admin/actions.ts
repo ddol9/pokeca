@@ -4,6 +4,7 @@ import { refresh } from "next/cache";
 import { redirect } from "next/navigation";
 import { requireAdmin } from "@/lib/admin";
 import { closeReport, LINK_STATUSES, linkReport, setLinkStatus, type LinkStatus } from "@/lib/admin-data";
+import { setArtistStatus, type ArtistStatus } from "@/lib/artists";
 import { authClient } from "@/lib/supabase/auth";
 
 // 어드민 server action. 각 action은 requireAdmin()으로 시작한다(화면 보호와 별개로 직접 호출도 막는다).
@@ -30,6 +31,15 @@ export async function recordLinkCheck(form: FormData) {
   const status = String(form.get("linkStatus"));
   if (!LINK_STATUSES.includes(status as LinkStatus)) return;
   await setLinkStatus(String(form.get("id")), status as LinkStatus);
+  refresh();
+}
+
+// 작가 계정 승인·거절. 거절하면 새 업로드만 막는다.
+export async function reviewArtist(form: FormData) {
+  const admin = await requireAdmin();
+  const status = String(form.get("status"));
+  if (status !== "approved" && status !== "rejected") return;
+  await setArtistStatus(String(form.get("userId")), status as ArtistStatus, admin.email);
   refresh();
 }
 

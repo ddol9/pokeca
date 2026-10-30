@@ -79,9 +79,19 @@ describe("access boundary", () => {
   });
 });
 
-describe("admin accounts", () => {
-  it("cannot be created by public signup (설계: 일반 사용자 로그인 없음)", async () => {
-    const { error } = await anon.auth.signUp({ email: `stranger-${Date.now()}@example.com`, password: "stranger-password-1" });
-    expect(error?.message).toMatch(/signups not allowed/i);
+describe("public signup", () => {
+  // 작가 소셜 로그인 때문에 가입은 열려 있다(Supabase는 이메일 가입만 따로 막을 수 없다).
+  // 이렇게 만든 이메일 계정은 어드민도 작가도 아니다. 화면에서 막히는지는 e2e artist.spec이 확인한다.
+  it("creates an email account with no admin or artist record", async () => {
+    const { data, error } = await anon.auth.signUp({
+      email: `stranger-${Date.now()}@example.com`,
+      password: "stranger-password-1",
+    });
+    expect(error).toBeNull();
+    const id = data.user!.id;
+    expect(data.user!.app_metadata.provider).toBe("email");
+    expect(await sql`select 1 from admins where user_id = ${id}`).toHaveLength(0);
+    expect(await sql`select 1 from artists where user_id = ${id}`).toHaveLength(0);
+    await sql`delete from auth.users where id = ${id}`;
   });
 });

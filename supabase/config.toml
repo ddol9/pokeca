@@ -157,11 +157,12 @@ max_indexes = 5
 enabled = true
 # The base URL of your website. Used as an allow-list for redirects and for constructing URLs used
 # in emails.
-site_url = "http://127.0.0.1:3000"
+site_url = "http://127.0.0.1:3100"
 # The public URL that Auth serves on. Defaults to the API external URL with `/auth/v1` appended.
 # external_url = ""
 # A list of *exact* URLs that auth providers are permitted to redirect to post authentication.
-additional_redirect_urls = ["https://127.0.0.1:3000"]
+# 작가 소셜 로그인(카카오·구글)이 돌아오는 주소. 운영에서는 대시보드 URL Configuration에 운영 주소를 넣는다.
+additional_redirect_urls = ["http://127.0.0.1:3100/artist/callback", "http://localhost:3100/artist/callback"]
 # How long tokens are valid for, in seconds. Defaults to 3600 (1 hour), maximum 604,800 (1 week).
 jwt_expiry = 3600
 # JWT issuer URL. If not set, defaults to auth.external_url.
@@ -174,7 +175,9 @@ enable_refresh_token_rotation = true
 # Requires enable_refresh_token_rotation = true.
 refresh_token_reuse_interval = 10
 # Allow/disallow new user signups to your project.
-enable_signup = false
+# 작가는 카카오·구글로 처음 로그인할 때 계정이 생기므로 켠다. 계정만으로는 아무 권한이 없다
+# (작가 신청 + 어드민 승인, 어드민 허용 목록이 따로 막는다).
+enable_signup = true
 # Allow/disallow anonymous sign-ins to your project.
 enable_anonymous_sign_ins = false
 # Allow/disallow testing manual linking of accounts
@@ -321,6 +324,22 @@ max_frequency = "5s"
 # Use an external OAuth provider. The full list of providers are: `apple`, `azure`, `bitbucket`,
 # `discord`, `facebook`, `github`, `gitlab`, `google`, `keycloak`, `linkedin_oidc`, `notion`, `twitch`,
 # `twitter`, `x`, `slack`, `spotify`, `workos`, `zoom`.
+# 작가 로그인. 키를 .env.local(SUPABASE_AUTH_EXTERNAL_*)에 넣고 enabled = true로 바꾸면 로컬에서도 쓸 수 있다.
+# 콜백 주소(각 콘솔에 등록): http://127.0.0.1:54321/auth/v1/callback (운영: https://<프로젝트>.supabase.co/auth/v1/callback)
+[auth.external.kakao]
+enabled = false
+client_id = "env(SUPABASE_AUTH_EXTERNAL_KAKAO_CLIENT_ID)"
+secret = "env(SUPABASE_AUTH_EXTERNAL_KAKAO_SECRET)"
+# 카카오 이메일 동의는 비즈 앱에서만 받을 수 있어 이메일 없이도 로그인되게 한다.
+email_optional = true
+
+[auth.external.google]
+enabled = true
+client_id = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_ID)"
+secret = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET)"
+# 로컬에서 구글 로그인을 쓰려면 필요하다.
+skip_nonce_check = true
+
 [auth.external.apple]
 enabled = false
 client_id = ""
