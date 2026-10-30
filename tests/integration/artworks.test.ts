@@ -75,6 +75,7 @@ describe("upload and create", () => {
       sourceDomain: "cafe.naver.com",
       membersOnly: false,
       printSizeVerified: false,
+      artistHandle: null,
     });
 
     const download = await resolveDownload(id);

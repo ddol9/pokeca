@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import type { PublicArtwork } from "@/lib/artworks";
 import { FORMAT_INFO } from "@/lib/formats";
-import { DownloadAction, SourceLink } from "./ArtworkItem";
+import { ArtistName, DownloadAction, SourceLink } from "./ArtworkItem";
 import styles from "./ArtworkViewer.module.css";
 
 // 도안 크게 보기. 사이트 안에서 감상하고 바로 받는다.
@@ -35,7 +35,7 @@ export function ArtworkViewer({ artwork, onClose }: { artwork: PublicArtwork | n
           </div>
           <div className={styles.info}>
             <h2 id="viewer-title" className={styles.title}>
-              @{artwork.artistName} · {label}
+              <ArtistName artwork={artwork} /> · {label}
             </h2>
             <p className={styles.size}>{FORMAT_INFO[artwork.format].printSize}</p>
             <SourceLink artwork={artwork} />

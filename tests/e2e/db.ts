@@ -1,3 +1,4 @@
+import { createServerClient } from "@supabase/ssr";
 import { createClient } from "@supabase/supabase-js";
 import postgres from "postgres";
 import sharp from "sharp";
@@ -59,6 +60,12 @@ export async function clearArtworks(): Promise<void> {
   }
 }
 
+// 작가 계정과 로그인 계정을 지운다(작품의 artist_id는 비워진다).
+export async function clearArtists(): Promise<void> {
+  const users = await sql<{ user_id: string }[]>`select user_id from artists`;
+  for (const u of users) await service.auth.admin.deleteUser(u.user_id);
+}
+
 // 어드민 로그인용 계정. 공개 가입이 꺼져 있어 서비스 키로 만든다.
 export const ADMIN = { email: "admin-e2e@example.com", password: "e2e-admin-password" };
 export const NOT_ADMIN = { email: "visitor-e2e@example.com", password: "e2e-visitor-password" };
@@ -74,4 +81,39 @@ export async function ensureUser(user: { email: string; password: string }, admi
   if (admin) {
     await sql`insert into admins (user_id, email) values (${found.id}, ${user.email}) on conflict do nothing`;
   }
+}
+
+// 카카오 로그인을 마친 것과 같은 브라우저 세션을 만든다. 실제 카카오 화면은 거치지 않는다.
+// 계정은 비밀번호로 만들어 서버 쪽에서 로그인한 뒤, 공급자를 kakao로 표시하고 세션 쿠키를 넘긴다.
+export async function socialSessionCookies(email: string, baseURL: string) {
+  const password = "e2e-social-password";
+  const { data } = await service.auth.admin.listUsers();
+  let user = data.users.find((u) => u.email === email);
+  if (!user) {
+    const created = await service.auth.admin.createUser({ email, password, email_confirm: true });
+    if (created.error) throw created.error;
+    user = created.data.user;
+  }
+  const updated = await service.auth.admin.updateUserById(user.id, {
+    password,
+    app_metadata: { provider: "kakao", providers: ["kakao"] },
+    user_metadata: { full_name: "카톡닉네임" },
+  });
+  if (updated.error) throw updated.error;
+  return sessionCookies(email, password, baseURL);
+}
+
+// 비밀번호로 서버 쪽에서 로그인하고, 브라우저에 넣을 세션 쿠키를 돌려준다.
+export async function sessionCookies(email: string, password: string, baseURL: string) {
+  const jar = new Map<string, string>();
+  const client = createServerClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!, {
+    cookies: {
+      getAll: () => [...jar].map(([name, value]) => ({ name, value })),
+      setAll: (list) => list.forEach(({ name, value }) => jar.set(name, value)),
+    },
+  });
+  const { error } = await client.auth.signInWithPassword({ email, password });
+  if (error) throw error;
+  const url = new URL(baseURL);
+  return [...jar].map(([name, value]) => ({ name, value, domain: url.hostname, path: "/" }));
 }

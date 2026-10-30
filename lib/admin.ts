@@ -65,9 +65,12 @@ export async function applyAdminAction(id: string, input: AdminArtworkAction, ad
   }
 }
 
+export function normalizeConfirm(s: string): string {
+  return s.normalize("NFKC").trim().toLowerCase().replace(/\s+/g, " ");
+}
+
 async function requireConfirm(id: string, confirm: string | undefined) {
   const expected = await expectedConfirm(id);
   if (!expected) throw new ArtworkError("not_found");
-  const normalize = (s: string) => s.normalize("NFKC").trim().toLowerCase().replace(/\s+/g, " ");
-  if (!confirm || normalize(confirm) !== normalize(expected)) throw new ArtworkError("confirm_mismatch");
+  if (!confirm || normalizeConfirm(confirm) !== normalizeConfirm(expected)) throw new ArtworkError("confirm_mismatch");
 }

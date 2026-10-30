@@ -43,6 +43,11 @@ async function Detail({ params }: { params: PageProps<"/admin/artworks/[id]">["p
         <p>
           <Link href={cardPath(a.setCode, a.collectorNumber)}>공개 카드 페이지 보기</Link>
         </p>
+        {a.artistAccount && (
+          <p>
+            작가가 직접 올린 작품 · <Link href="/admin/artists">작가 계정 /artists/{a.artistAccount.handle}</Link>
+          </p>
+        )}
       </header>
 
       <section className={styles.section} aria-labelledby="source-heading">

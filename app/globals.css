@@ -14,6 +14,12 @@
   --color-link-visited: #6b4f8a;
   --color-disabled: #8a939e;
   --color-backdrop: rgb(28 36 48 / 0.4);
+  /* 소셜 로그인 버튼은 각 공급자의 버튼 규칙 색을 그대로 쓴다. */
+  --color-kakao: #fee500;
+  --color-kakao-ink: rgb(0 0 0 / 0.85);
+  --color-google: #ffffff;
+  --color-google-ink: #1f1f1f;
+  --color-google-rule: #747775;
 
   --font-body: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
     "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;

@@ -2,7 +2,7 @@
 
 import { createClient } from "@supabase/supabase-js";
 
-// 어드민 브라우저 업로드 (eng D3). 서버가 발급한 서명 URL로 Supabase Storage에 직접 올린다.
+// 어드민·작가 브라우저 업로드 (eng D3). 서버가 발급한 서명 URL로 Supabase Storage에 직접 올린다.
 // 공개 키 클라이언트지만 서명 토큰이 있는 경로에만 쓸 수 있다.
 const storage = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!, {
   auth: { persistSession: false },
@@ -15,8 +15,13 @@ export const UPLOAD_ERRORS: Record<string, string> = {
 };
 
 // 허락 근거(evidence)는 별도 비공개 버킷에 올린다. 서명 토큰이 버킷·경로에 묶여 있어 다른 곳에는 못 쓴다.
-export async function uploadFile(kind: "original" | "thumbnail" | "evidence", file: File): Promise<string> {
-  const res = await fetch("/api/admin/uploads", {
+// api는 업로드 URL을 발급하는 영역: 어드민 "/api/admin", 작가 "/api/artist".
+export async function uploadFile(
+  kind: "original" | "thumbnail" | "evidence",
+  file: File,
+  api: "/api/admin" | "/api/artist" = "/api/admin",
+): Promise<string> {
+  const res = await fetch(`${api}/uploads`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ kind, mimeType: file.type, sizeBytes: file.size }),
@@ -48,4 +53,5 @@ const ERRORS: Record<string, string> = {
   confirm_mismatch: "카드 번호가 맞지 않아요.",
   withdrawn_is_final: "철회한 작품은 바꿀 수 없어요.",
   unauthorized: "로그인이 풀렸어요. 다시 로그인해 주세요.",
+  artist_not_approved: "아직 승인되지 않은 작가 계정이에요. 승인된 뒤에 올릴 수 있어요.",
 };

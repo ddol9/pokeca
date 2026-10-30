@@ -102,6 +102,7 @@ export type ConsentEvent = {
 
 export type AdminArtworkDetail = AdminArtworkRow & {
   cardName: string;
+  artistAccount: { handle: string; status: string } | null; // 작가가 직접 올린 작품
   printSizeVerified: boolean;
   files: { kind: "original" | "thumbnail"; mimeType: string; sizeBytes: number }[];
   events: ConsentEvent[];
@@ -113,12 +114,13 @@ export async function getAdminArtwork(id: string, now = new Date()): Promise<Adm
   const { data, error } = await db()
     .from("artworks")
     .select(
-      `${BASE}, print_size_verified, cards(set_code, collector_number, name_ko), artwork_files(kind, mime_type, size_bytes), consent_events(id, kind, before, after, reason, evidence_path, actor, created_at), reports(id, reason, status, created_at)`,
+      `${BASE}, print_size_verified, artists(handle, status), cards(set_code, collector_number, name_ko), artwork_files(kind, mime_type, size_bytes), consent_events(id, kind, before, after, reason, evidence_path, actor, created_at), reports(id, reason, status, created_at)`,
     )
     .eq("id", id)
     .maybeSingle<
       Row & {
         print_size_verified: boolean;
+        artists: { handle: string; status: string } | null;
         cards: { set_code: string; collector_number: string; name_ko: string };
         artwork_files: { kind: "original" | "thumbnail"; mime_type: string; size_bytes: number }[];
         consent_events: {
@@ -139,6 +141,7 @@ export async function getAdminArtwork(id: string, now = new Date()): Promise<Adm
   return {
     ...toAdminRow(data, now),
     cardName: data.cards.name_ko,
+    artistAccount: data.artists,
     printSizeVerified: data.print_size_verified,
     files: data.artwork_files.map((f) => ({ kind: f.kind, mimeType: f.mime_type, sizeBytes: f.size_bytes })),
     events: data.consent_events

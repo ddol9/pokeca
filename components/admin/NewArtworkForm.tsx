@@ -6,14 +6,17 @@ import { FORMAT_INFO, FORMATS, type Format } from "@/lib/formats";
 import { errorMessage, uploadFile } from "./upload";
 import styles from "@/app/admin/admin.module.css";
 
-// 작품 등록 (design 11A): 카드 찾기 → 규격 → 파일 → 출처 → 허락 근거.
+// 작품 등록 (design 11A): 카드 찾기 → 규격 → 파일 → 출처 → 허락.
 // 모든 작품은 사이트에 보관한다. 원본은 필수, 미리보기는 비워 두면 서버가 원본에서 만든다.
 // 작품 ID는 폼을 열 때 만든다. 저장이 중간에 실패해 다시 눌러도 같은 작품이 된다(서버 멱등).
+// mode "artist"는 승인된 작가가 자기 도안을 올리는 화면이다: 작가 이름은 계정 이름, 허락 근거 없음, 바로 공개.
 
 type Card = { cardId: string; label: string; name: string; setName: string };
 type Uploaded = { file: File; uploadId: string };
 
-export function NewArtworkForm() {
+export function NewArtworkForm({ mode = "admin" }: { mode?: "admin" | "artist" }) {
+  const artist = mode === "artist";
+  const api = artist ? "/api/artist" : "/api/admin";
   const router = useRouter();
   const [id] = useState(() => crypto.randomUUID());
   const [cards, setCards] = useState<Card[] | null>(null);
@@ -27,7 +30,7 @@ export function NewArtworkForm() {
     if (!q.trim()) return;
     setSearching(true);
     try {
-      const res = await fetch(`/api/admin/cards?q=${encodeURIComponent(q)}`);
+      const res = await fetch(`${api}/cards?q=${encodeURIComponent(q)}`);
       const hits: Card[] = res.ok ? await res.json() : [];
       setCards(hits);
       if (hits.length === 1) setCard(hits[0]);
@@ -41,7 +44,7 @@ export function NewArtworkForm() {
     const prev = uploaded.current[kind];
     if (prev && prev.file === file) return prev.uploadId;
     setSaving({ original: "원본 올리는 중…", thumbnail: "미리보기 올리는 중…", evidence: "허락 근거 올리는 중…" }[kind]);
-    const uploadId = await uploadFile(kind, file);
+    const uploadId = await uploadFile(kind, file, api);
     uploaded.current[kind] = { file, uploadId };
     return uploadId;
   }
@@ -54,14 +57,20 @@ export function NewArtworkForm() {
     const sourceUrl = String(form.get("sourceUrl") ?? "").trim();
     const originalFile = form.get("original") as File | null;
     if (!originalFile || originalFile.size === 0) return setError("원본 파일을 골라 주세요.");
-    if (form.get("consent") !== "on") return setError("작가에게 사이트 보관·다운로드 허락을 받았는지 확인해 주세요.");
+    if (form.get("consent") !== "on") {
+      return setError(
+        artist
+          ? "내가 만든 도안이고 사이트 보관·다운로드에 동의하는지 확인해 주세요."
+          : "작가에게 사이트 보관·다운로드 허락을 받았는지 확인해 주세요.",
+      );
+    }
 
     try {
       const original = await upload("original", originalFile);
       const thumbnail = await upload("thumbnail", form.get("thumbnail") as File | null);
-      const evidence = await upload("evidence", form.get("evidence") as File | null);
+      const evidence = artist ? undefined : await upload("evidence", form.get("evidence") as File | null);
       setSaving("저장 중…");
-      const res = await fetch("/api/admin/artworks", {
+      const res = await fetch(`${api}/artworks`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -77,7 +86,7 @@ export function NewArtworkForm() {
       });
       const body = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(body.code ?? "failed");
-      router.push(`/admin/artworks/${body.id}`);
+      router.push(artist ? "/artist?uploaded=1" : `/admin/artworks/${body.id}`);
     } catch (e) {
       setError(errorMessage(e instanceof Error ? e.message : ""));
       setSaving(null);
@@ -136,10 +145,12 @@ export function NewArtworkForm() {
         )}
       </fieldset>
 
-      <label className={styles.field}>
-        <span>작가 이름(닉네임)</span>
-        <input name="artistName" required maxLength={80} className={styles.input} />
-      </label>
+      {!artist && (
+        <label className={styles.field}>
+          <span>작가 이름(닉네임)</span>
+          <input name="artistName" required maxLength={80} className={styles.input} />
+        </label>
+      )}
 
       <fieldset className={styles.fieldset}>
         <legend>2. 규격</legend>
@@ -167,15 +178,19 @@ export function NewArtworkForm() {
         </label>
         <label className={styles.check}>
           <input type="checkbox" name="printSizeVerified" />
-          파일 치수를 직접 확인함 (방문자에게 인쇄 치수를 안내)
+          {artist ? "규격 인쇄 치수에 맞춰 만들었어요" : "파일 치수를 직접 확인함"} (방문자에게 인쇄 치수를 안내)
         </label>
       </fieldset>
 
       <fieldset className={styles.fieldset}>
         <legend>4. 출처 (선택)</legend>
         <label className={styles.field}>
-          <span>작가가 처음 올린 글 주소</span>
-          <span>도안 옆에 출처 링크로 보여 줘요. 파일만 받았다면 비워 두세요.</span>
+          <span>{artist ? "이 도안을 처음 올린 글 주소" : "작가가 처음 올린 글 주소"}</span>
+          <span>
+            {artist
+              ? "카페·SNS에 올린 글이 있으면 도안 옆에 출처 링크로 보여 줘요."
+              : "도안 옆에 출처 링크로 보여 줘요. 파일만 받았다면 비워 두세요."}
+          </span>
           <input name="sourceUrl" type="url" placeholder="https://cafe.naver.com/…" className={styles.input} />
         </label>
         <div className={styles.row}>
@@ -190,18 +205,29 @@ export function NewArtworkForm() {
         </div>
       </fieldset>
 
-      <fieldset className={styles.fieldset}>
-        <legend>5. 아티스트 허락</legend>
-        <label className={styles.check}>
-          <input type="checkbox" name="consent" required />
-          사이트에 파일을 보관하고 방문자가 미리보기·다운로드하는 것을 허락받았어요
-        </label>
-        <label className={styles.field}>
-          <span>허락 근거 (선택)</span>
-          <span>아티스트 DM 캡처 등. PNG·JPEG·PDF, 20 MB까지. 어드민만 볼 수 있어요.</span>
-          <input name="evidence" type="file" accept="image/png,image/jpeg,application/pdf" />
-        </label>
-      </fieldset>
+      {artist ? (
+        <fieldset className={styles.fieldset}>
+          <legend>5. 동의</legend>
+          <label className={styles.check}>
+            <input type="checkbox" name="consent" required />
+            내가 만든 도안이고, 사이트에 보관해 방문자가 미리보기·다운로드하는 것에 동의해요
+          </label>
+          <p className={styles.hint}>올리면 바로 카드 페이지와 내 작가 페이지에 공개돼요. 내 도안 목록에서 언제든 내릴 수 있어요.</p>
+        </fieldset>
+      ) : (
+        <fieldset className={styles.fieldset}>
+          <legend>5. 아티스트 허락</legend>
+          <label className={styles.check}>
+            <input type="checkbox" name="consent" required />
+            사이트에 파일을 보관하고 방문자가 미리보기·다운로드하는 것을 허락받았어요
+          </label>
+          <label className={styles.field}>
+            <span>허락 근거 (선택)</span>
+            <span>아티스트 DM 캡처 등. PNG·JPEG·PDF, 20 MB까지. 어드민만 볼 수 있어요.</span>
+            <input name="evidence" type="file" accept="image/png,image/jpeg,application/pdf" />
+          </label>
+        </fieldset>
+      )}
 
       <div role="status">
         {error && <p className={styles.error}>{error}</p>}
@@ -209,7 +235,7 @@ export function NewArtworkForm() {
       </div>
       <div>
         <button type="submit" className={styles.primary} disabled={!!saving}>
-          등록
+          {artist ? "올리기" : "등록"}
         </button>
       </div>
     </form>

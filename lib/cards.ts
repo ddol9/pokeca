@@ -61,6 +61,17 @@ export async function searchCards(query: string): Promise<SearchResult> {
 }
 
 // 측정 기록은 실패해도 화면을 막지 않는다. 호출자는 after() 안에서 부른다.
+// 등록 폼(어드민·작가)의 카드 후보.
+export async function cardCandidates(query: string) {
+  const { hits } = await searchCards(query.slice(0, 100));
+  return hits.map((h) => ({
+    cardId: h.cardId,
+    label: `${h.setCode} ${h.collectorNumber}`,
+    name: h.nameKo,
+    setName: h.setName,
+  }));
+}
+
 export async function recordSearch(
   query: string,
   result: SearchResult,

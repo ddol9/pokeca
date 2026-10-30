@@ -26,8 +26,31 @@ async function art(format: keyof typeof LAYOUT, hue: number): Promise<Buffer> {
   return sharp(Buffer.from(svg)).composite([{ input: hole_, left: hole.left, top: hole.top, blend: "dest-out" }]).png().toBuffer();
 }
 
+// 승인된 데모 작가 계정(카카오 가입으로 표시). 이 작가의 도안은 작가 페이지(/artists/byeolbit)에 모인다.
+const ARTIST = { email: "demo-artist@example.com", handle: "byeolbit", name: "별빛도안" };
+const { data: users } = await db.auth.admin.listUsers();
+let artistId = users.users.find((u) => u.email === ARTIST.email)?.id;
+if (!artistId) {
+  const { data, error } = await db.auth.admin.createUser({
+    email: ARTIST.email,
+    email_confirm: true,
+    app_metadata: { provider: "kakao", providers: ["kakao"] },
+  });
+  if (error) throw error;
+  artistId = data.user.id;
+}
+{
+  const { error } = await db.from("artists").upsert({
+    user_id: artistId, handle: ARTIST.handle, display_name: ARTIST.name, email: ARTIST.email, provider: "kakao", status: "approved",
+    intro: "리자몽·피카츄 확장 아트를 주로 만들어요. 9포켓 도안은 실제 크기로 인쇄해 확인했어요.",
+    link_url: "https://cafe.naver.com/pokeca",
+  });
+  if (error) throw error;
+}
+
 const DEMO = [
   { number: "201/165", artist: "별빛도안", format: "9pocket", hue: 20, source: "https://cafe.naver.com/pokeca/101" },
+  { number: "205/165", artist: "별빛도안", format: "psa", hue: 200, source: null },
   { number: "201/165", artist: "불꽃공방", format: "psa", hue: 0, source: null },
   { number: "201/165", artist: "리자몽러버", format: "brg", hue: 30, source: "https://cafe.naver.com/pokeca/102" },
   { number: "201/165", artist: "새벽작업실", format: "9pocket", hue: 260, source: null },
@@ -49,7 +72,7 @@ for (const d of DEMO) {
   }
   const { error } = await db.rpc("artwork_create", {
     p_artwork: {
-      id, card_id: card!.id, artist_name: d.artist, format: d.format,
+      id, card_id: card!.id, artist_name: d.artist, artist_id: d.artist === ARTIST.name ? artistId : null, format: d.format,
       source_url: d.source, source_visibility: d.source ? "public" : null, print_size_verified: true,
     },
     p_files: files.map((f) => ({ kind: f.kind, path: `artworks/${id}/${f.kind}-demo`, mime_type: f.mime, size_bytes: f.bytes.length })),
